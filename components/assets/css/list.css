@@ -1,0 +1,54 @@
+select.form-control
+{
+    font-weight: bold;
+    text-align: right!important;
+    direction: rtl;
+}
+.date label
+{
+    font-size:18px;
+}
+.date label::before
+{
+    font-family: "Font Awesome 5 Free"; 
+   font-size: 16px;
+    content: "\f073";
+    margin-right: 10px;
+    
+}
+.date input
+{
+    padding:10px;
+    font-weight: bold ;
+    font-size: 14px;
+    direction: rtl;
+    text-align: center;
+    border: 0;
+    border-bottom: 2px solid rgb(230, 230, 230);
+    
+}
+.table td
+{
+    font-size:12px ;
+    font-weight: bold;
+}
+.img-user
+{
+    max-width: 75px;
+    max-height: 75px;
+    min-width: 75px;
+    min-height: 75px;
+}
+#listdetail .list-group-item
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+#lisdetail .fab
+{
+    font-size:14px!important
+}
+#lisdetail .fa-facebook
+{
+    font-size:large!important;
+}

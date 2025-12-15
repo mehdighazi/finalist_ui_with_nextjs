@@ -1,0 +1,1236 @@
+/* New Team 2 */
+.app_css{
+position: relative;
+width: 360px;
+height: 800px;
+
+background: #0F0F0F;
+
+
+/* Status Bar */
+
+position: absolute;
+width: nanpx;
+height: nanpx;
+left: calc(50% - nanpx/2 + nanpx);
+top: 15.96px;
+
+
+
+/* Ellipse 2 */
+
+position: absolute;
+visibility: hidden;
+width: 283.38px;
+height: 283.38px;
+left: -27.69px;
+top: 448.62px;
+
+background: #9AC2FF;
+
+
+/* Right Side */
+
+position: absolute;
+visibility: hidden;
+left: 78.12%;
+right: 4.79%;
+top: 1.99%;
+bottom: 96.7%;
+
+
+
+/* Battery */
+
+position: absolute;
+left: 88.97%;
+right: 4.79%;
+top: 1.99%;
+bottom: 96.7%;
+
+
+
+/* Rectangle */
+
+box-sizing: border-box;
+
+position: absolute;
+left: 88.97%;
+right: 5.39%;
+top: 1.99%;
+bottom: 96.7%;
+
+mix-blend-mode: normal;
+opacity: 0.35;
+border: 0.923077px solid #FFFFFF;
+border-radius: 2.46154px;
+
+
+/* Combined Shape */
+
+position: absolute;
+left: 94.87%;
+right: 4.79%;
+top: 2.42%;
+bottom: 97.12%;
+
+background: #FFFFFF;
+mix-blend-mode: normal;
+opacity: 0.4;
+
+
+/* Rectangle */
+
+position: absolute;
+left: 89.49%;
+right: 5.9%;
+top: 2.23%;
+bottom: 96.93%;
+
+background: #FFFFFF;
+border-radius: 1.01538px;
+
+
+/* Wifi */
+
+position: absolute;
+left: 83.77%;
+right: 12.32%;
+top: 1.99%;
+bottom: 96.74%;
+
+background: #FFFFFF;
+
+
+/* Mobile Signal */
+
+position: absolute;
+left: 78.12%;
+right: 17.52%;
+top: 2.03%;
+bottom: 96.74%;
+
+background: #FFFFFF;
+
+
+/* Notch */
+
+position: absolute;
+visibility: hidden;
+left: 24.98%;
+right: 27.04%;
+top: 0%;
+bottom: 96.43%;
+
+background: #000000;
+
+
+/* Time */
+
+position: absolute;
+visibility: hidden;
+left: 4.62%;
+right: 81.54%;
+top: 1.5%;
+bottom: 96.2%;
+
+
+
+/* 9:41 */
+
+position: absolute;
+left: 4.62%;
+right: 81.54%;
+top: 1.5%;
+bottom: 96.2%;
+
+font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 500;
+font-size: 13.8462px;
+line-height: 18px;
+/* identical to box height, or 133% */
+text-align: center;
+letter-spacing: -0.461538px;
+
+color: #FFFFFF;
+
+
+
+/* 🦆 icon "filter" */
+
+position: absolute;
+width: nanpx;
+height: nanpx;
+left: 141.23px;
+top: 308.31px;
+
+
+
+/* Group */
+
+position: absolute;
+visibility: hidden;
+left: 39.23%;
+right: 57.18%;
+top: 38.44%;
+bottom: 59.7%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 39.23%;
+right: 57.18%;
+top: 38.44%;
+bottom: 59.7%;
+
+border: 0.738462px solid #FFFFFF;
+
+
+/* Frame 85 */
+
+position: absolute;
+width: 360px;
+height: 49px;
+left: -1px;
+top: 40px;
+
+background: #1D1D1D;
+
+
+/* Group 212 */
+
+position: absolute;
+width: 132px;
+height: 24px;
+left: 212px;
+top: calc(50% - 24px/2 - 0.5px);
+
+
+
+/* ایجاد تیم جدید */
+
+position: absolute;
+width: 102px;
+height: 23px;
+left: 212px;
+top: 12px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 144.19%;
+/* identical to box height, or 23px */
+text-align: right;
+
+color: #FFFFFF;
+
+
+
+/* arrow-up */
+
+position: absolute;
+width: 24px;
+height: 27px;
+left: 344px;
+top: 12px;
+
+transform: rotate(90deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 91.67%;
+right: 8.33%;
+top: 44.44%;
+bottom: -7.41%;
+
+border: 1.5px solid #FFFFFF;
+transform: rotate(90deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 91.67%;
+right: -50%;
+top: 18.52%;
+bottom: 55.56%;
+
+border: 1.5px solid #FFFFFF;
+transform: rotate(90deg);
+
+
+/* Frame 90 */
+
+position: absolute;
+visibility: hidden;
+width: 327px;
+height: 120px;
+left: 16px;
+top: 457px;
+
+background: #222222;
+border-radius: 5px;
+
+
+/* Status */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px 16px;
+gap: 153px;
+isolation: isolate;
+
+position: absolute;
+width: 359px;
+height: 40px;
+left: calc(50% - 359px/2 - 0.5px);
+top: 0px;
+
+
+
+/* Time & Date */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 8px;
+
+width: 128px;
+height: 40px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+z-index: 0;
+
+
+/* 9:30 */
+
+width: 29px;
+height: 20px;
+
+/* AOSP/Body/Medium */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 143% */
+display: flex;
+align-items: center;
+letter-spacing: 0.25px;
+
+/* AOSP/white */
+color: #FFFFFF;
+
+mix-blend-mode: normal;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Tue, Jul 19 */
+
+display: none;
+width: 70px;
+height: 20px;
+
+/* AOSP/Body/Medium */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 143% */
+display: flex;
+align-items: center;
+letter-spacing: 0.25px;
+
+/* material-theme/white */
+color: #FFFFFF;
+
+mix-blend-mode: normal;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Status Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: center;
+padding: 0px;
+
+width: 46px;
+height: 52px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Wi-Fi Network */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 30px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Wifi */
+
+width: 16px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+margin: 0px -2px;
+
+
+/* Vector */
+
+position: absolute;
+left: 4.17%;
+right: 4.17%;
+top: 18.5%;
+bottom: 16.67%;
+
+/* AOSP/white */
+background: #FFFFFF;
+
+
+/* Signal */
+
+width: 16px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 8.33%;
+right: 8.33%;
+top: 8.33%;
+bottom: 8.33%;
+
+/* AOSP/white */
+background: #FFFFFF;
+
+
+/* Battery */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 2px;
+
+width: 16px;
+height: 52px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Battery */
+
+width: 16px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Base */
+
+position: absolute;
+width: 8.5px;
+height: 14.17px;
+left: calc(50% - 8.5px/2);
+top: calc(50% - 14.17px/2 + 0px);
+
+/* AOSP/white */
+background: #FFFFFF;
+
+
+/* Until 10:00 AM */
+
+display: none;
+width: 95px;
+height: 20px;
+
+/* AOSP/Body/Medium */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 143% */
+display: flex;
+align-items: center;
+letter-spacing: 0.25px;
+
+/* material-theme/white */
+color: #FFFFFF;
+
+mix-blend-mode: normal;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Camera */
+
+position: absolute;
+display: none;
+width: 24px;
+height: 24px;
+left: calc(50% - 24px/2 + 0.5px);
+top: 8px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Frame 105 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px 45px;
+
+position: absolute;
+width: 150px;
+height: 46px;
+left: calc(50% - 150px/2);
+top: 683px;
+
+/* orange */
+background: #F07122;
+border-radius: 5px;
+
+
+/* ثبت تیم */
+
+width: 60px;
+height: 26px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 144.19%;
+/* identical to box height, or 26px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 207 */
+
+display: none;
+width: 8.31px;
+height: 8.31px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Rectangle 17 */
+
+position: absolute;
+width: 0.76px;
+height: 8.31px;
+left: 77.16px;
+top: 11.23px;
+
+background: #FFFFFF;
+border-radius: 6.46154px;
+
+
+/* Rectangle 18 */
+
+position: absolute;
+width: 0.76px;
+height: 8.31px;
+left: 73.38px;
+top: 15.76px;
+
+background: #FFFFFF;
+border-radius: 6.46154px;
+transform: rotate(-90deg);
+
+
+/* Frame 35 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px 23px;
+gap: 12px;
+
+position: absolute;
+width: 174px;
+height: 40px;
+left: calc(50% - 174px/2);
+top: 489px;
+
+border-radius: 5px;
+
+
+/* افزودن عضو جدید */
+
+width: 104px;
+height: 20px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 144.19%;
+/* or 20px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 207 */
+
+display: none;
+width: 8.31px;
+height: 8.31px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Rectangle 17 */
+
+position: absolute;
+width: 0.76px;
+height: 8.31px;
+left: 77.16px;
+top: 11.23px;
+
+background: #FFFFFF;
+border-radius: 6.46154px;
+
+
+/* Rectangle 18 */
+
+position: absolute;
+width: 0.76px;
+height: 8.31px;
+left: 73.38px;
+top: 15.76px;
+
+background: #FFFFFF;
+border-radius: 6.46154px;
+transform: rotate(-90deg);
+
+
+/* Group 208 */
+
+width: 12px;
+height: 12px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Rectangle 17 */
+
+position: absolute;
+width: 1.09px;
+height: 12px;
+left: 144.46px;
+top: 14px;
+
+background: #FFFFFF;
+border-radius: 6.46154px;
+
+
+/* Rectangle 18 */
+
+position: absolute;
+width: 1.09px;
+height: 12px;
+left: 139px;
+top: 20.55px;
+
+background: #FFFFFF;
+border-radius: 6.46154px;
+transform: rotate(-90deg);
+
+
+/* مشخصات اعضای تیم */
+
+position: absolute;
+width: 123px;
+height: 20px;
+left: 220px;
+top: 113px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 144.19%;
+/* or 20px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+
+/* Group 213 */
+
+position: absolute;
+width: 328px;
+height: 68px;
+left: 16px;
+top: 149px;
+
+
+
+/* نفر اول */
+
+position: absolute;
+width: 39px;
+height: 20px;
+left: 304px;
+top: 149px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 144.19%;
+/* or 20px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+
+/* نفر دوم */
+
+position: absolute;
+width: 42px;
+height: 20px;
+left: 130px;
+top: 149px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 144.19%;
+/* or 20px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+
+/* Frame 91 */
+
+position: absolute;
+width: 156px;
+height: 40px;
+left: 188px;
+top: 177px;
+
+/* Textbox BG */
+background: #222222;
+border-radius: 5px;
+
+
+/* شماره همراه */
+
+position: absolute;
+width: 54px;
+height: 16px;
+left: 93px;
+top: calc(50% - 16px/2);
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 11.0769px;
+line-height: 144.19%;
+/* identical to box height, or 16px */
+text-align: center;
+
+/* Gray txt */
+color: #BBBBBB;
+
+
+
+/* Frame 92 */
+
+position: absolute;
+width: 156px;
+height: 40px;
+left: 16px;
+top: 177px;
+
+/* Textbox BG */
+background: #222222;
+border-radius: 5px;
+
+
+/* شماره همراه */
+
+position: absolute;
+width: 54px;
+height: 16px;
+left: 93px;
+top: calc(50% - 16px/2);
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 11.0769px;
+line-height: 144.19%;
+/* identical to box height, or 16px */
+text-align: center;
+
+/* Gray txt */
+color: #BBBBBB;
+
+
+
+/* Group 214 */
+
+position: absolute;
+width: 328px;
+height: 68px;
+left: 16px;
+top: 232px;
+
+
+
+/* نفر اول */
+
+position: absolute;
+width: 39px;
+height: 20px;
+left: 304px;
+top: 232px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 144.19%;
+/* or 20px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+
+/* نفر دوم */
+
+position: absolute;
+width: 42px;
+height: 20px;
+left: 130px;
+top: 232px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 144.19%;
+/* or 20px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+
+/* Frame 91 */
+
+position: absolute;
+width: 156px;
+height: 40px;
+left: 188px;
+top: 260px;
+
+/* Textbox BG */
+background: #222222;
+border-radius: 5px;
+
+
+/* شماره همراه */
+
+position: absolute;
+width: 54px;
+height: 16px;
+left: 93px;
+top: calc(50% - 16px/2);
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 11.0769px;
+line-height: 144.19%;
+/* identical to box height, or 16px */
+text-align: center;
+
+/* Gray txt */
+color: #BBBBBB;
+
+
+
+/* Frame 92 */
+
+position: absolute;
+width: 156px;
+height: 40px;
+left: 16px;
+top: 260px;
+
+/* Textbox BG */
+background: #222222;
+border-radius: 5px;
+
+
+/* شماره همراه */
+
+position: absolute;
+width: 54px;
+height: 16px;
+left: 93px;
+top: calc(50% - 16px/2);
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 11.0769px;
+line-height: 144.19%;
+/* identical to box height, or 16px */
+text-align: center;
+
+/* Gray txt */
+color: #BBBBBB;
+
+
+
+/* Group 215 */
+
+position: absolute;
+width: 328px;
+height: 68px;
+left: 16px;
+top: 315px;
+
+
+
+/* نفر اول */
+
+position: absolute;
+width: 39px;
+height: 20px;
+left: 304px;
+top: 315px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 144.19%;
+/* or 20px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+
+/* نفر دوم */
+
+position: absolute;
+width: 42px;
+height: 20px;
+left: 130px;
+top: 315px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 144.19%;
+/* or 20px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+
+/* Frame 91 */
+
+position: absolute;
+width: 156px;
+height: 40px;
+left: 188px;
+top: 343px;
+
+/* Textbox BG */
+background: #222222;
+border-radius: 5px;
+
+
+/* شماره همراه */
+
+position: absolute;
+width: 54px;
+height: 16px;
+left: 93px;
+top: calc(50% - 16px/2);
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 11.0769px;
+line-height: 144.19%;
+/* identical to box height, or 16px */
+text-align: center;
+
+/* Gray txt */
+color: #BBBBBB;
+
+
+
+/* Frame 92 */
+
+position: absolute;
+width: 156px;
+height: 40px;
+left: 16px;
+top: 343px;
+
+/* Textbox BG */
+background: #222222;
+border-radius: 5px;
+
+
+/* شماره همراه */
+
+position: absolute;
+width: 54px;
+height: 16px;
+left: 93px;
+top: calc(50% - 16px/2);
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 11.0769px;
+line-height: 144.19%;
+/* identical to box height, or 16px */
+text-align: center;
+
+/* Gray txt */
+color: #BBBBBB;
+
+
+
+/* Group 216 */
+
+position: absolute;
+width: 328px;
+height: 68px;
+left: 16px;
+top: 398px;
+
+
+
+/* نفر اول */
+
+position: absolute;
+width: 39px;
+height: 20px;
+left: 304px;
+top: 398px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 144.19%;
+/* or 20px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+
+/* نفر دوم */
+
+position: absolute;
+width: 42px;
+height: 20px;
+left: 130px;
+top: 398px;
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 144.19%;
+/* or 20px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+
+/* Frame 91 */
+
+position: absolute;
+width: 156px;
+height: 40px;
+left: 188px;
+top: 426px;
+
+/* Textbox BG */
+background: #222222;
+border-radius: 5px;
+
+
+/* شماره همراه */
+
+position: absolute;
+width: 54px;
+height: 16px;
+left: 93px;
+top: calc(50% - 16px/2);
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 11.0769px;
+line-height: 144.19%;
+/* identical to box height, or 16px */
+text-align: center;
+
+/* Gray txt */
+color: #BBBBBB;
+
+
+
+/* Frame 92 */
+
+position: absolute;
+width: 156px;
+height: 40px;
+left: 16px;
+top: 426px;
+
+/* Textbox BG */
+background: #222222;
+border-radius: 5px;
+
+
+/* شماره همراه */
+
+position: absolute;
+width: 54px;
+height: 16px;
+left: 93px;
+top: calc(50% - 16px/2);
+
+font-family: 'IRANSansXFaNum';
+font-style: normal;
+font-weight: 500;
+font-size: 11.0769px;
+line-height: 144.19%;
+/* identical to box height, or 16px */
+text-align: center;
+
+/* Gray txt */
+color: #BBBBBB;
+
+}

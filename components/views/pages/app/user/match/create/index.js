@@ -1,0 +1,186 @@
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+    Box, Fade, Paper, Stack, useMediaQuery, useTheme
+} from "@mui/material";
+
+import { rlPadding } from 'store/constant';
+import Stepper from 'views/utilities/Stepper';
+import Step0 from "./steps/step0";
+import Step1 from "./steps/step1";
+import Step2 from "./steps/step2";
+import dataHandler from "api/dataHandler";
+import api from "api/api";
+import { showAlert } from "store/alertReducer";
+import { Description } from "@mui/icons-material";
+
+const CreateMatch = () => {
+    const theme = useTheme();
+    const dispatch = useDispatch();
+    const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
+
+    const [step, setStep] = useState(0);
+    const [userTeam, setUserTeam] = useState([]);
+    const [teamLocation, setTeamLocation] = useState("");
+
+    const [formData, setFormData] = useState({
+        match_time: null,
+        match_date: null,
+        match_local_date: null,
+        host_team_id: null,
+        match_province_id: null,
+        match_city_id: null,
+        description:null,
+        match_location_address: null,
+        match_type: 1 // will be dynamic
+    });
+
+    const handleInputChange = ({ name, value }) => {
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+    const fetchUserTeams = async () => {
+        try {
+            const result = dataHandler(api.listUserTeam(""), "get", "");
+            result(async (data, status) => {
+                if (status) {
+                    setUserTeam(data.result);
+                }
+            });
+        } catch (error) {
+            console.error("Error loading teams", error);
+        }
+    };
+    useEffect(() => {
+        fetchUserTeams();
+    }, []);
+    useEffect(() => {
+        if (formData.host_team_id && userTeam.length) {
+            const selectedTeam = userTeam.find(
+                team => team.team_id.toString() === formData.host_team_id.toString()
+            );
+            if (selectedTeam) {
+                setTeamLocation(`${selectedTeam.province.province_title}/${selectedTeam.city.city_title}`);
+                handleInputChange({ name: "match_province_id", value: selectedTeam.province.province_id });
+                handleInputChange({ name: "match_city_id", value: selectedTeam.city.city_id });
+            }
+        }
+    }, [formData.host_team_id, userTeam]);
+
+    const sendData = async () => {
+        
+        try {
+
+            const result = dataHandler(api.createMatch(1), "post", formData);
+            result(async (data, status) => {
+                dispatch(showAlert(
+                    status ? data.message : data.response?.data?.message || "خطا در ارسال اطلاعات",
+                    status ? "success" : "error"
+                ));
+            });
+        } catch (error) {
+            
+            dispatch(showAlert("خطایی رخ داده", "error"));
+        }
+    };
+
+    const stepHandler = (action) => {
+        switch (action) {
+            case 'Next':
+                if (step === 0) {
+                    if (formData.host_team_id) setStep(step + 1);
+                    else dispatch(showAlert("تیم انتخاب نشده است", "error"));
+                } else if (step === 1) {
+
+                    const { match_province_id, match_city_id, match_time, match_date, match_location_address } = formData;
+                    if (match_province_id && match_city_id && match_time && match_date && match_location_address)
+                        setStep(step + 1);
+                    else dispatch(showAlert("لطفا اطلاعات را تکمیل نمایید", "error"));
+                } else if (step === 2) {
+                    setStep(step + 1);
+                    sendData();
+                }
+                break;
+            case 'Back':
+                setStep(step - 1);
+                break;
+            default:
+                break;
+        }
+    };
+
+    const renderStep = () => {
+        switch (step) {
+            case 0:
+                return (
+                    <Step0
+                        userTeam={userTeam}
+                        formData={formData}
+                        onChange={handleInputChange}
+                    />
+                );
+            case 1:
+                return (
+                    <Fade in={true} timeout={400}>
+                        <div> {/* 👈 استفاده از div برای اطمینان از وجود نود */}
+                            <Step1
+                                userTeam={userTeam}
+                                teamLocation={teamLocation}
+                                setTeamLocation={setTeamLocation}
+                                formData={formData}
+                                onChange={handleInputChange}
+                                selectedTeam={selectedTeam}
+                            />
+                        </div>
+                    </Fade>
+                );
+            case 2:
+                return (
+                    <Fade in={true} timeout={400}>
+                        <div>
+                            <Step2
+                                teamLocation={teamLocation}
+                                formData={formData}
+                                selectedTeam={selectedTeam}
+                            />
+                        </div>
+                    </Fade>
+                );
+            default:
+                return (
+                    <Step2
+                        teamLocation={teamLocation}
+                        formData={formData}
+                        selectedTeam={selectedTeam}
+                    />
+                );
+        }
+    };
+
+    const selectedTeam = userTeam.find(team =>
+        team.team_id?.toString() === formData.host_team_id?.toString()
+    );
+    return (
+        <Box sx={{ p:1 }}>
+            <Stack spacing={2} sx={{ justifyContent: "center", alignItems: "flex-end" }}>
+                <Box sx={{ minWidth: "100%" }}>{renderStep()}</Box>
+                <Box
+                    sx={{
+                        minWidth: "100%",
+                        position: "fixed",
+                        bottom: 0,
+                        left: 0,
+                        paddingLeft: matchDownMd ? "0%" : rlPadding,
+                        paddingRight: matchDownMd ? "-2%" : rlPadding,
+                    }}
+                >
+                    <Paper elevation={3}>
+                        <Stepper stepnumber={3} step={step} onChange={stepHandler} />
+                    </Paper>
+                </Box>
+            </Stack>
+        </Box>
+    );
+};
+
+export default CreateMatch;

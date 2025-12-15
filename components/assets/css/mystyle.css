@@ -1,0 +1,1081 @@
+﻿
+.detailtable
+{
+    padding-left:35px;
+    padding-right:35px;
+}
+.pointer {cursor: pointer;}
+.roundmore {
+    border-radius: 25px;
+}
+.tiny-round
+{
+	 border-radius: 8px;
+}
+.overflow-none
+{
+    overflow:hidden;
+}
+.cursorhand
+{
+    cursor: pointer;
+}
+
+.tiny-pad
+{
+padding: 4px;
+}
+
+  
+.w-90
+{
+    width: 90%;
+}
+ .minw-100
+ {
+  min-width: 100%;
+ }
+
+
+/*------------------------------------------------------------------------------------------------ hyperstye */
+
+
+
+.aligncenter
+{
+
+text-align: center;
+}
+/* pay modal box section */
+
+
+/* end modal */
+
+ /* endhyperstyles */
+ .btmnav
+ {
+     width: 90px;
+     height:45px;
+     display: inline-block;
+     margin-right: 3px;
+     padding: 0px;
+
+
+
+ }
+.cl-darkgray
+{
+    background-color:#2E2E2E ;
+}
+
+ .cl-white
+{
+    background-color:#FFFFFF;
+
+}
+.cl-light
+{
+
+    background-color:#fafafa!important;
+}
+
+.cl-gray-2
+{
+    background-color: #d3d3d3;
+
+}
+
+.lb1
+{
+    background-color:#2988fe;
+    color:#FFFFFF;
+   
+}
+.lbl-s3
+{
+    border: thin solid #800000;
+     color:#800000;
+
+}
+.lbl-dt
+{
+  
+   background-color:white;
+   color:black;
+}
+.lbl-s4
+{
+    padding: 6px;
+    background-color: #a92828;
+    color:#fffbe7;
+}
+
+
+.right {
+    float :right;
+   
+}
+.left {
+    float :left;
+   
+}
+.center
+{
+   
+    right:50%;
+    position:relative;
+    
+}
+
+
+.controlst
+{
+    width: 180px;
+    height: 35px;
+
+}
+.noredius
+{
+    border-radius:0;
+
+}
+.m-margin
+{
+    margin: 5px;
+}
+.l-margin
+{
+    margin: 8px;
+}
+
+.n-margin
+{
+    margin: 15px;
+}
+.cl-dimgray
+{
+    background-color:#999999;
+}
+.cl-iceblue
+{
+     background-color:#d2e1ed;
+}
+.cl-dimred
+{
+    background-color:#a92828;
+
+}
+.cl-gray-3
+{
+    background-color: #ddd;;
+}
+.cl-grad
+{
+ background-image: linear-gradient(to bottom, #F7F7F7, #FFFFFF);
+
+}
+
+.font-small
+{
+    font-size: 12px;
+}
+
+.font-black
+{
+    color: #111111;
+}
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+
+
+.font-dimred
+{
+    color:#a92828;
+}
+a.font-milk
+{
+    color:#fffbe7;
+}
+.font-green
+{
+    color:green;
+}
+.font-blue
+{
+    color: #0000FF;
+}
+.font-darkblue
+{
+    color:#5e27ff;
+}
+.font-darkblue-2
+{
+
+color: #17194A  ;
+}
+
+.font-white
+{
+    color:#f7f7f7;
+}
+.font-bold
+{
+    font-weight: bold;
+}
+.font-brown
+{
+    color:#800000;
+}
+.font-gray
+{
+    color:#CCCCCC;
+}
+.font-light
+{
+ color: #EEEEEE;
+}
+
+.font-dimgray
+{
+    color: #696969  ;
+}
+
+.font-red
+{
+    color:red;
+}
+.font-gray-2
+{
+    color:#8f8f8f;
+}
+.font-gray-3
+{
+  color:  #CCCCCC;
+}
+
+.font-white
+{
+
+color: #FFFFFF;
+}
+.font-green2
+{
+    color: #32CD32;
+}
+
+  .textcenter
+  {
+      text-align: center;
+
+  }
+
+.wd-wide
+{
+   min-width:100%!important;
+}
+.p-show
+{
+    display: block;
+}
+.p-hide
+{
+    display: none;
+}
+
+/*navrbar  area*/
+
+.a-s1
+{
+    text-decoration: none;
+}
+  /*end*/
+.font-s1
+{
+    font-family: tahoma;
+    font-size: medium;
+}
+.font-s2
+{
+    font-family: tahoma;
+    font-size: small;
+    text-align: center;
+}
+.cl-blue
+{
+
+    background-color: #CCCCFF;
+}
+.cl-gray
+{
+    background-color: #787878;
+}
+.cl-light-gray
+{
+
+background-color: #ecebf1;
+}
+
+.cl-black
+{
+      background-color:#000;
+
+}
+.cl-red
+{
+   background-color: #FF0066;
+}
+.cl-red2 {
+    background-color: #FF3D3D;
+
+}
+
+
+
+    /* Set gray background color and 100% height */
+
+ /* callout layout */
+ .bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-right-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-default {
+    border-right-color: #777;
+}
+.bs-callout-default h4 {
+    color: #777;
+}
+.bs-callout-primary {
+    border-right-color: #428bca;
+}
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+.bs-callout-success {
+    border-right-color: #339999;
+    background-color:#C2E0C2 ;
+}
+.bs-callout-success h4 {
+    color: #339999;
+}
+.bs-callout-danger {
+    border-right-color: #d9534f;
+}
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+.bs-callout-warning {
+    border-right-color: #f0ad4e;
+}
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+.bs-callout-info {
+    border-right-color: #5bc0de;
+    background-color: #E6E6FA ;
+}
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+ /* end callout */
+.noredius
+{
+border-radius:0;
+}
+.bordered
+{
+    border: 1px solid #F3F3F3;
+}
+
+/*---in added---*/
+.column-two {
+    float: left;
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+
+
+
+.row-two:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.circle {
+  height: 50px;
+  width: 50px;
+  background-color: #555;
+  border-radius: 50%;
+}
+.alert-box {
+	padding: 15px;
+    width: 200px;
+   
+    border-radius: 0px;
+    z-index: 545;
+    position: fixed;
+    top:2%;
+    right:10%;
+    text-align: right;
+}
+
+.success {
+    color: white;
+    background-color: black;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    display: none;
+}
+/*----------------*/
+/*--------switch button */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+/*//////social media */
+
+
+
+
+
+/*---*/
+/*-------------------------*/
+
+/*breadcrumb for navigation */
+#breadcrumbs-one {
+  
+   
+    overflow: hidden;
+    width: 100%;
+    padding:8px;
+}
+
+    #breadcrumbs-one li {
+        float: right;
+    }
+
+    #breadcrumbs-one a {
+        padding: .7em 2em .7em 2em;
+        float: right;
+        margin-right:3px;
+        text-decoration: none;
+        color: #444;
+        position: relative;
+       
+        background-color: #EEEEEE;
+        
+    }
+
+    #breadcrumbs-one li:first-child a {
+        padding-right: 1em;
+        border-radius: 5px 0 0 5px ;
+    }
+
+    #breadcrumbs-one a:hover {
+        background: #fff;
+    }
+
+    #breadcrumbs-one a::after,
+    #breadcrumbs-one a::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        margin-top: -1.5em;
+        border-top: 1.5em solid transparent;
+        border-bottom: 1.5em solid transparent;
+        border-right: 1em solid;
+        left: -1em;
+    }
+
+    #breadcrumbs-one a::after {
+        z-index: 2;
+        border-right-color: #EEEEEE;
+    }
+
+    #breadcrumbs-one a::before {
+        border-right-color: #ccc;
+        left: -1.1em;
+        z-index: 1;
+    }
+
+    #breadcrumbs-one a:hover::after {
+        border-right-color: #fff;
+    }
+
+    #breadcrumbs-one .current,
+    #breadcrumbs-one .current:hover {
+        font-weight: bold;
+        background: none;
+    }
+
+        #breadcrumbs-one .current::after,
+        #breadcrumbs-one .current::before {
+            content: normal;
+        }
+        /*Rounded select*/
+.styled-select {
+    background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+    height: 29px;
+    overflow: hidden;
+    width: 240px;
+}
+
+    .styled-select select {
+        background: transparent;
+        border: none;
+        font-size: 14px;
+        height: 29px;
+        padding: 5px; /* If you add too much padding here, the options won't show in IE */
+        width: 268px;
+    }
+
+    .styled-select.slate {
+        background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+        height: 34px;
+        width: 240px;
+    }
+
+        .styled-select.slate select {
+            border: 1px solid #ccc;
+            font-size: 16px;
+            height: 34px;
+            width: 268px;
+        }
+
+/* -------------------- Rounded Corners */
+.rounded {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.semi-square {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/* -------------------- Colors: Background */
+.slate {
+    background-color: #ddd;
+}
+
+.green {
+    background-color: #779126;
+}
+
+.blue {
+    background-color: #3b8ec2;
+}
+
+.yellow {
+    background-color: #eec111;
+}
+
+.black {
+    background-color: #000;
+}
+
+/* -------------------- Colors: Text */
+.slate select {
+    color: #000;
+}
+
+.green select {
+    color: #fff;
+}
+
+.blue select {
+    color: #fff;
+}
+
+.yellow select {
+    color: #000;
+}
+
+.black select {
+    color: #fff;
+}
+
+
+/* -------------------- Image Overlay */
+/* -------------------- Source: http://danielneumann.com/blog/how-to-style-dropdown-with-css-only/ */
+.overlay
+{
+	position: relative;
+  width: 100%;
+	background: black;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+	
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-25%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+	min-width: 50%;
+	
+}
+
+.overlay:hover .image {
+  opacity: 0.3;
+}
+
+.overlay:hover .middle {
+  opacity: 1;
+}
+
+.text {
+   min-width: 100%;
+  color: white;
+  font-size: 16px;
+  padding: 8px 8px;
+	
+}
+.text a
+{
+	color: white;
+	text-decoration: none;
+	
+}
+.text a:hover
+{
+	color: green;
+}
+.overlay-fix {
+ 
+  transition: 1;
+  position: absolute;
+  top: 10%;
+  left: 75%;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+	min-width: 50%;
+	background:#ED0509;
+	border-radius: 25px;
+	color: white;
+	font-size: 14px;
+	
+}
+/*dropdown Hover*/
+
+
+.dropdown-1 {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+ top:-190px;
+ 
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a:focus {background-color: #ddd;}
+
+.dropdown-1:hover .dropdown-content {display: block;}
+
+.dropdown-1:focus .dropbtn {background-color: #3e8e41;}
+.dropdown-1 #helptools {
+    min-height: 140px;max-width:325px;
+}
+@media screen and (max-width: 650px) {
+    .dropdown-1 #helptools {
+        max-height: 100%;
+        max-width: 100%;
+    }
+    .dropdown-content {
+        top: 100px;
+    }
+}
+/**/
+/*Checkbox Layout*/
+/*
+<label class="container-check">One
+  <input type="checkbox" checked="checked">
+  <span class="checkmark"></span>
+</label>
+*/
+.container-check {
+  display: block;
+  position: relative;
+  
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container-check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  background-color: #EBEBEB;
+	
+}
+
+/* On mouse-over, add a grey background color */
+.container-check:hover input ~ .checkmark {
+  background-color: #ccc;
+	
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-check input:checked ~ .checkmark {
+  background-color: #2196F3;
+	
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container-check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-check .checkmark:after {
+  left: 12px;
+  top: 7px;
+  width: 5px;
+  height: 13px;
+  border: solid white ;
+  border-width: 0 2px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/*seprator*/
+.seprator
+{
+	 background: #e0e0e0;
+  width: 1px;
+  content: "";
+  display:block;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  right: 0;
+  min-height: 70px;
+}
+/*slider*/
+.slider-selection {
+	background: #f77500 !important;
+}
+.slider-success .slider-selection {
+	background-color: #5cb85c !important;
+}
+.slider-primary .slider-selection {
+	background-color: #428bca !important;
+}
+.slider-info .slider-selection {
+	background-color: #5bc0de !important;
+}
+.slider-warning .slider-selection {
+	background-color: #f0ad4e !important;
+}
+.slider-danger .slider-selection {
+	background-color: #d9534f !important;
+}
+.slider.slider-horizontal {
+    width: 100% !important;
+    height: 20px;
+}
+.slider-handle {
+	background-color: #fff !important;
+	background-image: none !important;
+	-webkit-box-shadow: 1px 1px 24px -2px rgba(0,0,0,0.75) !important;
+	-moz-box-shadow: 1px 1px 24px -2px rgba(0,0,0,0.75) !important;
+	box-shadow: 1px 1px 24px -2px rgba(0,0,0,0.75) !important;
+}
+
+.slider-strips .slider-selection {
+	background-image: repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(255,252,252,0.08) 5px, rgba(252,252,252,0.08) 10px) !important;
+	background-image: -ms-repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(255,252,252,0.08) 5px, rgba(252,252,252,0.08) 10px) !important;
+	background-image: -o-repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(255,252,252,0.08) 5px, rgba(252,252,252,0.08) 10px) !important;
+	background-image: -webkit-repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(255,252,252,0.08) 5px, rgba(252,252,252,0.08) 10px) !important; 
+}
+.tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #bdbdbd !important;
+    text-align: center;
+    background-color: transparent !important;
+    border-radius: 4px;
+}
+.tooltip.top .tooltip-arrow {
+    display: none !important;
+}
+.slider .tooltip.top {
+    margin-top: -25px !important;
+}
+.well {
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	width: 100% !important;
+	padding: 0;
+}
+.slider-ghost .slider-track {
+	height: 5px !important;
+}
+.slider-ghost .slider-handle {
+	top: -2px !important;
+	border: 5px solid #f77500;
+}
+.slider-success.slider-ghost .slider-handle {
+	border-color: #5cb85c;
+}
+.slider-primary.slider-ghost .slider-handle {
+	border-color: #428bca;
+}
+.slider-info.slider-ghost .slider-handle {
+	border-color: #5bc0de;
+}
+.slider-warning.slider-ghost .slider-handle {
+	border-color: #f0ad4e;
+}
+.slider-danger.slider-ghost .slider-handle {
+	border-color: #d9534f;
+}
+/*------*/
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 254px; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 10%; /* Stay at the top */
+  right:0;
+  background-color: #EFEFEF ;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding: 55px 10px 10px 10px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+ 
+  color: #474747;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #4A52A7;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+ 
+}
+/*Animated button*/
+.btn-anim {
+  
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+    .btn-anim span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+        .btn-anim span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+    .btn-anim:hover span {
+        padding-right: 25px;
+    }
+
+        .btn-anim:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+/*Ajax loader*/
+.modal-ajax {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba( 255, 255, 255, .8 ) url('http://i.stack.imgur.com/FhHRx.gif') 50% 50% no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loadaj .modal-ajax {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loadaj .modal-ajax {
+    display: block;
+}
+/*----*/
+
+
+/*----------------------*/
