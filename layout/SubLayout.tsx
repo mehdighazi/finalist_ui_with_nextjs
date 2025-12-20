@@ -33,7 +33,7 @@ export default function SubLayout({ children }: RootLayoutProps) {
     const theme: Theme = useTheme();
     const matchDownMd = useMediaQuery(theme.breakpoints.down("md"));
 
-    //  const [userinfo, setUserInfo] = useState<UserInfo | null>(null);
+     const [userinfo, setUserInfo] = React.useState<UserInfo | null>(null);
     const { height } = useWindowDimensions();
 
     return (
@@ -58,21 +58,20 @@ export default function SubLayout({ children }: RootLayoutProps) {
                     <AppBar
                         position="static"
                         elevation={0}
-                        sx={{
-                            bgcolor: theme.palette.primary.light,
-                        }}
+                       
                     >
                         <Toolbar>
-                            {/*<Header handleLeftDrawerToggle={""} userInfo={""} />*/}
+                            {<Header handleLeftDrawerToggle={""} userInfo={""} />}
                         </Toolbar>
                     </AppBar>
 
-                    {/* Sidebar 
+                    {/* Sidebar*/} 
                         <Sidebar
+                        
                             rlPadding={rlPadding}
-                            userInfo={userinfo}
+                          //  userInfo={userinfo}
                         />
-                        */}
+                       
 
                     {/* Breadcrumb 
                         <Breadcrumbs

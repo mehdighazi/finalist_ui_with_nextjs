@@ -1,32 +1,44 @@
-// src/providers/Providers.tsx
 'use client';
 import React, { ReactNode } from "react";
 import { Provider, useSelector } from 'react-redux';
 import { store, RootState } from '@/components/store';
-import themes from '@/components/themes';
-import { ThemeProvider, CssBaseline, StyledEngineProvider } from '@mui/material';
+import defaultTheme from '@/components/themes';
+import { createTheme,ThemeProvider, CssBaseline, StyledEngineProvider } from '@mui/material';
 
 interface ProvidersProps {
   children: ReactNode;
 }
-
-// کامپوننت داخلی که بعد از Provider می‌تواند useSelector داشته باشد
-const ThemeWrapper = ({ children }: { children: ReactNode }) => {
-  const customization = useSelector((state: RootState) => state.sidebarMenu);
-  return (
-    <ThemeProvider theme={themes(customization)}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
-  );
-};
+const testTheme = createTheme({
+  direction: 'rtl',
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#9c27b0',
+    },
+  },
+});
 
 export default function Providers({ children }: ProvidersProps) {
   return (
     <Provider store={store}>
-      <StyledEngineProvider injectFirst>
-        <ThemeWrapper>{children}</ThemeWrapper>
-      </StyledEngineProvider>
+   
+        <InnerProviders>{children}</InnerProviders>
+      
     </Provider>
+  );
+}
+
+// کامپوننت داخلی که بعد از Provider قرار می‌گیرد
+function InnerProviders({ children }: { children: ReactNode }) {
+  const customization = useSelector((state: RootState) => state.sidebarMenu);
+  
+  return (
+    <ThemeProvider theme={defaultTheme()}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
   );
 }

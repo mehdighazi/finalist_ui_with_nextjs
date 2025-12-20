@@ -1,19 +1,13 @@
+// @/components/themes/index.js
+'use client';
 import { createTheme } from '@mui/material/styles';
-
-// assets
 import colors from '@/components/assets/colors/themeColors';
-
-// project imports
 import componentStyleOverrides from './compStyleOverride';
 import themePalette from './palette';
 import themeTypography from './typography';
 
-/**
- * Represent theme style and structure as per Material-UI
- * @param {JsonObject} customization customization parameter object
- */
-
-export const theme = (customization) => {
+// یک theme ثابت بدون پارامتر
+export const defaultTheme = () => {
     const color = colors;
 
     const themeOption = {
@@ -24,11 +18,10 @@ export const theme = (customization) => {
         background: color.paper,
         darkTextPrimary: color.primaryMain,
         darkTextSecondary: color.grey600,
-        textDark:color.secondaryDark,
+        textDark: color.secondaryDark,
         menuSelected: color.secondaryDark,
         menuSelectedBack: color.secondaryLight,
-        divider: color.grey200,
-        customization
+        divider: color.grey200
     };
 
     const themeOptions = {
@@ -46,10 +39,13 @@ export const theme = (customization) => {
         typography: themeTypography(themeOption)
     };
 
-    const themes = createTheme(themeOptions);
-    themes.components = componentStyleOverrides(themeOption);
+    const theme = createTheme(themeOptions);
+    theme.components = componentStyleOverrides(themeOption);
 
-    return themes;
+    return theme;
 };
 
-export default theme;
+// نگه‌داری نسخه قدیمی برای backward compatibility
+export const theme = () => defaultTheme();
+
+export default defaultTheme;
