@@ -83,7 +83,7 @@ const Sidebar: React.FC<SidebarProps> = ({ window, rlPadding }) => {
           '& .MuiDrawer-paper': {
             width: matchUpMd ? '40%' : '100%',
             marginRight: matchUpMd ? rlPadding : 0,
-            borderRadius: 5,
+            borderRadius: 2,
             boxShadow: 3
           }
         }}

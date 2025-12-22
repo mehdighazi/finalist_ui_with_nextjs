@@ -14,8 +14,6 @@ import Header from "@/components/layout/MainLayout/Header";
 import Sidebar from "@/components/layout/MainLayout/Sidebar";
 import { BreadcrumbsItems } from "@/components/menu-items";
 import { rlPadding } from "@/components/store/constant";
-import AlertCompnent from "@/components/ui-component/alert";
-import BottomSheet from "@/components/utilities/BottomSheet";
 import useWindowDimensions from "@/components/utils/getScreenDimension";
 import Providers from "@/provider/provider";
 import { IconChevronRight } from "@tabler/icons-react";
@@ -30,9 +28,9 @@ interface RootLayoutProps {
 /* ============================== */
 
 export default function SubLayout({ children }: RootLayoutProps) {
-    const theme: Theme = useTheme();
+    const theme= useTheme();
     const matchDownMd = useMediaQuery(theme.breakpoints.down("md"));
-
+     
      const [userinfo, setUserInfo] = React.useState<UserInfo | null>(null);
     const { height } = useWindowDimensions();
 
@@ -44,6 +42,7 @@ export default function SubLayout({ children }: RootLayoutProps) {
                     display: "flex",
                     px: matchDownMd ? 0 : rlPadding,
                     height: "100%",
+                    
                 }}
             >
                 <CssBaseline />
@@ -61,7 +60,7 @@ export default function SubLayout({ children }: RootLayoutProps) {
                        
                     >
                         <Toolbar>
-                            {<Header handleLeftDrawerToggle={""} userInfo={""} />}
+                            {<Header  userInfo={""} />}
                         </Toolbar>
                     </AppBar>
 
@@ -73,7 +72,7 @@ export default function SubLayout({ children }: RootLayoutProps) {
                         />
                        
 
-                    {/* Breadcrumb 
+                    {/* Breadcrumb */}
                         <Breadcrumbs
                             separator={IconChevronRight}
                             navigation={BreadcrumbsItems}
@@ -81,10 +80,15 @@ export default function SubLayout({ children }: RootLayoutProps) {
                             title
                             rightAlign
                         />
-                        */}
+                        
 
                     {/* Page content */}
-                    <Box sx={{ textAlign: "center", mb: -1 }}>
+                    <Box sx={{ textAlign: "center", mb: -1,
+                    backgroundColor:theme.palette.grey[200],
+            
+                    
+                     }}>
+                   
                         {children}
                     </Box>
                 </Box>

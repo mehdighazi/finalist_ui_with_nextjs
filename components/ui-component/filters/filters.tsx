@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 //ui-material
 import {
@@ -10,26 +10,21 @@ import {
   Typography,
   IconButton,
   Stack,
-  ClickAwayListener,
-  Popper,
+  Theme,
   useTheme,
   List,
   ListItem,
   ListItemText,
-  ListItemIcon,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 //Tabler icon
 import {
   IconFilter,
   IconX,
-  IconAdjustmentsHorizontal,
   IconAdjustments,
   IconSortDescending,
   IconSortAscending,
   IconChevronLeft,
   IconChevronDown,
-  IconPlayerRecord,
   IconCircleFilled,
 } from "@tabler/icons-react";
 //swipe item
@@ -37,25 +32,55 @@ import { useSwipeable } from "react-swipeable";
 //motion div
 import { motion } from "framer-motion";
 //project import
-import CustomLoadingButton from "views/utilities/CustomLoadingButton";
-import { Calendar, CalendarProvider } from "zaman";
-import { showBUTTOMSheet } from "store/bottomSheetReducer";
-import { CustomTextField } from "views/utilities/inputs";
-import PopperCalender from "views/utilities/PopperCalender";
+import CustomLoadingButton from "@/components/ui-component/utilities/CustomLoadingButton";
+import { showBottomSheet } from "@/components/store/slices/bottomSheetSlice";
+import { CustomTextField } from "@/components/ui-component/utilities/inputs";
+import PopperCalender from "@/components/ui-component/utilities/PopperCalender";
 import "./style.css";
-import { persiandate } from "utils/Lib";
-import Transition from "ui-component/extended/Transitions";
-import dataHandler from "api/dataHandler";
-import api from "api/api";
-import { SportIcons } from "icons/sportIcons";
-////--------------------------------------------------------|          |----------------------------------
+import { persiandate } from "@/components/utils/Lib";
+import Transition from "@/components/ui-component/extended/Transitions";
+import dataHandler from "@/components/api/dataHandler";
+import api from "@/components/api/api";
+import { SportIcons } from "@/components/icons/sportIcons";
 
-const SportBottomSheetContent = () => {
+// -------------------- Types & Interfaces --------------------
+interface SportItem {
+  sport_field_id: number;
+  field_title: string;
+  field_icon?: string;
+  [key: string]: any;
+}
+
+interface FilterItem {
+  id: number;
+  title: string;
+  start_icon: React.ReactNode;
+  end_icon: React.ReactNode;
+  sport_field_id?: number;
+}
+
+interface DateValue {
+  startDate: string;
+  endDate: string;
+}
+
+interface FiltersSectionProps {
+  onChange: (value: string | number) => void;
+}
+
+interface PopperCalenderProps {
+  anchorEl: HTMLElement | null;
+  handleClose: () => void;
+  onChange: (e: any) => void;
+}
+
+// -------------------- SportBottomSheetContent --------------------
+const SportBottomSheetContent: React.FC = () => {
   const theme = useTheme();
-  const [loadedItems, setLoadedItems] = useState([]);
-  const [sportList, setSportList] = useState([]);
-  const [fieldParentId, setFeildParentId] = useState(0);
-  const [fieldSelectTitle, setFieldSelectTitle] = useState(null);
+  const [loadedItems, setLoadedItems] = useState<SportItem[]>([]);
+  const [sportList, setSportList] = useState<SportItem[]>([]);
+  const [fieldParentId, setFieldParentId] = useState<number>(0);
+  const [fieldSelectTitle, setFieldSelectTitle] = useState<string | null>(null);
 
   const getData = () => {
     const body = {
@@ -67,18 +92,20 @@ const SportBottomSheetContent = () => {
     const result = dataHandler(api.listSports(body), "get", "");
 
     try {
-      result(async function (data, status) {
+      result(async function (data: any, status: boolean) {
         if (status) setSportList(data.result);
       });
     } catch (error) {
       //error handle here
     }
   };
-  React.useEffect(() => {
-    getData("");
+
+  useEffect(() => {
+    getData();
     setLoadedItems([]);
   }, [fieldParentId]);
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (sportList) {
       sportList.forEach((item, index) => {
         setTimeout(() => {
@@ -87,14 +114,15 @@ const SportBottomSheetContent = () => {
       });
     }
   }, [sportList]);
-  const listItemOnclickHandler = (field_id, title) => {
+
+  const listItemOnclickHandler = (field_id: number, title: string) => {
     setFieldSelectTitle(title);
-    setFeildParentId(field_id);
+    setFieldParentId(field_id);
   };
 
   return (
     <Stack sx={{ p: 2 }}>
-      {fieldParentId !== 0 ? (
+      {fieldParentId !== 0 && (
         <Button
           sx={{
             p: 1,
@@ -106,28 +134,25 @@ const SportBottomSheetContent = () => {
             gap: "6px",
             borderRadius: 3,
           }}
-          //   onClick={() => selectItem(item.id)}
           variant="contained"
           color="primary"
         >
-          <IconChevronDown sx={{ order: 2 }} /> {/* آیکون در چپ قرار می‌گیرد */}
+          <IconChevronDown sx={{ order: 2 }} />
           <Typography fontSize={12} sx={{ order: 1 }}>
             {fieldSelectTitle}
           </Typography>
           <IconButton
             sx={{ color: theme.palette.grey[50], order: 3 }}
             size="small"
-            onClick={() => setFeildParentId(0)}
+            onClick={() => setFieldParentId(0)}
           >
             <IconX size={16} />
           </IconButton>
         </Button>
-      ) : (
-        <></>
       )}
       <List sx={{ width: "100%", bgcolor: "background.paper" }}>
         {loadedItems.map((item, index) => {
-          const IconComponent = SportIcons[item.field_icon]; // اینجا باید داخل map باشه
+          const IconComponent = SportIcons[item.field_icon as keyof typeof SportIcons];
           return (
             <Transition type={"fade"} in={true} key={index}>
               <ListItem
@@ -141,7 +166,7 @@ const SportBottomSheetContent = () => {
                   borderBottom: "1px solid #e0e0e0",
                   "&:hover": {
                     borderRadius: 5,
-                    backgroundColor: theme.palette.primary[100], // تغییر رنگ پس‌زمینه هنگام هاور
+                    backgroundColor: theme.palette.primary[100],
                     cursor: "pointer",
                     transition: "background-color 0.3s ease",
                   },
@@ -151,14 +176,10 @@ const SportBottomSheetContent = () => {
                   {IconComponent ? (
                     <IconComponent />
                   ) : (
-                    <>
-                      <IconCircleFilled size={12} />
-                    </>
-                  )}{" "}
-                  {/* نمایش آیکن داینامیک */}
+                    <IconCircleFilled size={12} />
+                  )}
                   <ListItemText sx={{ px: 1 }} primary={item.field_title} />
                 </Box>
-
                 <IconButton edge="end" aria-label="arrow-back">
                   <IconChevronLeft />
                 </IconButton>
@@ -170,32 +191,40 @@ const SportBottomSheetContent = () => {
     </Stack>
   );
 };
-//---------------------------------------------------|           |----------------------------------
-const FilterBottomSheetContent = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [date, setDate] = useState(null);
-  const [textField, setTextField] = useState(null);
-  const [value, setValue] = useState({
+
+// -------------------- FilterBottomSheetContent --------------------
+const FilterBottomSheetContent: React.FC = () => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [textField, setTextField] = useState<keyof DateValue | null>(null);
+  const [value, setValue] = useState<DateValue>({
     startDate: "",
     endDate: "",
   });
-  const handleClick = (event, textField) => {
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>, textField: keyof DateValue) => {
     setTextField(textField);
-    setAnchorEl(anchorEl ? null : event.currentTarget); // باز و بسته کردن منو
+    setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
-  //const [calendarValue, setCalendarValue] = useState(new Date())
+
+  const handleDateChange = (e: any) => {
+    if (textField) {
+      setValue({ ...value, [textField]: persiandate(e)[1] });
+    }
+  };
+
   return (
     <>
       <PopperCalender
         anchorEl={anchorEl}
         handleClose={handleClose}
-        onChange={(e) => setValue({ [textField]: persiandate(e)[1] })}
+        onChange={handleDateChange}
       />
       <Box sx={{ p: 2, px: 5 }}>
         <Typography fontSize={16} variant="h5">
@@ -221,13 +250,11 @@ const FilterBottomSheetContent = () => {
               />
             </Box>
           </Grid>
-          <Grid sm={12}>
+          <Grid item sm={12}>
             <Box sx={{ mt: 2 }}>
-              {
-                <CustomLoadingButton padding={1} variant={"contained"}>
-                  فیلتر کن
-                </CustomLoadingButton>
-              }
+              <CustomLoadingButton padding={1} variant={"contained"}>
+                فیلتر کن
+              </CustomLoadingButton>
             </Box>
           </Grid>
         </Grid>
@@ -235,156 +262,14 @@ const FilterBottomSheetContent = () => {
     </>
   );
 };
-//-------------------------------------------| Filter Section |---------------------------------
-/*const FiltersSection = () => {
-  const [index, setIndex] = useState(0);
-  const containerRef = React.useRef(null);
-  const [selectedItem, setSelectedItem] = useState(null); // فقط یک دکمه انتخاب شود
-  const [filtersMark, setFiltersMark] = useState([
-    {
-      id: 1,
-      title: "تاریخ نزولی",
-      start_icon: <IconSortDescending size={16} />,
-      end_icon: <IconSortDescending size={16} />,
-    },
-    {
-      id: 2,
-      title: "تاریخ صعودی",
-      start_icon: <IconSortAscending size={16} />,
-      end_icon: <IconX size={16} />,
-    },
-    {
-      id: 3,
-      title: "امتیاز صعودی",
-      start_icon: <IconSortAscending size={16} />,
-      end_icon: <IconX size={16} />,
-    },
-    {
-      id: 4,
-      title: "امتیاز نزولی",
-      start_icon: <IconSortDescending size={16} />,
-      end_icon: <IconX size={16} />,
-    },
-  ]);
 
+// -------------------- FiltersSection --------------------
+const FiltersSection: React.FC<FiltersSectionProps> = ({ onChange }) => {
+  const [index, setIndex] = useState<number>(0);
   const dispatch = useDispatch();
-  const totalItems = filtersMark.length;
-  const visibleItems = 3; // تعداد آیتم‌های قابل نمایش
-  const itemWidth = 140; // عرض هر آیتم
-  const maxIndex = totalItems - visibleItems; // حداکثر مقدار ایندکس
-
-  const nextSlide = () => {
-    setIndex((prev) => (prev < maxIndex ? prev + 1 : prev));
-  };
-
-  const prevSlide = () => {
-    setIndex((prev) => (prev > 0 ? prev - 1 : prev));
-  };
-
-  const handlers = useSwipeable({
-    onSwipedLeft: nextSlide,
-    onSwipedRight: prevSlide,
-  });
-  // حذف آیتم با کلیک روی endIcon
-  const removeItem = (id) => {
-    setFiltersMark((prev) => prev.filter((item) => item.id !== id));
-  };
-  const selectItem = (id) => {
-    setSelectedItem((prev) => (prev === id ? null : id));
-  };
-  const filterButtonOnclick = () => {
-    dispatch(showBUTTOMSheet(<BottomSheetContent />, "فیلتر", "30%"));
-  };
-
-  return (
-    <Stack direction={"row-reverse"} spacing={1} sx={{ p: 0 }}>
-      <Button
-        sx={{
-          p: 1,
-          width: `${itemWidth}px`,
-          flexShrink: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          gap: "6px",
-          height: 44,
-        }}
-        endIcon={<IconAdjustments />} // آیکون سمت راست
-        variant="outlined"
-        color="primary"
-        onClick={filterButtonOnclick}
-      >
-        <Typography fontSize={12}>فیلتر</Typography>
-      </Button>
-      <Box
-        {...handlers}
-        ref={containerRef}
-        sx={{
-          // width: `${visibleItems * itemWidth}px`,
-          width: "100%",
-          overflow: "hidden",
-          // border: "2px solid black",
-          display: "flex",
-          alignItems: "right",
-          justifyContent: "flex-end",
-          position: "relative",
-        }}
-      >
-        <motion.div
-          style={{
-            display: "flex",
-            gap: "10px",
-            width: `${totalItems * (itemWidth + 10)}px`,
-            cursor: "grab",
-          }}
-          drag="x"
-          dragConstraints={{
-            left: -(maxIndex * (itemWidth + 10)),
-            right: 0,
-          }}
-          animate={{ x: -index * (itemWidth + 10) }}
-          transition={{ type: "spring", stiffness: 100 }}
-        >
-          {filtersMark.map((item, i) => (
-            <Button
-              key={i}
-              sx={{
-                p: 1,
-                width: `${itemWidth}px`,
-                flexShrink: 0,
-                display: "flex",
-                alignItems: "right",
-                justifyContent: "flex-end", // آیکون شروع در ابتدای دکمه قرار گیرد
-                gap: "6px", // فاصله بین آیکون و متن
-                backgroundColor: selectedItem === item.id ? "#1976D2" : "white", // تغییر رنگ فقط برای دکمه‌ی انتخاب‌شده
-                color: selectedItem === item.id ? "white" : "black",
-                borderColor: selectedItem === item.id ? "#1976D2" : "black",
-              }}
-              startIcon={item.start_icon}
-              onClick={() => selectItem(item.id)}
-              variant="outlined"
-              color="primary"
-            >
-              <Typography fontSize={11}>{item.title}</Typography>
-              {
-                <IconButton size="small" onClick={() => removeItem(item.id)}>
-                  <IconX size={16} />
-                </IconButton>
-              }
-            </Button>
-          ))}
-        </motion.div>
-      </Box>
-    </Stack>
-  );
-};*/
-//--------------------------------------------------
-const FiltersSection = ({ onChange }) => {
-  const [index, setIndex] = useState(0);
-  const dispatch = useDispatch();
-  const containerRef = React.useRef(null);
-  const [selectedItem, setSelectedItem] = useState(null); // فقط یک دکمه انتخاب شود
-  const [filtersMark, setFiltersMark] = useState([
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedItem, setSelectedItem] = useState<number | null>(null);
+  const [filtersMark, setFiltersMark] = useState<FilterItem[]>([
     {
       id: 2,
       title: "فوتبال سالنی",
@@ -435,14 +320,16 @@ const FiltersSection = ({ onChange }) => {
     },
   ]);
 
-  const totalItems = filtersMark.length + 3;
-  const visibleItems = 5; // تعداد آیتم‌های قابل نمایش
-  const itemWidth = 125; // عرض هر آیتم
-  const maxIndex = totalItems - visibleItems; // حداکثر مقدار ایندکس
-  React.useEffect(() => {
-    // وقتی لود شد، اسکرول کن روی آخر (محل دکمه ورزش‌ها و فیلتر)
+  const totalItems = filtersMark.length + 2;
+  const visibleItems = 5;
+  const itemWidth = 125;
+  const maxIndex = totalItems - visibleItems;
+  const theme = useTheme();
+
+  useEffect(() => {
     setIndex(0);
   }, []);
+
   const nextSlide = () => {
     setIndex((prev) => (prev < maxIndex ? prev + 1 : prev));
   };
@@ -455,44 +342,40 @@ const FiltersSection = ({ onChange }) => {
     onSwipedLeft: nextSlide,
     onSwipedRight: prevSlide,
   });
-  // حذف آیتم با کلیک روی endIcon
-  const removeItem = (sport_field_id) => {
-    //onChange("-1")
+
+  const removeItem = (sport_field_id: number) => {
+    // onChange("-1");
     // setFiltersMark((prev) => prev.filter((item) => item.sport_field_id !== sport_field_id));
   };
-  const selectItem = (sport_field_id) => {
-    //if selected item and sport field id is equal
+
+  const selectItem = (sport_field_id: number) => {
     if (sport_field_id !== selectedItem) {
-      setSelectedItem((prev) =>
-        prev === sport_field_id ? null : sport_field_id
-      );
+      setSelectedItem(sport_field_id);
       onChange(sport_field_id);
     } else {
-      setSelectedItem("")
-      onChange("")
-    };
+      setSelectedItem(null);
+      onChange("");
+    }
   };
+
   const sportButtonOnclick = () => {
     dispatch(showBUTTOMSheet(<SportBottomSheetContent />, "ورزش ها", ""));
   };
+
   const filterButtonOnclick = () => {
     dispatch(showBUTTOMSheet(<FilterBottomSheetContent />, "فیلتر", "30%"));
   };
-  const theme = useTheme();
+
   return (
     <Stack direction={"row-reverse"} spacing={1} sx={{ p: 0 }}>
-
       <Box
         {...handlers}
-        // ref={containerRef}
         sx={{
-          width: `${(visibleItems) * (itemWidth + 10)}px`,
-          flexDirection: "row-reverse", // 👈 این باعث میشه ترتیب از راست شروع بشه
+          width: `${visibleItems * (itemWidth + 10)}px`,
+          flexDirection: "row-reverse",
           overflow: "hidden",
-          // border: "2px solid black",
           display: "flex-item",
           alignItems: "center",
-          //  justifyContent: "flex-start",
           position: "relative",
         }}
       >
@@ -502,7 +385,6 @@ const FiltersSection = ({ onChange }) => {
             gap: "10px",
             width: `${totalItems * (itemWidth + 10)}px`,
             cursor: "grab",
-
           }}
           drag="x"
           dragConstraints={{
@@ -512,7 +394,6 @@ const FiltersSection = ({ onChange }) => {
           animate={{ x: -index * (itemWidth + 10) }}
           transition={{ type: "spring", stiffness: 0 }}
         >
-          {/* دکمه‌های ثابت اول */}
           <Button
             sx={{
               p: 1,
@@ -550,7 +431,6 @@ const FiltersSection = ({ onChange }) => {
             <Typography fontSize={12}>ورزش ها</Typography>
           </Button>
 
-          {/* دکمه‌های داینامیک بعدش */}
           {filtersMark.map((item, i) => (
             <Button
               key={i}
@@ -572,7 +452,7 @@ const FiltersSection = ({ onChange }) => {
                     : theme.palette.primary.main,
               }}
               startIcon={item.start_icon}
-              onClick={() => selectItem(item.id, item)}
+              onClick={() => selectItem(item.id)}
               variant="outlined"
               color="primary"
             >
@@ -595,10 +475,9 @@ const FiltersSection = ({ onChange }) => {
             </Button>
           ))}
         </motion.div>
-
       </Box>
     </Stack>
   );
 };
-export default FiltersSection;
 
+export default FiltersSection;

@@ -14,7 +14,7 @@ export const defaultTheme = () => {
         colors: color,
         heading: color.grey300,
         paper: color.paper,
-        backgroundDefault: color.grey600,
+        backgroundDefault: color.grey100,
         background: color.paper,
         darkTextPrimary: color.primaryMain,
         darkTextSecondary: color.grey600,
@@ -25,6 +25,8 @@ export const defaultTheme = () => {
     };
 
     const themeOptions = {
+      
+
         direction: 'ltr',
         palette: themePalette(themeOption),
         mixins: {
