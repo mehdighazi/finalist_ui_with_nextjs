@@ -6,6 +6,7 @@ import {
     AppBar,
     Toolbar,
     useMediaQuery,
+    Typography,
 } from "@mui/material";
 import { useTheme, Theme } from "@mui/material/styles";
 
@@ -45,6 +46,7 @@ export default function SubLayout({ children }: RootLayoutProps) {
                     
                 }}
             >
+            
                 <CssBaseline />
 
                 <Box sx={{ width: "100%", height }}>

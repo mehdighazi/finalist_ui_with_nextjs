@@ -29,6 +29,8 @@ import {
   IconMapPin,
   IconCircleFilled,
 } from "@tabler/icons-react";
+///--------------project import
+import colors from "@/components/assets/colors/themeColors";
 //------------------------------------
 interface TeamBoxProps {
   title: string;
@@ -41,6 +43,7 @@ interface MatchBaseProps {
   matchType: "casual" | "official";
   hostTeamName: string;
   guestTeamName?: string;
+  matchSportField?:string;
   logoHost?: string;
   logoGuest?: string;
   rateHost?: number;
@@ -54,10 +57,7 @@ interface MatchBaseProps {
   confirmRequest?: "accepted" | "pending" | "-1";
 }
 //------------------------------------------------
-export const CardWrapper = styled(MainCard)(({ theme }) => ({
-  border: "1px solid",
-  borderColor: theme.palette.primary[100],
-}));
+
 
 export const headerSx = (theme: any) => ({
   p: 1,
@@ -96,14 +96,14 @@ const MatchActions: React.FC<{
   requestNumber?: number;
   confirmRequest?: string;
 }> = ({ viwer, createDate, requestNumber, confirmRequest }) => {
-  const theme = useTheme();
+  //const theme = useTheme();
   const date = createDate ? createDateStr(createDateLetter(createDate)) : "";
 
   return (
     <Stack direction="row" spacing={1} divider={<Divider flexItem />}>
       {viwer && (
         <IconText
-          icon={<IconEye size={14} color={theme.palette.grey[400]} />}
+          icon={<IconEye size={14} color={colors.primary100} />}
           text={viwer}
           textNumber
           fontSize={10}
@@ -111,13 +111,13 @@ const MatchActions: React.FC<{
       )}
 
       {date && (
-        <Typography fontSize={10} color={theme.palette.grey[400]}>
+        <Typography fontSize={10}  color={colors.primary100}>
           {date}
         </Typography>
       )}
 
       {requestNumber !== undefined && (
-        <Typography fontSize={10} color={theme.palette.secondary.main}>
+        <Typography fontSize={10}  color={"#e2e2e2"}>
           {requestNumber > 0
             ? `${requestNumber} درخواست`
             : "بدون درخواست"}
@@ -126,10 +126,10 @@ const MatchActions: React.FC<{
 
       {confirmRequest === "accepted" && (
         <IconText
-          icon={<IconCheckbox size={14} color={theme.palette.success.main} />}
+          icon={<IconCheckbox size={14} color={""} />}
           text="تایید شده"
           fontSize={10}
-          color={theme.palette.success.main}
+          color={""}
         />
       )}
     </Stack>
@@ -137,12 +137,12 @@ const MatchActions: React.FC<{
 };
 //---------------------------------------------------
 export const MatchFullCardContent: React.FC<MatchBaseProps> = (props) => {
-  const theme = useTheme();
+  //const theme = useTheme();
 
   return (
-    <CardWrapper
+    <MainCard
       actions={<MatchActions {...props} />}
-      headerSX={headerSx(theme)}
+      //headerSX={headerSx(theme)}
       contentSX={{ p: 1 }}
       border
       title={props.matchType === "casual" ? "دوستانه" : "رسمی"}
@@ -191,8 +191,7 @@ export const MatchFullCardContent: React.FC<MatchBaseProps> = (props) => {
           />
         </Grid>
       </Grid>
-    </CardWrapper>
+    </MainCard>
   );
 };
-
 

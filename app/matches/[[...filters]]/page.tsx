@@ -1,38 +1,74 @@
+import * as React from "react";
+import { Suspense } from "react";
+import { Metadata } from "next";
 
-import Image from "next/image";
+// کامپوننت‌ها
+import MatchListLayout from "@/layout/match/layout";
+import MatchesContent from "./home/MatchesContent";
+import TotalIncomeCard from "@/components/ui-component/cards/Skeleton/TotalIncomeCard";
+// types
+interface HomeProps {
+  params: Promise<{ filters?: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}
 
-export default async function Home({ params }) {
-  // await کردن params
-  const { filters } = await params;
+// metadata برای SEO
+export const metadata: Metadata = {
+  title: 'لیست مسابقات ورزشی',
+  description: 'جستجو و مشاهده مسابقات ورزشی در سراسر کشور',
+};
+
+// کامپوننت اصلی صفحه - Server Component
+export default async function Home({ params, searchParams }: HomeProps) {
+  // Await کردن params و searchParams
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams || {};
   
-  // گرفتن مقادیر v, b, c
-  const [v, b, c] = filters || [];
-  
-  console.log("V:", v); // در ترمینال سرور نمایش داده می‌شود
-  console.log("B:", b);
-  console.log("C:", c);
-  
-  // نمایش در صفحه برای تست
+  // گرفتن پارامترها از URL
+  const filters = resolvedParams?.filters || '';
+  const searchQuery = resolvedSearchParams?.q as string || '';
+  const sportFieldId = resolvedSearchParams?.sport_field_id as string || '';
+  const cityId = resolvedSearchParams?.city_id as string || '';
+  const page = resolvedSearchParams?.page as string || '1';
+
+  // داده‌های اولیه برای کامپوننت کلاینت
+  const initialData = {
+    filters,
+    searchQuery,
+    sportFieldId,
+    cityId,
+    page: parseInt(page),
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="text-base font-medium">
-            HI - Dynamic Route Example
-          </h1>
-          <div className="text-sm text-gray-500">
-            <p>Filters from URL: {filters?.join(', ') || 'None'}</p>
-            <p>V: {v || 'Not set'}</p>
-            <p>B: {b || 'Not set'}</p>
-            <p>C: {c || 'Not set'}</p>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          {/* بقیه کدت */}
-        </div>
-      </main>
+    <div className="min-h-screen bg-zinc-50 dark:bg-black">
+      {/* Layout Client Component */}
+      <MatchListLayout >
+      
+        {/* محتوای اصلی - Server Component */}
+       {
+         <Suspense fallback={<LoadingContent />}>
+          <MatchesContent
+            filters={filters}
+            searchQuery={searchQuery}
+            sportFieldId={sportFieldId}
+            cityId={cityId}
+            page={parseInt(page)}
+          />
+        </Suspense>
+        } 
+      </MatchListLayout>
     </div>
+  );
+}
+
+// کامپوننت loading برای محتوا
+function LoadingContent() {
+  return (
+    <Box sx={{ p: 2 }}>
+      <TotalIncomeCard />
+      <TotalIncomeCard />
+      <TotalIncomeCard />
+    </Box>
   );
 }

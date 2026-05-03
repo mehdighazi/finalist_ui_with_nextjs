@@ -359,11 +359,11 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onChange }) => {
   };
 
   const sportButtonOnclick = () => {
-    dispatch(showBUTTOMSheet(<SportBottomSheetContent />, "ورزش ها", ""));
+    dispatch(showBottomSheet(<SportBottomSheetContent />, "ورزش ها", ""));
   };
 
   const filterButtonOnclick = () => {
-    dispatch(showBUTTOMSheet(<FilterBottomSheetContent />, "فیلتر", "30%"));
+    dispatch(showBottomSheet(<FilterBottomSheetContent />, "فیلتر", "30%"));
   };
 
   return (

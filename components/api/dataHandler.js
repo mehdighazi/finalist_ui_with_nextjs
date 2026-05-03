@@ -33,7 +33,7 @@ export default function dataHandler(apiUrl, method, body) {
     return rep;
 
 }
-export  function dataHandlerWithFetch(apiUrl, method, body) {
+export async  function dataHandlerWithFetch(apiUrl, method, body) {
     return async function (callback) {
         try {
             const response = await fetch(apiUrl, {

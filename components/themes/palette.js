@@ -15,7 +15,9 @@ export default function themePalette(theme) {
             dark: theme.colors?.primaryDark,
             100: theme.colors?.primary100,
             200: theme.colors?.primary200,
-            800: theme.colors?.primary800
+            800: theme.colors?.primary800,
+
+            900: theme.colors?.secondaryLight
         },
         secondary: {
             light: theme.colors?.secondaryLight,
@@ -49,6 +51,7 @@ export default function themePalette(theme) {
             50: theme.colors?.grey50,
             100: theme.colors?.grey100,
             200: theme.colors?.grey200,
+            400: theme.colors?.grey400,
             500: theme.darkTextSecondary,
             600: theme.colors?.grey600,
             700:  theme.colors?.grey700,
