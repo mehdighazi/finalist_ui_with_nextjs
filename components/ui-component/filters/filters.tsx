@@ -31,16 +31,18 @@ import {
 import { useSwipeable } from "react-swipeable";
 //motion div
 import { motion } from "framer-motion";
+
 //project import
 import CustomLoadingButton from "@/components/ui-component/utilities/CustomLoadingButton";
 import { showBottomSheet } from "@/components/store/slices/bottomSheetSlice";
 import { CustomTextField } from "@/components/ui-component/utilities/inputs";
 import PopperCalender from "@/components/ui-component/utilities/PopperCalender";
-import "./style.css";
+import styles from "./style.module.css";
 import { persiandate } from "@/components/utils/Lib";
 import Transition from "@/components/ui-component/extended/Transitions";
 import dataHandler from "@/components/api/dataHandler";
 import api from "@/components/api/api";
+import ApiServer from "@/components/api/api.server";
 import { SportIcons } from "@/components/icons/sportIcons";
 
 // -------------------- Types & Interfaces --------------------
@@ -89,7 +91,7 @@ const SportBottomSheetContent: React.FC = () => {
       field_id: "",
     };
 
-    const result = dataHandler(api.listSports(body), "get", "");
+    const result = dataHandler(ApiServer.listSports(body), "get", "");
 
     try {
       result(async function (data: any, status: boolean) {
@@ -137,7 +139,7 @@ const SportBottomSheetContent: React.FC = () => {
           variant="contained"
           color="primary"
         >
-          <IconChevronDown sx={{ order: 2 }} />
+          <IconChevronDown />
           <Typography fontSize={12} sx={{ order: 1 }}>
             {fieldSelectTitle}
           </Typography>
@@ -166,7 +168,7 @@ const SportBottomSheetContent: React.FC = () => {
                   borderBottom: "1px solid #e0e0e0",
                   "&:hover": {
                     borderRadius: 5,
-                    backgroundColor: theme.palette.primary[100],
+                    backgroundColor: theme.palette.primary.light,
                     cursor: "pointer",
                     transition: "background-color 0.3s ease",
                   },
@@ -235,18 +237,20 @@ const FilterBottomSheetContent: React.FC = () => {
           <Grid item sm={6} xs={6}>
             <Box onClick={(e) => handleClick(e, "startDate")}>
               <CustomTextField
+                onChange={(e) => console.log(e)}
                 value={value.startDate}
                 readOnly={true}
-                placeHolder={"از تاریخ "}
+                placeholder={"از تاریخ "}
               />
             </Box>
           </Grid>
           <Grid item sm={6} xs={6}>
             <Box onClick={(e) => handleClick(e, "endDate")}>
               <CustomTextField
+                onChange={(e) => console.log(e)}
                 value={value.endDate}
                 readOnly={true}
-                placeHolder={"تا تاریخ "}
+                placeholder={"تا تاریخ "}
               />
             </Box>
           </Grid>
@@ -358,13 +362,20 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onChange }) => {
     }
   };
 
-  const sportButtonOnclick = () => {
-    dispatch(showBottomSheet(<SportBottomSheetContent />, "ورزش ها", ""));
+   const sportButtonOnclick = () => {
+    dispatch(showBottomSheet({ 
+      title: "ورزش ها",
+      renderContent: () => <SportBottomSheetContent />,
+      ptSX: ""
+    }));
   };
-
   const filterButtonOnclick = () => {
-    dispatch(showBottomSheet(<FilterBottomSheetContent />, "فیلتر", "30%"));
-  };
+  dispatch(showBottomSheet({ 
+    title: "فیلتر",
+    renderContent: () => <FilterBottomSheetContent />,
+    ptSX: "30%"
+  }));
+};
 
   return (
     <Stack direction={"row-reverse"} spacing={1} sx={{ p: 0 }}>
@@ -452,12 +463,13 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onChange }) => {
                     : theme.palette.primary.main,
               }}
               startIcon={item.start_icon}
+              endIcon={  <IconX size={16} />}
               onClick={() => selectItem(item.id)}
               variant="outlined"
               color="primary"
             >
               <Typography fontSize={11}>{item.title}</Typography>
-              <IconButton
+            {/** <IconButton
                 size="small"
                 sx={{
                   color:
@@ -470,8 +482,8 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({ onChange }) => {
                       : theme.palette.primary.main,
                 }}
               >
-                <IconX size={16} />
-              </IconButton>
+              
+              </IconButton>*/}  
             </Button>
           ))}
         </motion.div>

@@ -33,30 +33,3 @@ export default function dataHandler(apiUrl, method, body) {
     return rep;
 
 }
-export async  function dataHandlerWithFetch(apiUrl, method, body) {
-    return async function (callback) {
-        try {
-            const response = await fetch(apiUrl, {
-                method: method,
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: body ? JSON.stringify(body) : undefined
-            });
-
-            const data = await response.json();
-
-            let ret;
-            if (data.state === 100)
-                ret = true;
-            else
-                ret = false;
-
-            callback(data, ret);
-
-        } catch (error) {
-            console.log(error);
-            callback(error, false);
-        }
-    };
-}

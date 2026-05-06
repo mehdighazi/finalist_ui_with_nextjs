@@ -1,6 +1,13 @@
 import Image from "next/image";
+// app/[filters]/page.tsx (یا مسیر مناسب)
 
-export default async function Home({ params }) {
+type PageProps = {
+  params: Promise<{
+    filters?: string[];
+  }>;
+};
+
+export default async function Home({ params }: PageProps) {
   // await کردن params
   const { filters } = await params;
   

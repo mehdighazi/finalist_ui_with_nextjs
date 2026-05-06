@@ -12,7 +12,7 @@ import config from '@/components/config';
 import { gridSpacing } from '@/components/store/constant';
 
 // assets
-import { IconTallymark1,SeparatorIcon } from '@tabler/icons-react';
+import { IconTallymark1,IconSlash } from '@tabler/icons-react';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import HomeIcon from '@mui/icons-material/Home';
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
@@ -65,7 +65,7 @@ const Breadcrumbs = ({
   
   const linkSX: SxProps<Theme> = {
     display: 'flex',
-    color: 'secondary.dark',
+   // color: 'secondary.dark',
     textDecoration: 'none',
     alignContent: 'center',
     alignItems: 'center',
@@ -132,9 +132,9 @@ const Breadcrumbs = ({
   // item separator
   const SeparatorIcon = separator;
   const separatorIcon = separator ? (
-    <IconTallymark1 stroke={1.5} size="1rem" />
+    <IconSlash stroke={1.5} size="1rem" />
   ) : (
-    <IconTallymark1 stroke={1.5} size="1rem" />
+    <IconSlash stroke={1.5} size="1rem" />
   );
 
   let mainContent: ReactNode;
@@ -188,7 +188,7 @@ const Breadcrumbs = ({
           marginBottom: 1,
           // border: card === false ? 'none' : '1px solid',
           // borderColor: theme.palette.primary[] + 75,
-          background: card === false ? 'transparent' : theme.palette.primary[200]
+          background: card === false ? 'transparent' : theme.palette.primary.light
         }}
         {...others}
       >

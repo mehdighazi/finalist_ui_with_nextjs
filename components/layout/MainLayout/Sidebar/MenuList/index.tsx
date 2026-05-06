@@ -21,23 +21,45 @@ import { menuItems } from '@/components/menu-items';
 /* Types */
 /* ============================== */
 
-interface MenuItemType {
+// تایپ پایه برای منو آیتم‌ها
+interface BaseMenuItem {
   id: string;
-  type: 'group' | 'collapse' | 'item';
   title: string;
   caption?: string;
-  url?: string;
   icon?: React.ElementType;
-  children?: MenuItemType[];
   target?: boolean;
   external?: boolean;
 }
+
+// تایپ برای آیتم ساده
+interface ItemMenuItem extends BaseMenuItem {
+  type: 'item';
+  url: string;
+}
+
+// تایپ برای گروه تودرتو
+interface CollapseMenuItem extends BaseMenuItem {
+  type: 'collapse';
+  children: MenuItemType[];
+}
+
+// تایپ برای گروه اصلی
+interface GroupMenuItem extends BaseMenuItem {
+  type: 'group';
+  children: MenuItemType[];
+}
+
+// یونیون تایپ برای همه موارد
+type MenuItemType = ItemMenuItem | CollapseMenuItem | GroupMenuItem;
+
+// بررسی می‌کنیم که menuItems واقعاً چه ساختاری دارد
+// اگر structure متفاوت است، این تایپ‌ها را اصلاح کنید
 
 /* ============================== */
 /* Components */
 /* ============================== */
 
-const NavItem: React.FC<{ item: MenuItemType; level: number }> = ({ item, level }) => {
+const NavItem: React.FC<{ item: ItemMenuItem; level: number }> = ({ item, level }) => {
   const theme = useTheme();
   const Icon = item.icon;
   const itemIcon = Icon ? <Icon stroke={1.5} size="1.3rem" /> : <FiberManualRecord fontSize={level > 0 ? 'inherit' : 'medium'} />;
@@ -73,7 +95,7 @@ const NavItem: React.FC<{ item: MenuItemType; level: number }> = ({ item, level 
   );
 };
 
-const NavCollapse: React.FC<{ item: MenuItemType; level: number }> = ({ item, level }) => {
+const NavCollapse: React.FC<{ item: CollapseMenuItem; level: number }> = ({ item, level }) => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const Icon = item.icon;
@@ -109,9 +131,9 @@ const NavCollapse: React.FC<{ item: MenuItemType; level: number }> = ({ item, le
         <List component="div" disablePadding>
           {item.children?.map((child) =>
             child.type === 'collapse' ? (
-              <NavCollapse key={child.id} item={child} level={level + 1} />
+              <NavCollapse key={child.id} item={child as CollapseMenuItem} level={level + 1} />
             ) : (
-              <NavItem key={child.id} item={child} level={level + 1} />
+              <NavItem key={child.id} item={child as ItemMenuItem} level={level + 1} />
             )
           )}
         </List>
@@ -120,17 +142,17 @@ const NavCollapse: React.FC<{ item: MenuItemType; level: number }> = ({ item, le
   );
 };
 
-const NavGroup: React.FC<{ item: MenuItemType }> = ({ item }) => {
+const NavGroup: React.FC<{ item: GroupMenuItem }> = ({ item }) => {
   const theme = useTheme();
   return (
     <>
       <List
         subheader={
           item.title && (
-            <Typography variant="caption" sx={{ ...theme.typography.menuCaption }} display="block" gutterBottom>
+            <Typography variant="caption" sx={{ ...theme.typography.body1 }} display="block" gutterBottom>
               {item.title}
               {item.caption && (
-                <Typography variant="caption" sx={{ ...theme.typography.subMenuCaption }} display="block" gutterBottom>
+                <Typography variant="caption" sx={{ ...theme.typography.caption }} display="block" gutterBottom>
                   {item.caption}
                 </Typography>
               )}
@@ -140,9 +162,9 @@ const NavGroup: React.FC<{ item: MenuItemType }> = ({ item }) => {
       >
         {item.children?.map((menu) =>
           menu.type === 'collapse' ? (
-            <NavCollapse key={menu.id} item={menu} level={1} />
+            <NavCollapse key={menu.id} item={menu as CollapseMenuItem} level={1} />
           ) : (
-            <NavItem key={menu.id} item={menu} level={1} />
+            <NavItem key={menu.id} item={menu as ItemMenuItem} level={1} />
           )
         )}
       </List>
@@ -155,9 +177,14 @@ const NavGroup: React.FC<{ item: MenuItemType }> = ({ item }) => {
 /* ============================== */
 
 const MenuList: React.FC = () => {
+  // اضافه کردن type assertion برای رفع خطا
+  const items = (menuItems as { items: MenuItemType[] }).items || [];
+  
   return (
     <>
-      {menuItems.items.map((item) => item.type === 'group' && <NavGroup key={item.id} item={item} />)}
+      {items.map((item) => item.type === 'group' && (
+        <NavGroup key={item.id} item={item as GroupMenuItem} />
+      ))}
     </>
   );
 };

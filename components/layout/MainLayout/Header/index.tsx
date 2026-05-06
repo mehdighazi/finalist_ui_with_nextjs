@@ -83,8 +83,8 @@ const Header: React.FC<HeaderProps> = ({
             <Avatar
               variant="rounded"
               sx={{
-                ...theme.typography.commonAvatar,
-                ...theme.typography.mediumAvatar,
+                ...theme.typography.body1,
+                ...theme.typography.body2,
                 transition: 'all .2s ease-in-out',
                 background: theme.palette.grey[600],
                 color: theme.palette.grey[400],

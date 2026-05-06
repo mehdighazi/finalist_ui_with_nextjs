@@ -3,13 +3,13 @@ import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Drawer, useMediaQuery, IconButton,Chip } from '@mui/material';
+import { Box, Drawer, useMediaQuery, IconButton, Chip } from '@mui/material';
 
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { BrowserView, MobileView } from 'react-device-detect';
-//taqbler icon
 import { IconX } from '@tabler/icons-react'
+
 // project imports
 import MenuList from './MenuList';
 import CustomAvatar from '@/components/ui-component/extended/Avatar'
@@ -19,8 +19,17 @@ import { hideMenu } from '@/components/store/slices/sidebarMenuSlice'
 import api from '@/components/api/api'
 import dataHandler from '@/components/api/dataHandler'
 import { hostAddress } from '@/components/api/api'
+import { StaticImageData } from 'next/image';
 
-// ==============================|| SIDEBAR DRAWER ||============================== //
+// تابع کمکی برای تبدیل تصویر
+const getAvatarSrc = (avatar: any): string => {
+  if (!avatar) return DefaultAvatar.src;
+  if (typeof avatar === 'string') return avatar;
+  if (avatar.path) return `${hostAddress}/${avatar.path}`;
+  if (avatar.src) return avatar.src;
+  return DefaultAvatar.src;
+};
+
 interface SidebarProps {
   window?: any;
   rlPadding?: string;
@@ -43,7 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ window, rlPadding }) => {
           icon={
             <CustomAvatar
               size="sm"
-              src={userInfo.avatar ? `${hostAddress}/${userInfo.avatar.path}` : DefaultAvatar}
+              src={getAvatarSrc(userInfo.avatar)}
               aria-label="profile picture"
             >
               {userInfo.fullname[0]}
@@ -96,7 +105,5 @@ const Sidebar: React.FC<SidebarProps> = ({ window, rlPadding }) => {
     </div>
   );
 };
-
-
 
 export default Sidebar;

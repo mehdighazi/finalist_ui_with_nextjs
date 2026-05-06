@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import MatchListLayout from "@/layout/match/layout";
 import MatchesContent from "./home/MatchesContent";
 import TotalIncomeCard from "@/components/ui-component/cards/Skeleton/TotalIncomeCard";
+import { Box } from "@mui/system";
 // types
 interface HomeProps {
   params: Promise<{ filters?: string }>;
@@ -23,7 +24,7 @@ export default async function Home({ params, searchParams }: HomeProps) {
   // Await کردن params و searchParams
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams || {};
-  
+
   // گرفتن پارامترها از URL
   const filters = resolvedParams?.filters || '';
   const searchQuery = resolvedSearchParams?.q as string || '';
@@ -43,21 +44,20 @@ export default async function Home({ params, searchParams }: HomeProps) {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black">
       {/* Layout Client Component */}
-      <MatchListLayout >
       
-        {/* محتوای اصلی - Server Component */}
-       {
-         <Suspense fallback={<LoadingContent />}>
-          <MatchesContent
-            filters={filters}
-            searchQuery={searchQuery}
-            sportFieldId={sportFieldId}
-            cityId={cityId}
-            page={parseInt(page)}
-          />
-        </Suspense>
-        } 
-      </MatchListLayout>
+      {<MatchListLayout >
+        <MatchesContent
+          filters={filters}
+          searchQuery={searchQuery}
+          sportFieldId={sportFieldId}
+          cityId={cityId}
+          page={parseInt(page)}
+        />
+      </MatchListLayout>}
+
+      {/* محتوای اصلی - Server Component */}
+
+
     </div>
   );
 }
@@ -65,6 +65,7 @@ export default async function Home({ params, searchParams }: HomeProps) {
 // کامپوننت loading برای محتوا
 function LoadingContent() {
   return (
+
     <Box sx={{ p: 2 }}>
       <TotalIncomeCard />
       <TotalIncomeCard />

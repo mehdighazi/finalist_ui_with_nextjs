@@ -108,7 +108,7 @@ const ApiAdmin = {
   getMatchRequesterInfo(match_request_id: string): string {
     return `${DOMAIN}match/requester/info?match_request_id=${match_request_id}&${getAccessKey()}`;
   },
-
+  
   /*listMatch(body: ListMatchBody): string {
     const {
       match_city_id = '',

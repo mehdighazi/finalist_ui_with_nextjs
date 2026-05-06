@@ -1,6 +1,6 @@
 // @/components/themes/index.js
 'use client';
-import { createTheme } from '@mui/material/styles';
+import { createTheme, ThemeOptions, Direction } from '@mui/material/styles';
 import colors from '@/components/assets/colors/themeColors';
 import componentStyleOverrides from './compStyleOverride';
 import themePalette from './palette';
@@ -24,10 +24,8 @@ export const defaultTheme = () => {
         divider: color.grey200
     };
 
-    const themeOptions = {
-      
-
-        direction: 'ltr',
+    const themeOptions: ThemeOptions = {
+        direction: 'ltr' as Direction, // اضافه کردن type assertion
         palette: themePalette(themeOption),
         mixins: {
             toolbar: {
