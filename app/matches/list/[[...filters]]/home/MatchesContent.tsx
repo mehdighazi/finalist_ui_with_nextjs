@@ -34,7 +34,7 @@ export default async function MatchesContent({
     cityId,
     page = 1,
 }: MatchesContentProps) {
-    console.log('🟢 SERVER SIDE RENDERING - Time:', new Date().toISOString());
+   
 
     // این لاگ در کنسول مرورگر دیده می‌شود
 
@@ -60,7 +60,7 @@ export default async function MatchesContent({
     let matches = [];
 
  
-    
+  
 
         const response = await fetch(apiUrl, {
             method: 'GET',
@@ -72,6 +72,7 @@ export default async function MatchesContent({
             cache: 'no-store',
         });
 
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -79,7 +80,7 @@ export default async function MatchesContent({
         const result = await response.json();
         matches = result?.result?.data || [];
 
-       
+                
 
    
 
@@ -101,10 +102,11 @@ export default async function MatchesContent({
                 <Grid item xs={12} key={item.match_id}>
                    
                             <Link
-                                href={`/detail/${item.match_id}/${item.host_team_id}/${item.host_team_name}`}
+                                href={`/matches/detail/${item.match_id}/${item.host_team_id}/${encodeURIComponent(item.host_team.team_name)}`}
                                 style={{ textDecoration: "none" }}
                             >
                                 <Box sx={{ p: 1 }}>
+                                   
                                     <MatchFullCardContent
                                         confirmRequest="-1"
                                         createDate={item.createdAt}
@@ -112,7 +114,7 @@ export default async function MatchesContent({
                                         matchSportField={item.match_sport.field_title}
                                         matchType={item.match_type}
                                         hostTeamName={item.host_team.team_name}
-                                        logoHost={`${HOST}/${item.host_team.logo.logo_path}`}
+                                        logoHost={`${HOST}${PORT}/${item.host_team.logo.logo_path}`}
                                         rateHost={2}
                                         dateMatch={persiandate(item.match_date)[1]}
                                         timeMatch={item.match_time}
