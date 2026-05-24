@@ -9,7 +9,8 @@ import {
     Typography,
 } from "@mui/material";
 import { useTheme, Theme } from "@mui/material/styles";
-
+import AlertComponent from  "@/components/ui-component/alert.js"
+import BottomSheetComponent from  "@/components/ui-component/bottomSheet"
 import Breadcrumbs from "@/components/ui-component/extended/Breadcrumbs";
 import Header from "@/components/layout/MainLayout/Header";
 import Sidebar from "@/components/layout/MainLayout/Sidebar";
@@ -51,9 +52,11 @@ export default function SubLayout({ children }: RootLayoutProps) {
 
                 <Box sx={{ width: "100%", height }}>
                     {/* Global utilities
-                        <AlertCompnent />
-                        <BottomSheet />
+                     
                          */}
+                         <AlertComponent />
+                         <BottomSheetComponent/>
+                        
 
                     {/* Header */}
                     <AppBar
@@ -62,7 +65,7 @@ export default function SubLayout({ children }: RootLayoutProps) {
                        
                     >
                         <Toolbar>
-                            {<Header  userInfo={""} />}
+                            {<Header  />}
                         </Toolbar>
                     </AppBar>
 

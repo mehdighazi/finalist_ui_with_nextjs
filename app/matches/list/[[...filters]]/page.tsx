@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { Metadata } from "next";
 
 // کامپوننت‌ها
-import MatchListLayout from "@/layout/match/layout";
+import MatchListLayout from "@/layout/match/list/layout";
 import MatchesContent from "./home/MatchesContent";
 import TotalIncomeCard from "@/components/ui-component/cards/Skeleton/TotalIncomeCard";
 import { Box } from "@mui/system";
@@ -31,7 +31,7 @@ export default async function Home({ params, searchParams }: HomeProps) {
   const sportFieldId = resolvedSearchParams?.sport_field_id as string || '';
   const cityId = resolvedSearchParams?.city_id as string || '';
   const page = resolvedSearchParams?.page as string || '1';
-
+  
   // داده‌های اولیه برای کامپوننت کلاینت
   const initialData = {
     filters,
@@ -44,7 +44,7 @@ export default async function Home({ params, searchParams }: HomeProps) {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black">
       {/* Layout Client Component */}
-      
+
       {<MatchListLayout >
         <MatchesContent
           filters={filters}

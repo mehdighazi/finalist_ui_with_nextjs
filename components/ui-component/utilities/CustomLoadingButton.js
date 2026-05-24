@@ -30,10 +30,10 @@ const CustomLoadingButton = (props) => {
     const [loadButton, setLoadButton] = useState(false);
 
     const onClickHandle = () => {
-       console.log(props.type)
+        console.log(props.type)
         setLoadButton(true);
-        if(props.type!=='submit')
-        props.onChange(true)
+        if (props.type !== 'submit')
+            props.onChange(true)
     }
     useEffect(() => {
         /*header scroll handler*/
@@ -47,21 +47,33 @@ const CustomLoadingButton = (props) => {
     return (
         <>
 
-            <LoadingButton type={props.type??'Button'} endIcon={props.endIcon} startIcon={props.startIcon} disabled={props.disabled}
+            <LoadingButton
+                type={props.type ?? 'Button'}
+                endIcon={props.endIcon}
+                startIcon={props.startIcon}
+                disabled={props.disabled}
                 variant={props.variant ? props.variant : "text"}
-                color={props.color ? props.color : "inherit"} sx={{
-                    backgroundColor:theme.palette.secondary.main,
-                    borderRadius: props.borderRadius ?? 2
-                    , p: props.padding ? props.padding : 0,
-                     minWidth: "100%", mt: props.mt, fontFamily: "orginalfont",
+                color={props.color ? props.color : "inherit"}
+                sx={{
+                    backgroundColor: theme.palette.secondary.main,
+                    borderRadius: props.borderRadius ?? 2,
+                    p: props.padding ? props.padding : 0,
+                    minWidth: "100%",
+                    mt: props.mt,
+                    transition: 'all 0.3s ease-in-out', 
+                    fontFamily: "orginalfont",
+                    color: "white", // رنگ پیش‌فرض متن (اگر می‌خواهی همیشه سفید باشد)
                     '&:hover': {
-                        backgroundColor: props.variant === 'contained' ? 'primary.light' : 'primary.dark',
-                        color: props.variant === 'contained' ? 'white' : 'black',
+                        backgroundColor: theme.palette.secondary.main,
+                        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10))',
+                        color: 'white',
                     },
                 }}
-                onClick={onClickHandle} loadingIndicator={<CircularProgress color={props.color} size={20} />}
-
-                {...props} loading={loadButton} />
+                onClick={onClickHandle}
+                loadingIndicator={<CircularProgress color={props.color} size={20} />}
+                {...props}
+                loading={loadButton}
+            />
 
 
 
@@ -74,7 +86,7 @@ export const CustomSubmitButton = (props) => {
     const theme = useTheme();
     const [loadButton, setLoadButton] = useState(false);
 
-  
+
     useEffect(() => {
         /*header scroll handler*/
 
@@ -84,23 +96,23 @@ export const CustomSubmitButton = (props) => {
         }, 1000);
 
     }, [loadButton]);
-    
+
     return (
         <>
 
             <LoadingButton type={'submit'} endIcon={props.endIcon} startIcon={props.startIcon} disabled={props.disabled}
                 variant={props.variant ? props.variant : "text"}
                 color={props.color ? props.color : "inherit"} sx={{
-                    backgroundColor:theme.palette.secondary.main,
+                    backgroundColor: theme.palette.secondary.main,
                     borderRadius: props.borderRadius ?? 2
                     , p: props.padding ? props.padding : 0,
-                     minWidth: "100%", mt: props.mt, fontFamily: "orginalfont",
+                    minWidth: "100%", mt: props.mt, fontFamily: "orginalfont",
                     '&:hover': {
                         backgroundColor: props.variant === 'contained' ? 'primary.light' : 'primary.dark',
                         color: props.variant === 'contained' ? 'white' : 'black',
                     },
                 }}
-                 loadingIndicator={<CircularProgress color={props.color} size={20} />}
+                loadingIndicator={<CircularProgress color={props.color} size={20} />}
 
                 {...props} loading={loadButton} />
 

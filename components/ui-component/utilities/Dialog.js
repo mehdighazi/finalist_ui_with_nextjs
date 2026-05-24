@@ -4,7 +4,7 @@ import * as React from 'react';
 import {AppBar, Dialog, Grow, IconButton, Toolbar, Typography, useMediaQuery, useTheme} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 //project import
-import {rlPadding} from 'store/constant'
+import {rlPadding} from '@/components/store/constant'
 import {Box} from "@mui/system";
 
 const Transition = React.forwardRef(function Transition(props, ref) {

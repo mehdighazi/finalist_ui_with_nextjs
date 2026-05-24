@@ -20,7 +20,9 @@ const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(
     borderRadius: 8,
     background: 'transparent',
     fontFamily: 'orginalfont',
-    color: theme.palette.grey[400],
+    color: theme.palette.grey[600],
+      border: '1px solid',
+      borderColor:theme.palette.primary.dark,
 
     '& .MuiOutlinedInput-notchedOutline': {
       border: 'none'

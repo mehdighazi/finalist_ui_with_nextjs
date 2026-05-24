@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { hideAlert } from "@/components/store/slices/alertSlice"; // تابع مخفی کردن alert
 
 
-export default function AlertBox({ alertText, ContainerRef, severity, setAlertConfig }) {
+export default function AlertBox() {
     const { message, type, visible } = useSelector((state) => state.alert);
 
     const dispatch = useDispatch();

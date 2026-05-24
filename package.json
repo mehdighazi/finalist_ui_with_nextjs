@@ -61,6 +61,7 @@
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
+    "@types/react-avatar-editor": "^13.0.4",
     "@types/react-dom": "^19",
     "baseline-browser-mapping": "^2.10.25",
     "eslint": "^9",
