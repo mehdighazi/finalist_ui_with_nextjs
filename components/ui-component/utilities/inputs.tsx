@@ -134,7 +134,7 @@ export const CustomTextField: React.FC<CustomTextFieldProps> = ({
       />
 
       {errorText && (
-        <FormHelperText sx={{ color: 'red', fontSize: 10 }}>
+        <FormHelperText sx={{ color: 'red', fontSize: 10,fontFamily:"orginalfont" }}>
           {errorText}
         </FormHelperText>
       )}

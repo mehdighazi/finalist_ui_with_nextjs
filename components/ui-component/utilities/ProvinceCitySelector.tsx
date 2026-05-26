@@ -92,8 +92,10 @@ const ProvinceCitySelector: React.FC<ProvinceCitySelectorProps> = ({ onChange })
   };
 
   const getData = () => {
+    const parentIdString = String(fieldParentId || ""); 
+
     const result = dataHandler(
-      api.provinceWithCityList(fieldParentId),
+      api.provinceWithCityList( parentIdString),
       "get",
       ""
     );
@@ -213,7 +215,7 @@ const ProvinceCitySelector: React.FC<ProvinceCitySelectorProps> = ({ onChange })
                   borderBottom: "1px solid #e0e0e0",
                   "&:hover": {
                     borderRadius: 5,
-                    backgroundColor: theme.palette.primary[100],
+                    backgroundColor: theme.palette.primary.light,
                     cursor: "pointer",
                   },
                 }}

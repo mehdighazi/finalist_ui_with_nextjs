@@ -28,7 +28,7 @@ const IconText: React.FC<IconTextProps> = ({
   const theme = useTheme();
 
   return (
-    <Stack direction="row" spacing={spacing} alignItems="center">
+    <Stack direction="row-reverse" spacing={spacing} alignItems="center">
       {!iconRight && icon && (
         <Box sx={{ pt: iconPaddingTop }}>{icon}</Box>
       )}

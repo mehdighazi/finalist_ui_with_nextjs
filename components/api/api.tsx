@@ -1,5 +1,7 @@
 'use client';
 
+import { any } from "prop-types";
+
 /* =======================
    ENV (Next.js compatible)
 ======================= */
@@ -38,8 +40,8 @@ interface ListMatchBody {
 ======================= */
 
 const getAccessKey = (): string =>
-//  `token=${localStorage.getItem('token') ?? ''}`;
-'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjExMTExIiwiaWF0IjoxNzc5MzUzNDA4LCJleHAiOjE3ODExNTM0MDh9.vnW0a31-GUPX_VX3Xdyr6ZbAElzvGFrfzGUW0pLgQ5s'
+  //  `token=${localStorage.getItem('token') ?? ''}`;
+  'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjExMTExIiwiaWF0IjoxNzc5MzUzNDA4LCJleHAiOjE3ODExNTM0MDh9.vnW0a31-GUPX_VX3Xdyr6ZbAElzvGFrfzGUW0pLgQ5s'
 
 /* =======================
    API
@@ -109,7 +111,7 @@ const ApiAdmin = {
   getMatchRequesterInfo(match_request_id: string): string {
     return `${DOMAIN}match/requester/info?match_request_id=${match_request_id}&${getAccessKey()}`;
   },
-  
+
   /*listMatch(body: ListMatchBody): string {
     const {
       match_city_id = '',
@@ -147,7 +149,19 @@ const ApiAdmin = {
   teamIdentifierChecking(identifier: string): string {
     return `${DOMAIN}team/check/identifier?team_identifier=${identifier}&${getAccessKey()}`;
   },
+  provinceWithCityList: (province_id:string) :string=> {
+    const accesskey = `token=${localStorage.getItem("token")}`
 
+    return `${DOMAIN}province/list?${accesskey}&province_id=${province_id}`
+
+  },
+
+    listSports: (body:any) =>  {
+        const { title, field_id, field_parent_id } = body
+        const accesskey = `token=${localStorage.getItem("token")}`
+        return `${DOMAIN}sport/list?${accesskey}&title=${title}&field_id=${field_id}&field_parent_id=${field_parent_id}`
+
+    },
   fileUpload(section_id: string): string {
     return `${DOMAIN}file/upload?section_id=${section_id}&${getAccessKey()}`;
   }

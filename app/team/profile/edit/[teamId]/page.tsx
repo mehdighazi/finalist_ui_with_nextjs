@@ -107,7 +107,7 @@ export default function TeamEdit({ params, searchParams }: TeamEditProps) {
         try {
 
             result(async function (res: any, status: boolean) {
-console.log(res)
+
                 dispatch(showAlert({
                     message: res?.message,
                     type: status ? 'success' : 'error'
@@ -171,7 +171,7 @@ console.log(res)
 
     // --- Render ---
     return (
-        <Box sx={{ mb: 5 }}>
+        <Box sx={{ mb: 5,height:"100vh" }}>
             {data ? (
                 <Formik
                     enableReinitialize

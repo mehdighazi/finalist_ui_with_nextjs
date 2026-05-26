@@ -114,7 +114,7 @@ export default async function MatchesContent({
                                         matchSportField={item.match_sport.field_title}
                                         matchType={item.match_type}
                                         hostTeamName={item.host_team.team_name}
-                                        logoHost={`${HOST}${PORT}/${item.host_team.logo.logo_path}`}
+                                        logoHost={`${HOST}${PORT}/${item?.host_team?.logo?.logo_path}`}
                                         rateHost={2}
                                         dateMatch={persiandate(item.match_date)[1]}
                                         timeMatch={item.match_time}
