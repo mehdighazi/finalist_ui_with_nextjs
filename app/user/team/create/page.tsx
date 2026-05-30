@@ -36,7 +36,10 @@ interface TeamFormData {
     sport_field_title: string | null; // این‌ها حتماً باید باشند
     is_womens: number | boolean;
 }
-
+interface CustomInputEvent {
+    name: string;
+    value: string;
+}
 // اگر استپر را در فایل دیگری داری، اینجا ایمپورت کن
 // import Stepper from './Stepper';
 
@@ -75,7 +78,7 @@ const CreateTeam: React.FC = () => {
             case 0:
                 return (
                     <Box sx={{ minWidth: "100%" }}>
-                        <Step0 formData={formData} onChange={(e) => handleInputChange(e, 0)} userinfo={"A"} />
+                        <Step0 formData={formData} onChange={(e) => handleInputChange(e, 0)} />
                     </Box>
                 );
             case 1:
@@ -139,41 +142,50 @@ const CreateTeam: React.FC = () => {
     // هندلر تغییر مرحله
     const stepHandler = (action: string | number) => {
         if (action === 'Next') {
-            setStep((prev) => prev + 1);
+
+            if (step === 1) {
+                sendData()
+                setStep((prev) => prev + 1);
+            }
+
+            if (step === 0 && formData.city_id && formData.sport_field_id &&
+                formData.team_identifier
+            )
+                setStep((prev) => prev + 1);
+            else dispatch(showAlert({
+                message: "لطفا فیلد هارا تکمیل نمایید",
+                type: 'error'
+            }));
+
         } else if (action === 'Back') {
             setStep((prev) => (prev > 0 ? prev - 1 : 0));
         } else if (typeof action === 'number') {
             setStep(action);
         }
     };
-    const handleInputChange = (e: InputChangeEvent, stepNumber: number): void => {
+    const handleInputChange = (e: CustomInputEvent, stepNumber: number): void => {
+        // استخراج name و value از e.target
         const { name, value } = e;
 
         if (stepNumber === 0) {
             if (name === "team_identifier") {
-                // ریجکس فقط کاراکترهای مجاز را چک می‌کند (خروجی: true یا false)
-                const isAlphabetic: boolean = /^[a-zA-Z0-9]$/.test(value);
-
-                if (isAlphabetic) {
+                // اصلاح ریجکس: 
+                // ریجکس قبلی شما فقط اجازه ورود ۱ کاراکتر را می‌داد (^) و ($)
+                // برای چک کردن کل رشته از این استفاده کنید:
+                const isAlphanumeric = /^[a-zA-Z0-9]*$/.test(value);
+                console.log(isAlphanumeric)
+                if (isAlphanumeric) {
                     setData(name, value);
                 }
             } else {
                 setData(name, value);
             }
         }
-        // اگر از قبل اینترفیس ApiResponse را نداری، ساده‌اش این است:
-        interface ApiResponse {
-            data: any;
-            status: boolean;
-        }
-
-
-
-
     };
 
+
     return (
-        <Box sx={{ p: 2, pb: 10 }}>
+        <Box sx={{ height: "100vh" }}>
             <Stack
                 ref={containerRef}
                 spacing={2}
@@ -181,20 +193,21 @@ const CreateTeam: React.FC = () => {
             >
                 {renderStep()}
 
-                <Box
-                    sx={{
-                        minWidth: "100%",
-                        position: "fixed",
-                        bottom: 0,
-                        left: 0,
-                        paddingLeft: matchDownMd ? "0%" : rlPadding,
-                        paddingRight: matchDownMd ? "-2%" : rlPadding,
-                    }}
-                >
-                    <Paper elevation={3}>
-                        <Stepper stepnumber={2} step={step} onChange={stepHandler} />
-                    </Paper>
+
+                <Box sx={{
+                    width: "100%",
+                    position: "fixed", // تغییر از absolute به fixed
+                    bottom: 0,         // چسبیدن دقیق به کف
+                    left: '50%',       // برای وسط‌چین ماندن با وجود maxWidth
+                    transform: 'translateX(-50%)',
+                    maxWidth: { lg: 600, md: 600, xs: '100%' }, // اضافه کردن xs برای موبایل
+                    //background: theme.palette.secondary.main,
+                    zIndex: 1100,      // برای اینکه روی بقیه المان‌ها باشد
+                    borderRadius: 0,   // حذف گردی لبه‌ها برای چسبیدن کامل
+                }} >
+                    <Stepper stepnumber={2} step={step} onChange={stepHandler} />
                 </Box>
+
             </Stack>
         </Box>
     );

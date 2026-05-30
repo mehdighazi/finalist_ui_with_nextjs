@@ -112,11 +112,12 @@ const SportSelector: React.FC<SportSelectorProps> = ({ onChange }) => {
             // مرحله دوم: انتخاب فرزند
             const newSelection: SportSelection = {
                 ...finalSelection,
-                sport_field_id: item.item.sport_field_id,
+                sport_field_id: item.sport_field_id,
                 sport_field_title: item.field_title,
             };
             setFinalSelection(newSelection);
             onChange(newSelection);
+            
         }
     };
 

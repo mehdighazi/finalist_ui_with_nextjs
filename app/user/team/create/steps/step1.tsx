@@ -1,7 +1,7 @@
 "use client"
 import * as React from "react";
 //ui-material
-import { Box, Paper, Stack, Typography, useTheme,Divider } from "@mui/material";
+import { Box, Paper, Stack, Typography, useTheme, Divider, alpha } from "@mui/material";
 import { AccessTime, Festival, PlaylistAddCircle } from "@mui/icons-material";
 //table icon
 import { IconX, IconCircleCheckFilled, IconMapPin, IconUsersGroup, IconId, IconCategory } from '@tabler/icons-react'
@@ -46,94 +46,123 @@ const Step1: React.FC<Step1Props> = ({ formData }) => {
     const IconColor = theme.palette.primary.main;
 
     return (
-      <Box sx={{ width: '100%', p: 1, textAlign: "right" }}> 
-    <Stack spacing={2}>
+        <Box sx={{ width: '100%', p: 1, textAlign: "right" }}>
 
-        {/* نام تیم */}
-        <SectionBox>
-            
-                <IconText 
-                    fontSize={12} 
-                    textPaddingTop={0.6} 
-                    text="نام تیم" 
-                    color={TextColor} 
-                    icon={<IconUsersGroup size={18} color={IconColor} />} 
-                />
-          
-            <Typography variant="h5" color="primary" fontWeight={600} mt={0.5}>
-                {formData.team_name || "وارد نشده"}
-            </Typography>
-        </SectionBox>
+            <Box sx={{
+                mb: 4,
+                p: 2,
+                background: alpha(theme.palette.primary.main, 0.05),
+                borderRadius: 0,
+                borderRight: `6px solid ${theme.palette.primary.main}`,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 0.5,
+                direction: "rtl"
+            }}>
+                <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 0.5 }}>
+                    <IconCircleCheckFilled size={24} color={theme.palette.success.main} />
+                    <Typography textAlign={"right"} variant="h6" fontWeight="800" color="primary.dark">
+                        بازبینی و تأیید نهایی
+                    </Typography>
+                </Stack>
+                <Typography textAlign={"right"} variant="body2" color="text.secondary" sx={{ pr: 4 }}>
+                    لطفاً صحت اطلاعات وارد شده برای تیم خود را بررسی کنید. در صورت نیاز به تغییر، به مرحله قبل بازگردید.
+                </Typography>
+            </Box>
+            <Stack spacing={2}>
 
-       
-        <SectionBox>
-          
-                <IconText 
-                    textPaddingTop={0.6} 
-                    fontSize={12} 
-                    text="نام کاربری (ID)" 
-                    color={TextColor} 
-                    icon={<IconId size={18} color={IconColor} />} 
-                />
-          
+                {/* نام تیم */}
+                <SectionBox>
 
-            <Typography fontSize={16} color="primary" fontWeight={600} mt={0.5}>
-                @{formData.team_identifier || "---"}
-            </Typography>
-        </SectionBox>
+                    <IconText
+                        fontSize={12}
+                        textPaddingTop={0.6}
+                        text="نام تیم"
+                        color={TextColor}
+                        icon={<IconUsersGroup size={18} color={IconColor} />}
+                    />
 
-        <SectionBox>
-           
-                <IconText 
-                    textPaddingTop={0.6} 
-                    fontSize={12} 
-                    text="استان / شهر" 
-                    color={TextColor} 
-                    icon={<IconMapPin size={18} color={IconColor} />} 
-                />
-          
-            <Typography fontSize={14} color="text.primary" fontWeight={500} mt={0.5}>
-                {formData.province_title && formData.city_title 
-                    ? `${formData.province_title} ، ${formData.city_title}` 
-                    : "انتخاب نشده"}
-            </Typography>
-        </SectionBox>
+                    <Typography variant="h5" color="primary" fontWeight={600} mt={0.5}>
+                        {formData.team_name || "وارد نشده"}
+                    </Typography>
+                </SectionBox>
 
-        {/* رشته ورزشی */}
-        <SectionBox>
-           
-                <IconText 
-                   // textPaddingTop={0.2} 
-                    fontSize={12} 
-                    text="رشته ورزشی" 
-                    color={TextColor} 
-                    icon={<IconCategory size={18} color={IconColor} />} 
-                />
-          
-            <Typography fontSize={14} color="text.primary" fontWeight={500} mt={0.5}>
-                {formData.sport_field_title || "انتخاب نشده"}
-            </Typography>
-        </SectionBox>
 
-        {/* جنسیت تیم */}
-        <SectionBox>
-          
-                <IconText 
-                    textPaddingTop={0.2} 
-                    fontSize={12} 
-                    text="جنسیت تیم" 
-                    color={TextColor} 
-                    icon={<IconCategory size={18} color={IconColor} />} 
-                />
-           
+                <SectionBox>
 
-            <Typography fontSize={14} color="text.primary" fontWeight={500} mt={0.5}>
-                {formData.is_womens ? "بانوان 👩" : "آقایان 👨"}
-            </Typography>
-        </SectionBox>
+                    <IconText
+                        textPaddingTop={0.6}
+                        fontSize={12}
+                        text="نام کاربری (ID)"
+                        color={TextColor}
+                        icon={<IconId size={18} color={IconColor} />}
+                    />
 
-    </Stack>
-</Box>
+
+                    <Typography fontSize={16} color="primary" fontWeight={600} mt={0.5}>
+                        @{formData.team_identifier || "---"}
+                    </Typography>
+                </SectionBox>
+
+                <SectionBox>
+
+                    <IconText
+                        textPaddingTop={0.6}
+                        fontSize={12}
+                        text="استان / شهر"
+                        color={TextColor}
+                        icon={<IconMapPin size={18} color={IconColor} />}
+                    />
+
+                    <Typography fontSize={14} color="text.primary" fontWeight={500} mt={0.5}>
+                        {formData.province_title && formData.city_title
+                            ? `${formData.province_title} ، ${formData.city_title}`
+                            : "انتخاب نشده"}
+                    </Typography>
+                </SectionBox>
+
+                {/* رشته ورزشی */}
+                <SectionBox>
+
+                    <IconText
+                        // textPaddingTop={0.2} 
+                        fontSize={12}
+                        text="رشته ورزشی"
+                        color={TextColor}
+                        icon={<IconCategory size={18} color={IconColor} />}
+                    />
+
+                    <Typography fontSize={14} color="text.primary" fontWeight={500} mt={0.5}>
+                        {formData.sport_field_title || "انتخاب نشده"}
+                    </Typography>
+                </SectionBox>
+
+                {/* جنسیت تیم */}
+                <SectionBox>
+                    <IconText
+                        textPaddingTop={0.2}
+                        fontSize={12}
+                        text="جنسیت تیم"
+                        color={TextColor}
+                        icon={<IconCategory size={18} color={IconColor} />}
+                    />
+                    <Box sx={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        mt: 1,
+                        px: 2, py: 0.5,
+                        borderRadius: 10,
+                        bgcolor: formData.is_womens ? alpha('#e91e63', 0.1) : alpha('#1976d2', 0.1),
+                        color: formData.is_womens ? '#e91e63' : '#1976d2'
+                    }}>
+                        <Typography fontSize={14} fontWeight={550}>
+                            {formData.is_womens ? "تیم بانوان " : "تیم آقایان "}
+                        </Typography>
+                    </Box>
+                </SectionBox>
+
+            </Stack>
+        </Box>
     );
 };
 

@@ -8,7 +8,7 @@ import {
     Box, Stack, TextField, Typography, useTheme, CircularProgress,
     Checkbox, FormControlLabel, FormHelperText, FormControl
 } from "@mui/material";
-
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 //tabler icon
 import { IconX, IconCircleCheckFilled, IconMapPin, IconUsersGroup, IconId, IconCategory } from '@tabler/icons-react'
 //project import
@@ -21,15 +21,25 @@ import IconText from '@/components/ui-component/utilities/IconText'
 import { showBottomSheet, hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
 import api from '@/components/api/api'
 import dataHandler from '@/components/api/dataHandler'
+
 //--------------------------------------|Step 1|---------------------------------------------------
 interface Step0Props {
     formData: any; // یا TeamFormData که قبلاً تعریف کردیم
     onChange: (e: { name: string; value: any }) => void;
 }
+const SectionBox = styled(Box)(({ theme }) => ({
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    padding: theme.spacing(1),
+
+}));
 
 const Step0: React.FC<Step0Props> = (props) => {
+    const theme = useTheme()
     const dispatch = useDispatch();
-    const { TextColor, IconColor } = props as any; // اگر رنگ‌ها از پراپ می‌آیند
+    const TextColor = theme.palette.primary.main
     const [sport, setSport] = useState("")
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     // State ها با تایپ مشخص
@@ -101,130 +111,157 @@ const Step0: React.FC<Step0Props> = (props) => {
         };
     }, [teamIdentifier, api, dataHandler]);
     return (
-        <Box>
-            <Typography align={"right"} sx={{ fontWeight: 200, mt: 1, color: IconColor }}>
-                <IconText textPaddingTop={0.5} fontSize={12} icon={<IconCategory />} color={TextColor} text={" رشته ورزشی"} />
-            </Typography>
+        <Box sx={{ textAlign: "right" }}>
+            <SectionBox>
 
-            <CustomTextField
-            onChange={()=>console.log("click")}
-                onClick={() => dispatch(
-                    showBottomSheet({
-                        title: ' انتخاب رشته ورزشی',
-                       //ptSX: '10%',
-                        renderContent: () => (
-                            <SportSelector
+                <Box sx={{ mb: 4, textAlign: 'right' }}>
 
-                                onChange={(e) => {
-                                    props.onChange({
-                                        name: "sport_field_id",
-                                        value: e.sport_field_id
-                                    })
-                                    props.onChange({
-                                        name: "sport_field_title",
-                                        value: e.sport_field_title
-                                    })
-                                    setSport(e.sport_parent_title + "/" + e.sport_field_title);
-                                    //dispatch(hideBUTTOMSheet())
-                                }} />
-                        ),
-                    })
-                )
-                }
-              
-                value={sport}
-                readOnly={true}
-                fontSize={14}
-                placeholder={"برای انتخاب رشته ورزشی تیم اینجا کلیک کنید"}
-            //  fullWidth
+                    <IconText textPaddingTop={-1} fontSize={12} icon={<GroupAddIcon sx={{ color: 'primary.main', fontSize: 30 }} />} color={TextColor} text={"  ثبت اطلاعات تیم ورزشی"} />
 
 
-            //variant="filled"
-            />
+                    <Typography variant="body2" color="text.secondary" sx={{ pr: 1, borderRight: '3px solid', borderColor: 'primary.light', lineHeight: 1.8 }}>
+                        لطفاً مشخصات تیم خود را با دقت وارد نمایید. انتخاب صحیح شهر و وضعیت جنسیتی تیم در دسته‌بندی مسابقات تأثیرگذار است.
+                    </Typography>
+                </Box>
+            </SectionBox>
+            <SectionBox>
+                <IconText textPaddingTop={-1} fontSize={12} icon={<IconCategory />} color={TextColor} text={" رشته ورزشی"} />
+
+
+                <CustomTextField
+                    onChange={() => console.log("click")}
+                    onClick={() => dispatch(
+                        showBottomSheet({
+                            title: 'انتخاب رشته ورزشی',
+                            //ptSX: '10%',
+                            renderContent: () => (
+                                <SportSelector
+
+                                    onChange={(e) => {
+                                       
+                                        props.onChange({
+                                            name: "sport_field_id",
+                                            value: e.sport_field_id
+                                        })
+                                        props.onChange({
+                                            name: "sport_field_title",
+                                            value: e.sport_field_title
+                                        })
+                                        setSport(e.sport_parent_title + "/" + e.sport_field_title);
+                                        dispatch(hideBottomSheet())
+                                    }} />
+                            ),
+                        })
+                    )
+                    }
+
+                    value={sport}
+                    readOnly={true}
+                    fontSize={14}
+                    placeholder={"برای انتخاب رشته ورزشی تیم اینجا کلیک کنید"}
+                //  fullWidth
+
+
+                //variant="filled"
+                />
+            </SectionBox>
 
             {/* نام تیم */}
-            <Typography align="right" sx={{ fontWeight: 200, mt: 1 }}>
-                <IconText textPaddingTop={0.5} fontSize={12} icon={<IconUsersGroup size={18} />} color={TextColor} text="نام تیم" />
-            </Typography>
-            <CustomTextField
-                errorText="لطفا از نام‌های متعارف استفاده نمایید"
-                fontSize={14}
-                placeholder="نام تیم را به فارسی وارد کنید"
-                onChange={(e: string) => props.onChange({ name: "team_name", value: e })}
-                value={props.formData["team_name"]}
-            />
+            <SectionBox >
+                <IconText textPaddingTop={-1} fontSize={12} icon={<IconUsersGroup size={18} />} color={TextColor} text="نام تیم" />
+
+                <CustomTextField
+                    errorText="لطفا از نام‌های متعارف استفاده نمایید"
+                    fontSize={14}
+                    placeholder="نام تیم را به فارسی وارد کنید"
+                    onChange={(e: string) => props.onChange({ name: "team_name", value: e })}
+                    value={props.formData["team_name"]}
+                />
+            </SectionBox>
 
             {/* نام کاربری تیم */}
-            <Typography align="right" sx={{ fontWeight: 200, mt: 1, color: IconColor }}>
-                <IconText textPaddingTop={0.5} fontSize={12} icon={<IconId size={18} />} color={TextColor} text=" نام کاربری تیم " />
-            </Typography>
-            <CustomTextField
-                startIcon={
-                    usernameChecking ? <CircularProgress size={20} /> :
-                        usernameExists === true ? <IconCircleCheckFilled color="green" /> :
-                            usernameExists === false ? <IconX color="red" /> : null
-                }
-                fontSize={14}
-                placeholder="نام کاربری (انگلیسی و عدد)"
-                //fullWidth
-                //name="team_identifier"
-                // id="team_identifier"
-                value={teamIdentifier}
-                onChange={(value: string) => {
+            <SectionBox >
+                <IconText textPaddingTop={-1} fontSize={12} icon={<IconId size={18} />} color={TextColor} text=" نام کاربری تیم " />
 
-                    const valid = /^[a-zA-Z0-9]*$/.test(value);
-                    setValueValidity(valid ? "" : "فقط حروف انگلیسی و اعداد مجاز است");
-                    if (valid) {
-                        setTeamIdentifier(value);
-                        props.onChange({ name: "team_identifier", value });
+                <CustomTextField
+                    startIcon={
+                        usernameChecking ? <CircularProgress size={20} /> :
+                            usernameExists === true ? <IconCircleCheckFilled color="green" /> :
+                                usernameExists === false ? <IconX color="red" /> : null
                     }
-                }}
-                errorText={valueValidity}
-            />
+                    fontSize={14}
+                    placeholder="نام کاربری (انگلیسی و عدد)"
+                    //fullWidth
+                    //name="team_identifier"
+                    // id="team_identifier"
+                    value={teamIdentifier}
+                    onChange={(value: string) => {
 
+                        const valid = /^[a-zA-Z0-9]*$/.test(value);
+                        setValueValidity(valid ? "" : "فقط حروف انگلیسی و اعداد مجاز است");
+                        if (valid) {
+                            setTeamIdentifier(value);
+                            props.onChange({ name: "team_identifier", value });
+                        }
+                    }}
+                    errorText={valueValidity}
+                />
+            </SectionBox>
             {/* انتخاب استان/شهر */}
-            <Typography align="right" sx={{ fontWeight: 200, mt: 1, color: IconColor }}>
-                <IconText textPaddingTop={0.5} fontSize={12} icon={<IconMapPin size={18} />} color={TextColor} text="انتخاب استان/شهر" />
-            </Typography>
-            <CustomTextField
-                onChange={() => console.log("Click..")}
-                onClick={() => dispatch(
-                    showBottomSheet({
-                        title: 'انتخاب شهر',
-                        ptSX: '10%',
-                        renderContent: () => (
-                            <ProvinceCitySelector
-                                onChange={(e: any) => {
-                                    props.onChange({ name: "city_id", value: e.city_id });
-                                    props.onChange({ name: "province_id", value: e.province_id });
-                                    props.onChange({ name: "city_title", value: e.city_title });
-                                    props.onChange({ name: "province_title", value: e.province_title });
+            <SectionBox>
+                <IconText textPaddingTop={-1} fontSize={12} icon={<IconMapPin size={18} />} color={TextColor} text="انتخاب استان/شهر" />
 
-                                    setprovince_City_Title(`${e.province_title}/${e.city_title}`);
-                                    dispatch(hideBottomSheet());
-                                }}
-                            />
-                        ),
-                    })
-                )
-                }
+                <CustomTextField
+                    onChange={() => console.log("Click..")}
+                    onClick={() => dispatch(
+                        showBottomSheet({
+                            title: 'انتخاب شهر',
+                            ptSX: '10%',
+                            renderContent: () => (
+                                <ProvinceCitySelector
+                                    onChange={(e: any) => {
+                                        props.onChange({ name: "city_id", value: e.city_id });
+                                        props.onChange({ name: "province_id", value: e.province_id });
+                                        props.onChange({ name: "city_title", value: e.city_title });
+                                        props.onChange({ name: "province_title", value: e.province_title });
+
+                                        setprovince_City_Title(`${e.province_title}/${e.city_title}`);
+                                        dispatch(hideBottomSheet());
+                                    }}
+                                />
+                            ),
+                        })
+                    )
+                    }
 
 
 
-                readOnly={true}
-                fontSize={14}
-                placeholder="برای انتخاب استان و شهر اینجا کلیک کنید"
-                //fullWidth
-                value={province_City_Title}
-            //variant="filled"
-            />
-            <Box sx={{ position: 'relative', textAlign: 'right', py: 1, border: '1px solid #e2e2e2', mt: 1, borderRadius: 5 }}>
-                <FormControl >
+                    readOnly={true}
+                    fontSize={14}
+                    placeholder="برای انتخاب استان و شهر اینجا کلیک کنید"
+                    //fullWidth
+                    value={province_City_Title}
+                //variant="filled"
+                />
+            </SectionBox>
+            <Box sx={{ textAlign: 'right', py: 1, px: 1, border: '1px solid #e2e2e2', mt: 1, borderRadius: 5 }}>
+                <FormControl sx={{ p: 0, width: '100%' }}>
                     <FormControlLabel
-                        sx={{ mr: -0.5 }}
+                        sx={{
+                            mr: 0, // حذف مارجین راست
+                            ml: 1, // کمی فاصله از چپ (اختیاری)
+                            flexDirection: 'row-reverse', // معکوس کردن جهت برای راست‌چین شدن دقیق
+                            justifyContent: 'flex-start',
+                            '& .MuiFormControlLabel-label': {
+                                fontSize: '0.9rem', // تنظیم سایز فونت در صورت نیاز
+                            }
+                        }}
                         control={
                             <Checkbox
                                 checked={props.formData["is_womens"] || false}
+                                sx={{
+                                    pr: 0, // حذف پدینگ راستِ خودِ چک‌باکس
+                                }}
                                 onChange={(e) =>
                                     props.onChange({
                                         name: "is_womens",
@@ -235,7 +272,7 @@ const Step0: React.FC<Step0Props> = (props) => {
                         }
                         label="تیم بانوان می باشد"
                     />
-                    <FormHelperText sx={{ color: "red", fontSize: 10 }} id="team-identifier-error">
+                    <FormHelperText sx={{ color: "red", fontSize: 10, textAlign: 'right', pr: 2 }} id="team-identifier-error">
                         <span>{"چنانچه تیم بانوان می باشید حتما این گزینه را فعال کنید"}</span>
                     </FormHelperText>
                 </FormControl>
