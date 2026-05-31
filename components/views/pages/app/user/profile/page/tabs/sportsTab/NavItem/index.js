@@ -19,7 +19,7 @@ import {
 // project imports
 import { MENU_OPEN, SET_MENU } from 'store/actions';
 import CustomAvatar from 'ui-component/extended/Avatar'
-import {hostAddress} from 'api/api'
+import {hostAddress} from '@/components/api/api'
 import DefaultAvatar from 'assets/images/screen/default-avatar.jpg'
 // assets
 import { FiberManualRecord } from '@mui/icons-material';

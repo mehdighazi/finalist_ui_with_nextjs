@@ -10,16 +10,16 @@ import { IconChecklist } from '@tabler/icons-react'
 // ابزار پروژه
 import "../style.css";
 import { hostAddress } from "api/api";
-import IconText from "views/utilities/IconText";
+import IconText from '@/components/ui-component/utilities/IconText'
 import MainCard from "ui-component/cards/MainCard_pre";
 import { persiandate, StartDate4MYSQL } from "utils/Lib";
-import { TeamBox } from "views/utilities/MatchCardContent";
+import { TeamBox } from "@/components/ui-component/utilities/MatchCardContent";
 import DefaultAvatar from "assets/images/screen/default-avatar.jpg";
-import { CustomTextField } from "views/utilities/inputs";
-import PopperCalender from 'views/utilities/PopperCalender'
-import TimeSwipPicker, { PopperTimePicker } from "views/utilities/TimeSwipPicker";
-import { showBUTTOMSheet, hideBUTTOMSheet } from "store/bottomSheetReducer";
-import ProvinceCitySelector from 'views/utilities/ProvinceCitySelector'
+import { CustomTextField } from "@/components/ui-component/utilities/inputs";
+import PopperCalender from '@/components/ui-component/utilities/PopperCalender'
+import TimeSwipPicker, { PopperTimePicker } from "@/components/ui-component/utilities/TimeSwipPicker";
+import { showBottomSheet, hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
+import ProvinceCitySelector from '@/components/ui-component/utilities/ProvinceCitySelector'
 import { MainCardWrapper } from "ui-component/cards/MainCardWrapper";
 
 // CustomBox استایل برای باکس‌ها

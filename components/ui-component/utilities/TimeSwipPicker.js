@@ -9,7 +9,6 @@ import { useSwipeable } from "react-swipeable";
 import { useState } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { rlPadding } from "store/constant";
 import CustomLoadingButton from "./CustomLoadingButton";
 
 const CircularPicker = ({ items, label, value, onChange }) => {

@@ -11,8 +11,8 @@ import CurrentMatchTabContent from "./tabs/currentMatchTab";
 import ContentTabContent from './tabs/contentTab'
 import PropTypes from "prop-types";
 import {styled} from "@mui/material/styles";
-import dataHandler from "api/dataHandler";
-import api from "api/api";
+import dataHandler from '@/components/api/dataHandler';
+import api from '@/components/api/api';
 import {useParams} from "react-router";
 
 

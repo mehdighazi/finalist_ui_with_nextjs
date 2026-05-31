@@ -3,10 +3,10 @@ import { useState } from "react";
 
 //-------------------Tabler
 
-import MatchListWrapper from "views/utilities/MatchListProfileTab";
+import MatchListWrapper from "@/components/ui-component/utilities/MatchListProfileTab";
 
 
-import api from "api/api";
+import api from '@/components/api/api';
 
 
 const MatchList = () => {

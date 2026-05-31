@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 // project imports
-import Transition from "@/components/ui-component/extended/Transitions";
+import Transition from "@/components/ui-component/utilities/extended/Transitions";
 import { MatchFullCardContent } from "@/components/ui-component/utilities/MatchCardContent";
 import { hostAddress } from "@/components/api/api";
 import { persiandate } from "@/components/utils/Lib";

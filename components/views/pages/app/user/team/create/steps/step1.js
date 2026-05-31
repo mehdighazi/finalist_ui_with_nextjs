@@ -7,8 +7,8 @@ import { IconX, IconCircleCheckFilled, IconMapPin, IconUsersGroup, IconId, IconC
 //project import
 import "../style.css"
 import { styled } from "@mui/material/styles";
-import CustomLoadingButton from 'views/utilities/CustomLoadingButton'
-import IconText from "views/utilities/IconText";
+import CustomLoadingButton from '@/components/ui-component/utilities/CustomLoadingButton'
+import IconText from '@/components/ui-component/utilities/IconText'
 //--------------------------------------|Step 1|---------------------------------------------------
 
 

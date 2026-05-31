@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { Box, Typography, CircularProgress, ListItem, ListItemText, Grid, List,Theme,Stack } from '@mui/material';
 import {  TeamBox } from '@/components/ui-component/utilities/MatchCardContent';
 import { createDateStr, persiandate } from "@/components/utils/Lib";
-import MainCard from '@/components/ui-component/cards/MainCard';
+import MainCard from '@/components/ui-component/utilities/cards/MainCard';
 
 import { SxProps } from "@mui/material/styles"; // ✅ اضافه شد
 

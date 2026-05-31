@@ -24,8 +24,8 @@ import {
 // third-party
 
 // project imports
-import MainCard from '@/components/ui-component/cards/MainCard';
-import Transitions from  '@/components/ui-component/extended/Transitions';
+import MainCard from '@/components/ui-component/utilities/cards/MainCard';
+import Transitions from  '@/components/ui-component/utilities/extended/Transitions';
 import User1 from  '@/components/assets/images/users/user.png';
 
 // assets

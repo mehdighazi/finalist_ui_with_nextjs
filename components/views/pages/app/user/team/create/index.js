@@ -4,17 +4,17 @@ import { Box, Fade, Paper, Stack, Typography, useMediaQuery, useTheme } from "@m
 //table icon
 import {IconCheckbox} from '@tabler/icons-react'
 // project imports
-import { rlPadding } from 'store/constant';
-import Stepper from 'views/utilities/Stepper';
+import { rlPadding } from '@/components/store/constant';
+import Stepper from '@/components/ui-component/utilities/Stepper';
 import Step0 from "./steps/step0";
 import Step1 from "./steps/step1";
 //import Step2 from "./steps/step2";
-import TitleBox from "views/utilities/TitleBox";
-import IconText from "views/utilities/IconText";
+import TitleBox from "@/components/ui-component/utilities/TitleBox";
+import IconText from '@/components/ui-component/utilities/IconText'
 // data handling
 import api from 'api/api';
 import dataHandler from 'api/dataHandler';
-import { showAlert } from "store/alertReducer";
+import { showAlert } from "@/components/store/slices/alertSlice";
 
 // ================================== CreateTeam
 

@@ -6,10 +6,10 @@ import {Box, Stack, TextField, useTheme} from "@mui/material";
 import {IconSend} from "@tabler/icons-react";
 //tabler icon
 //project import
-import CustomLoadingButton from "views/utilities/CustomLoadingButton";
-import {uploadHandler} from "views/utilities/uploadfile"
-import dataHandler from "api/dataHandler";
-import api from "api/api";
+import CustomLoadingButton from "@/components/ui-component/utilities/CustomLoadingButton";
+import {uploadHandler} from "@/components/ui-component/utilities/uploadfile"
+import dataHandler from '@/components/api/dataHandler';
+import api from '@/components/api/api';
 import {showAlert} from "store/alertReducer";
 //----------------------------| Add Content |---------------------
 const Content = ({image, onChange, file}) => {

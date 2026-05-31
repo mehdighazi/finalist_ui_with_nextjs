@@ -6,8 +6,8 @@ import MainCard from "ui-component/cards/MainCard_pre";
 //tabler icon
 import {IconHeart} from "@tabler/icons-react"
 //project import
-import dataHandler from "api/dataHandler";
-import api from "api/api";
+import dataHandler from '@/components/api/dataHandler';
+import api from '@/components/api/api';
 import Contents from './contents'
 import {hideAlert} from "../../../../../../../../../app/store/alertReducer";
 

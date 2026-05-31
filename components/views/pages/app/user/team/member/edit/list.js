@@ -13,18 +13,18 @@ import { HowToReg } from "@mui/icons-material";
 //table icon
 import { IconX, IconChevronCompactDown, IconCircleCheck, IconCheck, IconSearch } from "@tabler/icons-react";
 //project import
-import { TeamBox } from "views/utilities/MatchCardContent";
+import { TeamBox } from "@/components/ui-component/utilities/MatchCardContent";
 import Avatar from 'ui-component/extended/Avatar';
 import { styled } from "@mui/material/styles";
-import IconText from 'views/utilities/IconText'
+import IconText from '@/components/ui-component/utilities/IconText'
 import MainCard from 'ui-component/cards/MainCard_pre';
 import Button from "@mui/material/Button";
 import { IconEdit, IconUserPlus } from "@tabler/icons-react";
-import DialogBox from "views/utilities/Dialog";
-import dataHandler from "api/dataHandler";
-import api from "api/api";
+import DialogBox from "@/components/ui-component/utilities/Dialog";
+import dataHandler from '@/components/api/dataHandler';
+import api from '@/components/api/api';
 import teamPng from "assets/images/screen/team.png";
-import { showAlert } from "store/alertReducer";
+import { showAlert } from "@/components/store/slices/alertSlice";
 import CustomAvatar from 'ui-component/extended/Avatar'
 import { createDateLetter, createDateStr } from 'utils/Lib'
 import { hostAddress } from "api/api";

@@ -7,7 +7,7 @@ import MainCard from "ui-component/cards/MainCard_pre";
 //tabler icon
 import { IconHeart, IconPlus, IconUserCheck } from "@tabler/icons-react"
 //project import
-import TopSectionUnified from "views/utilities/profilePageTopSection";
+import TopSectionUnified from "@/components/ui-component/utilities/profilePageTopSection";
 import { hostAddress } from 'api/api'
 
 //Content Sections

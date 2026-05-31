@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useMediaQuery, Box, Divider, Grid, Paper, Switch, Typography, useTheme } from "@mui/material";
 
 //project import
-import { SelectTeamChip } from 'views/utilities/SelectTeamChip'
+import { SelectTeamChip } from '@/components/ui-component/utilities/SelectTeamChip'
 import MatchsList from "./matchsList";
 
 function TabPanel(props) {

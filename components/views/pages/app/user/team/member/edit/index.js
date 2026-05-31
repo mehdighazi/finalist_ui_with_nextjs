@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { Box, Fade, Paper, Stack, useMediaQuery, useTheme } from "@mui/material";
 
 //project import
-import { rlPadding } from 'store/constant';
+import { rlPadding } from '@/components/store/constant';
 import TeamList from './teamlist'
-import dataHandler from "api/dataHandler";
-import api from "api/api";
+import dataHandler from '@/components/api/dataHandler';
+import api from '@/components/api/api';
 //==================================Create Match
 //Custom DatePicker
 

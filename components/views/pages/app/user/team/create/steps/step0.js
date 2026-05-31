@@ -12,12 +12,12 @@ import {
 import { IconX, IconCircleCheckFilled, IconMapPin, IconUsersGroup, IconId, IconCategory } from '@tabler/icons-react'
 //project import
 import "../style.css"
-import ProvinceCitySelector from 'views/utilities/ProvinceCitySelector'
-import SportSelector from "views/utilities/SportSelector";
+import ProvinceCitySelector from '@/components/ui-component/utilities/ProvinceCitySelector'
+import SportSelector from "@/components/ui-component/utilities/SportSelector";
 import { styled } from "@mui/material/styles";
-import { CustomTextField } from 'views/utilities/inputs'
-import IconText from 'views/utilities/IconText'
-import { showBUTTOMSheet, hideBUTTOMSheet } from "store/bottomSheetReducer";
+import { CustomTextField } from '@/components/ui-component/utilities/inputs'
+import IconText from '@/components/ui-component/utilities/IconText'
+import { showBottomSheet, hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
 import api from 'api/api'
 import dataHandler from 'api/dataHandler'
 //--------------------------------------|Step 1|---------------------------------------------------

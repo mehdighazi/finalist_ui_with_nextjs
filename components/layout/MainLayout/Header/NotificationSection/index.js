@@ -27,8 +27,8 @@ import {
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 // project imports
-import MainCard from '@/components/ui-component/cards/MainCard_pre';
-import Transitions from '@/components/ui-component/extended/Transitions';
+import MainCard from '@/components/ui-component/utilities/cards/MainCard_pre';
+import Transitions from '@/components/ui-component/utilities/extended/Transitions';
 import NotificationList from './NotificationList';
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api'

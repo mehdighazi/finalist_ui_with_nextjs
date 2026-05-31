@@ -19,7 +19,7 @@ import "../style.css"
 import {styled} from "@mui/material/styles";
 import teamPng from 'assets/images/screen/team.png'
 import defaultLogo from 'assets/images/screen/defaultlogo.png'
-import {hostAddress} from 'api/api'
+import {hostAddress} from '@/components/api/api'
 import CustomRating from "ui-component/rating";
 //DataHandling
 import Avatar from "ui-component/extended/Avatar";

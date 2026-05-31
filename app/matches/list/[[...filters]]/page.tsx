@@ -5,7 +5,7 @@ import { Metadata } from "next";
 // کامپوننت‌ها
 import MatchListLayout from "@/layout/match/list/layout";
 import MatchesContent from "./home/MatchesContent";
-import TotalIncomeCard from "@/components/ui-component/cards/Skeleton/TotalIncomeCard";
+import TotalIncomeCard from "@/components/ui-component/utilities/cards/Skeleton/TotalIncomeCard";
 import { Box } from "@mui/system";
 // types
 interface HomeProps {

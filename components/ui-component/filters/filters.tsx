@@ -39,7 +39,7 @@ import { CustomTextField } from "@/components/ui-component/utilities/inputs";
 import PopperCalender from "@/components/ui-component/utilities/PopperCalender";
 import styles from "./style.module.css";
 import { persiandate } from "@/components/utils/Lib";
-import Transition from "@/components/ui-component/extended/Transitions";
+import Transition from "@/components/ui-component/utilities/extended/Transitions";
 import dataHandler from "@/components/api/dataHandler";
 import api from "@/components/api/api";
 import ApiServer from "@/components/api/api.server";

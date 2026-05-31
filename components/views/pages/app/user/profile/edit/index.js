@@ -13,17 +13,17 @@ import {
 
 } from "@tabler/icons-react";
 //project import
-import { GetFileButtonWithCrop, uploadHandler, AvatarCropper } from 'views/utilities/uploadfile'
+import { GetFileButtonWithCrop, uploadHandler, AvatarCropper } from '@/components/ui-component/utilities/uploadfile'
 import CustomAvatar from "ui-component/extended/Avatar";
 import DefaultAvatar from "assets/images/screen/default-avatar.jpg";
 import api from 'api/api'
 import dataHandler from 'api/dataHandler'
-import { CustomTextField } from "views/utilities/inputs";
-import PopperCalender from 'views/utilities/PopperCalender'
+import { CustomTextField } from "@/components/ui-component/utilities/inputs";
+import PopperCalender from '@/components/ui-component/utilities/PopperCalender'
 import { StartDate4MYSQL, persiandate } from 'utils/Lib'
-import IconText from "views/utilities/IconText";
-import { CustomSubmitButton } from "views/utilities/CustomLoadingButton";
-import { showAlert } from "store/alertReducer";
+import IconText from '@/components/ui-component/utilities/IconText'
+import { CustomSubmitButton } from "@/components/ui-component/utilities/CustomLoadingButton";
+import { showAlert } from "@/components/store/slices/alertSlice";
 import { MainCardWrapper } from "ui-component/cards/MainCardWrapper";
 import EditProfileSkeleton from 'ui-component/cards/Skeleton/EditProfile'
 import { hostAddress } from 'api/api'

@@ -26,9 +26,9 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { showAlert } from "store/alertReducer";
+import { showAlert } from "@/components/store/slices/alertSlice";
 import Google from 'assets/images/icons/social-google.svg';
-import dataHandler from "api/dataHandler";
+import dataHandler from '@/components/api/dataHandler';
 import api from 'api/api'
 // ============================|| FIREBASE - LOGIN ||============================ //
 

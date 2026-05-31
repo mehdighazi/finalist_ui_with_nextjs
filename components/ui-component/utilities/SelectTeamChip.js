@@ -9,12 +9,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
 //project import
-import dataHandler from "api/dataHandler";
+import dataHandler from '@/components/api/dataHandler';
 import api, { hostAddress } from "api/api";
 import CustomAvatar from 'ui-component/extended/Avatar'
 import MainCard from 'ui-component/cards/MainCard_pre';
 import Transitions from 'ui-component/extended/Transitions';
-import DialogBox from 'views/utilities/Dialog'
+import DialogBox from '@/components/ui-component/utilities/Dialog'
 import { IconChevronDown, IconChevronLeft } from "@tabler/icons-react";
 import DefaultAvatar from "../../assets/images/screen/default-avatar.jpg";
 //-------------------------------------------Content

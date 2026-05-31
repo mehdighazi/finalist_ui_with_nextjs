@@ -8,20 +8,20 @@ import { styled } from "@mui/material/styles";
 //Tabler icon
 import { IconListDetails } from "@tabler/icons-react";
 //project import
-import dataHandler from "api/dataHandler";
-import api from "api/api";
+import dataHandler from '@/components/api/dataHandler';
+import api from '@/components/api/api';
 import AlertBox from "ui-component/alert";
 import CustomCard from "ui-component/cards/CustomCard";
-import CustomLoadingButton from "views/utilities/CustomLoadingButton";
-import { MatchDetailCardContent } from "views/utilities/MatchCardContent";
+import CustomLoadingButton from "@/components/ui-component/utilities/CustomLoadingButton";
+import { MatchDetailCardContent } from "@/components/ui-component/utilities/MatchCardContent";
 import useWindowDimensions from "utils/getScreenDimension";
-import DialogBox from 'views/utilities/Dialog'
-import BottomSheetDialog from 'views/utilities/BottomSheet'
+import DialogBox from '@/components/ui-component/utilities/Dialog'
+import BottomSheetDialog from '@/components/ui-component/utilities/BottomSheet'
 import Logo1 from "assets/images/test/t1.png";
 import { persiandate } from "utils/Lib";
-import SelectTeamChip from 'views/utilities/SelectTeamChip'
-import { showAlert } from "store/alertReducer";
-import IconText from "views/utilities/IconText";
+import SelectTeamChip from '@/components/ui-component/utilities/SelectTeamChip'
+import { showAlert } from "@/components/store/slices/alertSlice";
+import IconText from '@/components/ui-component/utilities/IconText'
 
 import { hostAddress } from "api/api"
 import { showBUTTOMSheet } from "store/bottomSheetReducer";

@@ -8,8 +8,8 @@ import { styled } from '@mui/material/styles';
 
 import MatchDetaiLayout from "@/layout/match/detail/layout";
 
-//import CustomLoadingButton from '@/views/utilities/CustomLoadingButton';
-//import BottomSheetDialog from '@/views/utilities/BottomSheet';
+//import CustomLoadingButton from '@/@/components/ui-component/utilities/CustomLoadingButton';
+//import BottomSheetDialog from '@/@/components/ui-component/utilities/BottomSheet';
 //import { showAlert } from '@/store/alertReducer';
 
 //import { persiandate } from '@/utils/Lib';

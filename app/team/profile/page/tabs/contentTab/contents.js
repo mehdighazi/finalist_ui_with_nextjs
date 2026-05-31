@@ -26,9 +26,9 @@ import {IconDotsVertical, IconHeart, IconMessageCircle, IconSend, IconTrash} fro
 //project import
 
 import api from 'api/api'
-import {hostAddress} from 'api/api'
+import {hostAddress} from '@/components/api/api'
 import CustomAvatar from 'ui-component/extended/Avatar'
-import dataHandler from "api/dataHandler";
+import dataHandler from '@/components/api/dataHandler';
 import {showBOTTOMSheet} from "store/bottomSheetReducer";
 import AnimatedButton from 'ui-component/extended/AnimateButton'
 import Skeleton from 'ui-component/cards/Skeleton/ImageListCard'

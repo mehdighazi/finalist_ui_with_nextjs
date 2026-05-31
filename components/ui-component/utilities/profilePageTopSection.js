@@ -12,11 +12,11 @@ import { hostAddress } from 'api/api'
 import AnimatedButton from 'ui-component/extended/AnimateButton'
 import CustomAvatar from 'ui-component/extended/Avatar'
 import DefaultAvatar from 'assets/images/screen/default-avatar.jpg'
-import BOTTOMSheet from 'views/utilities/BottomSheet'
+import BOTTOMSheet from '@/components/ui-component/utilities/BottomSheet'
 //import Content from './addContent'
-import { GetFileButtonWithCrop, Fileuploader } from 'views/utilities/uploadfile'
-import { showAlert } from "store/alertReducer";
-import { showBUTTOMSheet, hideBUTTOMSheet } from "store/bottomSheetReducer";
+import { GetFileButtonWithCrop, Fileuploader } from '@/components/ui-component/utilities/uploadfile'
+import { showAlert } from "@/components/store/slices/alertSlice";
+import { showBottomSheet, hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
 import ProfileSkeleton from 'ui-component/cards/Skeleton/profile'
 import api from 'api/api'
 import dataHandler from 'api/dataHandler'

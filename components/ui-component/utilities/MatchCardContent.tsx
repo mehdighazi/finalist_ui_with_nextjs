@@ -82,10 +82,10 @@ export const TeamBox: React.FC<TeamBoxProps> = ({
         <Avatar size={AvatarSize} src={logo || DefaultLogo} />
         <Typography fontSize={12}>{title}</Typography>
         <CustomRating
-          value={rating}
-          size="small"
-          readOnly
-          sx={{ "& .MuiRating-icon": { fontSize: 16 } }}
+          rate={rating}
+         // size="small"
+        //  readOnly
+        //  sx={{ "& .MuiRating-icon": { fontSize: 16 } }}
         />
       </Stack>
     </Box>

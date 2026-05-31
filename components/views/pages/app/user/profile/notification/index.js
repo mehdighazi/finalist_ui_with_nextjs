@@ -9,12 +9,12 @@ import {
 //tabler icon
 import { IconList, IconMail,IconTrash,IconX } from '@tabler/icons-react'
 //project import
-import IconText from "views/utilities/IconText";
-import dataHandler from "api/dataHandler";
+import IconText from '@/components/ui-component/utilities/IconText'
+import dataHandler from '@/components/api/dataHandler';
 import api from 'api/api'
 import ImageListCard from "ui-component/cards/Skeleton/ImageListCard";
 import CustomAvatar from 'ui-component/extended/Avatar'
-import { showAlert } from "store/alertReducer";
+import { showAlert } from "@/components/store/slices/alertSlice";
 import Transition from "ui-component/extended/Transitions";
 import NotFoundPlaceHolder from 'ui-component/NotFound'
 const NotifList = () => {

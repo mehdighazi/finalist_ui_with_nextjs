@@ -13,7 +13,7 @@ import {
 //project import
 import "./style.css"
 import {styled} from "@mui/material/styles";
-import SelectTeamCard from 'views/utilities/SelectTeamCard'
+import SelectTeamCard from '@/components/ui-component/utilities/SelectTeamCard'
 import teamPng from 'assets/images/screen/team.png'
 import defaultLogo from 'assets/images/screen/defaultlogo.png'
 import CustomRating from "ui-component/rating";

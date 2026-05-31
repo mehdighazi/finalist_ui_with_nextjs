@@ -17,10 +17,10 @@ import {
 import { IconMapPin } from "@tabler/icons-react";
 
 // project imports
-import SearchBar from "@/components/ui-component/SearchBar";
+import SearchBar from "@/components/ui-component/utilities/SearchBar";
 import ProvinceCitySelector from "@/components/ui-component/utilities/ProvinceCitySelector";
 import { showBottomSheet, hideBottomSheet } from '@/components/store/slices/bottomSheetSlice';
-import MainCard from "@/components/ui-component/cards/MainCard";
+import MainCard from "@/components/ui-component/utilities/cards/MainCard";
 import { TeamBox } from "@/components/ui-component/utilities/MatchCardContent";
 import CustomLoadingButton from "@/components/ui-component/utilities/CustomLoadingButton";
 import { showAlert } from "@/components/store/slices/alertSlice";

@@ -15,9 +15,9 @@ import Logo from 'ui-component/Logo';
 import AuthFooter from 'ui-component/cards/AuthFooter';
 import Transition from 'ui-component/extended/Transitions'
 import AlertCompnent from 'ui-component/alert'
-import dataHandler from "api/dataHandler";
+import dataHandler from '@/components/api/dataHandler';
 import api from 'api/api'
-import { showAlert } from "store/alertReducer";
+import { showAlert } from "@/components/store/slices/alertSlice";
 // assets
 //=================================|| Code Inputs  ||================================
 const CodeInputMUI = ({ onChange }) => {

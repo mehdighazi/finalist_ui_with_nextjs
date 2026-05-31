@@ -15,7 +15,7 @@ import { Box } from "@mui/system";
 import Slide from "@mui/material/Slide";
 
 // Redux actions
-import { hideBUTTOMSheet } from "@/components/store/slices/bottomSheetSlice";
+import { hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
 //project import
 import { rlPadding } from "@/components/store/constant";
 
@@ -26,13 +26,13 @@ const Transition = React.forwardRef((props, ref) => (
 export default function FullScreenDialog() {
   const dispatch = useDispatch();
   const { content, title, ptSX, visible } = useSelector(
-    (state) => state.buttomSheet
+    (state) => state.bottomSheet
   );
 
   const theme = useTheme();
 
   const handleClose = () => {
-    dispatch(hideBUTTOMSheet());
+    dispatch(hideBottomSheet());
   };
 
   return (

@@ -27,11 +27,11 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 //assest
 //project import
 import { rlPadding } from 'store/constant'
-import dataHandler from "api/dataHandler";
+import dataHandler from '@/components/api/dataHandler';
 import api, { hostAddress } from "api/api";
 import Transitions from 'ui-component/extended/Transitions';
 import MainCard from 'ui-component/cards/MainCard_pre';
-import DialogBox from 'views/utilities/Dialog'
+import DialogBox from '@/components/ui-component/utilities/Dialog'
 import CustomAvatar from 'ui-component/extended/Avatar'
 //Tabler icon
 import { IconBookmark, IconPennant2, IconSwords, IconHeart, IconHome, IconList, IconMenu2, IconChevronLeft, IconEdit, IconArrowsUpDown, IconUser } from '@tabler/icons-react';

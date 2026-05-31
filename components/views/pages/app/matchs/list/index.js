@@ -22,15 +22,15 @@ import { IconMapPin } from "@tabler/icons-react";
 //project import
 import SearchBar from "ui-component/SearchBar";
 import Transition from "ui-component/extended/Transitions";
-import CustomLoadingButton from "views/utilities/CustomLoadingButton";
-import { MatchListCardContent } from "views/utilities/MatchCardContent";
+import CustomLoadingButton from "@/components/ui-component/utilities/CustomLoadingButton";
+import { MatchListCardContent } from "@/components/ui-component/utilities/MatchCardContent";
 import TotalIncomeCard from "ui-component/cards/Skeleton/TotalIncomeCard";
-import { showBUTTOMSheet, hideBUTTOMSheet } from "store/bottomSheetReducer";
-import ProvinceCitySelector from 'views/utilities/ProvinceCitySelector'
-import dataHandler from "api/dataHandler";
-import api from "api/api";
+import { showBottomSheet, hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
+import ProvinceCitySelector from '@/components/ui-component/utilities/ProvinceCitySelector'
+import dataHandler from '@/components/api/dataHandler';
+import api from '@/components/api/api';
 import { persiandate } from "utils/Lib";
-import IconText from "views/utilities/IconText";
+import IconText from '@/components/ui-component/utilities/IconText'
 //-----------------------------------------------
 import FiltersSection from "./filters/filters";
 import SportFiltersSection from "./filters/sports";

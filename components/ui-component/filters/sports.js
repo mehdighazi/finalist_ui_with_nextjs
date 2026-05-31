@@ -39,8 +39,8 @@ import { motion } from "framer-motion";
 //project import
 import { showBUTTOMSheet } from "store/bottomSheetReducer";
 import Transition from "ui-component/extended/Transitions";
-import api from "api/api";
-import dataHandler from "api/dataHandler";
+import api from '@/components/api/api';
+import dataHandler from '@/components/api/dataHandler';
 import { SportIcons } from "icons/sportIcons";
 
 const BottomSheetContent = () => {
