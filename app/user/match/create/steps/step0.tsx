@@ -1,7 +1,6 @@
-
 "use client"
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // ui-material
 import {
     Box,
@@ -16,46 +15,47 @@ import {
 } from "@mui/material";
 
 // project import
-// @ts-ignore
 import { styled } from "@mui/material/styles";
-import teamPng from '@/components/assets/images/screen/team.png' 
-//const teamPng = require('assets/images/screen/team.png');
-
-// import defaultLogo from 'assets/images/screen/defaultlogo.png'; // در صورت نیاز فعال کنید
+import teamPng from '@/components/assets/images/screen/team.png';
 import { hostAddress } from '@/components/api/api';
 import CustomRating from "@/components/ui-component/rating";
 import Avatar from "@/components/ui-component/extended/Avatar";
-import { string } from "prop-types";
+
+// حذف شد: import { string } from "prop-types"; <--- این باعث ارور می‌شد
 
 //----------------------------------- Types & Interfaces -----------------------------------
-
 interface Team {
     team_id: string | number;
-    team_name: string;
-    logo?: {
-        logo_path: string;
-    } | null;
+    province: {
+        province_id: string | number;
+        province_title: string;
+    };
+    city: {
+        city_id: string | number;
+        city_title: string;
+    };
     [key: string]: any;
 }
 
 interface Step0Props {
     userTeam: Team[];
     formData: any;
-    onChange: (payload: { name: string; value: any }) => void;
+    onChange: (payload: { name: any; value: any }) => void;
+
+
 }
 
 interface TeamBoxProps {
     title: string;
     logo: string;
     rating: number;
-    color?: string;
 }
 
 //-------------------------------------- Styled Components -----------------------------------------
 
 const CustomBox = styled(Box)(({ theme }) => ({
     minWidth: "100%",
-    marginTop: 8, // معادل mt: 1
+    marginTop: 8,
     paddingLeft: "0%",
     alignItems: "center",
     justifyContent: "center",
@@ -75,18 +75,21 @@ const TeamBox: React.FC<TeamBoxProps> = ({ title, logo, rating }) => {
     return (
         <Box sx={{
             display: 'flex',
-            alignItems: 'flex-start',
+            alignItems: 'center',
             justifyContent: "center",
+            width: '100%'
         }}>
             <Stack sx={{
                 alignItems: "center",
                 justifyContent: "center",
+                flexDirection: 'row', // برای نمایش افقی
+                gap: 2
             }}>
                 <Avatar size='sm' src={logo} />
                 <Typography align="center" fontSize={12}>
                     {title}
                 </Typography>
-                <CustomRating  rate={rating}  />
+                <CustomRating rate={rating} />
             </Stack>
         </Box>
     );
@@ -96,18 +99,28 @@ const TeamBox: React.FC<TeamBoxProps> = ({ title, logo, rating }) => {
 
 const Step0: React.FC<Step0Props> = (props) => {
     const theme = useTheme();
-    // مقدار اولیه را مطابق کد خودتان 1 گذاشتم، اما در اجرا با رشته‌های "_id" جایگزین می‌شود
-    const [selectedValue, setSelectedValue] = useState<string | number>(1);
+
+
+    // مقدار اولیه را از روی formData می‌گیریم تا اگر صفحه رفرش شد، انتخاب کاربر باقی بماند
+    // اگر مقدار وجود داشت، آن را با پیشوند  ست می‌کنیم
+    const [selectedValue, setSelectedValue] = useState<string>("");
+
+    useEffect(() => {
+        if (props.formData.host_team_id) {
+            setSelectedValue(`_${props.formData.host_team_id}`);
+        }
+    }, [props.formData.host_team_id]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const val = event.target.value;
+        const val = event.target.value; // مقدار چیزی مثل "_123" است
         setSelectedValue(val);
 
-        // منطق جدا کردن ID که در کدتان بود
-        const teamid = val.split("_");
+        // جدا کردن ID از پیشوند 
+        const teamId = val.startsWith("_") ? val.substring(1) : val;
+
         props.onChange({
             name: "host_team_id",
-            value: teamid[1]
+            value: teamId
         });
     };
 
@@ -115,21 +128,21 @@ const Step0: React.FC<Step0Props> = (props) => {
     const logoHost = "";
 
     return (
-        <Box sx={{ minWidth: "100%",px:2 }}>
+        <Box sx={{ minWidth: "100%", px: 2 }}>
             <CustomBox>
-                {props.userTeam.length !== 0 ? (
+                {props.userTeam && props.userTeam.length !== 0 ? (
                     <>
-                        <Typography variant="h5" align="right">یکی از تیم ها را انتخاب کنید</Typography>
-                        <Divider sx={{ mt: 1 }} />
+                        <Typography variant="h5" align="right" sx={{ mb: 1 }}>
+                            یکی از تیم ها را انتخاب کنید
+                        </Typography>
+                        <Divider sx={{ mb: 2 }} />
 
                         <FormControl
                             sx={{
                                 direction: "rtl",
                                 width: "100%",
                                 mt: 1,
-                                ml: 2,
                             }}
-
                             component="fieldset"
                         >
                             <RadioGroup
@@ -145,7 +158,7 @@ const Step0: React.FC<Step0Props> = (props) => {
                                         control={<Radio />}
                                         label={
                                             <TeamBox
-                                                rating={!rateHost ? 0 : rateHost}
+                                                rating={rateHost}
                                                 logo={item.logo ? `${hostAddress}/${item.logo.logo_path}` : logoHost}
                                                 title={item.team_name}
                                             />
@@ -154,9 +167,9 @@ const Step0: React.FC<Step0Props> = (props) => {
                                             backgroundColor: selectedValue === `_${item.team_id}` ? "lightblue" : theme.palette.grey[100],
                                             borderRadius: "8px",
                                             padding: "8px",
-                                            pt: 1,
                                             margin: "4px 0",
-                                            width: "100%"
+                                            width: "100%",
+                                            border: "1px solid #eee"
                                         }}
                                     />
                                 ))}
@@ -164,7 +177,6 @@ const Step0: React.FC<Step0Props> = (props) => {
                         </FormControl>
                     </>
                 ) : (
-                    // در صورتی که کاربر تیمی ندارد
                     <Box sx={{ p: 5, textAlign: 'center' }}>
                         <img src={teamPng} alt="no-team" style={{ width: "225px", height: "auto" }} />
                         <Typography variant="h5" sx={{ color: theme.palette.grey[500], mt: 2 }}>

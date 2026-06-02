@@ -66,6 +66,7 @@ const CreateMatch: React.FC = () => {
 
     const handleInputChange = ({ name, value }: { name: keyof MatchFormData; value: any }) => {
         setFormData(prev => ({ ...prev, [name]: value }));
+       
     };
 
     const fetchUserTeams = async () => {

@@ -22,28 +22,35 @@ import { PopperTimePicker } from "@/components/ui-component/utilities/TimeSwipPi
 import { showBottomSheet, hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
 import ProvinceCitySelector from '@/components/ui-component/utilities/ProvinceCitySelector'
 import { MainCardWrapper } from "@/components/ui-component/cards/MainCardWrapper";
-
-// تعریف اینترفیس‌ها
 interface Team {
-    team_name: string;
-    logo?: {
-        logo_path: string;
-    } | null;
+    team_id: string | number;
+    province: {
+        province_id: string | number;
+        province_title: string;
+    };
+    city: {
+        city_id: string | number;
+        city_title: string;
+    };
+    [key: string]: any;
 }
 
 interface FormData {
-    match_local_date?: string;
-    match_date?: string;
-    match_time?: string;
-    match_location_address?: string;
-    description?: string;
-    match_province_id?: number;
-    match_city_id?: number;
+    match_time: string | null;
+    match_date: string | null;
+    match_local_date: string | null;
+    host_team_id: number | string | null;
+    match_province_id: number | string | null;
+    match_city_id: number | string | null;
+    description: string | null;
+    match_location_address: string | null;
+    match_type: number;
 }
 
 interface Step1Props {
     formData: FormData;
-    selectedTeam: Team;
+    userTeam: Team[];
+    selectedTeam?: Team; // با اضافه کردن علامت سوال، می‌گوییم این مقدار می‌تواند اختیاری (Optional) باشد
     teamLocation: string;
     onChange: (payload: { name: keyof FormData; value: any }) => void;
     setTeamLocation: (location: string) => void;
@@ -127,41 +134,42 @@ const Step1: React.FC<Step1Props> = (props) => {
             </MainCardWrapper>
 
             <SectionBox>
-               
-                    <IconText fontSize={14} icon={<IconChecklist />} color={TextColor} text={" اطلاعات مسابقه"} />
-               
+
+                <IconText fontSize={14} icon={<IconChecklist />} color={TextColor} text={" اطلاعات مسابقه"} />
+
             </SectionBox>
             <Divider />
 
             {/* بخش تاریخ */}
             <SectionBox sx={{ mt: 1 }}>
-                
-                    <IconText textPaddingTop={0.5} fontSize={12} icon={<CalendarMonth  />} color={TextColor} text={"تاریخ برگزاری"} />
-               
+
+                <IconText textPaddingTop={0.5} fontSize={12} icon={<CalendarMonth />} color={TextColor} text={"تاریخ برگزاری"} />
+
                 <PopperCalender
                     anchorEl={anchorEl}
                     handleClose={handleDatePickerClose}
                     onChange={(e: any) => {
-                        const pDate = persiandate(e);
+
+                        const pDate = persiandate(e.value)[1];
                         props.onChange({ name: "match_local_date", value: pDate });
-                        props.onChange({ name: "match_date", value: StartDate4MYSQL(e) });
+                        props.onChange({ name: "match_date", value: StartDate4MYSQL(e.value) });
                         setCalendarValue(pDate.toString());
                         handleDatePickerClose();
                     }}
                 />
-                <Box onClick={handleDatePickerOnClick} sx={{ p: 0.5 }}>
-                    <CustomTextField onChange={() => console.log("")} value={calendarValue} readOnly={true} placeholder={"جهت انتخاب تاریخ کلیک کنید"} />
-                </Box>
+
+                <CustomTextField onClick={handleDatePickerOnClick} onChange={() => console.log("")} value={calendarValue} readOnly={true} placeholder={"جهت انتخاب تاریخ کلیک کنید"} />
+
             </SectionBox>
 
             {/* بخش زمان */}
             <SectionBox>
-                
-                    <IconText fontSize={12} icon={<AccessTime />} color={TextColor} text={"زمان برگزاری"} />
-              
-                <Box onClick={handleTimePickerOnClick} sx={{ p: 0.5 }}>
-                    <CustomTextField onChange={() => console.log("")} fontFamily="numberfarsi" fontSize={14} value={timeValue} readOnly={true} placeholder={"جهت انتخاب ساعت کلیک کنید"} />
-                </Box>
+
+                <IconText fontSize={12} icon={<AccessTime />} color={TextColor} text={"زمان برگزاری"} />
+
+
+                <CustomTextField onClick={handleTimePickerOnClick} onChange={() => console.log("")} fontFamily="numberfarsi" fontSize={14} value={timeValue} readOnly={true} placeholder={"جهت انتخاب ساعت کلیک کنید"} />
+
                 <PopperTimePicker
                     anchorEl={anchorTimePickerEl}
                     handleClose={handleTimePickerClose}
@@ -176,9 +184,9 @@ const Step1: React.FC<Step1Props> = (props) => {
 
             {/* بخش محل برگزاری */}
             <SectionBox>
-               
-                    <IconText textPaddingTop={0.5} fontSize={12} icon={<PinDrop />} color={TextColor} text={"محل برگزاری"} />
-         
+
+                <IconText textPaddingTop={0.5} fontSize={12} icon={<PinDrop />} color={TextColor} text={"محل برگزاری"} />
+
 
 
                 <Typography color={"secondary"} variant={"subtitle2"} fontSize={12} align="right" sx={{ pt: 0.2, mr: 2 }}>
@@ -217,19 +225,19 @@ const Step1: React.FC<Step1Props> = (props) => {
             </SectionBox>
             {/* بخش توضیحات */}
             <SectionBox>
-               
-                    <IconText textPaddingTop={0.2} fontSize={12} icon={<Comment />} color={TextColor} text={"توضیحات "} />
-                
 
-                <Box sx={{ mb: 6, p: 0.5 }}>
-                    <CustomTextField
-                        fontSize={14}
-                        fontFamily={"orginalfont"}
-                        placeholder={"توضیحاتی اضافی از قبیل شرایط زمانی مسابقه را اینجا بنویسید"}
-                        value={props.formData.description || ""}
-                        onChange={(val: string) => props.onChange({ name: "description", value: val })}
-                    />
-                </Box>
+                <IconText textPaddingTop={0.2} fontSize={12} icon={<Comment />} color={TextColor} text={"توضیحات "} />
+
+
+
+                <CustomTextField
+                    fontSize={14}
+                    fontFamily={"orginalfont"}
+                    placeholder={"توضیحاتی اضافی از قبیل شرایط زمانی مسابقه را اینجا بنویسید"}
+                    value={props.formData.description || ""}
+                    onChange={(val: string) => props.onChange({ name: "description", value: val })}
+                />
+
             </SectionBox>
         </CustomBox>
     );
