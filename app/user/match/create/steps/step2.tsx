@@ -2,50 +2,76 @@ import * as React from "react";
 import { useDispatch } from "react-redux";
 
 import { Box, Paper, Stack, Typography, useTheme, Button } from "@mui/material";
-
 import { styled } from "@mui/material/styles";
-import { AccessTime, CalendarMonth, PinDrop,Comment } from "@mui/icons-material";
+import { AccessTime, CalendarMonth, PinDrop, Comment } from "@mui/icons-material";
 import { hostAddress } from "@/components/api/api";
 import { TeamBox } from "@/components/ui-component/utilities/MatchCardContent";
 import { MainCardWrapper } from "@/components/ui-component/cards/MainCardWrapper";
+import IconText from "@/components/ui-component/utilities/IconText";
 
-//import "../style.css";
+// Type definitions
+interface FormData {
+    match_time: string | null;
+    match_date: string | null;
+    match_local_date: string | null;
+    host_team_id: number | string | null;
+    match_province_id: number | string | null;
+    match_city_id: number | string | null;
+    description: string | null;
+    match_location_address: string | null;
+    match_type: number;
+}
 
+interface Team {
+  team_name: string;
+  logo?: {
+    logo_path: string;
+  };
+}
 
+interface Step2Props {
+  formData: FormData | null;
+  teamLocation: string;
+  selectedTeam: Team | null;
+}
 
+// Styled component
 const CustomBox = styled(Paper)(({ theme }) => ({
   minWidth: "100%",
   marginTop: 0,
   padding: 10,
- // background: theme.palette.grey[50],
- marginBottom:40
+  marginBottom: 40
 }));
 
-// حالا این SectionBox درست شده
-const SectionBox = ({ children }) => {
+// SectionBox component with proper typing
+interface SectionBoxProps {
+  children: React.ReactNode;
+}
+
+const SectionBox: React.FC<SectionBoxProps> = ({ children }) => {
   const theme = useTheme();
   return (
     <Paper
       sx={{
         display: "flex",
         flexDirection: "row-reverse",
-        alignItems: "stretch", // نوار کل ارتفاع محتوا رو بگیره
+        alignItems: "stretch",
         backgroundColor: theme.palette.grey[100],
-        borderRadius: 2,
-        boxShadow: theme.shadows[0.5],
-        overflow: "hidden", // نوار قشنگ بچسبه
+        borderRadius: 1,
+        boxShadow: theme.shadows[1],
+        overflow: "hidden",
         mt: 2
       }}
     >
-      {/* نوار عمودی رنگی */}
+      {/* Vertical colored bar */}
       <Box
         sx={{
           width: "5px",
-          background: theme.palette.orange.main
+          background: theme.palette.primary.main
         }}
       />
 
-      {/* محتوای اصلی */}
+      {/* Main content */}
       <Box sx={{ flex: 1, p: 2, textAlign: "left" }}>
         {children}
       </Box>
@@ -53,7 +79,7 @@ const SectionBox = ({ children }) => {
   );
 };
 
-const Step2 = ({ formData, teamLocation, selectedTeam }) => {
+const Step2: React.FC<Step2Props> = ({ formData, teamLocation, selectedTeam }) => {
   const theme = useTheme();
   const IconColor = theme.palette.grey[400];
   const TextColor = theme.palette.grey[600];
@@ -63,86 +89,80 @@ const Step2 = ({ formData, teamLocation, selectedTeam }) => {
   }
 
   return (
-    
-      <CustomBox>
-        <Stack sx={{mb:2}} spacing={3}>
+    <CustomBox>
+      <Stack sx={{ mb: 2 }} spacing={3}>
+        {/* Team Section */}
+        <MainCardWrapper border={false}>
+          <TeamBox
+            title={selectedTeam?.team_name ?? ""}
+            logo={selectedTeam?.logo ? `${hostAddress}/${selectedTeam.logo.logo_path}` : ""}
+          />
+        </MainCardWrapper>
 
-          {/* تیم */}
-          <MainCardWrapper border={false}>
-            <TeamBox
-             title={selectedTeam?selectedTeam.team_name:""}
-              logo={selectedTeam&&selectedTeam.logo ? `${hostAddress}/${selectedTeam.logo.logo_path}` : ""}
+        {/* Date Section */}
+        <SectionBox>
+          <IconText
+            textPaddingTop={0.5}
+            fontSize={12}
+            icon={<CalendarMonth sx={{ color: IconColor }} />}
+            color={TextColor}
+            text={"تاریخ برگزاری"}
+          />
+          <Typography variant="h6" color={TextColor} fontWeight={500} mt={1}>
+            <span className="numfarsi-s1">{formData.match_local_date}</span>
+         
+            <span className="numfarsi-s1">{/*formData.match_local_date[0]*/}</span>
+          </Typography>
+        </SectionBox>
+
+        {/* Time Section */}
+        <SectionBox>
+         
+            <IconText
+              fontSize={12}
+              icon={<AccessTime sx={{ color: IconColor }} />}
+              color={TextColor}
+              text={"زمان برگزاری"}
             />
-          </MainCardWrapper>
+          
+          <Typography variant="h6" color="primary" fontWeight={500} mt={1}>
+            <span className="numfarsi-s1">{formData.match_time}</span>
+          </Typography>
+        </SectionBox>
 
-          {/* تاریخ */}
-          <SectionBox>
-            <Typography variant="h5" color="primary" textAlign={'right'} fontWeight={500} mt={0}>
-              <IconText
-                text_pt={0.5}
-                fontSize={12}
-                icon={<CalendarMonth sx={{ color: IconColor }} />}
-                color={TextColor}
-                text={"تاریخ برگزاری"}
-              />
-            </Typography>
-            <Typography variant="h6"  color={TextColor} fontWeight={500} mt={1}>
-              <span className="numfarsi-s1">{formData.match_local_date[1]}</span>
-              {" - "}
-              <span className="numfarsi-s1">{formData.match_local_date[0]}</span>
-            </Typography>
-          </SectionBox>
+        {/* Address Section */}
+        <SectionBox>
+         
+            <IconText
+              textPaddingTop={0.5}
+              fontSize={12}
+              icon={<PinDrop sx={{ color: IconColor }} />}
+              color={TextColor}
+              text={"آدرس محل برگزاری"}
+            />
+         
+          <Typography variant="h6" color="primary" textAlign={'left'} fontWeight={500} mt={1}>
+            <span className="numfarsi-s1">{`${teamLocation}/${formData.match_location_address}`}</span>
+          </Typography>
+        </SectionBox>
 
-          {/* زمان */}
-          <SectionBox>
-            <Typography textAlign={'right'} fontWeight={500} mt={0}>
-              <IconText
-                fontSize={12}
-                icon={<AccessTime sx={{ color: IconColor }} />}
-                color={TextColor}
-                text={"زمان برگزاری"}
-              />
-            </Typography>
-            <Typography variant="h6" color="primary" fontWeight={500} mt={1}>
-              <span className="numfarsi-s1">{formData.match_time}</span>
-            </Typography>
-          </SectionBox>
-
-          {/* آدرس */}
-          <SectionBox>
-            <Typography variant="h6" color="primary" textAlign={'right'} fontWeight={500} mt={0}>
-              <IconText
-                text_pt={0.5}
-                fontSize={12}
-                icon={<PinDrop sx={{ color: IconColor }} />}
-                color={TextColor}
-                text={"آدرس محل برگزاری"}
-              />
-            </Typography>
-            <Typography variant="h6" color="primary" textAlign={'left'} fontWeight={500} mt={1}>
-             <span className="numfarsi-s1">{`${teamLocation}/${formData.match_location_address}`}</span> 
-
-            </Typography>
-          </SectionBox>
-          <SectionBox>
-            <Typography variant="h6" color="primary" textAlign={'right'} fontWeight={500} mt={0}>
-              <IconText
-                text_pt={0.5}
-                fontSize={12}
-                icon={<Comment sx={{ color: IconColor }} />}
-                color={TextColor}
-                text={"توضیحات"}
-              />
-            </Typography>
-            <Typography variant="h6" color="primary" textAlign={'left'} fontWeight={500} mt={1}>
-             <span className="numfarsi-s1">{formData.description}</span>  
-
-            </Typography>
-          </SectionBox>
-
-        </Stack>
-      </CustomBox>
-    
+        {/* Description Section */}
+        <SectionBox>
+         
+            <IconText
+              textPaddingTop={0.5}
+              fontSize={12}
+              icon={<Comment sx={{ color: IconColor }} />}
+              color={TextColor}
+              text={"توضیحات"}
+            />
+         
+          <Typography variant="h6" color="primary" textAlign={'left'} fontWeight={500} mt={1}>
+            <span className="numfarsi-s1">{formData.description}</span>
+          </Typography>
+        </SectionBox>
+      </Stack>
+    </CustomBox>
   );
 };
 

@@ -194,7 +194,7 @@ const CreateMatch: React.FC = () => {
     };
 
     return (
-        <Box sx={{ p: 1 }}>
+        <Box sx={{ p: 1,height:"100vh" }}>
             <Stack spacing={2} sx={{ justifyContent: "center", alignItems: "flex-end" }}>
                 <Box sx={{ minWidth: "100%" }}>{renderStep()}</Box>
                 <Box

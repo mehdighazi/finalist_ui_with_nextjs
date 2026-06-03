@@ -26,17 +26,41 @@ interface Step1Props {
 }
 
 // استایل سفارشی برای باکس‌های هر بخش (جایگزین SectionBox اگر تعریف نشده باشد)
-const SectionBox = styled(Box)(({ theme }) => ({
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-    padding: theme.spacing(1),
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    '&:last-child': {
-        borderBottom: 'none'
-    }
-}));
+interface SectionBoxProps {
+  children: React.ReactNode;
+}
+
+const SectionBox: React.FC<SectionBoxProps> = ({ children }) => {
+  const theme = useTheme();
+  return (
+    <Paper
+      sx={{
+        display: "flex",
+        flexDirection: "row-reverse",
+        alignItems: "stretch",
+        backgroundColor: theme.palette.grey[100],
+        borderRadius: 1,
+        boxShadow: theme.shadows[1],
+        overflow: "hidden",
+        mt: 2
+      }}
+    >
+      {/* Vertical colored bar */}
+      <Box
+        sx={{
+          width: "5px",
+          background: theme.palette.primary.main
+        }}
+      />
+
+      {/* Main content */}
+      <Box sx={{ flex: 1, p: 2, textAlign: "left" }}>
+        {children}
+      </Box>
+    </Paper>
+  );
+};
+
 
 const Step1: React.FC<Step1Props> = ({ formData }) => {
     const theme = useTheme();

@@ -111,7 +111,7 @@ const Step0: React.FC<Step0Props> = (props) => {
         };
     }, [teamIdentifier, api, dataHandler]);
     return (
-        <Box sx={{ textAlign: "right" }}>
+        <Box sx={{ textAlign: "right",p:0.5 }}>
             <SectionBox>
 
                 <Box sx={{ mb: 4, textAlign: 'right' }}>
@@ -150,6 +150,7 @@ const Step0: React.FC<Step0Props> = (props) => {
                                         setSport(e.sport_parent_title + "/" + e.sport_field_title);
                                         dispatch(hideBottomSheet())
                                     }} />
+                                     
                             ),
                         })
                     )

@@ -25,7 +25,7 @@ const Transition = React.forwardRef((props, ref) => (
  
 export default function FullScreenDialog() {
   const dispatch = useDispatch();
-  const { content, title, ptSX, visible } = useSelector(
+  const { renderContent, title, ptSX, visible } = useSelector( 
     (state) => state.bottomSheet
   );
 
@@ -54,7 +54,6 @@ export default function FullScreenDialog() {
           pr: `calc((${rlPadding}) + 0px);`,
           pl: `calc((${rlPadding}) + 0px);`,
         },
-        
       }}
     >
       <AppBar sx={{ position: "relative", p: 0 }}>
@@ -64,7 +63,7 @@ export default function FullScreenDialog() {
               width: "100%",
               display: "flex",
               alignItems: "center",
-              px: { xs: 0, sm: 0, md: 0 }, // اینجا پدینگ برای موبایل
+              px: { xs: 0, sm: 0, md: 0 },
             }}
           >
             <IconButton sx={{ml:{xs:1,md:0}}} edge="start" color="inherit" onClick={handleClose}>
@@ -77,7 +76,8 @@ export default function FullScreenDialog() {
           </Box>
         </Toolbar>
       </AppBar>
-      {content}
+      {/* اینجا محتوای داینامیک رندر می‌شود */}
+      {renderContent && renderContent()}
     </Dialog>
   );
 }

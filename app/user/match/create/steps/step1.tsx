@@ -143,7 +143,7 @@ const Step1: React.FC<Step1Props> = (props) => {
             {/* بخش تاریخ */}
             <SectionBox sx={{ mt: 1 }}>
 
-                <IconText textPaddingTop={0.5} fontSize={12} icon={<CalendarMonth />} color={TextColor} text={"تاریخ برگزاری"} />
+                <IconText  fontSize={12} icon={<CalendarMonth />} color={TextColor} text={"تاریخ برگزاری"} />
 
                 <PopperCalender
                     anchorEl={anchorEl}
@@ -185,7 +185,7 @@ const Step1: React.FC<Step1Props> = (props) => {
             {/* بخش محل برگزاری */}
             <SectionBox>
 
-                <IconText textPaddingTop={0.5} fontSize={12} icon={<PinDrop />} color={TextColor} text={"محل برگزاری"} />
+                <IconText  fontSize={12} icon={<PinDrop />} color={TextColor} text={"محل برگزاری"} />
 
 
 
@@ -226,7 +226,7 @@ const Step1: React.FC<Step1Props> = (props) => {
             {/* بخش توضیحات */}
             <SectionBox>
 
-                <IconText textPaddingTop={0.2} fontSize={12} icon={<Comment />} color={TextColor} text={"توضیحات "} />
+                <IconText  fontSize={12} icon={<Comment />} color={TextColor} text={"توضیحات "} />
 
 
 
