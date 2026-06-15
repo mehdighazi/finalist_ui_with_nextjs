@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 
 // project imports
-import Transition from "@/components/ui-component/utilities/extended/Transitions";
-import { MatchFullCardContent } from "@/components/ui-component/utilities/MatchCardContent";
+
+import { MatchFullCardContent, WaitingOpponentCard } from "@/components/ui-component/utilities/MatchCardContent";
 import { hostAddress } from "@/components/api/api";
 import { persiandate } from "@/components/utils/Lib";
 
@@ -106,8 +106,8 @@ export default async function MatchesContent({
                                 style={{ textDecoration: "none" }}
                             >
                                 <Box sx={{ p: 1 }}>
-                                   
-                                    <MatchFullCardContent
+                                  
+                                    <WaitingOpponentCard
                                         confirmRequest="-1"
                                         createDate={item.createdAt}
                                         viwer={item.viewer_count ?? "0"}

@@ -14,7 +14,7 @@ import {
 import { IconMapPin } from "@tabler/icons-react";
 
 // project imports
-import SearchBar from "@/components/ui-component/utilities/SearchBar";
+import SearchBar from "@/components/ui-component/SearchBar";
 import ProvinceCitySelector from "@/components/ui-component/utilities/ProvinceCitySelector";
 import { showBottomSheet, hideBottomSheet } from '@/components/store/slices/bottomSheetSlice';
 

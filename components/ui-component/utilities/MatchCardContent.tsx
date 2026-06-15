@@ -30,6 +30,7 @@ import {
   IconEye,
   IconMapPin,
   IconCircleFilled,
+  IconStar
 } from "@tabler/icons-react";
 ///--------------project import
 import colors from "@/components/assets/colors/themeColors";
@@ -209,7 +210,108 @@ export const MatchFullCardContent: React.FC<MatchBaseProps> = (props) => {
   );
 };
 //---------------------------------------------------
+export const WaitingOpponentCard: React.FC<MatchBaseProps> = (props) => {
+    return (
+      
+        <MainCard
+            border
+            actions={<MatchActions {...props} />}
+            contentSX={{ p: 2 }}
+            sx={{
+                transition: '0.3s',
+                cursor: 'pointer',
+                '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.12)'
+                }
+            }}
+        >
+            <Stack spacing={2}>
+                {/* Header */}
+                <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
+                    <Chip
+                        size="small"
+                        color={props.matchType === 'casual' ? 'primary' : 'error'}
+                        label={props.matchType === 'casual' ? 'دوستانه' : 'رسمی'}
+                    />
 
+                    <Chip
+                        size="small"
+                        color="warning"
+                        label="در انتظار حریف"
+                    />
+                </Stack>
+
+                {/* Team Logo */}
+                <Stack alignItems="center" spacing={1}>
+                    <Avatar
+                        src={props.logoHost}
+                        sx={{
+                            width: 80,
+                            height: 80
+                        }}
+                    />
+
+                    <Typography variant="h6">
+                        <span>{props.hostTeamName}</span>
+                    </Typography>
+
+                   
+                </Stack>
+
+                <Divider />
+
+                {/* Match Info */}
+                <Stack spacing={1}>
+                    {props.dateMatch && (
+                        <Stack
+                            direction="row"
+                            spacing={1}
+                            alignItems="center"
+                        >
+                            <IconCalendar size={18} />
+                            <Typography variant="body2">
+                                <span>
+                                    {props.dateMatch} - {props.timeMatch}
+                                </span>
+                            </Typography>
+                        </Stack>
+                    )}
+
+                    {props.location && (
+                        <Stack
+                            direction="row"
+                            spacing={1}
+                            alignItems="center"
+                        >
+                            <IconMapPin size={18} />
+                            <Typography variant="body2">
+                                <span>{props.location}</span>
+                            </Typography>
+                        </Stack>
+                    )}
+
+                    {props.rateHost && (
+                        <Stack
+                            direction="row"
+                            spacing={1}
+                            alignItems="center"
+                        >
+                            <IconStar size={18} />
+                            <Typography variant="body2">
+                                <span>امتیاز تیم: {props.rateHost}</span>
+                            </Typography>
+                        </Stack>
+                    )}
+                </Stack>
+            </Stack>
+        </MainCard>
+    );
+};
 
 // ============== تایپ‌های محلی ==============
 interface MatchItemRowProps {

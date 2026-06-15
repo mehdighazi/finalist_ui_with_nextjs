@@ -29,59 +29,75 @@ const CustomLoadingButton = (props) => {
     const theme = useTheme();
     const [loadButton, setLoadButton] = useState(false);
 
+    const defaultGradient =
+        "linear-gradient(135deg, #ff9800 0%, #ff5722 100%)";
+
     const onClickHandle = () => {
-        console.log(props.type)
         setLoadButton(true);
-        if (props.type !== 'submit')
-            props.onChange(true)
-    }
+
+        if (props.type !== "submit" && props.onChange) {
+            props.onChange(true);
+        }
+    };
+
     useEffect(() => {
-        /*header scroll handler*/
+        if (loadButton) {
+            const timer = setTimeout(() => {
+                setLoadButton(false);
+            }, 1000);
 
-        setTimeout(() => {
-            setLoadButton(false)
-
-        }, 1000);
-
+            return () => clearTimeout(timer);
+        }
     }, [loadButton]);
+
     return (
-        <>
+        <LoadingButton
+            type={props.type || "button"}
+            endIcon={props.endIcon}
+            startIcon={props.startIcon}
+            disabled={props.disabled}
+            variant={props.variant || "contained"}
+            color={props.color || "inherit"}
+            loading={loadButton}
+            loadingIndicator={
+                <CircularProgress size={20} color="inherit" />
+            }
+            onClick={onClickHandle}
+            {...props}
+            sx={{
+                background:
+                    props.gradient || defaultGradient,
 
-            <LoadingButton
-                type={props.type ?? 'Button'}
-                endIcon={props.endIcon}
-                startIcon={props.startIcon}
-                disabled={props.disabled}
-                variant={props.variant ? props.variant : "text"}
-                color={props.color ? props.color : "inherit"}
-                sx={{
-                    backgroundColor: theme.palette.secondary.main,
-                    borderRadius: props.borderRadius ?? 2,
-                    p: props.padding ? props.padding : 0,
-                    minWidth: "100%",
-                    mt: props.mt,
-                    transition: 'all 0.3s ease-in-out', 
-                    fontFamily: "orginalfont",
-                    color: "white", // رنگ پیش‌فرض متن (اگر می‌خواهی همیشه سفید باشد)
-                    '&:hover': {
-                        backgroundColor: theme.palette.secondary.main,
-                        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10))',
-                        color: 'white',
-                    },
-                }}
-                onClick={onClickHandle}
-                loadingIndicator={<CircularProgress color={props.color} size={20} />}
-                {...props}
-                loading={loadButton}
-            />
+                borderRadius: props.borderRadius || 2,
+                p: props.padding || 0,
+                minWidth: "100%",
+                mt: props.mt,
 
+                fontFamily: "orginalfont",
+                color: "#fff",
 
+                transition: "all .3s ease",
 
-        </>
-    )
+                "&:hover": {
+                    background:
+                        props.gradient || defaultGradient,
+                    filter: "brightness(0.95)",
+                    transform: "translateY(-2px)",
+                    boxShadow:
+                        "0 8px 20px rgba(0,0,0,.15)",
+                },
 
-}
+                "&:active": {
+                    transform: "translateY(0)",
+                },
+
+                ...props.sx,
+            }}
+        />
+    );
+};
 export default CustomLoadingButton;
+//---------------------------------------SUBMIT BUTTON
 export const CustomSubmitButton = (props) => {
     const theme = useTheme();
     const [loadButton, setLoadButton] = useState(false);

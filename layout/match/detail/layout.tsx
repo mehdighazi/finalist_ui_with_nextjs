@@ -17,11 +17,9 @@ import {
 import { IconMapPin } from "@tabler/icons-react";
 
 // project imports
-import SearchBar from "@/components/ui-component/utilities/SearchBar";
-import ProvinceCitySelector from "@/components/ui-component/utilities/ProvinceCitySelector";
+
+
 import { showBottomSheet, hideBottomSheet } from '@/components/store/slices/bottomSheetSlice';
-import MainCard from "@/components/ui-component/utilities/cards/MainCard";
-import { TeamBox } from "@/components/ui-component/utilities/MatchCardContent";
 import CustomLoadingButton from "@/components/ui-component/utilities/CustomLoadingButton";
 import { showAlert } from "@/components/store/slices/alertSlice";
 import api from "@/components/api/api"
@@ -159,18 +157,29 @@ export default function MatchDetailLayout({ children }: RootLayoutProps) {
         <Stack sx={{ width: "100%" }}>
             {children}
             {
-                <Box sx={{ mb: '4rem', p: 2 }}>
+                <Stack spacing={1}>
                     <CustomLoadingButton
-                        color="orange"
-                        //  inColor={theme.palette.grey[50]}
-                        padding={1}
+                    padding={1.5}
+                        fullWidth
+                        size="large"
+                     
                         variant="contained"
                         onChange={handleRequestClick}
                         loading={isLoading}
                     >
-                        <span>درخواست بازی</span>
+                        <span>ارسال پیشنهاد مسابقه</span>
                     </CustomLoadingButton>
-                </Box>
+
+                    <Typography
+                        variant="caption"
+                        textAlign="center"
+                        color="text.secondary"
+                    >
+                        <span>
+                            با ارسال پیشنهاد، درخواست شما برای تیم میزبان ارسال می‌شود
+                        </span>
+                    </Typography>
+                </Stack>
             }
 
         </Stack>

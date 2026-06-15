@@ -1,9 +1,9 @@
 // app/matches/detail/[...slug]/page.tsx
 import { notFound } from 'next/navigation';
-import { Box, Typography, CircularProgress, ListItem, ListItemText, Grid, List,Theme,Stack } from '@mui/material';
-import {  TeamBox } from '@/components/ui-component/utilities/MatchCardContent';
+import {Paper,Button, Box, Typography, CircularProgress, ListItem, ListItemText, Grid, List, Theme, Stack } from '@mui/material';
+import { TeamBox } from '@/components/ui-component/utilities/MatchCardContent';
 import { createDateStr, persiandate } from "@/components/utils/Lib";
-import MainCard from '@/components/ui-component/utilities/cards/MainCard';
+import MainCard from '@/components/ui-component/cards/MainCard';
 
 import { SxProps } from "@mui/material/styles"; // ✅ اضافه شد
 
@@ -113,17 +113,17 @@ async function getMatchDetail(matchId: string) {
     }
 }
 
-const headerSx = ( size: string): SxProps<Theme> => ({
-  p: size === 'lg' ? 2 : 1,
- // backgroundColor: theme.palette.primary.main,
-  color: 'primary.white',
- // borderRadius: '8px 8px 0 0',
+const headerSx = (size: string): SxProps<Theme> => ({
+    p: size === 'lg' ? 2 : 1,
+    // backgroundColor: theme.palette.primary.main,
+    color: 'primary.white',
+    // borderRadius: '8px 8px 0 0',
 });
 export default async function DetailMatchPage({ params }: PageProps) {
     const { slug } = await params;
     // استخراج matchId
     let matchId = slug?.[0];
- const HOST = process.env.NEXT_PUBLIC_HOST_API_URL ?? '';
+    const HOST = process.env.NEXT_PUBLIC_HOST_API_URL ?? '';
     const PORT = process.env.NEXT_PUBLIC_HOST_PORT
         ? `:${process.env.NEXT_PUBLIC_HOST_PORT}`
         : '';
@@ -161,7 +161,7 @@ export default async function DetailMatchPage({ params }: PageProps) {
                 <Typography variant="h5" color="error">
                     اطلاعات مسابقه یافت نشد
                 </Typography>
-               
+
             </Box>
         );
     }
@@ -193,16 +193,17 @@ export default async function DetailMatchPage({ params }: PageProps) {
 
     return (
         <Box sx={{ p: { xs: 1, sm: 2 } }}>
-                <MainCard
+            <MainCard
+            
 
                 actions={false}
                 contentSX={{ p: 1 }}
-                headerSX={headerSx( 'lg')}
+                headerSX={headerSx('lg')}
                 border={true}
                 title={
                     <Stack>
                         <Typography fontSize={18} fontWeight={500} textAlign="center" variant="caption">
-                          {`اطلاعات مسابقه ${matchDisplayData.matchSportField}`}
+                            {`اطلاعات مسابقه ${matchDisplayData.matchSportField}`}
                         </Typography>
                         <Typography fontSize={12} textAlign="center" color={'primary.light'}>
                             {`#${matchDisplayData.match_id}`}
@@ -213,59 +214,121 @@ export default async function DetailMatchPage({ params }: PageProps) {
                     </Stack>
                 }
             >
-           <Grid container alignItems="center" justifyContent="center" sx={{ p: 3 }}>
-
-                <Grid item xs={12}>
-                    <TeamBox
-                       // rating={rateHost}
-                        logo={`${HOST}${PORT}/${matchDisplayData.hostLogo}`}
-                        title={matchDisplayData.hostTeamName}
-                        // color="green"
-                        AvatarSize="md"
-                    />
-                </Grid>
-                
-                <Grid item xs={12}>
-                    <List sx={{ width: "100%", bgcolor: "background.paper", borderRadius: 2 }}>
-                        {items.map((item, index) => (
-                            <MatchItemRow
-                                key={index}
-                                title={item.title}
-                                value={item.value}
-                                index={index}
-                            />
-                        ))}
-                    </List>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Typography fontWeight={400} fontSize="0.85rem" sx={{ float: "right", px: 2, pt: 0.5 }}>
-                        توضیحات:
-                    </Typography>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Box sx={{ background: "#e6f7ff", borderRadius: 5, pt: 1, width: "100%", height: 100 }}>
-                        <Typography
-                            fontSize="0.75rem"
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Box
                             sx={{
-                                float: "right",
-                                px: 2,
-                                pr: 2,
-                                pt: 0.5,
-                             //   color: theme.palette.secondary.dark,
-                                minHeight: 100
+                                borderRadius: 3,
+                                p: 3,
+                                background:
+                                    "linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)",
+                                color: "#fff",
                             }}
                         >
-                            { 'توضیحاتی وجود ندارد'}
-                        </Typography>
-                    </Box>
+                            <Stack spacing={2} alignItems="center">
+                                <TeamBox
+                                    logo={`${HOST}${PORT}/${matchDisplayData.hostLogo}`}
+                                    title={matchDisplayData.hostTeamName}
+                                    AvatarSize="lg"
+                                />
+
+                                <Typography
+                                    variant="h6"
+                                    textAlign="center"
+                                    fontWeight={600}
+                                >
+                                    <span>در انتظار حریف</span>
+                                </Typography>
+
+                                <Stack
+                                    direction="row"
+                                    spacing={2}
+                                    flexWrap="wrap"
+                                    justifyContent="center"
+                                >
+                                    <Typography variant="body2">
+                                        <span>📅 {matchDisplayData.matchDate}</span>
+                                    </Typography>
+
+                                    <Typography variant="body2">
+                                        <span>⏰ {matchDisplayData.matchTime}</span>
+                                    </Typography>
+                                </Stack>
+
+                                <Typography
+                                    variant="body2"
+                                    textAlign="center"
+                                >
+                                    <span>
+                                        📍 {matchDisplayData.province} / {matchDisplayData.city}
+                                    </span>
+                                </Typography>
+
+                               
+                               
+                            </Stack>
+                        </Box>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <Paper
+                            elevation={0}
+                            sx={{
+                                border: "1px solid #eee",
+                                borderRadius: 3,
+                                overflow: "hidden",
+                            }}
+                        >
+                           
+
+                            <List disablePadding>
+                                {items.map((item, index) => (
+                                    <MatchItemRow
+                                        key={index}
+                                        title={item.title}
+                                        value={item.value}
+                                        index={index}
+                                    />
+                                ))}
+                            </List>
+                        </Paper>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <Paper
+                            elevation={0}
+                            sx={{
+                                border: "1px solid #eee",
+                                borderRadius: 3,
+                                p: 2,
+                            }}
+                        >
+                            <Typography
+                                fontWeight={600}
+                                mb={1}
+                            >
+                                <span>توضیحات مسابقه</span>
+                            </Typography>
+
+                            <Typography
+                                variant="body2"
+                                sx={{
+                                    lineHeight: 2,
+                                    color: "text.secondary",
+                                }}
+                            >
+                                <span>
+                                    {matchDisplayData.description ||
+                                        "توضیحاتی برای این مسابقه ثبت نشده است."}
+                                </span>
+                            </Typography>
+                        </Paper>
+                    </Grid>
                 </Grid>
-            </Grid>
-            
-                
+
+
             </MainCard>
-           
+
 
 
         </Box>

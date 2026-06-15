@@ -51,14 +51,14 @@ const pages = {
           id: 'user-profile',
           title: 'پروفایل',
           type: 'item',
-          url: '/app/user/profile',
+          url: '/user/profile',
           target: true
         },
         {
           id: 'user-edit',
           title: 'ویرایش حساب کابری',
           type: 'item',
-          url: '/app/user/profile/edit',
+          url: '/user/profile/edit',
           target: true
         },
         {
@@ -81,21 +81,21 @@ const pages = {
           id: 'match-list',
           title: 'تالار مسابقات',
           type: 'item',
-          url: '/app/match/list',
+          url: '/matches/list/all',
           target: true
         },
         {
           id: 'match-active',
           title: 'مسابقات من',
           type: 'item',
-          url: '/app/user/match/mymatchs',
+          url: '/user/match/mymatchs',
           target: true
         },
         {
           id: 'match-create',
           title: 'ایجاد مسابقه',
           type: 'item',
-          url: '/app/user/match/create',
+          url: '/user/match/create',
           target: true
         },
         {
@@ -118,21 +118,21 @@ const pages = {
           id: 'team-create',
           title: 'ایجاد تیم',
           type: 'item',
-          url: '/app/user/team/create',
+          url: '/user/team/create',
           target: true
         },
         {
           id: 'team-edit',
           title: 'ویرایش اعضا',
           type: 'item',
-          url: '/app/user/team/member/edit',
+          url: '/user/team/member/edit',
           target: true
         },
         {
           id: 'team-history',
           title: 'نتایج',
           type: 'item',
-          url: '/app/user/team/member',
+          url: '/user/team/member',
           target: true
         }
       ]
