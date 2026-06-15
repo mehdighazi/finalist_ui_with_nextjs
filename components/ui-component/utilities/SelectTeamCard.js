@@ -16,12 +16,12 @@ import {
 import {styled} from "@mui/material/styles";
 //project import
 //import "../style.css"
-import { hostAddress } from "api/api";
-import teamPng from 'assets/images/screen/team.png'
-import defaultLogo from 'assets/images/screen/defaultlogo.png'
-import CustomRating from "ui-component/rating";
+import { hostAddress } from "@/components/api/api";
+import teamPng from '@/components/assets/images/screen/team.png'
+import defaultLogo from '@/components/assets/images/screen/defaultlogo.png'
+import CustomRating from "@/components/ui-component/rating";
 //DataHandling
-import Avatar from "ui-component/extended/Avatar";
+import Avatar from "@/components/ui-component/extended/Avatar";
 //--------------------------------------|Step 1|---------------------------------------------------
 const CustomBox = styled(Box)(({theme}) => ({
     minWidth: "100%", marginTop: 1,
@@ -120,7 +120,7 @@ const SelectTeamCard = (props) => {
                                             control={<Radio/>}
                                             label={<TeamBox
                                                 rating={!rateHost ? 0 : rateHost}
-                                                logo={item.logo?`${hostAddress}/${item.logo["logo_path"]}` : defaultLogo }
+                                                logo={item.logo?`${hostAddress}/${item.logo["logo_path"]}` : "" }
                                                 title={item["team_name"]}
 
                                             />}

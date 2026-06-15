@@ -82,7 +82,14 @@ const ApiAdmin = {
   createTeam(usertoken: string): string {
     return `${DOMAIN}team/create?userid=${usertoken}&${getAccessKey()}`;
   },
-
+  memberInvite: () => {
+    const accesskey = `token=${localStorage.getItem("token")}`
+    return `${DOMAIN}member/invite?${accesskey}`
+  },
+  memberRemove: () => {
+    const accesskey = `token=${localStorage.getItem("token")}`
+    return `${DOMAIN}member/remove?${accesskey}`
+  },
   listUserTeam(usertoken: string): string {
     return `${DOMAIN}team/user/list?userid=${usertoken}&${getAccessKey()}`;
   },
@@ -149,19 +156,19 @@ const ApiAdmin = {
   teamIdentifierChecking(identifier: string): string {
     return `${DOMAIN}team/check/identifier?team_identifier=${identifier}&${getAccessKey()}`;
   },
-  provinceWithCityList: (province_id:string) :string=> {
+  provinceWithCityList: (province_id: string): string => {
     const accesskey = `token=${localStorage.getItem("token")}`
 
     return `${DOMAIN}province/list?${accesskey}&province_id=${province_id}`
 
   },
 
-    listSports: (body:any) =>  {
-        const { title, field_id, field_parent_id } = body
-        const accesskey = `token=${localStorage.getItem("token")}`
-        return `${DOMAIN}sport/list?${accesskey}&title=${title}&field_id=${field_id}&field_parent_id=${field_parent_id}`
+  listSports: (body: any) => {
+    const { title, field_id, field_parent_id } = body
+    const accesskey = `token=${localStorage.getItem("token")}`
+    return `${DOMAIN}sport/list?${accesskey}&title=${title}&field_id=${field_id}&field_parent_id=${field_parent_id}`
 
-    },
+  },
   fileUpload(section_id: string): string {
     return `${DOMAIN}file/upload?section_id=${section_id}&${getAccessKey()}`;
   }

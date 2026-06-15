@@ -2,8 +2,8 @@ import * as React from 'react';
 //Mui import
 import {List,ListItem,Divider,ListItemText,ListItemAvatar,useTheme,Typography} from '@mui/material';
 //project import
-import {ProfileImagePlaceholder} from 'ui-component/cards/Skeleton/ImagePlaceholder'
-import ImagePlaceholder from 'ui-component/cards/Skeleton/ImagePlaceholder'
+import {ProfileImagePlaceholder} from '@/components/ui-component/cards/Skeleton/ImagePlaceholder'
+import ImagePlaceholder from '@/components/ui-component/cards/Skeleton/ImagePlaceholder'
 export default function ListItems({data}) {
     const theme=useTheme();
   return (

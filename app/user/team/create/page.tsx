@@ -9,18 +9,13 @@ import { rlPadding } from '@/components/store/constant';
 import Stepper from '@/components/ui-component/utilities/Stepper';
 import Step0 from "./steps/step0";
 import Step1 from "./steps/step1";
-//import Step2 from "./steps/step2";
-import TitleBox from "@/components/ui-component/utilities/TitleBox";
-import IconText from "@/components/ui-component/utilities/IconText";
+
 // data handling
 import api from '@/components/api/api';
 import dataHandler from '@/components/api/dataHandler';
 import { showAlert } from "@/components/store/slices/alertSlice";
 
-// ================================== CreateTeam
-const cityList = [{ title: "تهران", value: 1 }, { title: "اصفهان", value: 2 }];
-const provinceList = [{ title: "تهران", value: 1 }, { title: "اصفهان", value: 2 }, { title: "شیراز", value: 3 }];
-const sportFieldList = [{ title: "فوتبال سالنی", value: 1 }, { title: "فوتبال چمنی", value: 2 }];
+
 
 // مشخص کردن تایپ داده‌های فرم (برای تمیزی کد)
 

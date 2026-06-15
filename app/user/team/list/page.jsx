@@ -1,9 +1,10 @@
+'use client'
 import * as React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from 'next/navigation';
 //ui-material
 import { Box, Fade, Paper, Stack, useMediaQuery, useTheme } from "@mui/material";
-
+import ListTeams from '@/components/ui-component/utilities/selectTeamNew'
 //project import
 import { rlPadding } from '@/components/store/constant';
 import TeamList from './teamlist'
@@ -15,7 +16,7 @@ import api from '@/components/api/api';
 const Invite = () => {
     const [userTeam, setUserTeam] = useState([])
     const [userinfo, setUserInfo] = useState(null)
-    const navigate = useNavigate()
+   const router = useRouter();
     const getData = (body) => {
         const result = dataHandler(api.getUserInfo({ uid: '' }), "get", "");
         try {
@@ -27,7 +28,7 @@ const Invite = () => {
 
                 }
 
-                 else navigate("/splash")
+                 else router.push("/splash")
             })
         } catch (error) {
             //error handle here
@@ -40,6 +41,13 @@ const Invite = () => {
             getData()
 
     }, [])
+     const selectedHandler=(e)=>
+    {
+     
+        const {value,name}=e
+        router.push(`memberslist/${value}`)
+
+    }
     const getTeamData = () => {
 
         const result = dataHandler(api.listUserTeam(), "get", "");
@@ -61,7 +69,8 @@ const Invite = () => {
     }, [])
 
     return (<>
-       {<TeamList userTeam={userTeam} />}
+     <ListTeams onChange={(e)=>selectedHandler(e)} userTeam={userTeam??[]}/>
+       
 
 
     </>)
