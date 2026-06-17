@@ -9,7 +9,7 @@ import {
     List, ListItem, Divider, ListItemText, ListItemAvatar, Typography, Autocomplete, CircularProgress,
     useTheme
 } from "@mui/material";
-import { HowToReg } from "@mui/icons-material";
+import { Directions, HowToReg } from "@mui/icons-material";
 import { IconX, IconCircleCheck, IconCheck, IconUserPlus } from "@tabler/icons-react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
@@ -28,6 +28,7 @@ import { hostAddress } from "@/components/api/api";
 import DefaultAvatar from "@/components/assets/images/screen/default-avatar.jpg";
 import { MainCardWrapper } from "@/components/ui-component/cards/MainCardWrapper";
 import UserListSkeleton from '@/components/ui-component/cards/Skeleton/UserList';
+import { textAlign } from "@mui/system";
 
 //------------------------------------| Interfaces & Types |---------
 
@@ -87,11 +88,16 @@ const CustomBox = styled(Box)(({ theme }) => ({
 // استایل فرضی برای باکس‌ها که در کد شما جا افتاده بود
 const boxStyle = {
     width: "100%",
-    backgroundColor: "background.paper",
+    backgroundColor: "#e2e2e2",
     borderRadius: 2,
     p: 2,
-    mt: 2
+    mt: 2,
+    textAlign: 'right',
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "stretch",
 };
+
 
 //--------------------------------------------| Components |---------
 function ListItems({ data, team_id }: ListItemsProps) {
@@ -218,7 +224,7 @@ function ListItems({ data, team_id }: ListItemsProps) {
                                         backgroundColor: theme.palette.primary.light,
                                         transition: 'background-color 0.3s ease',
                                         '&:hover': {
-                                            backgroundColor: theme.palette.secondary.main,
+                                            backgroundColor: theme.palette.primary.main,
                                         },
                                     }}
                                     color="secondary"
@@ -367,7 +373,7 @@ const MembersSetting = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const theme = useTheme();
-    
+
     const IconColor = theme.palette.grey[400];
     const TextColor = theme.palette.grey[600];
 
@@ -427,7 +433,7 @@ const MembersSetting = () => {
     }, []);
 
     useEffect(() => {
-        console.log({teamid})
+
         if (teamid) getTeamData();
     }, [teamid, update]);
 
@@ -474,8 +480,8 @@ const MembersSetting = () => {
     };
 
     return (
-        <>
-            <Box sx={{ mb: 10,height:"100vh" }}>
+        <Box sx={{mb:10}}>
+           
                 <DialogBox
                     size="md"
                     title="ثبت اطلاعات"
@@ -502,71 +508,71 @@ const MembersSetting = () => {
                                 />
                             </MainCardWrapper>
                         </Paper>
+                        <Box sx={boxStyle}>
 
-                        <Stack sx={{ maxWidth: "100%", p: 1 }}>
-                            <Box sx={boxStyle}>
-                                <Typography align="right" sx={{ fontWeight: 200, mt: 1, color: IconColor }}>
-                                    <IconText textPaddingTop={0.5} fontSize={12} icon={<HowToReg />} color={TextColor} text="مدیریت اعضا" />
-                                </Typography>
+                            <IconText textPaddingTop={0.5} fontSize={12} icon={<HowToReg />} color={TextColor} text="مدیریت اعضا" />
+                        </Box>
+                        {/* استک اصلی برای بخش لیست اعضا و دکمه‌های بیشتر/کمتر */}
+                        <Stack sx={{ maxWidth: "100%", direction: "rtl" }} spacing={0}>
+                            <ListItems
+                                team_id={teamid}
+                                data={showAll ? verifyMemberList.members : verifyMemberList.members.slice(0, 2)}
+                            />
 
-                                <ListItems
-                                    team_id={teamid}
-                                    data={showAll ? verifyMemberList.members : verifyMemberList.members.slice(0, 2)}
+                            {verifyMemberList.members.length > 2 && (
+                                <Box sx={{ mt: 0, display: "flex", justifyContent: "center" }}>
+                                    {!showAll ? (
+                                        <Button
+                                            variant="text"
+                                            sx={{ color: theme.palette.grey[600], fontWeight: 500, fontSize: 12 }}
+                                            onClick={() => setShowAll(true)}
+                                        >
+                                            <span>مشاهده بیشتر</span>
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            variant="text"
+                                            sx={{ color: theme.palette.grey[600], fontWeight: 500, fontSize: 12 }}
+                                            onClick={() => setShowAll(false)}
+                                        >
+                                            <span>مشاهده کمتر</span>
+                                        </Button>
+                                    )}
+                                </Box>
+                            )}
+                        </Stack>
+
+                        {/* باکس جستجو و افزودن کاملاً مستقل از استک بالا با یک فاصله مشخص (مثلاً mt: 2) */}
+                        <Paper sx={{ display: "block", width: "100%", p: 0, mt: 0 }}>
+                            <Stack spacing={3}>
+                                <UserSearchAutocomplete
+                                    update={update}
+                                    setUpdate={setUpdate}
+                                    onChange={(user) => setUserId(user.user_id)}
                                 />
 
-                                {verifyMemberList.members.length > 2 && (
-                                    <Box sx={{ mt: 1, display: "flex", justifyContent: "center" }}>
-                                        {!showAll ? (
-                                            <Button
-                                                variant="text"
-                                                sx={{ color: theme.palette.grey[400], fontWeight: 500, fontSize: 12 }}
-                                                onClick={() => setShowAll(true)}
-                                            >
-                                                <span>مشاهده بیشتر</span>
-                                            </Button>
-                                        ) : (
-                                            <Button
-                                                variant="text"
-                                                sx={{ color: theme.palette.grey[400], fontWeight: 500, fontSize: 12 }}
-                                                onClick={() => setShowAll(false)}
-                                            >
-                                                <span>مشاهده کمتر</span>
-                                            </Button>
-                                        )}
-                                    </Box>
-                                )}
-                            </Box>
+                                <Box sx={{ p: 1 }}>
+                                    <Button
+                                        fullWidth
+                                        sx={{ border: "1px dashed", borderColor: theme.palette.secondary.main, p: 1, borderRadius: 2 }}
+                                        onClick={() => setDialogOpen(true)}
+                                    >
+                                        <Chip
+                                            sx={{
+                                                background: "none",
+                                                mr: 1,
+                                                "& .MuiChip-label": { ml: 2, pr: 0 },
+                                                "& .MuiChip-icon": { mb: "4px" }
+                                            }}
+                                            icon={<IconUserPlus size={20} />}
+                                            size="small"
+                                            label={<Typography sx={{ fontWeight: 500, mt: 1 }} variant="h5">افزودن</Typography>}
+                                        />
+                                    </Button>
+                                </Box>
+                            </Stack>
+                        </Paper>
 
-                            <Box sx={boxStyle}>
-                                <Stack spacing={3}>
-                                    <UserSearchAutocomplete
-                                        update={update}
-                                        setUpdate={setUpdate}
-                                        onChange={(user) => setUserId(user.user_id)}
-                                    />
-
-                                    <Box sx={{ p: 1 }}>
-                                        <Button
-                                            fullWidth
-                                            sx={{ border: "1px dashed", borderColor: theme.palette.secondary.main, p: 1, borderRadius: 2 }}
-                                            onClick={() => setDialogOpen(true)}
-                                        >
-                                            <Chip
-                                                sx={{
-                                                    background: "none",
-                                                    mr: 1,
-                                                    "& .MuiChip-label": { ml: 2, pr: 0 },
-                                                    "& .MuiChip-icon": { mb: "4px" }
-                                                }}
-                                                icon={<IconUserPlus size={20} />}
-                                                size="small"
-                                                label={<Typography sx={{ fontWeight: 500, mt: 1 }} variant="h5">افزودن</Typography>}
-                                            />
-                                        </Button>
-                                    </Box>
-                                </Stack>
-                            </Box>
-                        </Stack>
                     </CustomBox>
                 ) : (
                     <Box sx={{ p: 5, textAlign: 'center' }}>
@@ -576,8 +582,8 @@ const MembersSetting = () => {
                         </Typography>
                     </Box>
                 )}
-            </Box>
-        </>
+            
+        </Box>
     );
 };
 

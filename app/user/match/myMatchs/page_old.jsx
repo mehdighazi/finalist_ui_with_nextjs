@@ -1,3 +1,4 @@
+'use client'
 import * as React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,10 +19,10 @@ import {
 //project import
 import MyMatchList from "./myMatchsList";
 import IconText from '@/components/ui-component/utilities/IconText'
-import { hostAddress } from "api/api";
+import { hostAddress } from "@/components/api/api";
 import dataHandler from '@/components/api/dataHandler';
-import CustomAvatar from "ui-component/extended/Avatar";
-import NotFoundPlaceHolder from 'ui-component/NotFound'
+import CustomAvatar from "@/components/ui-component/extended/Avatar";
+import NotFoundPlaceHolder from '@/components/ui-component/NotFound'
 import api from '@/components/api/api';
 //-----------------------------------| List Box |---------------------------------------
 function IconSelectBox({ onChange }) {
@@ -160,10 +161,10 @@ const Index = () => {
       </AppBar>
       <Divider />
       <TabPanel value={value} index={0}>
-        <MyMatchList teamId={teamId} hostCheck={true} />
+        {<MyMatchList teamId={teamId} hostCheck={true} />}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <MyMatchList teamId={teamId} hostCheck={false} />
+       {/**<MyMatchList teamId={teamId} hostCheck={false} /> */} 
       </TabPanel>
       <TabPanel value={value} index={2}>
         <NotFoundPlaceHolder />

@@ -125,7 +125,7 @@ const pages = {
           id: 'team-edit',
           title: 'ویرایش اعضا',
           type: 'item',
-          url: '/user/team/member/edit',
+          url: '/user/team/member/setting',
           target: true
         },
         {

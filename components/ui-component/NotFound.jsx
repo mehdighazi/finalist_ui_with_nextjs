@@ -1,5 +1,5 @@
 import { Fade, useTheme, Box, Typography, Stack } from "@mui/material";
-import NotFoundImage from 'assets/images/screen/no-data-6.png'
+import NotFoundImage from '@/components/assets/images/screen/no-data-6.png'
 const NotFoundPlaceHolder = () => {
     const theme = useTheme();
     return (<>
