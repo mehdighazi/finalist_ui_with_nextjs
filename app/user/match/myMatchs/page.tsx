@@ -13,6 +13,12 @@ import HistoryList from "./history_list";
 import { hostAddress } from "@/components/api/api";
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
+import TitleBox from '@/components/ui-component/utilities/TitleBox'
+import IconText from "@/components/ui-component/utilities/IconText";
+import { IconTriangleFilled } from "@tabler/icons-react";
+import { IconCaretLeft } from '@tabler/icons-react';
+import MatchList from "./myMatchsList";
+
 //------------------------| Select Team listBox |----------------------------------
 //-----------------------------------| List Box |---------------------------------------
 
@@ -141,12 +147,13 @@ export function TeamSelectListBox({ onChange }: IconSelectBoxProps) {
 function MyMatchesContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
+  const theme = useTheme()
   // خواندن فیلترها از URL با مقادیر پیش‌فرض
   const currentTab = searchParams.get("tab") || "upcoming";
   const currentRole = searchParams.get("role") || "all";
   const currentResult = searchParams.get("result") || "all";
-
+  const currentSubStatus = searchParams.get("sub_status") || "confirmed";
+  const teamId = searchParams.get("teamId") || "";
   // تابع سراسری برای آپدیت تمیز URL Query Params
   const updateFilter = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -165,14 +172,13 @@ function MyMatchesContent() {
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
       {/* هدر صفحه */}
-      <Typography variant="h5" component="h1" fontWeight="bold" gutterBottom>
-        مسابقات من
-      </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-        مدیریت و مشاهده بازی‌های پیش‌رو و تاریخچه مسابقات تیم شما
-      </Typography>
+      <Divider  >
+        <Typography color={theme.palette.primary.main}>مسابقات من</Typography>
+
+      </Divider>
+
       {/*انتخاب تیم */}
-      <Stack spacing={2}>
+      <Stack spacing={2} sx={{ mt: 1 }}>
         <TeamSelectListBox onChange={(teamId) => updateFilter("teamId", teamId?.toString() || "")} />
         <Box sx={{ width: { xs: "100%", sm: "auto", mt: 4 } }}>
           <Typography variant="subtitle2" textAlign="right" sx={{ mb: 1, color: "text.secondary" }}>
@@ -205,43 +211,78 @@ function MyMatchesContent() {
 
           </Tabs>
         </Box>
-      </Stack>     
+      </Stack>
 
-        {/* لایه سوم: نتایج (فقط در تب تاریخچه نمایش داده می‌شود) */}
-        {currentTab === "history" && (
-          <Box sx={{ mt: 5 }}>
+      {/* لایه سوم: نتایج (فقط در تب تاریخچه نمایش داده می‌شود) */}
+      {currentTab === "history" && (
+        <Box sx={{ mt: 5 }}>
 
-            <Stack direction="row" spacing={1}>
-              {[
-                { label: "همه", value: "all" },
-                { label: "بردها", value: "win", color: "success" as const },
-                { label: "مساوی‌ها", value: "draw", color: "warning" as const },
-                { label: "باخت‌ها", value: "lose", color: "error" as const },
-              ].map((item) => (
-                <Chip
-                  key={item.value}
-                  label={item.label}
-                  clickable
-                  color={currentResult === item.value ? (item.color || "primary") : "default"}
-                  variant={currentResult === item.value ? "filled" : "outlined"}
-                  onClick={() => updateFilter("result", item.value)}
-                />
-              ))}
-            </Stack>
-          </Box>
-        )}
-     
+          <Stack direction="row" spacing={1}>
+            {[
+              { label: "همه", value: "all" },
+              { label: "بردها", value: "win", color: "success" as const },
+              { label: "مساوی‌ها", value: "draw", color: "warning" as const },
+              { label: "باخت‌ها", value: "lose", color: "error" as const },
+            ].map((item) => (
+              <Chip
+                key={item.value}
+                label={item.label}
+                clickable
+                color={currentResult === item.value ? (item.color || "primary") : "default"}
+                variant={currentResult === item.value ? "filled" : "outlined"}
+                onClick={() => updateFilter("result", item.value)}
+              />
+            ))}
+          </Stack>
+        </Box>
+      )}
+
       <Divider sx={{ mb: 4 }} />
-
+      {/**<UpcomingList role={currentRole} /> */}
       {/* بخش نمایش لیست نهایی بر اساس فیلترها */}
       <Box sx={{ minHeight: "200px" }}>
-        {currentTab === "upcoming" ? (
-          <UpcomingList role={currentRole} />
-        ) : (
-          <>
-            {/** <HistoryList role={currentRole} result={currentResult} />*/}
-          </>
+        {currentTab === "upcoming" && (
+          <Box sx={{ mt: 2, direction: 'rtl' }}>
+            <Tabs
+              value={currentSubStatus}
+              onChange={(_, newValue) => updateFilter("sub_status", newValue)}
+              variant="scrollable"
+              scrollButtons="auto"
+              textColor="secondary"
+              indicatorColor="secondary"
+              sx={{ minHeight: 35, '& .MuiTab-root': { py: 0.5, minHeight: 35, fontSize: '0.8rem' } }}
+            >
+              {/* اگر میزبان بود */}
+              {currentRole === "host" && [
+                <Tab key="conf" label={<span>تایید شده</span>} value="confirmed" />,
+                <Tab key="pend" label={<span>در انتظار حریف</span>} value="pending" />
+              ]}
+
+              {/* اگر میهمان بود */}
+              {currentRole === "guest" && [
+                <Tab key="conf" label={<span>تایید شده</span>} value="confirmed" />,
+                <Tab key="sent" label={<span> در انتظار تایید  </span>} value="pending" />
+              ]}
+
+              {/* اگر روی حالت 'همه' بود */}
+              {currentRole === "all" && [
+                <Tab key="conf" label="همه بازی‌های قطعی" value="confirmed" />,
+                <Tab key="all-pend" label="همه درخواست‌های معلق" value="pending" />
+              ]}
+            </Tabs>
+          </Box>
         )}
+        {/* ----------------------------------------------------------------- */}
+        {/* ۲. محل قرارگیری محتوای اصلی (لیست مسابقات) */}
+        {/* ----------------------------------------------------------------- */}
+        <Box sx={{ mt: 3 }}>
+          <MatchList
+            teamId={teamId}
+            tab={currentTab ?? "upcoming"} // با این کار پاس دادن مقدار حتمی می‌شود
+            sub_status={currentSubStatus ?? "confirmed"}
+            role={currentRole}            // مقادیر: host / guest / all
+          />
+        </Box>
       </Box>
     </Container>
   );

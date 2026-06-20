@@ -34,13 +34,14 @@ function AvatarWithLabel({ name, avatar }) {
 
 // کامپوننت حالا Props فیلترها را از کامپوننت مادر (MUI Tabs) دریافت می‌کند
 interface MatchListProps {
-  teamId: string ;
+  teamId: string;
   tab: string;     // "upcoming" یا "history"
   role: string;    // "all" یا "host" یا "guest"
   result?: string; // "all" یا "win" یا "lose" یا "draw"
+  sub_status?: string; // وضعیت فرعی (مثلاً "confirmed", "pending", "rejected")
 }
 
-const MatchList = ({ teamId, tab, role, result = "all" }: MatchListProps) => {
+const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListProps) => {
   const [matchList, setMatchList] = useState<any[] | null>(null);
   const [notFound, setNotFound] = useState(false);
   const fontSize = 12;
@@ -52,27 +53,26 @@ const MatchList = ({ teamId, tab, role, result = "all" }: MatchListProps) => {
     // ۱. مشخص کردن اکشن بر اساس نقش (میزبان یا میهمان)
     // نکته: برای حالت role === "all" باید با بک‌اند هماهنگ کنید که یک API جامع بدهد، 
     // یا به صورت پیش‌فرض یکی از آن‌ها را صدا بزنید. در اینجا فرض را بر تفکیک می‌گذاریم.
-    const isHost = role === "host" || role === "all"; 
-    
+    const isHost = role === "host" || role === "all";
+    console.log({ isHost })
     // ۲. ارسال پارامترهای فیلتر (وضعیت زمان بازی و نتیجه) به عنوان کوئری به API
     // شما باید این پارامترها (tab و result) را به متد ای‌پ‌آی خود منتقل کنید تا بک‌بند دیتای فیلتر شده بدهد
-    const Api_ = isHost
-      ? api.hostmatchList(3, teamId, `?status=${tab}&result=${result}`, "")
-      : api.guestMatchRequest(3, teamId, `?status=${tab}&result=${result}`, "");
-
+    /* const Api_ = isHost
+       ? api.hostmatchList(3, teamId, `?status=${tab}&result=${result}`, "")
+       : api.guestMatchRequest(3, teamId, `?status=${tab}&result=${result}`);*/
+    const userToken = ""
+    const query = "";
+    const param = ""
+    const Api_ = api.hostmatchList(teamId, userToken, tab, sub_status)
     const handler = dataHandler(Api_, "get", "");
-console.log("API URL:", Api_); // برای دیباگ کردن آدرس API
+
+    console.log("API URL:", Api_); // برای دیباگ کردن آدرس API
     try {
-      handler(async function (data:any, status:any) {
+      handler(async function (data: any, status: any) {
         if (data && data.result) {
-          // یکسان‌سازی ساختار خروجی دیتای میزبان و میهمان برای جلوگیری از کرش
-          let normalizedData = [];
-          if (isHost) {
-            normalizedData = data.result.data?.teams?.[0]?.host_matches || data.result.teams?.[0]?.host_matches || [];
-          } else {
-            normalizedData = Array.isArray(data.result) ? data.result : (data.result.data || []);
-          }
-          
+          // با ساختار جدید بک‌اندر، دیتای هاست و گست کاملاً یکسان و در data.result.data قرار دارد
+          const normalizedData = data.result.data || [];
+
           setMatchList(normalizedData);
         } else {
           setMatchList([]);
@@ -86,7 +86,7 @@ console.log("API URL:", Api_); // برای دیباگ کردن آدرس API
   // هر زمان هرکدام از فیلترها عوض شد، دیتا دوباره واکشی می‌شود
   useEffect(() => {
     getData();
-    
+
     // تایمر ۵ ثانیه‌ای برای نمایش عدم یافتن مسابقه
     const timer = setTimeout(() => setNotFound(true), 5000);
     return () => clearTimeout(timer);
@@ -150,13 +150,13 @@ console.log("API URL:", Api_); // برای دیباگ کردن آدرس API
                   <ListItem alignItems="flex-start" sx={{ px: 2, py: 1.5 }}>
                     {/* ستون اول: تیم‌ها */}
                     <Box sx={{ flex: 1.5, display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-                      <AvatarWithLabel 
-                        name={hostTeamName} 
-                        avatar={matchData.host_team?.logo?.logo_path ? `${hostAddress}/${matchData.host_team.logo.logo_path}` : ""} 
+                      <AvatarWithLabel
+                        name={hostTeamName}
+                        avatar={matchData.host_team?.logo?.logo_path ? `${hostAddress}/${matchData.host_team.logo.logo_path}` : ""}
                       />
-                      <AvatarWithLabel 
-                        name={guestTeamName} 
-                        avatar={matchData.guest_team?.logo?.logo_path ? `${api.hostname}${matchData.guest_team.logo.logo_path}` : ""} 
+                      <AvatarWithLabel
+                        name={guestTeamName}
+                        avatar={matchData.guest_team?.logo?.logo_path ? `${api.hostname}${matchData.guest_team.logo.logo_path}` : ""}
                       />
                     </Box>
 
@@ -195,7 +195,7 @@ console.log("API URL:", Api_); // برای دیباگ کردن آدرس API
                         </Typography>
                       ) : (
                         // فیلد تمپلیت فرضی برای نتیجه بازی از سمت دیتابیس (مثلاً matchData.your_team_result)
-                        renderResultBadge(matchData.your_team_result || "win") 
+                        renderResultBadge(matchData.your_team_result || "win")
                       )}
                     </Box>
                   </ListItem>

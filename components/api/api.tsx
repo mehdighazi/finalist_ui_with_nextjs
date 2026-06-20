@@ -41,7 +41,7 @@ interface ListMatchBody {
 
 const getAccessKey = (): string =>
   //  `token=${localStorage.getItem('token') ?? ''}`;
-  'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjExMTExIiwiaWF0IjoxNzgwMzk3MDIzLCJleHAiOjE3ODIxOTcwMjN9.HBSbyanplgwPz-XK8YAcfuw_0b8sEx-RGboX6j2b4pM'
+  'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjExMTExIiwiaWF0IjoxNzgxNzcyNzI5LCJleHAiOjE3ODM1NzI3Mjl9.XbFvF8_BiQjpl-20nNUj2PC-MsYMVT7P5r38QRghMYA'
 
 /* =======================
    API
@@ -93,10 +93,10 @@ const ApiAdmin = {
   listUserTeam(usertoken: string): string {
     return `${DOMAIN}team/user/list?userid=${usertoken}&${getAccessKey()}`;
   },
- hostmatchList: ( teamid:string | number, usertoken: string, query: string, param: string) => {
-    const accesskey = `token=${localStorage.getItem("token")}`
-    return `${DOMAIN}match/host/list?team_id=${teamid}&userid=${usertoken}&query=${query}&param=${param}&${accesskey}`
-  } ,
+
+   hostmatchList: ( teamid:string | number, usertoken: string, tab: string, sub_status: string) => {
+        return `${DOMAIN}match/created/list?status=${tab}&sub_status=${sub_status}&team_id=${teamid}&userid=${usertoken}&${getAccessKey()}`
+    },
     guestMatchRequest: (usertoken:string, teamid:string, accept:string) => {
         const accesskey = `token=${localStorage.getItem("token")}`
         return `${DOMAIN}match/request/send/list?accept=${accept}&team_id=${teamid}&userid=${usertoken}&${accesskey}`
