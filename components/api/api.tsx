@@ -94,8 +94,8 @@ const ApiAdmin = {
     return `${DOMAIN}team/user/list?userid=${usertoken}&${getAccessKey()}`;
   },
 
-   hostmatchList: ( teamid:string | number, usertoken: string, tab: string, sub_status: string) => {
-        return `${DOMAIN}match/created/list?status=${tab}&sub_status=${sub_status}&team_id=${teamid}&userid=${usertoken}&${getAccessKey()}`
+   matchTeamList: ( teamid:string | number, usertoken: string, tab: string, sub_status: string,role:string) => {
+        return `${DOMAIN}match/team/list?status=${tab}&sub_status=${sub_status}&team_id=${teamid}&userid=${usertoken}&role=${role}&${getAccessKey()}`
     },
     guestMatchRequest: (usertoken:string, teamid:string, accept:string) => {
         const accesskey = `token=${localStorage.getItem("token")}`

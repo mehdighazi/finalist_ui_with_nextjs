@@ -63,12 +63,13 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
     const userToken = ""
     const query = "";
     const param = ""
-    const Api_ = api.hostmatchList(teamId, userToken, tab, sub_status)
+    const Api_ = api.matchTeamList(teamId, userToken, tab, sub_status, role)
     const handler = dataHandler(Api_, "get", "");
 
     console.log("API URL:", Api_); // برای دیباگ کردن آدرس API
     try {
       handler(async function (data: any, status: any) {
+        console.log("API Response:", data, "Status:", status); // برای دیباگ کردن پاسخ API
         if (data && data.result) {
           // با ساختار جدید بک‌اندر، دیتای هاست و گست کاملاً یکسان و در data.result.data قرار دارد
           const normalizedData = data.result.data || [];
@@ -86,11 +87,11 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
   // هر زمان هرکدام از فیلترها عوض شد، دیتا دوباره واکشی می‌شود
   useEffect(() => {
     getData();
-
+console.log({ teamId, tab, role, result })
     // تایمر ۵ ثانیه‌ای برای نمایش عدم یافتن مسابقه
     const timer = setTimeout(() => setNotFound(true), 5000);
     return () => clearTimeout(timer);
-  }, [teamId, tab, role, result]);
+  }, [teamId, tab, role, result,sub_status]);
 
   // تابع کمکی برای تشخیص رنگ و متن وضعیت نتیجه (بر اساس بیزینس اپ شما)
   const renderResultBadge = (itemResult: string) => {
