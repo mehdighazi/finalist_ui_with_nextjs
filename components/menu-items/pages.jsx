@@ -51,7 +51,7 @@ const pages = {
           id: 'user-profile',
           title: 'پروفایل',
           type: 'item',
-          url: '/user/profile',
+          url: '/user/profile/feed',
           target: true
         },
         {
@@ -88,7 +88,7 @@ const pages = {
           id: 'match-active',
           title: 'مسابقات من',
           type: 'item',
-          url: '/user/match/mymatchs',
+          url: '/user/match/myMatchs',
           target: true
         },
         {

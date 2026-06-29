@@ -15,10 +15,10 @@ import Content from './addContent'
 import { GetFileButtonWithCrop, Fileuploader } from '@/components/ui-component/utilities/uploadfile'
 import { showAlert } from "@/components/store/slices/alertSlice";
 import { showBottomSheet, hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
-import { hostAddress } from 'api/api'
+import {hostAddress}  from '@/components/api/api';
 import ProfileSkeleton from 'ui-component/cards/Skeleton/profile'
-import api from 'api/api'
-import dataHandler from 'api/dataHandler'
+import  api from '@/components/api/api';
+import dataHandler from '@/components/api/dataHandler'
 import TopSectionUnified from "@/components/ui-component/utilities/profilePageTopSection";
 
 const teamProfileTopSection=({ teamInfo })=>

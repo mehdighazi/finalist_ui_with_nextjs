@@ -9,12 +9,12 @@ import { AccessTime, CalendarMonth, Festival, LocationCity, PinDrop, Comment } f
 import { IconChecklist } from '@tabler/icons-react'
 // ابزار پروژه
 import "../style.css";
-import { hostAddress } from "api/api";
+import  {hostAddress} from '@/components/api/api';;
 import IconText from '@/components/ui-component/utilities/IconText'
 import MainCard from "ui-component/cards/MainCard_pre";
 import { persiandate, StartDate4MYSQL } from "utils/Lib";
 import { TeamBox } from "@/components/ui-component/utilities/MatchCardContent";
-import DefaultAvatar from "assets/images/screen/default-avatar.jpg";
+import DefaultAvatar from "@/components/assets//images/screen/default-avatar.jpg";
 import { CustomTextField } from "@/components/ui-component/utilities/inputs";
 import PopperCalender from '@/components/ui-component/utilities/PopperCalender'
 import TimeSwipPicker, { PopperTimePicker } from "@/components/ui-component/utilities/TimeSwipPicker";

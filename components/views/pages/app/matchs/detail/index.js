@@ -17,13 +17,13 @@ import { MatchDetailCardContent } from "@/components/ui-component/utilities/Matc
 import useWindowDimensions from "utils/getScreenDimension";
 import DialogBox from '@/components/ui-component/utilities/Dialog'
 import BottomSheetDialog from '@/components/ui-component/utilities/BottomSheet'
-import Logo1 from "assets/images/test/t1.png";
+import Logo1 from "@/components/assets//images/test/t1.png";
 import { persiandate } from "utils/Lib";
 import SelectTeamChip from '@/components/ui-component/utilities/SelectTeamChip'
 import { showAlert } from "@/components/store/slices/alertSlice";
 import IconText from '@/components/ui-component/utilities/IconText'
 
-import { hostAddress } from "api/api"
+import  {hostAddress} from '@/components/api/api';
 import { showBUTTOMSheet } from "store/bottomSheetReducer";
 //-------------------------------------|  Detail Matchs and Send Request
 const CustomBox = styled(Box)(({ theme, screenHeight }) => ({

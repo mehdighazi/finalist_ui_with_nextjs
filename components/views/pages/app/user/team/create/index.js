@@ -12,8 +12,8 @@ import Step1 from "./steps/step1";
 import TitleBox from "@/components/ui-component/utilities/TitleBox";
 import IconText from '@/components/ui-component/utilities/IconText'
 // data handling
-import api from 'api/api';
-import dataHandler from 'api/dataHandler';
+import api from '@/components/api/api';
+import dataHandler from '@/components/api/dataHandler';
 import { showAlert } from "@/components/store/slices/alertSlice";
 
 // ================================== CreateTeam

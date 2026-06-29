@@ -5,7 +5,7 @@ import { Box, Paper, Stack, Typography, useTheme, Button } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
 import { AccessTime, CalendarMonth, PinDrop,Comment } from "@mui/icons-material";
-import { hostAddress } from "api/api";
+import  {hostAddress} from '@/components/api/api';;
 import { TeamBox } from "@/components/ui-component/utilities/MatchCardContent";
 import { MainCardWrapper } from "ui-component/cards/MainCardWrapper";
 import MainCard from "ui-component/cards/MainCard_pre";

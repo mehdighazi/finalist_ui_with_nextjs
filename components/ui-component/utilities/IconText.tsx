@@ -1,16 +1,16 @@
-"use client"
-import { Stack, Typography, useTheme, Box } from "@mui/material";
-import { ReactNode } from "react";
+"use client";
+import React from 'react';
+import { Stack, Box, Typography, Badge, useTheme } from '@mui/material';
 
 interface IconTextProps {
-  text:any;
-  icon?: ReactNode;
+  text: string | number;
+  icon: React.ReactNode;
   textNumber?: boolean;
-  fontSize?: number;
+  fontSize?: number | string;
   color?: string;
   textPaddingTop?: number;
-  iconRight?: boolean;
   iconPaddingTop?: number;
+  iconRight?: boolean;
   spacing?: number;
 }
 
@@ -27,27 +27,56 @@ const IconText: React.FC<IconTextProps> = ({
 }) => {
   const theme = useTheme();
 
+  // آماده‌سازی محتوای داخل تکست با کلاس فونت فارسی در صورت نیاز
+  const renderText = (
+    <Typography
+      fontSize={fontSize}
+      fontWeight={500}
+      className={textNumber ? "numfarsi-s1" : ""}
+      sx={{
+        color: color ?? theme.palette.grey[400],
+        pt: textPaddingTop,
+      }}
+      align="right"
+    >
+      <span className={textNumber ? "numfarsi-s1" : ""}>{text}</span>
+    </Typography>
+  );
+
   return (
-    <Stack direction="row-reverse" spacing={spacing} alignItems="center">
-      {!iconRight && icon && (
-        <Box sx={{ pt: iconPaddingTop }}>{icon}</Box>
+    // جهت کامپوننت بر اساس iconRight تغییر می‌کند تا چینش آیکون و بج درست باشد
+    <Stack 
+      direction={iconRight ? "row" : "row-reverse"} 
+      spacing={spacing} 
+      alignItems="center"
+    >
+      {icon && (
+        <Box sx={{ pt: iconPaddingTop }}>
+          <Badge
+            badgeContent={renderText}
+            // می‌توانید موقعیت بج را با anchorOrigin تنظیم کنید
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: iconRight ? 'left' : 'right',
+            }}
+            sx={{
+              '& .MuiBadge-badge': {
+                position: 'relative',
+                transform: 'none',
+                backgroundColor: 'transparent', // حذف رنگ پس‌زمینه پیش‌فرض بج
+                padding: 0,
+                height: 'auto',
+                minWidth: 'auto',
+              }
+            }}
+          >
+            {icon}
+          </Badge>
+        </Box>
       )}
 
-      <Typography
-        fontSize={fontSize}
-        className={textNumber ? "numfarsi-s1" : ""}
-        sx={{
-          color: color ?? theme.palette.grey[400],
-          pt: textPaddingTop,
-        }}
-        align="right"
-      >
-        {text}
-      </Typography>
-
-      {iconRight && icon && (
-        <Box sx={{ pt: iconPaddingTop }}>{icon}</Box>
-      )}
+      {/* اگر آیکون وجود نداشته باشد، متن به تنهایی رندر می‌شود */}
+      {!icon && renderText}
     </Stack>
   );
 };

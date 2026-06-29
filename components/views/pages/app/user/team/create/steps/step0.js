@@ -18,8 +18,8 @@ import { styled } from "@mui/material/styles";
 import { CustomTextField } from '@/components/ui-component/utilities/inputs'
 import IconText from '@/components/ui-component/utilities/IconText'
 import { showBottomSheet, hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
-import api from 'api/api'
-import dataHandler from 'api/dataHandler'
+import  api from '@/components/api/api';
+import dataHandler from '@/components/api/dataHandler'
 //--------------------------------------|Step 1|---------------------------------------------------
 const CustomBox = styled(Stack)(({ theme }) => ({
     minWidth: "100%",

@@ -12,7 +12,7 @@ import './assets/css/directionRTL.css'
 
 // project imports
 import NavigationScroll from 'layout/NavigationScroll';
-import api from 'api/api';
+import api from '@/components/api/api';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { disableLogs } from 'utils/logControl';

@@ -20,6 +20,7 @@ import useWindowDimensions from "@/components/utils/getScreenDimension";
 import Providers from "@/provider/provider";
 import { IconChevronRight } from "@tabler/icons-react";
 import { UserInfo } from "@/types/user"
+import BottomNavigation from "@/components/ui-component/bottomNavigation";
 
 /* ============================== */
 
@@ -95,6 +96,7 @@ export default function SubLayout({ children }: RootLayoutProps) {
                      }}>
                    
                         {children}
+                      
                     </Box>
                 </Box>
             </Box>

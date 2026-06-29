@@ -19,10 +19,10 @@ import {
   MatchListCardContent,
   MatchFullCardContent,
 } from "@/components/ui-component/utilities/MatchCardContent";
-import Logo1 from "assets/images/test/t1.png";
+import Logo1 from "@/components/assets//images/test/t1.png";
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
-import { hostAddress } from "api/api";
+import  {hostAddress} from '@/components/api/api';;
 import { persiandate } from "utils/Lib";
 const MatchListWrapper = ({
     apiFunc,      // تابع API که دیتا میاره

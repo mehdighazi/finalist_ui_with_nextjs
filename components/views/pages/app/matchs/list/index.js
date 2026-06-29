@@ -35,7 +35,7 @@ import IconText from '@/components/ui-component/utilities/IconText'
 import FiltersSection from "./filters/filters";
 import SportFiltersSection from "./filters/sports";
 
-import { hostAddress } from 'api/api'
+import {hostAddress}  from '@/components/api/api';
 import { borderRadius } from "@mui/system";
 
 //------------------------------------------------------------------------------------------

@@ -29,7 +29,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { showAlert } from "@/components/store/slices/alertSlice";
 import Google from 'assets/images/icons/social-google.svg';
 import dataHandler from '@/components/api/dataHandler';
-import api from 'api/api'
+import  api from '@/components/api/api';
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ onChange, resend }) => {

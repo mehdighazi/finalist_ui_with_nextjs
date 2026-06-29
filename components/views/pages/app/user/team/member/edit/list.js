@@ -23,12 +23,12 @@ import { IconEdit, IconUserPlus } from "@tabler/icons-react";
 import DialogBox from "@/components/ui-component/utilities/Dialog";
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
-import teamPng from "assets/images/screen/team.png";
+import teamPng from "@/components/assets//images/screen/team.png";
 import { showAlert } from "@/components/store/slices/alertSlice";
 import CustomAvatar from 'ui-component/extended/Avatar'
 import { createDateLetter, createDateStr } from 'utils/Lib'
-import { hostAddress } from "api/api";
-import DefaultAvatar from "assets/images/screen/default-avatar.jpg";
+import  {hostAddress} from '@/components/api/api';;
+import DefaultAvatar from "@/components/assets//images/screen/default-avatar.jpg";
 import { MainCardWrapper } from "ui-component/cards/MainCardWrapper";
 
 import UserListSkeleton from 'ui-component/cards/Skeleton/UserList'

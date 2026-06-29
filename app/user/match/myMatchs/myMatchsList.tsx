@@ -45,7 +45,7 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
   const [matchList, setMatchList] = useState<any[] | null>(null);
   const [notFound, setNotFound] = useState(false);
   const fontSize = 12;
-
+  console.log({ teamId })
   const getData = () => {
     setMatchList(null);
     setNotFound(false);
@@ -69,11 +69,11 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
     console.log("API URL:", Api_); // برای دیباگ کردن آدرس API
     try {
       handler(async function (data: any, status: any) {
-        console.log("API Response:", data, "Status:", status); // برای دیباگ کردن پاسخ API
+        console.log("API Response:", data.result); // برای دیباگ کردن پاسخ API
         if (data && data.result) {
           // با ساختار جدید بک‌اندر، دیتای هاست و گست کاملاً یکسان و در data.result.data قرار دارد
-          const normalizedData = data.result.data || [];
-
+          let normalizedData =role==="host" ? data.result.data || [] : data.result || [];
+          console.log("API Response:", normalizedData);
           setMatchList(normalizedData);
         } else {
           setMatchList([]);
@@ -87,11 +87,11 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
   // هر زمان هرکدام از فیلترها عوض شد، دیتا دوباره واکشی می‌شود
   useEffect(() => {
     getData();
-console.log({ teamId, tab, role, result })
+    console.log({ teamId, tab, role, result })
     // تایمر ۵ ثانیه‌ای برای نمایش عدم یافتن مسابقه
     const timer = setTimeout(() => setNotFound(true), 5000);
     return () => clearTimeout(timer);
-  }, [teamId, tab, role, result,sub_status]);
+  }, [teamId, tab, role, result, sub_status]);
 
   // تابع کمکی برای تشخیص رنگ و متن وضعیت نتیجه (بر اساس بیزینس اپ شما)
   const renderResultBadge = (itemResult: string) => {
@@ -143,9 +143,13 @@ console.log({ teamId, tab, role, result })
                 <Link
                   href={`/app/user/match/requests/${matchData.match_id}/${teamId}`}
                   sx={{
-                    textDecoration: "none",
-                    color: "inherit",
-                    "&:hover": { color: "secondary.main", cursor: "pointer" },
+                    textDecoration: "none", // حذف آندرلاین خود لینک
+                    "&:hover": {
+                      color: "secondary.main",
+                      cursor: "pointer",
+                      textDecoration: "none", // حذف آندرلاین خود لینک
+                      "& *": { textDecoration: "none !important" } // حذف آندرلاین تمام تگ‌های متنی داخلی
+                    },
                   }}
                 >
                   <ListItem alignItems="flex-start" sx={{ px: 2, py: 1.5 }}>
@@ -164,7 +168,7 @@ console.log({ teamId, tab, role, result })
                     {/* ستون دوم: تاریخ و ساعت */}
                     <ListItemText
                       primary={
-                        <Box sx={{ textAlign: "center" }}>
+                        <Box sx={{ textAlign: "center",pt:1 }}>
                           <Typography fontSize="0.75rem" fontWeight="bold">
                             {persiandate(matchData.match_date)?.[1] || matchData.match_date}
                           </Typography>
@@ -179,7 +183,7 @@ console.log({ teamId, tab, role, result })
                     {/* ستون سوم: محل برگزاری */}
                     <ListItemText
                       primary={
-                        <Typography variant="body2" sx={{ textAlign: "center", fontSize: '0.75rem' }}>
+                        <Typography component={"div"} variant="body2" sx={{pt:1, textAlign: "center", fontSize: '0.75rem' }}>
                           {matchData.province_match?.province_title && matchData.city_match?.city_title
                             ? `${matchData.province_match.province_title} / ${matchData.city_match.city_title}`
                             : "نامشخص"}
@@ -189,7 +193,7 @@ console.log({ teamId, tab, role, result })
                     />
 
                     {/* ستون چهارم: تعداد درخواست (برای بازی‌های آینده) یا نشان نتیجه (برای تاریخچه) */}
-                    <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Box sx={{pt:1, flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                       {tab === "upcoming" ? (
                         <Typography variant="body2" fontWeight="bold">
                           {matchData.total_requests || 0}

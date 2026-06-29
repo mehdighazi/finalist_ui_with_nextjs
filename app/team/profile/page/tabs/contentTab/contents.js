@@ -25,7 +25,7 @@ import {makeStyles} from '@mui/styles'
 import {IconDotsVertical, IconHeart, IconMessageCircle, IconSend, IconTrash} from '@tabler/icons-react'
 //project import
 
-import api from 'api/api'
+import  api from '@/components/api/api';
 import {hostAddress} from '@/components/api/api'
 import CustomAvatar from 'ui-component/extended/Avatar'
 import dataHandler from '@/components/api/dataHandler';

@@ -267,8 +267,8 @@ function MyMatchesContent() {
 
               {/* اگر روی حالت 'همه' بود */}
               {currentRole === "all" && [
-                <Tab key="conf" label="همه بازی‌های قطعی" value="confirmed" />,
-                <Tab key="all-pend" label="همه درخواست‌های معلق" value="pending" />
+                <Tab key="conf" label={<span>همه بازی‌های قطعی</span>}  value="confirmed" />,
+                <Tab key="all-pend" label={<span>همه درخواست‌های معلق</span>} value="pending" />
               ]}
             </Tabs>
           </Box>

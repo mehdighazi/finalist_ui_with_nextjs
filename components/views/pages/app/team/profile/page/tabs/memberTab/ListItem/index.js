@@ -5,7 +5,7 @@ import { List, ListItem, Divider, ListItemText, ListItemAvatar, useTheme, Typogr
 //project import
 import CustomAvatar from 'ui-component/extended/Avatar'
 import { createDateLetter,createDateStr } from 'utils/Lib'
-import { hostAddress } from 'api/api'
+import {hostAddress}  from '@/components/api/api';
 import UserListSkeleton from 'ui-component/cards/Skeleton/UserList'
 
 export default function ListItems({ data }) {

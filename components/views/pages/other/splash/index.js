@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
-import splash from "assets/images/screen/splash.png"
+import splash from "@/components/assets//images/screen/splash.png"
 import Logo from 'ui-component/Logo';
 const Root = styled(Box)(({ theme }) => ({
   width: "100%",

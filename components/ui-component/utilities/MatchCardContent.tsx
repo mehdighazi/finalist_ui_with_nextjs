@@ -106,6 +106,7 @@ const MatchActions: React.FC<{
     <Stack direction="row" spacing={1} divider={<Divider flexItem />}>
       {viwer && (
         <IconText
+
           icon={<IconEye size={14} color={colors.primary100} />}
           text={viwer}
           textNumber
@@ -114,17 +115,19 @@ const MatchActions: React.FC<{
       )}
 
       {date && (
-        <Typography fontSize={10} color={colors.primary100}>
+        <Typography component={"div"} sx={{pt:0.5}} fontSize={10} color={colors.primary100}>
           {date}
         </Typography>
       )}
 
       {requestNumber !== undefined && (
+        
         <Typography fontSize={10} color={"#e2e2e2"}>
           {requestNumber > 0
             ? `${requestNumber} درخواست`
             : "بدون درخواست"}
         </Typography>
+       
       )}
 
       {confirmRequest === "accepted" && (

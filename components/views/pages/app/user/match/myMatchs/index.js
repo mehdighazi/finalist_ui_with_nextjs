@@ -18,7 +18,7 @@ import {
 //project import
 import MyMatchList from "./myMatchsList";
 import IconText from '@/components/ui-component/utilities/IconText'
-import { hostAddress } from "api/api";
+import  {hostAddress} from '@/components/api/api';;
 import dataHandler from '@/components/api/dataHandler';
 import CustomAvatar from "ui-component/extended/Avatar";
 import NotFoundPlaceHolder from 'ui-component/NotFound'

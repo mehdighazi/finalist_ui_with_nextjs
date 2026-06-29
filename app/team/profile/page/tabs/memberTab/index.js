@@ -13,8 +13,8 @@ import {
 //project import
 
 //project import
-import api from 'api/api'
-import dataHandler from 'api/dataHandler'
+import  api from '@/components/api/api';
+import dataHandler from '@/components/api/dataHandler'
 import MemberList from './ListItem'
 // constant
 const icons = {

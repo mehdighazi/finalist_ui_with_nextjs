@@ -19,7 +19,7 @@ import Avatar from 'ui-component/extended/Avatar';
 import { IconChevronLeft, IconEye } from "@tabler/icons-react";
 import { createDateLetter,createDateStr } from "utils/Lib";
 import CustomRating from "ui-component/rating";
-import { hostAddress } from "api/api";
+import  {hostAddress} from '@/components/api/api';;
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
 import { useState } from "react";

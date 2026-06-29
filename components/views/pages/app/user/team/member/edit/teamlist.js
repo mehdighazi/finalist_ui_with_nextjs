@@ -18,8 +18,8 @@ import teamPng from 'assets/images/screen/team.png'
 import defaultLogo from 'assets/images/screen/defaultlogo.png'
 import CustomRating from "ui-component/rating";
 //DataHandling
-import api from 'api/api'
-import dataHandler from 'api/dataHandler'
+import  api from '@/components/api/api';
+import dataHandler from '@/components/api/dataHandler'
 import Avatar from "ui-component/extended/Avatar";
 
 //--------------------------------------|Step 1|---------------------------------------------------
