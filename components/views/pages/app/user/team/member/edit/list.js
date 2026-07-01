@@ -14,10 +14,10 @@ import { HowToReg } from "@mui/icons-material";
 import { IconX, IconChevronCompactDown, IconCircleCheck, IconCheck, IconSearch } from "@tabler/icons-react";
 //project import
 import { TeamBox } from "@/components/ui-component/utilities/MatchCardContent";
-import Avatar from 'ui-component/extended/Avatar';
+import Avatar from '@/components/ui-component/extended/Avatar';
 import { styled } from "@mui/material/styles";
 import IconText from '@/components/ui-component/utilities/IconText'
-import MainCard from 'ui-component/cards/MainCard_pre';
+import MainCard from '@/components/ui-component/cards/MainCard_pre';
 import Button from "@mui/material/Button";
 import { IconEdit, IconUserPlus } from "@tabler/icons-react";
 import DialogBox from "@/components/ui-component/utilities/Dialog";
@@ -25,13 +25,13 @@ import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
 import teamPng from "@/components/assets//images/screen/team.png";
 import { showAlert } from "@/components/store/slices/alertSlice";
-import CustomAvatar from 'ui-component/extended/Avatar'
-import { createDateLetter, createDateStr } from 'utils/Lib'
+import CustomAvatar from '@/components/ui-component/extended/Avatar'
+import { createDateLetter, createDateStr } from '@/components/utils/Lib'
 import  {hostAddress} from '@/components/api/api';;
 import DefaultAvatar from "@/components/assets//images/screen/default-avatar.jpg";
-import { MainCardWrapper } from "ui-component/cards/MainCardWrapper";
+import { MainCardWrapper } from "@/components/ui-component/cards/MainCardWrapper";
 
-import UserListSkeleton from 'ui-component/cards/Skeleton/UserList'
+import UserListSkeleton from '@/components/ui-component/cards/Skeleton/UserList'
 
 //------------------------------------| function |-------------------
 
@@ -105,7 +105,10 @@ function ListItems({ data, team_id }) {
                     status ? "success" : "error"))
             });
         } catch (error) {
-            dispatch(showAlert("خطایی رخ داده", "error"));
+             dispatch(showAlert({
+                message: "خطایی رخ داده است",
+                type: 'error'
+            }));
         }
 
     }
@@ -453,7 +456,10 @@ const MembersList = (props) => {
                     status ? "success" : "error"))
             });
         } catch (error) {
-            dispatch(showAlert("خطایی رخ داده", "error"));
+             dispatch(showAlert({
+                message: "خطایی رخ داده است",
+                type: 'error'
+            }));
         }
     };
 

@@ -22,8 +22,8 @@ import { IconSettings } from "@tabler/icons-react";
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 // project imports
-import SubCard from 'ui-component/cards/SubCard';
-import AnimateButton from 'ui-component/extended/AnimateButton';
+import SubCard from '@/components/ui-component/cards/SubCard';
+import AnimateButton from '@/components/ui-component/extended/AnimateButton';
 import { SET_BORDER_RADIUS, SET_FONT_FAMILY } from 'store/actions';
 import { gridSpacing } from 'store/constant';
 

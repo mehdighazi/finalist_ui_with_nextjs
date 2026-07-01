@@ -54,6 +54,7 @@ interface MatchBaseProps {
   dateMatch?: string;
   timeMatch?: string;
   location?: string;
+  user_team_role?: string;
   createDate?: string;
   viwer?: number;
   requestNumber?: number;
@@ -84,7 +85,7 @@ export const TeamBox: React.FC<TeamBoxProps> = ({
         <Typography fontSize={12}>{title}</Typography>
         <CustomRating
           rate={rating}
-         // size="small"
+        // size="small"
         //  readOnly
         //  sx={{ "& .MuiRating-icon": { fontSize: 16 } }}
         />
@@ -115,19 +116,19 @@ const MatchActions: React.FC<{
       )}
 
       {date && (
-        <Typography component={"div"} sx={{pt:0.5}} fontSize={10} color={colors.primary100}>
+        <Typography component={"div"} sx={{ pt: 0.5 }} fontSize={10} color={colors.primary100}>
           {date}
         </Typography>
       )}
 
       {requestNumber !== undefined && (
-        
+
         <Typography fontSize={10} color={"#e2e2e2"}>
           {requestNumber > 0
             ? `${requestNumber} درخواست`
             : "بدون درخواست"}
         </Typography>
-       
+
       )}
 
       {confirmRequest === "accepted" && (
@@ -143,32 +144,64 @@ const MatchActions: React.FC<{
 };
 //---------------------------------------------------
 export const MatchFullCardContent: React.FC<MatchBaseProps> = (props) => {
-  //const theme = useTheme();
+  const theme = useTheme();
 
+  // بررسی وضعیت‌ها برای متمایز کردن تیم کاربر
+  const isUserHost = props.user_team_role === "host" || props.user_team_role === "both";
+  const isUserGuest = props.user_team_role === "guest" || props.user_team_role === "both";
+console.log(props.user_team_role)
   return (
     <MainCard
       actions={<MatchActions {...props} />}
-      //headerSX={headerSx(theme)}
       contentSX={{ p: 1 }}
       border
       title={props.matchType === "casual" ? "دوستانه" : "رسمی"}
       sx={{
         transition: "0.3s",
-        "&:hover": { transform: "translateY(-5px)" },
+        "&:hover": { transform: "translateY(-5px)", textDecoration: "none" },
       }}
     >
-      <Grid container alignItems="center">
+      <Grid container alignItems="center" spacing={1}>
+
+        {/* بخش تیم میزبان */}
         <Grid item xs={4}>
-          <TeamBox
-            title={props.hostTeamName}
-            logo={props.logoHost}
-            rating={props.rateHost}
-          />
+          <Stack
+            alignItems="center"
+            spacing={1}
+            sx={{
+              p: 1,
+              borderRadius: 2,
+              // اگر تیم کاربر میزبان بود، یک بوردر ظریف متمایز و پس‌زمینه بسیار لایت می‌گیرد
+             // border: isUserHost ? `1px dashed ${theme.palette.secondary.main}` : "1px solid transparent",
+              backgroundColor: isUserHost ? `${theme.palette.secondary.light}10` : "transparent", // اضافه کردن آلفا (شفافیت) به رنگ لایت
+            }}
+          >
+            <Chip
+              label="میزبان"
+              size="small"
+              sx={{
+                height: 20,
+                fontSize: 10,
+                alignSelf: "center",
+                // اگر تیم کاربر بود، رنگ تم ثانویه؛ در غیر این صورت رنگ خاکستری ملایم
+                backgroundColor: isUserHost ? theme.palette.secondary.main : theme.palette.action.selected,
+                color: isUserHost ? theme.palette.secondary.contrastText : theme.palette.text.secondary,
+               // border: isUserHost ? "none" : `1px solid ${theme.palette.divider}`,
+                fontWeight: isUserHost ? "bold" : "normal"
+              }}
+            />
+            <TeamBox
+              title={props.hostTeamName}
+              logo={props.logoHost}
+              rating={props.rateHost}
+            />
+          </Stack>
         </Grid>
 
+        {/* بخش وسط کارت (اطلاعات بازی) */}
         <Grid item xs={4}>
           <Stack alignItems="center">
-            <Divider>
+            <Divider sx={{ width: "100%" }}>
               <Chip label="VS" sx={{ background: "none" }} />
             </Divider>
 
@@ -184,15 +217,12 @@ export const MatchFullCardContent: React.FC<MatchBaseProps> = (props) => {
                 icon={<IconMapPin size={16} />}
                 sx={{
                   background: "none",
-                  // هدف قرار دادن ظرف متن (Label)
                   "& .MuiChip-label": {
-                    paddingLeft: "4px", // کم کردن فاصله از سمت آیکون (در حالت LTR)
-                    // اگر پروژه کاملاً RTL است، از paddingRight استفاده کن
+                    paddingLeft: "4px",
                   },
-                  // هدف قرار دادن خود آیکون
                   "& .MuiChip-icon": {
-                    marginRight: "0", // نزدیک‌تر کردن آیکون به متن
-                    marginLeft: "-10px",   // حذف فاصله اضافی سمت چپ آیکون
+                    marginRight: "0",
+                    marginLeft: "-10px",
                   },
                 }}
                 label={props.location}
@@ -201,119 +231,140 @@ export const MatchFullCardContent: React.FC<MatchBaseProps> = (props) => {
           </Stack>
         </Grid>
 
+        {/* بخش تیم میهمان */}
         <Grid item xs={4}>
-          <TeamBox
-            title={props.guestTeamName || "تعیین نشده"}
-            logo={props.logoGuest}
-            rating={props.rateGuest}
-          />
+          <Stack
+            alignItems="center"
+            spacing={1}
+            sx={{
+              p: 1,
+              borderRadius: 2,
+              // اگر تیم کاربر میهمان بود، متمایز می‌شود
+             // border: isUserGuest ? `1px dashed ${theme.palette.secondary.main}` : "1px solid transparent",
+              backgroundColor: isUserGuest ? `${theme.palette.secondary.light}10` : "transparent",
+            }}
+          >
+            <Chip
+              label="میهمان"
+              size="small"
+              variant={isUserGuest ? "filled" : "outlined"}
+              color={isUserGuest ? "secondary" : "default"}
+              sx={{ height: 20, fontSize: 10, alignSelf: "center" }}
+            />
+            <TeamBox
+              title={props.guestTeamName || "تعیین نشده"}
+              logo={props.logoGuest}
+              rating={props.rateGuest}
+            />
+          </Stack>
         </Grid>
+
       </Grid>
     </MainCard>
   );
 };
 //---------------------------------------------------
 export const WaitingOpponentCard: React.FC<MatchBaseProps> = (props) => {
-    return (
-      
-        <MainCard
-            border
-            actions={<MatchActions {...props} />}
-            contentSX={{ p: 2 }}
-            sx={{
-                transition: '0.3s',
-                cursor: 'pointer',
-                '&:hover': {
-                    transform: 'translateY(-5px)',
-                    boxShadow: '0 8px 24px rgba(0,0,0,0.12)'
-                }
-            }}
+  return (
+
+    <MainCard
+      border
+      actions={<MatchActions {...props} />}
+      contentSX={{ p: 2 }}
+      sx={{
+        transition: '0.3s',
+        cursor: 'pointer',
+        '&:hover': {
+          transform: 'translateY(-5px)',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.12)'
+        }
+      }}
+    >
+      <Stack spacing={2}>
+        {/* Header */}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
         >
-            <Stack spacing={2}>
-                {/* Header */}
-                <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                >
-                    <Chip
-                        size="small"
-                        color={props.matchType === 'casual' ? 'primary' : 'error'}
-                        label={props.matchType === 'casual' ? 'دوستانه' : 'رسمی'}
-                    />
+          <Chip
+            size="small"
+            color={props.matchType === 'casual' ? 'primary' : 'error'}
+            label={props.matchType === 'casual' ? 'دوستانه' : 'رسمی'}
+          />
 
-                    <Chip
-                        size="small"
-                        color="warning"
-                        label="در انتظار حریف"
-                    />
-                </Stack>
+          <Chip
+            size="small"
+            color="warning"
+            label="در انتظار حریف"
+          />
+        </Stack>
 
-                {/* Team Logo */}
-                <Stack alignItems="center" spacing={1}>
-                    <Avatar
-                        src={props.logoHost}
-                        sx={{
-                            width: 80,
-                            height: 80
-                        }}
-                    />
+        {/* Team Logo */}
+        <Stack alignItems="center" spacing={1}>
+          <Avatar
+            src={props.logoHost}
+            sx={{
+              width: 80,
+              height: 80
+            }}
+          />
 
-                    <Typography variant="h6">
-                        <span>{props.hostTeamName}</span>
-                    </Typography>
+          <Typography variant="h6">
+            <span>{props.hostTeamName}</span>
+          </Typography>
 
-                   
-                </Stack>
 
-                <Divider />
+        </Stack>
 
-                {/* Match Info */}
-                <Stack spacing={1}>
-                    {props.dateMatch && (
-                        <Stack
-                            direction="row"
-                            spacing={1}
-                            alignItems="center"
-                        >
-                            <IconCalendar size={18} />
-                            <Typography variant="body2">
-                                <span>
-                                    {props.dateMatch} - {props.timeMatch}
-                                </span>
-                            </Typography>
-                        </Stack>
-                    )}
+        <Divider />
 
-                    {props.location && (
-                        <Stack
-                            direction="row"
-                            spacing={1}
-                            alignItems="center"
-                        >
-                            <IconMapPin size={18} />
-                            <Typography variant="body2">
-                                <span>{props.location}</span>
-                            </Typography>
-                        </Stack>
-                    )}
-
-                    {props.rateHost && (
-                        <Stack
-                            direction="row"
-                            spacing={1}
-                            alignItems="center"
-                        >
-                            <IconStar size={18} />
-                            <Typography variant="body2">
-                                <span>امتیاز تیم: {props.rateHost}</span>
-                            </Typography>
-                        </Stack>
-                    )}
-                </Stack>
+        {/* Match Info */}
+        <Stack spacing={1}>
+          {props.dateMatch && (
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+            >
+              <IconCalendar size={18} />
+              <Typography variant="body2">
+                <span>
+                  {props.dateMatch} - {props.timeMatch}
+                </span>
+              </Typography>
             </Stack>
-        </MainCard>
-    );
+          )}
+
+          {props.location && (
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+            >
+              <IconMapPin size={18} />
+              <Typography variant="body2">
+                <span>{props.location}</span>
+              </Typography>
+            </Stack>
+          )}
+
+          {props.rateHost && (
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+            >
+              <IconStar size={18} />
+              <Typography variant="body2">
+                <span>امتیاز تیم: {props.rateHost}</span>
+              </Typography>
+            </Stack>
+          )}
+        </Stack>
+      </Stack>
+    </MainCard>
+  );
 };
 
 // ============== تایپ‌های محلی ==============

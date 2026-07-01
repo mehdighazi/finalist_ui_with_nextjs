@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 // project imports
 import MainLayout from 'layout/MainLayout';
-import Loadable from 'ui-component/Loadable';
+import Loadable from '@/components/ui-component/Loadable';
 import ProtectedRoute from './ProtectedRoute'; // مسیر صحیح رو تنظیم کن
 import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 

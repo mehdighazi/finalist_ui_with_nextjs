@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 //ui-material
 import { Button, ButtonGroup, Chip, Divider, Grid, Stack, Typography, useTheme, Paper, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import MainCard from "ui-component/cards/MainCard_pre";
+import MainCard from "@/components/ui-component/cards/MainCard_pre";
 //tabler icon
 import { IconHeart, IconPlus, IconUserCheck } from "@tabler/icons-react"
 //project import

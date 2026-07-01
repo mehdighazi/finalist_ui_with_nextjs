@@ -12,9 +12,9 @@ import {
 } from "@mui/material";
 
 //project import
-import MatchCardPlaceHolder from 'ui-component/cards/Skeleton/matchCardPlaceHolder'
-import NotFoundPlaceHolder from 'ui-component/NotFound'
-import CustomCard from "ui-component/cards/CustomCard";
+import MatchCardPlaceHolder from '@/components/ui-component/cards/Skeleton/matchCardPlaceHolder'
+import NotFoundPlaceHolder from '@/components/ui-component/NotFound'
+import CustomCard from "@/components/ui-component/cards/CustomCard";
 import MatchListWrapper from '@/components/ui-component/utilities/MatchListProfileTab'
 import {
   MatchListCardContent,
@@ -24,7 +24,7 @@ import Logo1 from "@/components/assets//images/test/t1.png";
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
 import  {hostAddress} from '@/components/api/api';;
-import { persiandate } from "utils/Lib";
+import { persiandate } from "@/components/utils/Lib";
 
 const MatchList = ({ teamId, hostCheck }) => {
   return (

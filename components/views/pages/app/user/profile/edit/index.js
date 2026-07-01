@@ -14,20 +14,20 @@ import {
 } from "@tabler/icons-react";
 //project import
 import { GetFileButtonWithCrop, uploadHandler, AvatarCropper } from '@/components/ui-component/utilities/uploadfile'
-import CustomAvatar from "ui-component/extended/Avatar";
+import CustomAvatar from "@/components/ui-component/extended/Avatar";
 import DefaultAvatar from "@/components/assets//images/screen/default-avatar.jpg";
 import  api from '@/components/api/api';
 import dataHandler from '@/components/api/dataHandler'
 import { CustomTextField } from "@/components/ui-component/utilities/inputs";
 import PopperCalender from '@/components/ui-component/utilities/PopperCalender'
-import { StartDate4MYSQL, persiandate } from 'utils/Lib'
+import { StartDate4MYSQL, persiandate } from '@/components/utils/Lib'
 import IconText from '@/components/ui-component/utilities/IconText'
 import { CustomSubmitButton } from "@/components/ui-component/utilities/CustomLoadingButton";
 import { showAlert } from "@/components/store/slices/alertSlice";
-import { MainCardWrapper } from "ui-component/cards/MainCardWrapper";
-import EditProfileSkeleton from 'ui-component/cards/Skeleton/EditProfile'
+import { MainCardWrapper } from "@/components/ui-component/cards/MainCardWrapper";
+import EditProfileSkeleton from '@/components/ui-component/cards/Skeleton/EditProfile'
 import {hostAddress}  from '@/components/api/api';
-import { base64ToBlob } from 'utils/Lib'
+import { base64ToBlob } from '@/components/utils/Lib'
 
 //--------------------------------------| Teb List |--------------------------------------
 const Edit = () => {

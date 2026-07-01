@@ -16,11 +16,11 @@ import {styled} from "@mui/material/styles";
 import SelectTeamCard from '@/components/ui-component/utilities/SelectTeamCard'
 import teamPng from 'assets/images/screen/team.png'
 import defaultLogo from 'assets/images/screen/defaultlogo.png'
-import CustomRating from "ui-component/rating";
+import CustomRating from "@/components/ui-component/rating";
 //DataHandling
 import  api from '@/components/api/api';
 import dataHandler from '@/components/api/dataHandler'
-import Avatar from "ui-component/extended/Avatar";
+import Avatar from "@/components/ui-component/extended/Avatar";
 
 //--------------------------------------|Step 1|---------------------------------------------------
 

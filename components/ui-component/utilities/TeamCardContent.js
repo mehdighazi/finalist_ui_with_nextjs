@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Avatar  from 'ui-component/extended/Avatar';
+import Avatar  from '@/components/ui-component/extended/Avatar';
 //ui-material
 import {
   Grid,
@@ -24,7 +24,7 @@ import {
 //project import
 
 import DefaultLogo from 'assets/images/screen/defaultlogo.png'
-import CustomRating from "ui-component/rating";
+import CustomRating from "@/components/ui-component/rating";
 //Tabler icon
 import { IconFilter,IconCalendar,IconMapPin } from "@tabler/icons-react";
 

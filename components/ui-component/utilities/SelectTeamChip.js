@@ -11,9 +11,9 @@ import ListItemText from '@mui/material/ListItemText';
 //project import
 import dataHandler from '@/components/api/dataHandler';
 import {hostAddress}  from '@/components/api/api';
-import CustomAvatar from 'ui-component/extended/Avatar'
-import MainCard from 'ui-component/cards/MainCard_pre';
-import Transitions from 'ui-component/extended/Transitions';
+import CustomAvatar from '@/components/ui-component/extended/Avatar'
+import MainCard from '@/components/ui-component/cards/MainCard_pre';
+import Transitions from '@/components/ui-component/extended/Transitions';
 import DialogBox from '@/components/ui-component/utilities/Dialog'
 import { IconChevronDown, IconChevronLeft } from "@tabler/icons-react";
 import DefaultAvatar from "../../assets/images/screen/default-avatar.jpg";

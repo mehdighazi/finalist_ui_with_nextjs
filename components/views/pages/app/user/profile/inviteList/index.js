@@ -12,11 +12,11 @@ import { IconList, IconMedal, IconOlympics, IconPhoto, IconPackageImportm, IconM
 import IconText from '@/components/ui-component/utilities/IconText'
 import dataHandler from '@/components/api/dataHandler';
 import  api from '@/components/api/api';
-import ImageListCard from "ui-component/cards/Skeleton/UserList";
-import CustomAvatar from 'ui-component/extended/Avatar'
+import ImageListCard from "@/components/ui-component/cards/Skeleton/UserList";
+import CustomAvatar from '@/components/ui-component/extended/Avatar'
 import {showAlert} from "store/alertReducer";
-import Transition from "ui-component/extended/Transitions";
-import NotFoundPlaceHolder from 'ui-component/NotFound'
+import Transition from "@/components/ui-component/extended/Transitions";
+import NotFoundPlaceHolder from '@/components/ui-component/NotFound'
 const InviteList = () => {
     const [inviteList, setInviteList] = React.useState([])
     const [loadedItems, setLoadedItems] = React.useState([]);

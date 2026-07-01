@@ -3,8 +3,8 @@
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams, GridToolbar } from '@mui/x-data-grid';
 // project imports
-import MainCard from 'ui-component/cards/MainCard';
-import Table from 'ui-component/Table.js'
+import MainCard from '@/components/ui-component/cards/MainCard';
+import Table from '@/components/ui-component/Table.js'
 import Button from '@mui/material/Button';
 
 // ==============================|| SAMPLE PAGE ||============================== //

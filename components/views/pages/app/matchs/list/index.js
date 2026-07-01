@@ -20,16 +20,16 @@ import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 //table icon
 import { IconMapPin } from "@tabler/icons-react";
 //project import
-import SearchBar from "ui-component/SearchBar";
-import Transition from "ui-component/extended/Transitions";
+import SearchBar from "@/components/ui-component/SearchBar";
+import Transition from "@/components/ui-component/extended/Transitions";
 import CustomLoadingButton from "@/components/ui-component/utilities/CustomLoadingButton";
 import { MatchListCardContent } from "@/components/ui-component/utilities/MatchCardContent";
-import TotalIncomeCard from "ui-component/cards/Skeleton/TotalIncomeCard";
+import TotalIncomeCard from "@/components/ui-component/cards/Skeleton/TotalIncomeCard";
 import { showBottomSheet, hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
 import ProvinceCitySelector from '@/components/ui-component/utilities/ProvinceCitySelector'
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
-import { persiandate } from "utils/Lib";
+import { persiandate } from "@/components/utils/Lib";
 import IconText from '@/components/ui-component/utilities/IconText'
 //-----------------------------------------------
 import FiltersSection from "./filters/filters";

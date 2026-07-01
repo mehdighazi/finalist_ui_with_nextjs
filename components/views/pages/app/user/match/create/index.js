@@ -80,7 +80,10 @@ const CreateMatch = () => {
             });
         } catch (error) {
             
-            dispatch(showAlert("خطایی رخ داده", "error"));
+             dispatch(showAlert({
+                message: "خطایی رخ داده است",
+                type: 'error'
+            }));
         }
     };
 

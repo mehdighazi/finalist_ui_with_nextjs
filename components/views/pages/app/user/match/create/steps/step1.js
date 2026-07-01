@@ -11,8 +11,8 @@ import { IconChecklist } from '@tabler/icons-react'
 import "../style.css";
 import  {hostAddress} from '@/components/api/api';;
 import IconText from '@/components/ui-component/utilities/IconText'
-import MainCard from "ui-component/cards/MainCard_pre";
-import { persiandate, StartDate4MYSQL } from "utils/Lib";
+import MainCard from "@/components/ui-component/cards/MainCard_pre";
+import { persiandate, StartDate4MYSQL } from "@/components/utils/Lib";
 import { TeamBox } from "@/components/ui-component/utilities/MatchCardContent";
 import DefaultAvatar from "@/components/assets//images/screen/default-avatar.jpg";
 import { CustomTextField } from "@/components/ui-component/utilities/inputs";
@@ -20,7 +20,7 @@ import PopperCalender from '@/components/ui-component/utilities/PopperCalender'
 import TimeSwipPicker, { PopperTimePicker } from "@/components/ui-component/utilities/TimeSwipPicker";
 import { showBottomSheet, hideBottomSheet } from "@/components/store/slices/bottomSheetSlice";
 import ProvinceCitySelector from '@/components/ui-component/utilities/ProvinceCitySelector'
-import { MainCardWrapper } from "ui-component/cards/MainCardWrapper";
+import { MainCardWrapper } from "@/components/ui-component/cards/MainCardWrapper";
 
 // CustomBox استایل برای باکس‌ها
 //--------------------------------------| MainCard Wrapeer |------------------------------

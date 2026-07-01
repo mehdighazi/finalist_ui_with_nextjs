@@ -15,10 +15,10 @@ import {
 } from "@mui/material";
 import { withStyles } from "@mui/styles";
 //project import
-import Avatar from 'ui-component/extended/Avatar';
+import Avatar from '@/components/ui-component/extended/Avatar';
 import { IconChevronLeft, IconEye } from "@tabler/icons-react";
-import { createDateLetter,createDateStr } from "utils/Lib";
-import CustomRating from "ui-component/rating";
+import { createDateLetter,createDateStr } from "@/components/utils/Lib";
+import CustomRating from "@/components/ui-component/rating";
 import  {hostAddress} from '@/components/api/api';;
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';

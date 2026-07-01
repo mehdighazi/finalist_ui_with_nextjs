@@ -1,13 +1,36 @@
-import PropTypes from 'prop-types';
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 // third-party
 import { motion, useCycle } from 'framer-motion';
 
+// تعریف پوزیشن و انواع مقادیر ورودی کامپوننت (Interfaces)
+interface ScaleObject {
+    hover: number;
+    tap: number;
+}
+
+interface AnimateButtonProps {
+    children?: React.ReactNode;
+    type?: 'slide' | 'scale' | 'rotate';
+    direction?: 'up' | 'down' | 'left' | 'right';
+    offset?: number;
+    scale?: number | ScaleObject;
+}
+
 // ==============================|| ANIMATION BUTTON ||============================== //
 
-const AnimateButton = forwardRef(({ children, type, direction, offset, scale }, ref) => {
-    let offset1;
-    let offset2;
+const AnimateButton = forwardRef<HTMLDivElement, AnimateButtonProps>((props, ref) => {
+    // مقداردهی اولیه دیفالت‌ها به روش مدرن تایپ‌اسکریپت
+    const {
+        children,
+        type = 'scale',
+        direction = 'right',
+        offset = 10,
+        scale: initialScale = { hover: 1, tap: 0.9 }
+    } = props;
+
+    let offset1: number;
+    let offset2: number;
+
     switch (direction) {
         case 'up':
         case 'left':
@@ -25,6 +48,11 @@ const AnimateButton = forwardRef(({ children, type, direction, offset, scale }, 
     const [x, cycleX] = useCycle(offset1, offset2);
     const [y, cycleY] = useCycle(offset1, offset2);
 
+    // تبدیل مقادیر اسکیل در صورت عدد بودن به شیء
+    let finalScale: ScaleObject = typeof initialScale === 'number' 
+        ? { hover: initialScale, tap: initialScale } 
+        : initialScale;
+
     switch (type) {
         case 'rotate':
             return (
@@ -41,6 +69,7 @@ const AnimateButton = forwardRef(({ children, type, direction, offset, scale }, 
                     {children}
                 </motion.div>
             );
+            
         case 'slide':
             if (direction === 'up' || direction === 'down') {
                 return (
@@ -55,43 +84,30 @@ const AnimateButton = forwardRef(({ children, type, direction, offset, scale }, 
                 );
             }
             return (
-                <motion.div ref={ref} animate={{ x: x !== undefined ? x : '' }} onHoverEnd={() => cycleX()} onHoverStart={() => cycleX()}>
+                <motion.div 
+                    ref={ref} 
+                    animate={{ x: x !== undefined ? x : '' }} 
+                    onHoverEnd={() => cycleX()} 
+                    onHoverStart={() => cycleX()}
+                >
                     {children}
                 </motion.div>
             );
 
         case 'scale':
         default:
-            if (typeof scale === 'number') {
-                scale = {
-                    hover: scale,
-                    tap: scale
-                };
-            }
             return (
-                <motion.div ref={ref} whileHover={{ scale: scale?.hover }} whileTap={{ scale: scale?.tap }}>
+                <motion.div 
+                    ref={ref} 
+                    whileHover={{ scale: finalScale?.hover }} 
+                    whileTap={{ scale: finalScale?.tap }}
+                >
                     {children}
                 </motion.div>
             );
     }
 });
 
-AnimateButton.propTypes = {
-    children: PropTypes.node,
-    offset: PropTypes.number,
-    type: PropTypes.oneOf(['slide', 'scale', 'rotate']),
-    direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
-    scale: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
-};
-
-AnimateButton.defaultProps = {
-    type: 'scale',
-    offset: 10,
-    direction: 'right',
-    scale: {
-        hover: 1,
-        tap: 0.9
-    }
-};
+AnimateButton.displayName = 'AnimateButton';
 
 export default AnimateButton;

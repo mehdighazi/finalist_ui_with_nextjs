@@ -21,7 +21,7 @@ import api from '@/components/api/api';
 import { hostAddress } from '@/components/api/api';
 import { persiandate } from "@/components/utils/Lib";
 
-function AvatarWithLabel({ name, avatar }) {
+function AvatarWithLabel({ name, avatar }: { name: any; avatar: string }) {
   return (
     <Box display="flex" alignItems="center" gap={1}>
       <Avatar sx={{ width: 20, height: 20 }} alt={name} src={avatar} />
@@ -66,7 +66,7 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
     const Api_ = api.matchTeamList(teamId, userToken, tab, sub_status, role)
     const handler = dataHandler(Api_, "get", "");
 
-    console.log("API URL:", Api_); // برای دیباگ کردن آدرس API
+
     try {
       handler(async function (data: any, status: any) {
         console.log("API Response:", data.result); // برای دیباگ کردن پاسخ API

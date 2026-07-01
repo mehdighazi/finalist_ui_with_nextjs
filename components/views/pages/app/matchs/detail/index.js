@@ -10,15 +10,15 @@ import { IconListDetails } from "@tabler/icons-react";
 //project import
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
-import AlertBox from "ui-component/alert";
-import CustomCard from "ui-component/cards/CustomCard";
+import AlertBox from "@/components/ui-component/alert";
+import CustomCard from "@/components/ui-component/cards/CustomCard";
 import CustomLoadingButton from "@/components/ui-component/utilities/CustomLoadingButton";
 import { MatchDetailCardContent } from "@/components/ui-component/utilities/MatchCardContent";
-import useWindowDimensions from "utils/getScreenDimension";
+import useWindowDimensions from "@/components/utils/getScreenDimension";
 import DialogBox from '@/components/ui-component/utilities/Dialog'
 import BottomSheetDialog from '@/components/ui-component/utilities/BottomSheet'
 import Logo1 from "@/components/assets//images/test/t1.png";
-import { persiandate } from "utils/Lib";
+import { persiandate } from "@/components/utils/Lib";
 import SelectTeamChip from '@/components/ui-component/utilities/SelectTeamChip'
 import { showAlert } from "@/components/store/slices/alertSlice";
 import IconText from '@/components/ui-component/utilities/IconText'

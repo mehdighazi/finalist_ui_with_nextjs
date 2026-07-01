@@ -15,7 +15,7 @@ import NavigationScroll from 'layout/NavigationScroll';
 import api from '@/components/api/api';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { disableLogs } from 'utils/logControl';
+import { disableLogs } from '@/components/utils/logControl';
 
 
 // ==============================|| APP ||============================== //

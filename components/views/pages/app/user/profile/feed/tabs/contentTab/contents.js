@@ -27,13 +27,13 @@ import {IconDotsVertical, IconHeart, IconMessageCircle, IconSend, IconTrash,Icon
 //project import
 
 import  api from '@/components/api/api';
-import CustomAvatar from 'ui-component/extended/Avatar'
+import CustomAvatar from '@/components/ui-component/extended/Avatar'
 import dataHandler from '@/components/api/dataHandler';
 import {showBUTTOMSheet} from "store/bottomSheetReducer";
-import AnimatedButton from 'ui-component/extended/AnimateButton'
-import Skeleton from 'ui-component/cards/Skeleton/ImageListCard'
-import Transition from 'ui-component/extended/Transitions'
-import useWindowDimensions from 'utils/getScreenDimension'
+import AnimatedButton from '@/components/ui-component/extended/AnimateButton'
+import Skeleton from '@/components/ui-component/cards/Skeleton/ImageListCard'
+import Transition from '@/components/ui-component/extended/Transitions'
+import useWindowDimensions from '@/components/utils/getScreenDimension'
 import {hostAddress}  from '@/components/api/api';;
 //const define
 //--------------------------------| Comment Box |-------------------------------------------

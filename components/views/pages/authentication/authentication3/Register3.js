@@ -9,11 +9,11 @@ import { Divider, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 // project imports
 import AuthWrapper1 from '../AuthWrapper1';
 import AuthCardWrapper from '../AuthCardWrapper';
-import Logo from 'ui-component/Logo';
+import Logo from '@/components/ui-component/Logo';
 import AuthRegister from '../auth-forms/AuthRegister';
-import AuthFooter from 'ui-component/cards/AuthFooter';
+import AuthFooter from '@/components/ui-component/cards/AuthFooter';
 import Register from './register'
-import AlertCompnent from 'ui-component/alert'
+import AlertCompnent from '@/components/ui-component/alert'
 // assets
 
 // ===============================|| AUTH3 - REGISTER ||=============================== //

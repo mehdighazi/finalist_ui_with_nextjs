@@ -94,15 +94,19 @@ const ApiAdmin = {
     return `${DOMAIN}team/user/list?userid=${usertoken}&${getAccessKey()}`;
   },
 
-   matchTeamList: ( teamid:string | number, usertoken: string, tab: string, sub_status: string,role:string) => {
-    
-        return `${DOMAIN}match/team/list?status=${tab}&sub_status=${sub_status}&team_id=${teamid}&userid=${usertoken}&role=${role}&${getAccessKey()}`
-    },
-    guestMatchRequest: (usertoken:string, teamid:string, accept:string) => {
-        const accesskey = `token=${localStorage.getItem("token")}`
-        return `${DOMAIN}match/request/send/list?accept=${accept}&team_id=${teamid}&userid=${usertoken}&${accesskey}`
-    },
- 
+  matchTeamList: (teamid: string | number, usertoken: string, tab: string, sub_status: string, role: string) => {
+
+    return `${DOMAIN}match/team/list?status=${tab}&sub_status=${sub_status}&team_id=${teamid}&userid=${usertoken}&role=${role}&${getAccessKey()}`
+  },
+  //profile page matchs
+matchAllOfTeamList: ({ team_id, usertoken, status, sub_status, role }: any) => {
+  return `${DOMAIN}match/team/list/all?status=${status}&sub_status=${sub_status}&team_id=${team_id}&userid=${usertoken}&role=${role}&${getAccessKey()}`;
+},
+  guestMatchRequest: (usertoken: string, teamid: string, accept: string) => {
+    const accesskey = `token=${localStorage.getItem("token")}`
+    return `${DOMAIN}match/request/send/list?accept=${accept}&team_id=${teamid}&userid=${usertoken}&${accesskey}`
+  },
+
   listUserSportTeam(body: { uid: string }): string {
     return `${DOMAIN}team/sport/user/list?uid=${body.uid}&${getAccessKey()}`;
   },
@@ -142,7 +146,7 @@ const ApiAdmin = {
       status = 'active',
       sport_field_id
     } = body;
-
+ 
     return `${DOMAIN}match/list?match_city_id=${match_city_id}&query=${query}&page_index=${page_index}&page_size=${page_size}&team_id=${teamid}&param=${param}&guest_user_id=${guestuserid}&host_user_id=${hostuserid}&userid=${usertoken}&status=${status}&sport_field_id=${sport_field_id}&${getAccessKey()}`;
   },*/
 

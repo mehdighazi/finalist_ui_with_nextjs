@@ -12,11 +12,11 @@ import { IconList, IconMail,IconTrash,IconX } from '@tabler/icons-react'
 import IconText from '@/components/ui-component/utilities/IconText'
 import dataHandler from '@/components/api/dataHandler';
 import  api from '@/components/api/api';
-import ImageListCard from "ui-component/cards/Skeleton/ImageListCard";
-import CustomAvatar from 'ui-component/extended/Avatar'
+import ImageListCard from "@/components/ui-component/cards/Skeleton/ImageListCard";
+import CustomAvatar from '@/components/ui-component/extended/Avatar'
 import { showAlert } from "@/components/store/slices/alertSlice";
-import Transition from "ui-component/extended/Transitions";
-import NotFoundPlaceHolder from 'ui-component/NotFound'
+import Transition from "@/components/ui-component/extended/Transitions";
+import NotFoundPlaceHolder from '@/components/ui-component/NotFound'
 const NotifList = () => {
     const [notifList, setNotifList] = React.useState([])
     const [loadedItems, setLoadedItems] = React.useState([]);

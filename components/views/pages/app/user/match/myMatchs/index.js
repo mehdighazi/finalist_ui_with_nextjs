@@ -20,8 +20,8 @@ import MyMatchList from "./myMatchsList";
 import IconText from '@/components/ui-component/utilities/IconText'
 import  {hostAddress} from '@/components/api/api';;
 import dataHandler from '@/components/api/dataHandler';
-import CustomAvatar from "ui-component/extended/Avatar";
-import NotFoundPlaceHolder from 'ui-component/NotFound'
+import CustomAvatar from "@/components/ui-component/extended/Avatar";
+import NotFoundPlaceHolder from '@/components/ui-component/NotFound'
 import api from '@/components/api/api';
 //-----------------------------------| List Box |---------------------------------------
 function IconSelectBox({ onChange }) {

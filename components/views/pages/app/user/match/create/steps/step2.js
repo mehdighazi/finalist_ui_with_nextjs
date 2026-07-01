@@ -7,8 +7,8 @@ import { styled } from "@mui/material/styles";
 import { AccessTime, CalendarMonth, PinDrop,Comment } from "@mui/icons-material";
 import  {hostAddress} from '@/components/api/api';;
 import { TeamBox } from "@/components/ui-component/utilities/MatchCardContent";
-import { MainCardWrapper } from "ui-component/cards/MainCardWrapper";
-import MainCard from "ui-component/cards/MainCard_pre";
+import { MainCardWrapper } from "@/components/ui-component/cards/MainCardWrapper";
+import MainCard from "@/components/ui-component/cards/MainCard_pre";
 import IconText from '@/components/ui-component/utilities/IconText'
 import "../style.css";
 

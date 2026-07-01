@@ -29,10 +29,10 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { rlPadding } from 'store/constant'
 import dataHandler from '@/components/api/dataHandler';
 import {hostAddress}  from '@/components/api/api';
-import Transitions from 'ui-component/extended/Transitions';
-import MainCard from 'ui-component/cards/MainCard_pre';
+import Transitions from '@/components/ui-component/extended/Transitions';
+import MainCard from '@/components/ui-component/cards/MainCard_pre';
 import DialogBox from '@/components/ui-component/utilities/Dialog'
-import CustomAvatar from 'ui-component/extended/Avatar'
+import CustomAvatar from '@/components/ui-component/extended/Avatar'
 //Tabler icon
 import { IconBookmark, IconPennant2, IconSwords, IconHeart, IconHome, IconList, IconMenu2, IconChevronLeft, IconEdit, IconArrowsUpDown, IconUser } from '@tabler/icons-react';
 //-------------------

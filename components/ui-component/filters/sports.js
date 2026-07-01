@@ -38,7 +38,7 @@ import { useSwipeable } from "react-swipeable";
 import { motion } from "framer-motion";
 //project import
 import { showBUTTOMSheet } from "store/bottomSheetReducer";
-import Transition from "ui-component/extended/Transitions";
+import Transition from "@/components/ui-component/extended/Transitions";
 import api from '@/components/api/api';
 import dataHandler from '@/components/api/dataHandler';
 import { SportIcons } from "icons/sportIcons";

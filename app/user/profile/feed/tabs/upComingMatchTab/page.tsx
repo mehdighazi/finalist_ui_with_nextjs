@@ -1,3 +1,4 @@
+"use client"
 import * as React from "react";
 
 //ui-material
@@ -8,7 +9,7 @@ import List from './list/list'
 
 
 
-const CurrentMatch = () => {
+const UpComingMatch: React.FC = () => {
 
 
     return (<>
@@ -18,4 +19,4 @@ const CurrentMatch = () => {
     </>)
 
 }
-export default CurrentMatch
+export default UpComingMatch

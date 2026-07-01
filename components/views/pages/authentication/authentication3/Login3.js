@@ -7,14 +7,14 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Stack, Typography, useMediaQuery, TextField, Box, Fade, Button, Paper } from '@mui/material';
 
 // project imports
-import AnimateButton from 'ui-component/extended/AnimateButton';
+import AnimateButton from '@/components/ui-component/extended/AnimateButton';
 import AuthWrapper1 from '../AuthWrapper1';
 import AuthCardWrapper from '../AuthCardWrapper';
 import AuthLogin from '../auth-forms/AuthLogin';
-import Logo from 'ui-component/Logo';
-import AuthFooter from 'ui-component/cards/AuthFooter';
-import Transition from 'ui-component/extended/Transitions'
-import AlertCompnent from 'ui-component/alert'
+import Logo from '@/components/ui-component/Logo';
+import AuthFooter from '@/components/ui-component/cards/AuthFooter';
+import Transition from '@/components/ui-component/extended/Transitions'
+import AlertCompnent from '@/components/ui-component/alert'
 import dataHandler from '@/components/api/dataHandler';
 import  api from '@/components/api/api';
 import { showAlert } from "@/components/store/slices/alertSlice";

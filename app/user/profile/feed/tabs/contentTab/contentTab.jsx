@@ -2,7 +2,7 @@ import * as React from "react";
 //ui-material
 import {Box,Avatar, Button, ButtonGroup, Chip, Divider, Grid, Stack, Typography, useTheme} from "@mui/material";
 import {styled} from "@mui/material/styles";
-import MainCard from "ui-component/cards/MainCard_pre";
+import MainCard from "@/components/ui-component/cards/MainCard_pre";
 //tabler icon
 import {IconHeart} from "@tabler/icons-react"
 //project import

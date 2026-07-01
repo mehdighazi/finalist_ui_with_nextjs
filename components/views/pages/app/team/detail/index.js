@@ -3,8 +3,8 @@ import * as React from "react";
 //ui-material
 import {Divider, List, ListItem, ListItemText, Typography, useTheme} from "@mui/material";
 //project import
-import CustomCard from "ui-component/cards/CustomCard";
-import useWindowDimensions from "utils/getScreenDimension";
+import CustomCard from "@/components/ui-component/cards/CustomCard";
+import useWindowDimensions from "@/components/utils/getScreenDimension";
 import TeamCardContent from "../../../../../../app/utilities/TeamCardContent";
 //Tabler icon
 

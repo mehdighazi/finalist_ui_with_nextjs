@@ -67,13 +67,22 @@ const CreateTeam = () => {
             result((data, status) => {
                 if (status) {
                     setStep(5); // no more step after success
-                    dispatch(showAlert("عملیات موفقیت آمیز", "success"));
+                   dispatch(showAlert({
+                    message: status ? data.message : (data.response?.data?.message || "خطا در ارسال اطلاعات"),
+                    type: status ? "success" : "error"
+                }));
                 } else {
-                    dispatch(showAlert("خطایی رخ داده", "error"));
+                     dispatch(showAlert({
+                message: "خطایی رخ داده است",
+                type: 'error'
+            }));
                 }
             });
         } catch (error) {
-            dispatch(showAlert("خطایی رخ داده", "error"));
+             dispatch(showAlert({
+                message: "خطایی رخ داده است",
+                type: 'error'
+            }));
         }
     };
 

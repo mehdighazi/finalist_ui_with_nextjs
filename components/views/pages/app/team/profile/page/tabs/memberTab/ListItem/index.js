@@ -3,10 +3,10 @@ import { Link as RouterLink } from 'react-router-dom';
 //Mui import
 import { List, ListItem, Divider, ListItemText, ListItemAvatar, useTheme, Typography, Link } from '@mui/material';
 //project import
-import CustomAvatar from 'ui-component/extended/Avatar'
-import { createDateLetter,createDateStr } from 'utils/Lib'
+import CustomAvatar from '@/components/ui-component/extended/Avatar'
+import { createDateLetter,createDateStr } from '@/components/utils/Lib'
 import {hostAddress}  from '@/components/api/api';
-import UserListSkeleton from 'ui-component/cards/Skeleton/UserList'
+import UserListSkeleton from '@/components/ui-component/cards/Skeleton/UserList'
 
 export default function ListItems({ data }) {
     const theme = useTheme();
