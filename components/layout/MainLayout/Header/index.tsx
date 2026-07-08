@@ -22,12 +22,14 @@ import {
 import ProfileSection from './ProfileSection';
 import NotificationSection from './NotificationSection';
 import SiteLogo from './siteLogo';
+import LogoComponent from '@/components/ui-component/Logo';
 
 // assets
 import { IconMenu2 } from '@tabler/icons-react';
 
 // types
 import type { UserInfo } from '@/types/user';
+
 
 /* ============================== */
 /* Types */
@@ -63,7 +65,8 @@ const Header: React.FC<HeaderProps> = ({
     >
       {/* Logo */}
       <Box component="span" sx={{ display: 'block' }}>
-        <SiteLogo imgPath={logoimg} />
+       {/* <SiteLogo /> */}
+       {<LogoComponent width="50" height="50" />}
         <Typography fontSize={14}>فینالیست</Typography>
       </Box>
 

@@ -29,7 +29,7 @@ interface LocationDetail {
 
 // ۲. اینترفیس اصلی برای آیتم‌های مسابقه (Match Item)
 interface MatchItem {
-  id: string | number;
+  match_id: string | number;
   status: string ;
   total_requests: number;
   createdAt: string;
@@ -64,7 +64,7 @@ const MatchListWrapper: React.FC<MatchListWrapperProps> = ({
     const Api_ = apiFunc(apiParams);
    
     const result = dataHandler(Api_, "get", "");
-console.log(Api_)
+
     try {
       result(async function (data: any, status: any) {
        
@@ -89,15 +89,16 @@ console.log(Api_)
     <Stack spacing={1} sx={{ direction: "rtl", minWidth: "100%", px: { xs: 0.5, sm: 0.5, lg: 2 } }}>
       {matchList ? (
         matchList.map((item) => {
-          console.log(item)
+         
           return(
           <Link
-            key={item.id} // اضافه کردن کلید یکتا برای رندر بهینه در ری‌اکت
+            key={item.match_id} // اضافه کردن کلید یکتا برای رندر بهینه در ری‌اکت
             sx={{
               textDecoration: "none",
               "&:hover": { cursor: "pointer", textDecoration: "none" },
             }}
-            href={linkBuilder(item)}
+            href={linkBuilder(item
+            )}
           >
            
             <MatchFullCardContent

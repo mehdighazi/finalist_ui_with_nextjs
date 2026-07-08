@@ -99,9 +99,9 @@ const ApiAdmin = {
     return `${DOMAIN}match/team/list?status=${tab}&sub_status=${sub_status}&team_id=${teamid}&userid=${usertoken}&role=${role}&${getAccessKey()}`
   },
   //profile page matchs
-matchAllOfTeamList: ({ team_id, usertoken, status, sub_status, role }: any) => {
-  return `${DOMAIN}match/team/list/all?status=${status}&sub_status=${sub_status}&team_id=${team_id}&userid=${usertoken}&role=${role}&${getAccessKey()}`;
-},
+  matchAllOfTeamList: ({ team_id, usertoken, status, sub_status, role }: any) => {
+    return `${DOMAIN}match/team/list/all?status=${status}&sub_status=${sub_status}&team_id=${team_id}&userid=${usertoken}&role=${role}&${getAccessKey()}`;
+  },
   guestMatchRequest: (usertoken: string, teamid: string, accept: string) => {
     const accesskey = `token=${localStorage.getItem("token")}`
     return `${DOMAIN}match/request/send/list?accept=${accept}&team_id=${teamid}&userid=${usertoken}&${accesskey}`
@@ -131,7 +131,13 @@ matchAllOfTeamList: ({ team_id, usertoken, status, sub_status, role }: any) => {
   getMatchRequesterInfo(match_request_id: string): string {
     return `${DOMAIN}match/requester/info?match_request_id=${match_request_id}&${getAccessKey()}`;
   },
+  matchRequestList: (teamid: string, matchid: string) => {
+    return `${DOMAIN}match/request/get/list?match_id=${matchid}&team_id=${teamid}&${getAccessKey()}`
+  },
+  confirmRequest: () => {
 
+    return `${DOMAIN}match/request/accept?${getAccessKey()}`
+  },
   /*listMatch(body: ListMatchBody): string {
     const {
       match_city_id = '',

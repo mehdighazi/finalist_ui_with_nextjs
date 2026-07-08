@@ -3,7 +3,7 @@ import React from 'react';
 import { Stack, Box, Typography, Badge, useTheme } from '@mui/material';
 
 interface IconTextProps {
-  text: string | number;
+  text: string |any;
   icon: React.ReactNode;
   textNumber?: boolean;
   fontSize?: number | string;

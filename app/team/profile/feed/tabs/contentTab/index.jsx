@@ -9,8 +9,8 @@ import {IconHeart} from "@tabler/icons-react"
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
 import Contents from './contents'
-import {hideAlert} from "../../../../../../../../../app/store/alertReducer";
-
+import {showAlert,hideAlert} from "@/components/store/slices/alertSlice";
+ 
 const ContentList=({userInfo,uid})=>
 {
     const [content,setContents]=React.useState([])

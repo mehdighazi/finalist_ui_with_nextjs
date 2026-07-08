@@ -1,6 +1,7 @@
+"use client"
 import * as React from "react";
 import { useState } from "react";
-
+import { useRouter, useSearchParams } from 'next/navigation';
 //-------------------Tabler
 
 import MatchListWrapper from "@/components/ui-component/utilities/MatchListProfileTab";
@@ -10,20 +11,20 @@ import api from '@/components/api/api';
 
 
 const MatchList = () => {
-    const queryParams = new URLSearchParams(location.search); // Extract query params
-    const [teamId, setTeamId] = useState(queryParams.get('tid'))
-    
+    const searchParams = useSearchParams();
+    const teamId=searchParams.get('tid');
+
     return (
         <>
             <MatchListWrapper
-                apiFunc={api.matchsOfTeam}
+                 apiFunc={api.matchAllOfTeamList}
                 apiParams={{
                     team_id: teamId,
                     page_size: 10,
                     page_index: 1,
                     status: "host_accepted"
                 }}
-                linkBuilder={(item) => `/app/user/match/requests/${item.match_id}/${teamId}`}
+                linkBuilder={(item) => `#`}
             />
 
         </>

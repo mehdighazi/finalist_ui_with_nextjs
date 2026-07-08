@@ -227,7 +227,7 @@ const TopSectionUnified: React.FC<TopSectionUnifiedProps> = ({ type, info, id, a
                             }
                         }}
                     >
-                       <Box sx={{m:0.5,mr:1}}> {!isFollowing ? "دنبال کردن" : "دنبال شده"}</Box>
+                       <Box sx={{mr:1}}> {!isFollowing ? "دنبال کردن" : "دنبال شده"}</Box>
                     </Button>
                 </AnimatedButton>
             </Box>

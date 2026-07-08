@@ -10,7 +10,7 @@ import CustomLoadingButton from "@/components/ui-component/utilities/CustomLoadi
 import {uploadHandler} from "@/components/ui-component/utilities/uploadfile"
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
-import {showAlert} from "store/alertReducer";
+import { showAlert } from "@/components/store/slices/alertSlice";
 //----------------------------| Add Content |---------------------
 const Content = ({image, onChange, file}) => {
     const dispatch=useDispatch()

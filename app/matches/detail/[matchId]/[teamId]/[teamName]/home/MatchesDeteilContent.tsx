@@ -1,11 +1,12 @@
 // app/matches/detail/[...slug]/page.tsx
 import { notFound } from 'next/navigation';
-import {Paper,Button, Box, Typography, CircularProgress, ListItem, ListItemText, Grid, List, Theme, Stack } from '@mui/material';
+import { Paper, Button, Box, Typography, CircularProgress, ListItem, ListItemText, Grid, List, Theme, Stack } from '@mui/material';
 import { TeamBox } from '@/components/ui-component/utilities/MatchCardContent';
 import { createDateStr, persiandate } from "@/components/utils/Lib";
 import MainCard from '@/components/ui-component/cards/MainCard';
 
 import { SxProps } from "@mui/material/styles"; // ✅ اضافه شد
+import MatchDetailHeader from '@/components/ui-component/utilities/matchDetailHeader';
 
 interface PageProps {
     params: Promise<{
@@ -132,12 +133,12 @@ export default async function DetailMatchPage({ params }: PageProps) {
     // اگر [object Object] بود، از پارامتر دوم استفاده کن
     if (matchId === '[object Object]' && slug?.length > 1) {
         matchId = slug[1];
-        console.log('Fixed [object Object] issue, new matchId:', matchId);
+
     }
 
     // اگر matchId عددی نیست، سعی کن از قسمت اول URL استخراج کنی
     if (!matchId || matchId === '[object Object]') {
-        console.error('Invalid matchId:', matchId);
+
         return (
             <Box sx={{ p: 4, textAlign: 'center' }}>
                 <Typography variant="h5" color="error">
@@ -194,7 +195,7 @@ export default async function DetailMatchPage({ params }: PageProps) {
     return (
         <Box sx={{ p: { xs: 1, sm: 2 } }}>
             <MainCard
-            
+
 
                 actions={false}
                 contentSX={{ p: 1 }}
@@ -216,58 +217,14 @@ export default async function DetailMatchPage({ params }: PageProps) {
             >
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <Box
-                            sx={{
-                                borderRadius: 3,
-                                p: 3,
-                                background:
-                                    "linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)",
-                                color: "#fff",
-                            }}
-                        >
-                            <Stack spacing={2} alignItems="center">
-                                <TeamBox
-                                    logo={`${HOST}${PORT}/${matchDisplayData.hostLogo}`}
-                                    title={matchDisplayData.hostTeamName}
-                                    AvatarSize="lg"
-                                />
-
-                                <Typography
-                                    variant="h6"
-                                    textAlign="center"
-                                    fontWeight={600}
-                                >
-                                    <span>در انتظار حریف</span>
-                                </Typography>
-
-                                <Stack
-                                    direction="row"
-                                    spacing={2}
-                                    flexWrap="wrap"
-                                    justifyContent="center"
-                                >
-                                    <Typography variant="body2">
-                                        <span>📅 {matchDisplayData.matchDate}</span>
-                                    </Typography>
-
-                                    <Typography variant="body2">
-                                        <span>⏰ {matchDisplayData.matchTime}</span>
-                                    </Typography>
-                                </Stack>
-
-                                <Typography
-                                    variant="body2"
-                                    textAlign="center"
-                                >
-                                    <span>
-                                        📍 {matchDisplayData.province} / {matchDisplayData.city}
-                                    </span>
-                                </Typography>
-
-                               
-                               
-                            </Stack>
-                        </Box>
+                        <MatchDetailHeader
+                            hostLogo={`${HOST}${PORT}/${matchDisplayData.hostLogo}`}
+                            hostTeamName={matchDisplayData.hostTeamName}
+                            matchDate={matchDisplayData.matchDate}
+                            matchTime={matchDisplayData.matchTime}
+                            province={matchDisplayData.province}
+                            city={matchDisplayData.city}
+                        />
                     </Grid>
 
                     <Grid item xs={12}>
@@ -279,7 +236,7 @@ export default async function DetailMatchPage({ params }: PageProps) {
                                 overflow: "hidden",
                             }}
                         >
-                           
+
 
                             <List disablePadding>
                                 {items.map((item, index) => (

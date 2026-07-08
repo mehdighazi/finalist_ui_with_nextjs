@@ -14,14 +14,14 @@ const other = {
             id: 'profile',
             title: 'پروفایل',
             type: 'collapse',
-            url: '/app/user/profile',
+            url: '/user/profile/feed',
             icon: icons.IconBrandChrome,
             children: [
                 {
                     id: 'profileEdit',
                     title: 'ویرایش',
                     type: 'item',
-                    url: '/app/user/profile/edit',
+                    url: '/user/profile/edit',
                     icon: icons.IconBrandChrome,
 
                 },
@@ -29,7 +29,7 @@ const other = {
                     id: 'teamCreate',
                     title: 'ساختن تیم',
                     type: 'item',
-                    url: '/app/user/team/create',
+                    url: '/user/team/create',
                     icon: icons.IconBrandChrome,
 
                 }
@@ -40,21 +40,21 @@ const other = {
             id: 'team',
             title: 'پروفایل تیم',
             type: 'collapse',
-            url: '/app/team/profile',
+            url: '/team/profile',
             icon: icons.IconBrandChrome,
             children: [
                 {
                     id: 'editMember',
                     title: 'ویرایش اعضای تیم',
                     type: 'collapse',
-                    url: '/app/user/team/member/edit',
+                    url: '/user/team/member/edit',
                     icon: icons.IconBrandChrome,
                     children: [
                         {
                             id: 'editMemberList',
                             title: 'لیست اعضا',
                             type: 'item',
-                            url: '/app/user/team/member/edit/list',
+                            url: '/user/team/member/edit/list',
                         }
                     ]
 
@@ -63,7 +63,7 @@ const other = {
                     id: 'editProfile',
                     title: 'ویرایش پروفایل تیم',
                     type: 'collapse',
-                    url: '/app/team/profile/edit',
+                    url: '/team/profile/edit',
                     
 
                 }
@@ -76,14 +76,14 @@ const other = {
             id: 'match',
             title: 'مسابقات',
             type: 'collapse',
-            url: '/app/match/list',
+            url: '/matches/list/all',
             icon: icons.IconBrandChrome,
             children: [
                 {
                     id: 'createMatch',
                     title: 'ایجاد مسابقه',
                     type: 'item',
-                    url: '/app/user/match/create',
+                    url: '/user/match/create',
                     icon: icons.IconBrandChrome,
 
                 },
@@ -91,7 +91,7 @@ const other = {
                     id: 'detailMatch',
                     title: 'جزییات مسابقه',
                     type: 'item',
-                    url: '/app/match/detail',
+                    url: '/match/detail',
                     icon: icons.IconBrandChrome,
 
                 }

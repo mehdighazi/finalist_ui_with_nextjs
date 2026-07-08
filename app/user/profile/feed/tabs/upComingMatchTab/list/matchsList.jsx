@@ -1,30 +1,8 @@
-import * as React from "react";
-import { useState } from "react";
-//ui-material
-import {
-  Box,
-  Divider,
-  Grid,
-  Link,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
 
 //project import
-import MatchCardPlaceHolder from '@/components/ui-component/cards/Skeleton/matchCardPlaceHolder'
-import NotFoundPlaceHolder from '@/components/ui-component/NotFound'
-import CustomCard from "@/components/ui-component/cards/CustomCard";
+
 import MatchListWrapper from '@/components/ui-component/utilities/MatchListProfileTab'
-import {
-  MatchListCardContent,
-  MatchFullCardContent,
-} from "@/components/ui-component/utilities/MatchCardContent";
-import Logo1 from "@/components/assets//images/test/t1.png";
-import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
-import  {hostAddress} from '@/components/api/api';;
-import { persiandate } from "@/components/utils/Lib";
 
 const MatchList = ({ teamId, hostCheck }) => {
   return (
@@ -37,7 +15,7 @@ const MatchList = ({ teamId, hostCheck }) => {
           status: "host_accepted",
           team_id: "",
         }}
-       linkBuilder={()=>"#"}
+       linkBuilder={(item)=>`/matches/detail/${item.match_id}/${item.host_team_id}/${encodeURIComponent(item.host_team.team_name)}`}
       />
     </>
   )

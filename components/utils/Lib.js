@@ -77,7 +77,7 @@ function DiffrenceDateLetter(difDays) {
 }
 export function createDateStr(Create_Date){
     const {type,dif}=Create_Date
-   
+   console.log(type,dif)
     switch (type) {
         case 'year':
             return (

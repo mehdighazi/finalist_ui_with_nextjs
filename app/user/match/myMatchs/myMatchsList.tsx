@@ -72,8 +72,8 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
         console.log("API Response:", data.result); // برای دیباگ کردن پاسخ API
         if (data && data.result) {
           // با ساختار جدید بک‌اندر، دیتای هاست و گست کاملاً یکسان و در data.result.data قرار دارد
-          let normalizedData =role==="host" ? data.result.data || [] : data.result || [];
-          console.log("API Response:", normalizedData);
+          let normalizedData = role === "host" ? data.result.data || [] : data.result || [];
+
           setMatchList(normalizedData);
         } else {
           setMatchList([]);
@@ -137,11 +137,12 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
             const matchData = item.request_match ? item.request_match : item;
             const hostTeamName = matchData.host_team?.team_name || "تیم میزبان";
             const guestTeamName = matchData.guest_team?.team_name || "-";
-
+            const hrefLink = role === 'host' ? `/user/match/requests/${matchData.match_id}/${teamId}` :
+              `/matches/detail/${matchData.match_id}/${teamId}`
             return (
               <React.Fragment key={matchData.match_id || id}>
                 <Link
-                  href={`/app/user/match/requests/${matchData.match_id}/${teamId}`}
+                  href={hrefLink}
                   sx={{
                     textDecoration: "none", // حذف آندرلاین خود لینک
                     "&:hover": {
@@ -168,7 +169,7 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
                     {/* ستون دوم: تاریخ و ساعت */}
                     <ListItemText
                       primary={
-                        <Box sx={{ textAlign: "center",pt:1 }}>
+                        <Box sx={{ textAlign: "center", pt: 1 }}>
                           <Typography fontSize="0.75rem" fontWeight="bold">
                             {persiandate(matchData.match_date)?.[1] || matchData.match_date}
                           </Typography>
@@ -183,7 +184,7 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
                     {/* ستون سوم: محل برگزاری */}
                     <ListItemText
                       primary={
-                        <Typography component={"div"} variant="body2" sx={{pt:1, textAlign: "center", fontSize: '0.75rem' }}>
+                        <Typography component={"div"} variant="body2" sx={{ pt: 1, textAlign: "center", fontSize: '0.75rem' }}>
                           {matchData.province_match?.province_title && matchData.city_match?.city_title
                             ? `${matchData.province_match.province_title} / ${matchData.city_match.city_title}`
                             : "نامشخص"}
@@ -193,7 +194,7 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
                     />
 
                     {/* ستون چهارم: تعداد درخواست (برای بازی‌های آینده) یا نشان نتیجه (برای تاریخچه) */}
-                    <Box sx={{pt:1, flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Box sx={{ pt: 1, flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                       {tab === "upcoming" ? (
                         <Typography variant="body2" fontWeight="bold">
                           {matchData.total_requests || 0}

@@ -482,7 +482,7 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
                 break;
             case 3:
                 if (tid) {
-                    window.open(`/app/team/profile?tid=${tid}`, '_blank');
+                    window.open(`/team/profile/feed?tid=${tid}`, '_blank');
                 }
                 break;
             default:
@@ -491,7 +491,7 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
     }, [value, teamInfo, router]);
 
     const elemSX = {
-        color: theme.palette.orange.main,
+        color: theme.palette.secondary.main,
         '& .hover': {
             cursor: 'pointer'
         },

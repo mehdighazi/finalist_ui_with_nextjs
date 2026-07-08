@@ -13,6 +13,7 @@ import api from '@/components/api/api';
 import TopSectionUnified from "@/components/ui-component/utilities/profilePageTopSection";
 import { hostAddress } from '@/components/api/api';
 import UpcomingMatchContet from './tabs/upComingMatchTab/page';
+import SportTabContet from './tabs/sportsTab/page';
 //--------------------------------------| Types |--------------------------------------
 
 interface TabItem {
@@ -55,7 +56,7 @@ const TabsList: TabItem[] = [
         icon: IconList
     },
     {
-        label: "ورزش ها",
+        label: "تیم ها",
         icon: IconOlympics
     }
 ];
@@ -107,7 +108,7 @@ function a11yProps(index: number) {
 const Profile: React.FC = () => {
     const theme = useTheme();
     const router = useRouter();
-    const searchParams = useSearchParams();
+    const searchParams = useSearchParams(); 
 
     const [value, setValue] = React.useState<number>(0);
     const [, setStartGet] = React.useState<boolean>(false);
@@ -247,7 +248,7 @@ const Profile: React.FC = () => {
                                     
                                     <TabPanel value={value} index={1} dir={theme.direction}>
                                         <Box sx={{ mt: 1 }}>
-                                            {/* <SportsTabContent/> */}
+                                            { <SportTabContet/> }
                                           
                                         </Box>
                                     </TabPanel>
