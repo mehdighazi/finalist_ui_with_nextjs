@@ -65,7 +65,7 @@ const pages = {
           id: 'user-invited',
           title: 'دعوت نامه های عضویت',
           type: 'item',
-          url: '/app/user/profile/invited',
+          url: '/user/inviteList',
           target: true
         }
       ]
@@ -169,7 +169,7 @@ const pages = {
       id: 'logout',
       title: 'خروج',
       type: 'item',
-      url: '/user/login?p=exit',
+      url: './?p=exit',
       icon: icons.IconPower
     }
   ]

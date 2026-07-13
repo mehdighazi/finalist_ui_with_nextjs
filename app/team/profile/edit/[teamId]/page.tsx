@@ -142,16 +142,16 @@ export default function TeamEdit({ params, searchParams }: TeamEditProps) {
     };
 
     const getTeamData = async () => {
-
+            
         setTeamId(tid);
-        if (!tid) return;
+       // if (!tid) return;
         const result = dataHandler(api.teamInfo(tid), "get", "");
 
         try {
             result(async function (res: any, status: boolean) {
                 if (status) {
                     const teamRes = res.result as TeamData;
-                    console.log("team:", res)
+               
                     setLogo(teamRes?.logo?.logo_path ? `${hostAddress}/${teamRes.logo.logo_path}` : "");
                     setLogoPath(teamRes?.logo?.logo_path || null);
 
@@ -224,7 +224,7 @@ export default function TeamEdit({ params, searchParams }: TeamEditProps) {
                                                 <AvatarCropper
                                                     uploadIconButton={true}
                                                     onChange={(e: any) => {
-                                                        console.log(e)
+                                                       
                                                         uploadFile(e)
                                                     }
                                                     }
@@ -270,9 +270,9 @@ export default function TeamEdit({ params, searchParams }: TeamEditProps) {
 
                                     <Divider />
 
-                                    <Typography align="right" sx={{ color: IconColor }}>
+                                  
                                         <IconText fontSize={12} icon={<IconUserCheck />} color={TextColor} text={"شناسه تیم"} />
-                                    </Typography>
+                                   
 
                                     <CustomTextField
                                         endIcon={

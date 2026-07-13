@@ -282,13 +282,14 @@ export default function Requestes() {
                     text={
                         <Typography
                        
-                            variant="h5"
+                          // variant="h5"
                             sx={{ fontWeight: 500 }}
                         >
                             لیست درخواست‌ها
 
                             <Typography
-                                variant="subtitle2"
+                            component="span"
+                               // variant="subtitle2"
                                 align="center"
                                 sx={{
                                     color:
@@ -318,7 +319,7 @@ export default function Requestes() {
                 </Box>
             ) : (
                 <Box sx={{ p: 3 }}>
-                    <Typography variant="h5">
+                    <Typography >
                         درخواستی ارسال نشده است.
                     </Typography>
                 </Box>

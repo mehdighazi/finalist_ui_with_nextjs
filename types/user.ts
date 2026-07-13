@@ -4,4 +4,7 @@ export interface UserInfo {
     fullname: string;
     mobile?: string;
     avatar?: string;
+    bio?:string;
+    isFollowing?:boolean;
+   // totalFollowers?:string;
 }

@@ -61,6 +61,7 @@ export function TeamSelectListBox({ onChange }: IconSelectBoxProps) {
     try {
       result(async function (data: any, status: number) {
         if (data && data.result) {
+          
           setTeams(data.result);
         }
       });
@@ -95,7 +96,7 @@ export function TeamSelectListBox({ onChange }: IconSelectBoxProps) {
   return (
     <Box sx={{ p: 0, direction: 'rtl', width: "100%" }}>
       <Typography textAlign='right' fontWeight={500} mt={0} sx={{ mb: 1 }}>
-        {/* این بخش را با کامپوننت‌های خودتان هماهنگ کنید، برای بیلد بدون ارور موقتاً متن عادی قرار گرفت */}
+   
         <span style={{ color: TextColor, fontSize: '12px' }}>انتخاب تیم</span>
       </Typography>
 

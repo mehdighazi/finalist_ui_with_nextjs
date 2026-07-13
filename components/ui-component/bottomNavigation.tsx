@@ -189,7 +189,7 @@ const TeamProfileMenuList: React.FC<TeamProfileMenuListProps> = ({ onChange, tea
                 <ListItem
                     disabled={!teamID}
                     component="a"
-                    href={`/app/team/profile?tid=${teamID}`}
+                    href={`/team/profile?tid=${teamID}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     sx={{
@@ -327,9 +327,9 @@ const TeamProfile: React.FC<TeamProfileProps> = ({ onChange, userTeamList, teamI
         if (event === 'changeTeam') {
             setDialogOpen(true);
         } else if (event === 'editTeam') {
-            router.push(`/app/team/profile/edit?tid=${teamID}`);
+            router.push(`/team/profile/edit/${teamID}`);
         } else if (event === 'editMember') {
-            router.push(`/app/user/team/member/edit/list/${teamID}`);
+            router.push(`/user/team/member/setting/${teamID}`);
         }
     };
 
@@ -550,6 +550,13 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
 };
 
 const CustomBottomNavigation: React.FC = () => {
+    //if user not logged in, don't show bottom navigation
+    const token = localStorage.getItem("token");
+        
+    if (!token) {
+        return null;
+    }
+
     const boxRef = useRef<HTMLDivElement>(null);
     const [boxWidth, setBoxWidth] = useState<number>(0);
 

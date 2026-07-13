@@ -30,6 +30,7 @@ const IconText: React.FC<IconTextProps> = ({
   // آماده‌سازی محتوای داخل تکست با کلاس فونت فارسی در صورت نیاز
   const renderText = (
     <Typography
+    component="span"
       fontSize={fontSize}
       fontWeight={500}
       className={textNumber ? "numfarsi-s1" : ""}

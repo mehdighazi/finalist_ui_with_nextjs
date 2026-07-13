@@ -42,7 +42,11 @@ const Sidebar: React.FC<SidebarProps> = ({ window, rlPadding }) => {
   const visible = useSelector((state: any) => state.sidebarMenu.visible);
   const [userInfo, setUserInfo] = React.useState<any>({ fullname: 'کاربر', avatar: null });
 
-  const handleClose = () => dispatch(hideMenu());
+  const handleClose = () => {
+    if (!matchUpMd) {
+      dispatch(hideMenu());
+    }
+  };
 
   const drawer = (
     <>
@@ -62,9 +66,11 @@ const Sidebar: React.FC<SidebarProps> = ({ window, rlPadding }) => {
           variant="outlined"
         />
         <Box sx={{ flexGrow: 1 }} />
-        <IconButton onClick={handleClose}>
-          <IconX />
-        </IconButton>
+        {!matchUpMd && (
+          <IconButton onClick={handleClose}>
+            <IconX />
+          </IconButton>
+        )}
       </Box>
 
       <BrowserView>
@@ -86,19 +92,20 @@ const Sidebar: React.FC<SidebarProps> = ({ window, rlPadding }) => {
   return (
     <div id="drawer-container" style={{ position: 'relative' }}>
       <Drawer
-        container={container}
-        transitionDuration={{ enter: 100, exit: matchUpMd ? 10 : 500 }}
+        anchor="right"
+        variant={matchUpMd ? "permanent" : "temporary"}
+        open={matchUpMd ? true : visible}
+        onClose={handleClose}
         sx={{
+          width: 320,
+          flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: matchUpMd ? '40%' : '100%',
-            marginRight: matchUpMd ? rlPadding : 0,
-            borderRadius: 2,
-            boxShadow: 3
+            width: 320,
+            right: 0,
+            left: 'auto',
+            boxSizing: 'border-box'
           }
         }}
-        anchor="right"
-        open={visible}
-        onClose={handleClose}
       >
         {drawer}
       </Drawer>

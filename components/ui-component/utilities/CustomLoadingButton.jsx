@@ -120,7 +120,7 @@ export const CustomSubmitButton = (props) => {
             <LoadingButton type={'submit'} endIcon={props.endIcon} startIcon={props.startIcon} disabled={props.disabled}
                 variant={props.variant ? props.variant : "text"}
                 color={props.color ? props.color : "inherit"} sx={{
-                    backgroundColor: theme.palette.secondary.main,
+                    backgroundColor: theme.palette.primary.main,
                     borderRadius: props.borderRadius ?? 2
                     , p: props.padding ? props.padding : 0,
                     minWidth: "100%", mt: props.mt, fontFamily: "orginalfont",

@@ -5,11 +5,12 @@ interface RootLayoutProps {
     children: ReactNode;
 }
 export default function Layout({ children }: RootLayoutProps) {
+      
     return (
         <>
             {children}
           
-            <CustomBottomNavigation />
+           {  <CustomBottomNavigation /> }
         </>
     )
 }

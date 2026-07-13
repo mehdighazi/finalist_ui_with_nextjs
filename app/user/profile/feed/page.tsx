@@ -152,14 +152,11 @@ const Profile: React.FC = () => {
        // setUserId(uidParam);
 
         if (stParam === 'login') {
-            setStartGet(true);
+           // setStartGet(true);
         }
 
        
 
-        if (!token) {
-            router.push("/splash");
-        }
     }, [searchParams]);
 
     const tabsHandleOnChange = (event: React.SyntheticEvent, newValue: number) => {

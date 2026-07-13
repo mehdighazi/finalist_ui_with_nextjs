@@ -40,8 +40,8 @@ interface ListMatchBody {
 ======================= */
 
 const getAccessKey = (): string =>
-  //  `token=${localStorage.getItem('token') ?? ''}`;
-  'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjExMTExIiwiaWF0IjoxNzgxNzcyNzI5LCJleHAiOjE3ODM1NzI3Mjl9.XbFvF8_BiQjpl-20nNUj2PC-MsYMVT7P5r38QRghMYA'
+   `token=${localStorage.getItem('token') ?? ''}`;
+//  'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjExMTExIiwiaWF0IjoxNzgzNTc5ODgyLCJleHAiOjE3ODUzNzk4ODJ9.OlMULIKMhiQklT6dD6iFcnTYCHRbvhQ4ojTnd4dX5LU'
 
 /* =======================
    API
@@ -52,8 +52,10 @@ const ApiAdmin = {
 
   getUserInfo(body: { uid: string; first_name: string; last_name: string }): string {
     const { uid, first_name, last_name } = body;
+    
     return `${DOMAIN}user/info?uid=${uid}&first_name=${first_name}&last_name=${last_name}&${getAccessKey()}`;
   },
+  
 
   getUserInfoAll(body: { param: string }): string {
     return `${DOMAIN}user/info/all?param=${body.param}&${getAccessKey()}`;
@@ -82,9 +84,21 @@ const ApiAdmin = {
   createTeam(usertoken: string): string {
     return `${DOMAIN}team/create?userid=${usertoken}&${getAccessKey()}`;
   },
+  checkUserName: (username: string) => {
+    return `${DOMAIN}user/check/username?username=${username}&${getAccessKey()}`
+  },
+  userUpdate: () => {
+    return `${DOMAIN}user/update?&${getAccessKey()}`
+  },
+  listInvitedUser: () => {
+
+    return `${DOMAIN}team/user/invite/list?${getAccessKey()}`
+  },
+  acceptInvite: () => {
+    return `${DOMAIN}member/invite/accept?${getAccessKey()}`
+  },
   memberInvite: () => {
-    const accesskey = `token=${localStorage.getItem("token")}`
-    return `${DOMAIN}member/invite?${accesskey}`
+    return `${DOMAIN}member/invite?&${getAccessKey()}`
   },
   memberRemove: () => {
     const accesskey = `token=${localStorage.getItem("token")}`
