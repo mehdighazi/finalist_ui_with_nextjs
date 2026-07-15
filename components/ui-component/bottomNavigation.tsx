@@ -113,13 +113,15 @@ const DialogContentSelectTeam: React.FC<DialogContentSelectTeamProps> = ({ onCha
                             disablePadding
                         >
                             <ListItemButton
-                                onClick={() =>
+                                onClick={(e: React.MouseEvent) => {
+                                    e.stopPropagation();
+                                    e.preventDefault();
                                     onChange({
                                         team_id: item.team_id,
                                         team_name: item.team_name,
                                         team_logo: item?.logo?.logo_path ?? "",
-                                    })
-                                }
+                                    });
+                                }}
                                 dense
                             >
                                 <ListItemText
@@ -458,6 +460,7 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
 
     const [teamInfo, setTeamInfo] = useState<TeamItem | string>("");
     const [userTeamList, setUserTeamList] = useState<TeamItem[]>([]);
+    const suppressProfileOpenRef = useRef<boolean>(false);
 
     const getData = () => {
         const result = dataHandler(api.listUserTeam(""), "get", "");
@@ -494,6 +497,11 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
                 router.push('/app/match/list');
                 break;
             case 3:
+                // if we recently set team via the selector, suppress opening profile
+                if (suppressProfileOpenRef.current) {
+                    suppressProfileOpenRef.current = false;
+                    break;
+                }
                 if (tid) {
                     window.open(`/team/profile/feed?tid=${tid}`, '_blank');
                 }
@@ -530,7 +538,7 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
             }}
             elevation={3}
         >
-            <BottomNavigation
+                <BottomNavigation
                 sx={{
                     backgroundColor: theme.palette.primary.main,
                     minWidth: "100%",
@@ -553,7 +561,11 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
                         <TeamProfile
                             teamInfo={teamInfo}
                             userTeamList={userTeamList}
-                            onChange={(e) => setTeamInfo(e)}
+                            onChange={(e) => {
+                                // when user selects a team from the dialog, suppress automatic profile open
+                                suppressProfileOpenRef.current = true;
+                                setTeamInfo(e);
+                            }}
                         />
                     }
                 />

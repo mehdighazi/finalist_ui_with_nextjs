@@ -44,15 +44,18 @@ export default function SubLayout({ children }: RootLayoutProps) {
     const { height } = useWindowDimensions();
     const router = useRouter();
     const searchParams = useSearchParams();
- 
+
+    const normalizedPathname = pathname?.replace(/^\/(fa|en)\//, '/') || '';
+   
     const ignoreAuth =
-    pathname === '/matches/list/all' ||
-    pathname.startsWith('/matches/detail/') ||
-    pathname === '/register';
+        normalizedPathname === '/matches/list/all' ||
+        normalizedPathname.startsWith('/matches/detail') ||
+        normalizedPathname === '/register';
+     
     useEffect(() => {
         const tokenLocal = localStorage.getItem("token");
         if (!tokenLocal && !ignoreAuth) {
-           console.log(pathname)
+          
             router.replace('/');
         }
     }, [ ignoreAuth, router]);

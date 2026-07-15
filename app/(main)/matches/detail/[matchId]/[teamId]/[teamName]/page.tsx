@@ -60,17 +60,97 @@ interface HomeProps {
   }>;
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
+async function getMatchDetail(matchId: string) {
+    const HOST = process.env.NEXT_PUBLIC_HOST_API_URL ?? 'http://localhost';
+    const PORT = process.env.NEXT_PUBLIC_HOST_PORT ? `:${process.env.NEXT_PUBLIC_HOST_PORT}` : '';
+    const DOMAIN = `${HOST}${PORT}/api/app/`;
+    const apiUrl = `${DOMAIN}match/detail?match_id=${matchId}`;
+
+
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            cache: 'no-store',
+        });
+
+        
+
+        if (!response.ok) {
+            console.error('HTTP Error:', response.status);
+            return null;
+        }
+
+        const result = await response.json();
+
+
+        // بررسی ساختارهای مختلف پاسخ
+        let matchData = null;
+
+        // ساختار 1: result.result.data
+        if (result?.result?.data) {
+            matchData = result.result.data;
+            console.log('Found data in result.result.data');
+        }
+        // ساختار 2: result.data
+        else if (result?.data) {
+            matchData = result.data;
+            console.log('Found data in result.data');
+        }
+        // ساختار 3: result.result
+        else if (result?.result) {
+            matchData = result.result;
+            console.log('Found data in result.result');
+        }
+        // ساختار 4: خود result
+        else if (result && typeof result === 'object') {
+            matchData = result;
+            console.log('Using result itself as data');
+        }
+
+        if (!matchData) {
+            console.error('No data found in response. Response structure:', Object.keys(result));
+            return null;
+        }
+
+
+        return matchData;
+
+    } catch (error: any) {
+        console.error('Fetch error:', error.message);
+        return null;
+    }
+}
 // فقط یک default export در این فایل
 export default async function DetailMatchClient({ params, searchParams }: HomeProps) {
 
   const resolvedParams = await params;
+  const matchId = resolvedParams.matchId;
+  const matchDetail = await getMatchDetail(matchId);
 
+  const matchDisplayData = {
+    hostTeamName: matchDetail?.host_team?.team_name || matchDetail?.host_team_name || resolvedParams.teamName || 'نامشخص',
+    hostTeamLogo: matchDetail?.host_team?.logo?.logo_path || matchDetail?.host_team_logo || '',
+  };
 
   return (
     <>
       <Box sx={{ p: 1.5 }}>
-        <MatchDetaiLayout>
-          {<MatchDetail params={Promise.resolve({ slug: [resolvedParams.matchId, resolvedParams.teamId, resolvedParams.teamName] })} />}
+        <MatchDetaiLayout
+          hostTeamName={matchDisplayData.hostTeamName}
+          hostTeamLogo={matchDisplayData.hostTeamLogo}
+          matchId={resolvedParams.matchId}
+          teamId={resolvedParams.teamId}
+        >
+          {
+            <MatchDetail
+              params={Promise.resolve({ slug: [resolvedParams.matchId, resolvedParams.teamId, resolvedParams.teamName] })}
+              matchDetail={matchDetail}
+            />
+          }
         </MatchDetaiLayout>
       </Box>
 

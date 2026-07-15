@@ -71,6 +71,12 @@ const TopSectionUnified: React.FC<TopSectionUnifiedProps> = ({ type, info, id, a
     const dispatch = useDispatch();
     const [file, setFile] = React.useState<File | null>(null);
     const [imageSrc, setImageSrc] = React.useState<string | null>(null);
+    const [avatarImageSrc, setAvatarImageSrc] = React.useState<string>(() => {
+        if (typeof DefaultAvatar === 'string') {
+            return DefaultAvatar;
+        }
+        return DefaultAvatar.src || '';
+    });
 
     const selectFileHandler = (selectedFile: File) => {
         const blobUrl = URL.createObjectURL(selectedFile);
@@ -103,7 +109,7 @@ const TopSectionUnified: React.FC<TopSectionUnifiedProps> = ({ type, info, id, a
         }
     };
     {/**بخش ارسال محتوا فعلا لازم نیست */ }
-    {/** 
+    {/**
     React.useEffect(() => {
         if (file && imageSrc) {
             dispatch(
@@ -121,16 +127,24 @@ const TopSectionUnified: React.FC<TopSectionUnifiedProps> = ({ type, info, id, a
     }, [file, imageSrc, dispatch]);
     */}
 
-    if (!info) return null;
-
     const avatarSrc =
         type === "team"
             ? info?.team_info?.logo?.logo_path
                 ? `${hostAddress}${info.team_info.logo.logo_path}`
-                : DefaultAvatar
+                : (typeof DefaultAvatar === 'string' ? DefaultAvatar : DefaultAvatar.src || '')
             : info?.avatar?.path
                 ? `${hostAddress}${info.avatar.path}`
-                : DefaultAvatar;
+                : (typeof DefaultAvatar === 'string' ? DefaultAvatar : DefaultAvatar.src || '');
+
+    React.useEffect(() => {
+        setAvatarImageSrc(avatarSrc);
+    }, [avatarSrc]);
+
+    if (!info) return null;
+
+    const handleAvatarError = () => {
+        setAvatarImageSrc(typeof DefaultAvatar === 'string' ? DefaultAvatar : DefaultAvatar.src || '');
+    };
 
     const displayName = type === "team" ? info?.team_info?.team_name || "" : info?.fullname || "";
     const followers = info?.totalFollowers || 0;
@@ -152,7 +166,8 @@ const TopSectionUnified: React.FC<TopSectionUnifiedProps> = ({ type, info, id, a
                                 size="md"
                                 outline
                                 color={theme.palette.primary.main}
-                                 src={avatarSrc}
+                                src={avatarImageSrc}
+                                onError={handleAvatarError}
                                 sx={{
                                     width: 64,
                                     height: 64,

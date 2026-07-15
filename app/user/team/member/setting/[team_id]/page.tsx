@@ -7,10 +7,10 @@ import { useRouter, useParams } from "next/navigation";
 import {
     Box, Chip, IconButton, Paper, Stack, Tooltip, TextField,
     List, ListItem, Divider, ListItemText, ListItemAvatar, Typography, Autocomplete, CircularProgress,
-    useTheme
+    useTheme, Alert, Collapse
 } from "@mui/material";
 import { Directions, HowToReg } from "@mui/icons-material";
-import { IconX, IconCircleCheck, IconCheck, IconUserPlus } from "@tabler/icons-react";
+import { IconX, IconCircleCheck, IconCheck, IconUserPlus, IconChevronsDown, IconChevronsUp } from "@tabler/icons-react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
@@ -109,6 +109,10 @@ function ListItems({ data, team_id }: ListItemsProps) {
     const dialogOpenHandler = (member_id: string | number) => {
         setMemberId(member_id);
         setDialogOpen(true);
+    };
+
+    const handleDelete = (item: MemberItem) => {
+        dialogOpenHandler(item.team_member_id);
     };
 
     const dialogHandler = (event: boolean) => {
@@ -391,6 +395,9 @@ const MembersSetting = () => {
     const [userId, setUserId] = useState<string | number | null>(null);
     const [update, setUpdate] = useState<boolean>(false);
 
+    const memberCount = teaminfo?.members?.length ?? 0;
+    const approvedMemberCount = teaminfo?.members?.filter((member) => member.type === "member").length ?? 0;
+
     const dialogHandler = (event: boolean) => {
         if (event === false) {
             setDialogOpen(false);
@@ -510,36 +517,77 @@ const MembersSetting = () => {
                             >
                                 <TeamBox
                                     title={teaminfo.team_name}
-                                    logo={teaminfo.logo ? `${hostAddress}/${teaminfo.logo.logo_path}` : DefaultAvatar}
+                                    logo={teaminfo.logo && teaminfo.logo.logo_path ? `${hostAddress}/${teaminfo.logo.logo_path}` : (typeof DefaultAvatar === 'string' ? DefaultAvatar : DefaultAvatar.src || '')}
                                 />
                             </MainCardWrapper>
                         </Paper>
+                        <Paper
+                            elevation={0}
+                            sx={{
+                                mt: 2,
+                                p: 2,
+                                borderRadius: 2,
+                                border: `1px solid ${theme.palette.divider}`,
+                                backgroundColor: theme.palette.background.default,
+                            }}
+                        >
+                            <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
+                                <Box sx={{ flex: 1, p: 1.5, borderRadius: 2, backgroundColor: theme.palette.background.paper }}>
+                                    <Typography variant="caption" sx={{ color: theme.palette.grey[600], display: "block", mb: 0.5 }}>
+                                        تعداد اعضا
+                                    </Typography>
+                                    <Typography variant="h5" sx={{ color: theme.palette.primary.main, fontWeight: 700 }}>
+                                        {memberCount}
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ flex: 1, p: 1.5, borderRadius: 2, backgroundColor: theme.palette.background.paper }}>
+                                    <Typography variant="caption" sx={{ color: theme.palette.grey[600], display: "block", mb: 0.5 }}>
+                                        تعداد تایید شده
+                                    </Typography>
+                                    <Typography variant="h5" sx={{ color: theme.palette.success.main, fontWeight: 700 }}>
+                                        {approvedMemberCount}
+                                    </Typography>
+                                </Box>
+                            </Stack>
+                        </Paper>
+
                         <Box sx={boxStyle}>
 
                             <IconText textPaddingTop={0.5} fontSize={12} icon={<HowToReg />} color={TextColor} text="مدیریت اعضا" />
                         </Box>
                         {/* استک اصلی برای بخش لیست اعضا و دکمه‌های بیشتر/کمتر */}
                         <Stack sx={{ maxWidth: "100%", direction: "rtl" }} spacing={0}>
-                            <ListItems
-                                team_id={teamid}
-                                data={showAll ? verifyMemberList.members : verifyMemberList.members.slice(0, 2)}
-                            />
+                            <Collapse in={showAll} timeout={400} unmountOnExit>
+                                <ListItems
+                                    team_id={teamid}
+                                    data={verifyMemberList.members}
+                                />
+                            </Collapse>
+
+                            {!showAll && (
+                                <ListItems
+                                    team_id={teamid}
+                                    data={verifyMemberList.members.slice(0, 2)}
+                                />
+                            )}
 
                             {verifyMemberList.members.length > 2 && (
                                 <Box sx={{ mt: 0, display: "flex", justifyContent: "center" }}>
                                     {!showAll ? (
                                         <Button
                                             variant="text"
-                                            sx={{ color: theme.palette.grey[600], fontWeight: 500, fontSize: 12 }}
+                                            sx={{ color: theme.palette.grey[600], fontWeight: 500, fontSize: 12, gap: 0.5 }}
                                             onClick={() => setShowAll(true)}
+                                            endIcon={<IconChevronsDown size={16} />}
                                         >
                                             <span>مشاهده بیشتر</span>
                                         </Button>
                                     ) : (
                                         <Button
                                             variant="text"
-                                            sx={{ color: theme.palette.grey[600], fontWeight: 500, fontSize: 12 }}
+                                            sx={{ color: theme.palette.grey[600], fontWeight: 500, fontSize: 12, gap: 0.5 }}
                                             onClick={() => setShowAll(false)}
+                                            endIcon={<IconChevronsUp size={16} />}
                                         >
                                             <span>مشاهده کمتر</span>
                                         </Button>
@@ -558,6 +606,21 @@ const MembersSetting = () => {
                                 />
 
                                 <Box sx={{ p: 1 }}>
+                                    <Alert
+                                        severity="warning"
+                                        sx={{
+                                            mb: 1,
+                                            textAlign: "right",
+                                            borderRadius: 2,
+                                            backgroundColor: theme.palette.primary.light,
+                                            color: theme.palette.warning.dark,
+                                            '& .MuiAlert-icon': {
+                                                color: theme.palette.warning.dark,
+                                            },
+                                        }}
+                                    >
+                                        برای افزودن عضو، کاربر باید قبلاً در سایت ثبت‌نام کرده باشد.
+                                    </Alert>
                                     <Button
                                         fullWidth
                                         sx={{ border: "1px dashed", borderColor: theme.palette.secondary.main, p: 1, borderRadius: 2 }}
@@ -581,8 +644,8 @@ const MembersSetting = () => {
 
                     </CustomBox>
                 ) : (
-                    <Box sx={{ p: 5, textAlign: 'center' }}>
-                        <img src={teamPng.src || teamPng} style={{ width: "225px", height: "auto" }} alt="No Team" />
+                    <Box sx={{ p: 5, textAlign: 'center',height:"100vh" }}>
+                        <img src={typeof teamPng === 'string' ? teamPng : teamPng.src || ''} style={{ width: "225px", height: "auto" }} alt="No Team" />
                         <Typography variant="h5" sx={{ color: theme.palette.grey[500], mt: 2 }}>
                             تیم نداری؟ از <a href="#"> اینجا </a> یه تیم ایجاد کن
                         </Typography>

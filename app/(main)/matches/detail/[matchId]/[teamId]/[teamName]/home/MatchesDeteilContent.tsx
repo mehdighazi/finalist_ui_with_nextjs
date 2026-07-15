@@ -12,7 +12,7 @@ interface PageProps {
     params: Promise<{
         slug: string[];
     }>;
-
+    matchDetail?: any;
 }
 interface MatchItemRowProps {
     title: string;
@@ -65,8 +65,7 @@ async function getMatchDetail(matchId: string) {
             cache: 'no-store',
         });
 
-        console.log('Response status:', response.status);
-        console.log('Response ok:', response.ok);
+        
 
         if (!response.ok) {
             console.error('HTTP Error:', response.status);
@@ -120,7 +119,7 @@ const headerSx = (size: string): SxProps<Theme> => ({
     color: 'primary.white',
     // borderRadius: '8px 8px 0 0',
 });
-export default async function DetailMatchPage({ params }: PageProps) {
+export default async function DetailMatchPage({ params, matchDetail }: PageProps) {
     const { slug } = await params;
     // استخراج matchId
     let matchId = slug?.[0];
@@ -129,7 +128,7 @@ export default async function DetailMatchPage({ params }: PageProps) {
         ? `:${process.env.NEXT_PUBLIC_HOST_PORT}`
         : '';
 
-    const DOMAIN = `${HOST}${PORT}/api/app/`;
+  
     // اگر [object Object] بود، از پارامتر دوم استفاده کن
     if (matchId === '[object Object]' && slug?.length > 1) {
         matchId = slug[1];
@@ -154,9 +153,9 @@ export default async function DetailMatchPage({ params }: PageProps) {
 
 
     // دریافت اطلاعات
-    const matchDetail = await getMatchDetail(matchId);
+    const resolvedMatchDetail = matchDetail ?? await getMatchDetail(matchId);
 
-    if (!matchDetail) {
+    if (!resolvedMatchDetail) {
         return (
             <Box sx={{ p: 4, textAlign: 'center' }}>
                 <Typography variant="h5" color="error">
@@ -169,10 +168,10 @@ export default async function DetailMatchPage({ params }: PageProps) {
 
     // تبدیل داده‌ها با بررسی وجود فیلدها
     const matchDisplayData = {
-        createdAt: matchDetail.createdAt || matchDetail.created_at || new Date().toISOString(),
+        createdAt: resolvedMatchDetail.createdAt || resolvedMatchDetail.created_at || new Date().toISOString(),
         match_id: matchId,
-        hostTeamName: matchDetail.host_team?.team_name || matchDetail.host_team_name || 'نامشخص',
-        hostLogo: matchDetail.host_team?.logo?.logo_path || matchDetail.host_team_logo || '',
+        hostTeamName: resolvedMatchDetail.host_team?.team_name || resolvedMatchDetail.host_team_name || 'نامشخص',
+        hostLogo: resolvedMatchDetail.host_team?.logo?.logo_path || resolvedMatchDetail.host_team_logo || '',
         matchSportField: matchDetail.match_sport?.field_title || matchDetail.sport_field || 'فوتبال',
         matchDate: matchDetail.match_date ? (persiandate(matchDetail.match_date)?.[1] || matchDetail.match_date) : '',
         matchTime: matchDetail.match_time || '',

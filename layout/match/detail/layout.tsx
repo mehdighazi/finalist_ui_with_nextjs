@@ -33,19 +33,34 @@ interface City {
 
 interface RootLayoutProps {
     children: ReactNode;
+    hostTeamName: string;
+    hostTeamLogo?: string;
+    hostTeamId?: string;
+    matchId?: string;
+    teamId?: string;
 }
 //------------------------------------------------
 interface BottomSheetContentProps {
     onChange: (value: boolean) => void; // تابعی که یک مقدار Boolean می‌گیرد
     guestTeamName: string;
     hostTeamName: string;
+    guestTeamLogo?: string;
+    hostTeamLogo?: string;
 }
 
 const BottomSheetContent: React.FC<BottomSheetContentProps> = ({
     onChange,
     guestTeamName,
-    hostTeamName
+    hostTeamName,
+    guestTeamLogo,
+    hostTeamLogo
 }) => {
+    const guestInitials = guestTeamName ? guestTeamName.slice(0, 2) : '';
+    const hostInitials = hostTeamName ? hostTeamName.slice(0, 2) : '';
+ const HOST = process.env.NEXT_PUBLIC_HOST_API_URL ?? '';
+    const PORT = process.env.NEXT_PUBLIC_HOST_PORT
+        ? `:${process.env.NEXT_PUBLIC_HOST_PORT}`
+        : '';
     return (
         <>
             <Stack sx={{ p: 3 }}>
@@ -57,6 +72,7 @@ const BottomSheetContent: React.FC<BottomSheetContentProps> = ({
                     {` می باشید درصورت تایید اطلاعات شما به جهت هماهنگی به سرپرست تیم حریف نمایش داده خواهد شد. ادامه میدهید؟`}
                 </Typography>
 
+               
                 <Stack direction={"row"} spacing={2} sx={{ mt: 2 }}>
                     <Button
                         color={"error"}
@@ -74,18 +90,72 @@ const BottomSheetContent: React.FC<BottomSheetContentProps> = ({
                     </Button>
                 </Stack>
             </Stack>
+             <Stack direction="row" alignItems="center" justifyContent="center" spacing={2} sx={{ mt: 2 }}>
+                    <Stack alignItems="center">
+                        <Box>
+                            <Box component="img" src={`${HOST}${PORT}/${guestTeamLogo || undefined}`} alt={guestTeamName} sx={{ width: 56, height: 56, borderRadius: '8px', objectFit: 'cover', bgcolor: 'grey.100' }} />
+                        </Box>
+                        <Typography variant="caption" sx={{ mt: 0.5 }}>{guestTeamName}</Typography>
+                    </Stack>
+
+                    <Box sx={{ mx: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Box sx={{ width: 96, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                            <Box sx={{ position: 'relative', width: 72, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <Box sx={{ position: 'absolute', left: 0, right: 0, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    {/* static faint arrow path as background */}
+                                    <svg width="64" height="20" viewBox="0 0 64 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 10h48" stroke="#E0E0E0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        <path d="M38 4l8 6-8 6" stroke="#E0E0E0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                </Box>
+
+                                <Box sx={{
+                                    width: 28,
+                                    height: 28,
+                                    color: 'primary.main',
+                                    transformOrigin: 'center',
+                                    '@keyframes slideFromLeft': {
+                                        '0%': { transform: 'translateX(-28px) scale(0.9)', opacity: 0 },
+                                        '50%': { transform: 'translateX(8px) scale(1)', opacity: 1 },
+                                        '100%': { transform: 'translateX(44px) scale(0.9)', opacity: 0 }
+                                    },
+                                    animation: 'slideFromLeft 1000ms ease-in-out infinite'
+                                }}>
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 12h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        <path d="M12 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+
+                    <Stack alignItems="center">
+                        <Box>
+                            <Box component="img" src={`${HOST}${PORT}/${hostTeamLogo || undefined}`} alt={hostTeamName} sx={{ width: 56, height: 56, borderRadius: '8px', objectFit: 'cover', bgcolor: 'grey.100' }} />
+                        </Box>
+                        <Typography variant="caption" sx={{ mt: 0.5 }}>{hostTeamName}</Typography>
+                    </Stack>
+                </Stack>
+
         </>
     );
 };
 //---------------------------------------------------------
 
+const safeDecode = (val?: string): string | undefined => {
+    if (!val) return val;
+    try {
+        return decodeURIComponent(val);
+    } catch (e) {
+        return val;
+    }
+};
 
-export default function MatchDetailLayout({ children }: RootLayoutProps) {
+
+export default function MatchDetailLayout({ children, hostTeamName, hostTeamLogo, teamId }: RootLayoutProps) {
     const dispatch = useDispatch();
-    const theme = useTheme();
-    const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
+   
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -133,12 +203,26 @@ export default function MatchDetailLayout({ children }: RootLayoutProps) {
         }
     };
     const handleRequestClick = () => {
+        const storedRaw = localStorage.getItem("team_info");
+        let storedInfo: any = null;
+        try {
+            storedInfo = storedRaw ? JSON.parse(storedRaw) : null;
+        } catch (e) {
+            storedInfo = null;
+        }
+
         dispatch(
             showBottomSheet({
-                title: 'تنظیمات کاربری',
+                title: 'ارسال درخواست مسابقه',
                 ptSX: '10%',
                 renderContent: () => (
-                    <BottomSheetContent hostTeamName="تهران" guestTeamName="بارسا" onChange={() => sendData({ teamId: 10 })} />
+                    <BottomSheetContent
+                        hostTeamName={safeDecode(hostTeamName) || ""}
+                        hostTeamLogo={safeDecode(hostTeamLogo) || undefined}
+                        guestTeamName={storedInfo?.team_name || storedInfo?.teamName || ""}
+                        guestTeamLogo={storedInfo?.team_logo || storedInfo?.logo}
+                        onChange={() => sendData({ teamId: 10 })}
+                    />
                 ),
             })
         );

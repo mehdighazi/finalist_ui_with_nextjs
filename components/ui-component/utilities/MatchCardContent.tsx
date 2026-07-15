@@ -265,6 +265,7 @@ console.log(props.user_team_role)
 };
 //---------------------------------------------------
 export const WaitingOpponentCard: React.FC<MatchBaseProps> = (props) => {
+ 
   return (
 
     <MainCard
@@ -296,7 +297,7 @@ export const WaitingOpponentCard: React.FC<MatchBaseProps> = (props) => {
           <Chip
             size="small"
             color="warning"
-            label="در انتظار حریف"
+            label= {props.matchSportField || "نامشخص"}
           />
         </Stack>
 

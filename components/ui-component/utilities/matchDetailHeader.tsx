@@ -20,6 +20,7 @@ export default function MatchDetailHeader({
     province,
     city,
 }: MatchDetailHeaderProps) {
+  
     return (
         <Box
             sx={{
@@ -52,7 +53,7 @@ export default function MatchDetailHeader({
                     justifyContent="center"
                 >
                     <Typography variant="body2">
-                        📅 { (persiandate(matchDate)?.[1] || matchDate) }
+                        📅 { ( matchDate) }
                     </Typography>
 
                     <Typography variant="body2">
