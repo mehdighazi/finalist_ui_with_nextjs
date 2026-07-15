@@ -7,8 +7,6 @@ import { AccessTime, Festival, PlaylistAddCircle } from "@mui/icons-material";
 import { IconX, IconCircleCheckFilled, IconMapPin, IconUsersGroup, IconId, IconCategory } from '@tabler/icons-react'
 //project import
 //import "../style.css"
-import { styled } from "@mui/material/styles";
-import CustomLoadingButton from '@/components/ui-component/utilities/CustomLoadingButton'
 import IconText from "@/components/ui-component/utilities/IconText";
 //--------------------------------------|Step 1|---------------------------------------------------
 

@@ -22,7 +22,7 @@ import { rlPadding } from "@/components/store/constant";
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
- 
+  
 export default function FullScreenDialog() {
   const dispatch = useDispatch();
   const { renderContent, title, ptSX, visible } = useSelector( 

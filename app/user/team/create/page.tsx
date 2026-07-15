@@ -14,6 +14,7 @@ import Step1 from "./steps/step1";
 import api from '@/components/api/api';
 import dataHandler from '@/components/api/dataHandler';
 import { showAlert } from "@/components/store/slices/alertSlice";
+import { useRouter } from "next/router";
 
 
 
@@ -40,6 +41,7 @@ interface CustomInputEvent {
 
 const CreateTeam: React.FC = () => {
     const theme = useTheme();
+    const router=useRouter();
     const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
     const containerRef = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch()
@@ -114,6 +116,7 @@ const CreateTeam: React.FC = () => {
                         message: "عملیات با موفقیت انجام شد",
                         type: status ? 'success' : 'error'
                     }));
+                    router.push("/user/profile/feed")
 
                 } else {
                     dispatch(showAlert({

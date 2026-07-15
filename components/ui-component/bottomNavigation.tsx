@@ -1,7 +1,6 @@
 'use client';
 
-import * as React from "react";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation'; // تغییر به نکست‌جی‌اس برای هدایت صفحات
 
 // ui-material
@@ -30,19 +29,21 @@ import dataHandler from "@/components/api/dataHandler";
 import api, { hostAddress } from "@/components/api/api";
 import Transitions from '@/components/ui-component/extended/Transitions';
 import MainCard from '@/components/ui-component/cards/MainCard_pre';
-import DialogBox from '@/components/ui-component/dialog';
+// DialogBox removed — not used in this file
 import CustomAvatar from '@/components/ui-component/extended/Avatar';
 
 // Tabler icons
-import { 
-    IconBookmark, 
-    IconPennant2, 
-    IconSwords, 
-    IconChevronLeft, 
-    IconEdit, 
-    IconArrowsUpDown, 
-    IconUser 
+import {
+    IconBookmark,
+    IconPennant2,
+    IconSwords,
+    IconChevronLeft,
+    IconEdit,
+    IconArrowsUpDown,
+    IconUser
 } from '@tabler/icons-react';
+import { useDispatch } from "react-redux";
+import { showBottomSheet } from "../store/slices/bottomSheetSlice";
 
 // Interfaces & Types
 interface TeamLogo {
@@ -76,12 +77,19 @@ interface PagesBottomNavigationProps {
     customWidth: number;
 }
 
+// helper to build absolute urls for host + path (ensures single slash)
+const buildHostUrl = (path: string) => {
+    if (!path) return '';
+    const host = hostAddress ? String(hostAddress) : '';
+    return host.replace(/\/$/, '') + '/' + path.replace(/^\//, '');
+};
+
 // styles
 const ListItemWrapper = styled('div')(({ theme }) => ({
     cursor: 'pointer',
     padding: 0,
     '&:hover': {
-        background: theme.palette.primary[100]
+        background: theme.palette.primary.light
     },
     '& .MuiListItem-root': {
         padding: 0
@@ -99,9 +107,7 @@ const DialogContentSelectTeam: React.FC<DialogContentSelectTeamProps> = ({ onCha
                             key={item.team_id ?? i}
                             secondaryAction={
                                 <CustomAvatar src={
-                                    item?.logo?.logo_path
-                                        ? `${hostAddress}/${item.logo.logo_path}`
-                                        : ""
+                                    item?.logo?.logo_path ? buildHostUrl(item.logo.logo_path) : ''
                                 } />
                             }
                             disablePadding
@@ -118,8 +124,8 @@ const DialogContentSelectTeam: React.FC<DialogContentSelectTeamProps> = ({ onCha
                             >
                                 <ListItemText
                                     sx={{ float: 'right', mr: '0.8rem', direction: "rtl", textAlign: 'right' }}
-                                    id={labelId} 
-                                    primary={item["team_name"]} 
+                                    id={labelId}
+                                    primary={item["team_name"]}
                                 />
                                 <ListItemIcon>
                                     <IconChevronLeft />
@@ -189,7 +195,7 @@ const TeamProfileMenuList: React.FC<TeamProfileMenuListProps> = ({ onChange, tea
                 <ListItem
                     disabled={!teamID}
                     component="a"
-                    href={`/team/profile?tid=${teamID}`}
+                     href={`/team/profile/feed?tid=${teamID}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     sx={{
@@ -274,7 +280,7 @@ const TeamProfile: React.FC<TeamProfileProps> = ({ onChange, userTeamList, teamI
     const theme = useTheme();
     const matchesXs = useMediaQuery(theme.breakpoints.down('md'));
     const router = useRouter(); // استفاده از روتر نکست‌جی‌اس
-
+    const dispatch = useDispatch()
     const [teamName, setTeamName] = useState<string | null>(null);
     const [teamID, setTeamID] = useState<string | number | null>(null);
     const [logo, setLogo] = useState<string | null>(null);
@@ -300,7 +306,7 @@ const TeamProfile: React.FC<TeamProfileProps> = ({ onChange, userTeamList, teamI
         setTeamID(value.team_id);
         setLogo(value.team_logo ?? null);
         onChange(value);
-        setDialogOpen(false);
+        localStorage.setItem("team_info", JSON.stringify(value))
     };
 
     useEffect(() => {
@@ -312,10 +318,10 @@ const TeamProfile: React.FC<TeamProfileProps> = ({ onChange, userTeamList, teamI
     }, [teamInfo]);
 
     useEffect(() => {
-        setLogoPath(logo ? `${hostAddress}${logo}` : "");
+        setLogoPath(logo ? buildHostUrl(logo) : "");
     }, [logo, teamID]);
 
-    const prevOpen = useRef(open);
+    const prevOpen = useRef<boolean>(false);
     useEffect(() => {
         if (prevOpen.current === true && open === false) {
             anchorRef.current?.focus();
@@ -324,8 +330,20 @@ const TeamProfile: React.FC<TeamProfileProps> = ({ onChange, userTeamList, teamI
     }, [open]);
 
     const handleMenuOnChange = (event: string) => {
+
+
         if (event === 'changeTeam') {
-            setDialogOpen(true);
+            dispatch(
+                showBottomSheet({
+                    title: 'انتخاب تیم',
+                    ptSX: '10%',
+                    renderContent: () => (
+                        <DialogContentSelectTeam data={userTeamList} onChange={(e) => teamRadioOnchange(e)} />
+
+                    ),
+                })
+            )
+
         } else if (event === 'editTeam') {
             router.push(`/team/profile/edit/${teamID}`);
         } else if (event === 'editMember') {
@@ -335,12 +353,7 @@ const TeamProfile: React.FC<TeamProfileProps> = ({ onChange, userTeamList, teamI
 
     return (
         <>
-            <DialogBox 
-                title={"انتخاب تیم"} 
-                onChange={(event: boolean) => setDialogOpen(event)}
-                open={dialogOpen}
-                content={<DialogContentSelectTeam data={userTeamList} onChange={(e) => teamRadioOnchange(e)} />} 
-            />
+
             <Box sx={{ mb: 1 }}>
                 <ButtonBase onClick={handleToggle} sx={{ borderRadius: 0 }} ref={anchorRef}>
                     <Chip
@@ -447,7 +460,7 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
     const [userTeamList, setUserTeamList] = useState<TeamItem[]>([]);
 
     const getData = () => {
-        const result = dataHandler(api.listUserTeam(), "get", "");
+        const result = dataHandler(api.listUserTeam(""), "get", "");
         try {
             result(async function (data: { result: TeamItem[] }, status: boolean) {
                 if (status) {
@@ -507,13 +520,13 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
     const iconSize = 18;
 
     return (
-        <Paper 
-            sx={{ 
-                position: 'fixed', 
-                bottom: 0, 
-                left: matchUpMd ? rlPadding : 0, 
-                right: matchUpMd ? rlPadding : 0, 
-                height: 45 
+        <Paper
+            sx={{
+                position: 'fixed',
+                bottom: 0,
+                left: matchUpMd ? rlPadding : 0,
+                right: matchUpMd ? rlPadding : 0,
+                height: 45
             }}
             elevation={3}
         >
@@ -531,18 +544,18 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
                 }}
             >
                 <BottomNavigationAction label={<span>نشان شده ها</span>} sx={elemSX} icon={<IconBookmark size={iconSize} />} />
-             <BottomNavigationAction label={<span>شروع مسابقه</span>} sx={elemSX} icon={<IconSwords size={iconSize} />} />
+                <BottomNavigationAction label={<span>شروع مسابقه</span>} sx={elemSX} icon={<IconSwords size={iconSize} />} />
                 <BottomNavigationAction label={<span> مسابقات</span>} sx={elemSX} icon={<IconPennant2 size={iconSize} />} />
-                <BottomNavigationAction 
-                    label="" 
-                    sx={elemSX} 
+                <BottomNavigationAction
+                    label=""
+                    sx={elemSX}
                     icon={
-                        <TeamProfile 
-                            teamInfo={teamInfo} 
-                            userTeamList={userTeamList} 
-                            onChange={(e) => console.log(e)} 
+                        <TeamProfile
+                            teamInfo={teamInfo}
+                            userTeamList={userTeamList}
+                            onChange={(e) => setTeamInfo(e)}
                         />
-                    } 
+                    }
                 />
             </BottomNavigation>
         </Paper>
@@ -552,7 +565,7 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
 const CustomBottomNavigation: React.FC = () => {
     //if user not logged in, don't show bottom navigation
     const token = localStorage.getItem("token");
-        
+
     if (!token) {
         return null;
     }

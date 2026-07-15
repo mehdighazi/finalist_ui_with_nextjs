@@ -158,10 +158,7 @@ function ListItems({ data, team_id }: ListItemsProps) {
         }
     };
 
-    const handleDelete = (item: MemberItem) => {
-        console.log("تغییر وضعیت یا حذف تاییدیه عضو:", item);
-    };
-
+   
     return (
         <>
             <DialogBox
@@ -249,6 +246,12 @@ const UserSearchAutocomplete = ({ onChange, update, setUpdate }: UserSearchAutoc
     const [options, setOptions] = useState<User[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const theme = useTheme();
+
+    // when parent toggles `update`, clear input and options
+    useEffect(() => {
+        setInputValue('');
+        setOptions([]);
+    }, [update]);
 
     const handleSearch = async (value: string) => {
         setInputValue(value);
@@ -465,7 +468,10 @@ const MembersSetting = () => {
 
         try {
             result(async function (data: any, status: any) {
-                if (status === 100 || status === true) setUpdate(prev => !prev);
+                if (status === 100 || status === true) {
+                    setUpdate(prev => !prev);
+                    setUserId(null);
+                }
                 dispatch(showAlert({
                     message: status ? data.message : (data.response?.data?.message || "خطا در ارسال اطلاعات"),
                     type: status ? "success" : "error"
