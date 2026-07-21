@@ -71,8 +71,7 @@ const Content = ({image, onChange, file}) => {
         // تابعی که پس از اتمام آپلود فراخوانی می‌شود
 
         function handleUploadComplete({fileskey, filepath}) {
-            console.log("فایل با موفقیت آپلود شد!");
-            console.log("filepath:", filepath);
+           
             setPath(filepath)
 
         }

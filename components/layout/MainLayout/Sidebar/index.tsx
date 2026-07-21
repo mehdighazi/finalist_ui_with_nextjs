@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Drawer, useMediaQuery, IconButton, Chip } from '@mui/material';
+import { Box, Drawer, useMediaQuery, IconButton, Chip, Badge } from '@mui/material';
 
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -20,27 +20,36 @@ import api from '@/components/api/api'
 import dataHandler from '@/components/api/dataHandler'
 import { hostAddress } from '@/components/api/api'
 import { StaticImageData } from 'next/image';
+import type { UserInfo } from '@/types/user';
 
 // تابع کمکی برای تبدیل تصویر
 const getAvatarSrc = (avatar: any): string => {
   if (!avatar) return DefaultAvatar.src;
   if (typeof avatar === 'string') return avatar;
-  if (avatar.path) return `${hostAddress}/${avatar.path}`;
-  if (avatar.src) return avatar.src;
+  if (typeof avatar === 'object') {
+    if (avatar.path) return `${hostAddress}/${avatar.path}`;
+    if (avatar.src) return avatar.src;
+  }
   return DefaultAvatar.src;
 };
 
 interface SidebarProps {
   window?: any;
   rlPadding?: string;
+  userInfo?: UserInfo | null;
+  hasNotification?: boolean;
+  notificationCount?: number;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ window, rlPadding }) => {
+const Sidebar: React.FC<SidebarProps> = ({ window, rlPadding, userInfo, hasNotification = false, notificationCount = 0 }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
   const visible = useSelector((state: any) => state.sidebarMenu.visible);
-  const [userInfo, setUserInfo] = React.useState<any>({ fullname: 'کاربر', avatar: null });
+  const profileUserInfo = userInfo ?? { fullname: 'کاربر', avatar: null };
+
+
+  
 
   const handleClose = () => {
     if (!matchUpMd) {
@@ -54,15 +63,17 @@ const Sidebar: React.FC<SidebarProps> = ({ window, rlPadding }) => {
         <Chip
           sx={{ height: 48, borderRadius: 27, fontSize: 14 }}
           icon={
-            <CustomAvatar
-              size="sm"
-              src={getAvatarSrc(userInfo.avatar)}
-              aria-label="profile picture"
-            >
-              {userInfo.fullname[0]}
-            </CustomAvatar>
+           
+              <CustomAvatar
+                size="sm"
+                src={getAvatarSrc(profileUserInfo?.avatar)}
+                aria-label="profile picture"
+              >
+                {(profileUserInfo?.fullname || 'کاربر').charAt(0)}
+              </CustomAvatar>
+           
           }
-          label={userInfo.fullname}
+          label={profileUserInfo?.fullname || 'کاربر'}
           variant="outlined"
         />
         <Box sx={{ flexGrow: 1 }} />
@@ -75,13 +86,13 @@ const Sidebar: React.FC<SidebarProps> = ({ window, rlPadding }) => {
 
       <BrowserView>
         <PerfectScrollbar style={{ height: matchUpMd ? 'calc(100vh - 88px)' : 'calc(100vh - 56px)', padding: '0 16px' }}>
-          <MenuList />
+          <MenuList hasNotification={hasNotification} notificationCount={notificationCount} />
         </PerfectScrollbar>
       </BrowserView>
 
       <MobileView>
         <Box sx={{ px: 2 }}>
-          <MenuList />
+          <MenuList hasNotification={hasNotification} notificationCount={notificationCount} />
         </Box>
       </MobileView>
     </>

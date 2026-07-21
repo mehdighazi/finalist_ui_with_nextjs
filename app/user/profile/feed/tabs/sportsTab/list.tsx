@@ -88,7 +88,7 @@ const userTeams = data?.result?.teams || [];
       {userTeams.length > 0 ? (
         userTeams.map((team: any) => (
           <Grid item xs={12} sm={6} md={4} key={team.team_id}>
-            <TeamCard team={team} />
+           { <TeamCard team={team} />}
           </Grid>
         ))
       ) : (

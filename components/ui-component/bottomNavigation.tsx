@@ -601,7 +601,7 @@ const CustomBottomNavigation: React.FC = () => {
     }, []);
 
     return (
-        <Box ref={boxRef} sx={{ p: 0, pr: 0, position: "relative", minHeight: "100vh" }}>
+        <Box ref={boxRef} sx={{ p: 0, pr: 0, position: "relative", width: "100%" }}>
             <PagesBottomNavigation customWidth={boxWidth} />
         </Box>
     );

@@ -153,7 +153,7 @@ const safeDecode = (val?: string): string | undefined => {
 };
 
 
-export default function MatchDetailLayout({ children, hostTeamName, hostTeamLogo, teamId }: RootLayoutProps) {
+export default function MatchDetailLayout({ children, hostTeamName, hostTeamLogo, teamId,matchId }: RootLayoutProps) {
     const dispatch = useDispatch();
    
 
@@ -163,7 +163,8 @@ export default function MatchDetailLayout({ children, hostTeamName, hostTeamLogo
     // هندل کردن تغییر شهر و آپدیت URL برای SSR
     interface MatchRequestBody {
         // برای مثال:
-        teamId: number;
+        team_id: string;
+        match_id:string;
         // description?: string;
         [key: string]: any;
     }
@@ -172,12 +173,11 @@ export default function MatchDetailLayout({ children, hostTeamName, hostTeamLogo
         // نکته: در کد شما از formData استفاده شده بود، 
         // اگر منظورتان همان body ورودی است، نام را اصلاح کنید.
         const result = dataHandler(api.createMatchRequest(""), "post", body);
-
+console.log(body)
         try {
             // تایپ‌دهی به پارامترهای کالبک
             result(async (data: any, status: boolean) => {
-                console.log(data)
-
+             console.log(status)
                 if (status) {
                     dispatch(showAlert({
                         message: 'عملیات با موفقیت انجام شد',
@@ -186,11 +186,11 @@ export default function MatchDetailLayout({ children, hostTeamName, hostTeamLogo
 
                 } else {
                     dispatch(showAlert({
-                        message: "خطایی در سرور رخ داده است",
+                        message:  data?.response?.data?.message || "خطایی رخ داده",
                         type: 'error'
                     }));
                     // استفاده از Optional Chaining برای جلوگیری از کرش کردن در صورت نبود پیام
-                    const errorMessage = data?.response?.data?.message || ""
+                   
 
                 }
             });
@@ -214,14 +214,18 @@ export default function MatchDetailLayout({ children, hostTeamName, hostTeamLogo
         dispatch(
             showBottomSheet({
                 title: 'ارسال درخواست مسابقه',
-                ptSX: '10%',
+                ptSX: '20%',
                 renderContent: () => (
                     <BottomSheetContent
                         hostTeamName={safeDecode(hostTeamName) || ""}
                         hostTeamLogo={safeDecode(hostTeamLogo) || undefined}
                         guestTeamName={storedInfo?.team_name || storedInfo?.teamName || ""}
                         guestTeamLogo={storedInfo?.team_logo || storedInfo?.logo}
-                        onChange={() => sendData({ teamId: 10 })}
+                        onChange={() => sendData({ 
+                            team_id: storedInfo?.team_id,
+                            match_id:matchId
+
+                         })}
                     />
                 ),
             })

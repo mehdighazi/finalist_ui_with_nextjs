@@ -36,6 +36,7 @@ import {
 
 import IconText from "@/components/ui-component/utilities/IconText";
 import MatchDetailHeader from "@/components/ui-component/utilities/matchDetailHeader";
+import { persiandate } from "@/components/utils/Lib";
 
 const BoxWrapper = styled(Box)(({ theme }) => ({
     border: "1px solid",
@@ -262,7 +263,7 @@ export default function Requestes() {
                 <MatchDetailHeader
                     hostLogo={`${hostAddress}/${detailMatch.host_team?.logo?.logo_path ?? ""}`}
                     hostTeamName={detailMatch.host_team?.team_name ?? ""}
-                    matchDate={detailMatch.match_date ?? ""}
+                    matchDate={persiandate( detailMatch.match_date)[1] ?? ""}
                     matchTime={detailMatch.match_time ?? ""}
                     province={detailMatch.province_match?.province_title ?? ""}
                     city={detailMatch.city_match?.city_title ?? ""}

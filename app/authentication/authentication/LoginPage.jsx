@@ -138,6 +138,16 @@ const LoginPage = () => {
     const theme = useTheme();
       const router = useRouter();
 
+    // اگر توکن وجود داشت کاربر را به پروفایل منتقل می‌کنیم
+    React.useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('token');
+            if (token) {
+                router.replace('/user/profile/feed');
+            }
+        }
+    }, [router]);
+
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const dispatch = useDispatch();
     const [resend, setResend] = React.useState(false)
@@ -150,6 +160,7 @@ const LoginPage = () => {
     if (queryParams.get('p') === 'exit') {
         localStorage.removeItem("token")
         localStorage.removeItem("team_info")
+        localStorage.removeItem("userInfo")
     }
     React.useEffect(() => {
 
@@ -173,8 +184,22 @@ const LoginPage = () => {
                 if (status) {
 
                     if (data.result.type === 'active') {
+                        const resultData = data?.result || {};
+                        const userInfo = {
+                            fullname: resultData.fullname || [resultData.first_name, resultData.last_name].filter(Boolean).join(' ') || 'کاربر',
+                            first_name: resultData.first_name || '',
+                            last_name: resultData.last_name || '',
+                            avatar: resultData.avatar || null,
+                            token: resultData.token || '',
+                            type: resultData.type || 'active',
+                            ...resultData,
+                        };
 
-                        localStorage.setItem("token", data.result.token)
+                        localStorage.setItem("token", resultData.token || "")
+                        localStorage.setItem("userInfo", JSON.stringify(userInfo))
+                        if (typeof window !== 'undefined') {
+                            window.dispatchEvent(new Event("userInfo:updated"))
+                        }
                         setLoginStart(false)
                         const timeout = setTimeout(() => {
                             router.push(`/user/profile/feed?st=login`)
@@ -220,7 +245,7 @@ const LoginPage = () => {
                             <Grid container spacing={2} alignItems="center" justifyContent="center">
                                 <Grid xs={12} item sx={{ mb: 3, pt: 1 }}>
                                     <Typography align='center' sx={{ mt: 4, pt: 2 }}>
-                                        <Logo />
+                                        <Logo height={"150"} width={"150"} />
                                     </Typography>
 
                                 </Grid>

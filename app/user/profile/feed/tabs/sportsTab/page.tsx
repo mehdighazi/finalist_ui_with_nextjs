@@ -98,7 +98,7 @@ const SportsTab: React.FC = () => {
         
         try {
             result(async function (res: any, status: boolean) {
-                console.log(res);
+              
                 // بررسی وجود دیتا و پر بودن آرایه تیم‌ها
                 if (status && res?.result?.teams?.length > 0) {
                     setData(res); // ذخیره کل آبجکت پاسخ دیتابیس برای در دسترس بودن فیلد .result

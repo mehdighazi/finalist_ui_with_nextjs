@@ -44,9 +44,30 @@ export default function SubLayout({ children }: RootLayoutProps) {
     const { height } = useWindowDimensions();
     const router = useRouter();
     const searchParams = useSearchParams();
+   
 
     const normalizedPathname = pathname?.replace(/^\/(fa|en)\//, '/') || '';
-   
+    const isMeaningfulUserInfo = (value: any): value is UserInfo => {
+        if (!value || typeof value !== 'object') return false;
+
+        const fullname = typeof value.fullname === 'string' ? value.fullname.trim() : '';
+        const id = typeof value.id === 'string' ? value.id.trim() : '';
+        const mobile = typeof value.mobile === 'string' ? value.mobile.trim() : '';
+
+        return Boolean(id || mobile || (fullname && fullname !== 'کاربر'));
+    };
+
+    const [userInfo, setUserInfo] = React.useState<UserInfo | null>(() => {
+        try {
+            const storedUserInfo = localStorage.getItem('userInfo');
+            const parsedUserInfo = storedUserInfo ? JSON.parse(storedUserInfo) : null;
+            return isMeaningfulUserInfo(parsedUserInfo) ? parsedUserInfo : null;
+        } catch (error) {
+            return null;
+        }
+    });
+    const [hasNotification, setHasNotification] = React.useState(false);
+    const [notificationCount, setNotificationCount] = React.useState(0);
     const ignoreAuth =
         normalizedPathname === '/matches/list/all' ||
         normalizedPathname.startsWith('/matches/detail') ||
@@ -67,7 +88,50 @@ export default function SubLayout({ children }: RootLayoutProps) {
     }, [searchParams, router]);
     useEffect(() => {
         setToken(localStorage.getItem("token"));
+
+        try {
+            const storedUserInfo = localStorage.getItem('userInfo');
+            if (storedUserInfo) {
+                const parsedUserInfo = JSON.parse(storedUserInfo);
+                setUserInfo(isMeaningfulUserInfo(parsedUserInfo) ? parsedUserInfo : null);
+            } else {
+                setUserInfo(null);
+            }
+        } catch (error) {
+            console.error('Failed to load userInfo from localStorage', error);
+            setUserInfo(null);
+        }
     }, []);
+
+    useEffect(() => {
+        if (!token && !ignoreAuth) {
+            setHasNotification(false);
+            setNotificationCount(0);
+            return;
+        }
+
+        if (!userInfo) {
+            setHasNotification(false);
+            setNotificationCount(0);
+            return;
+        }
+
+        const result = dataHandler(api.notificationList('sent', 0), 'get', '');
+
+        result((data: any, status: boolean) => {
+            const notificationData = Array.isArray(data?.result?.data) ? data.result.data : [];
+            const totalRecords = Number(data?.result?.total_records ?? 0);
+
+            if (status && (notificationData.length > 0 || totalRecords > 0)) {
+                setHasNotification(true);
+                setNotificationCount(notificationData.length || totalRecords);
+            } else {
+                setHasNotification(false);
+                setNotificationCount(0);
+            }
+        });
+    }, [token, ignoreAuth, userInfo]);
+
     return (
         <Providers>
 
@@ -99,7 +163,7 @@ export default function SubLayout({ children }: RootLayoutProps) {
                     >
                         {(token || ignoreAuth) && (
                             <Toolbar>
-                                {<Header />}
+                                {<Header userInfo={userInfo} hasNotification={hasNotification} notificationCount={notificationCount} />}
                             </Toolbar>
                         )}
                     </AppBar>
@@ -109,7 +173,9 @@ export default function SubLayout({ children }: RootLayoutProps) {
                      (
                         <Sidebar
                             rlPadding={rlPadding}
-                        //  userInfo={userinfo}
+                            userInfo={userInfo}
+                            hasNotification={hasNotification}
+                            notificationCount={notificationCount}
                         />
                     )}
 
@@ -127,7 +193,9 @@ export default function SubLayout({ children }: RootLayoutProps) {
 
                     {/* Page content */}
                     <Box sx={{
-                        textAlign: "center", mb: -1,
+                        textAlign: "center",
+                        mb: -1,
+                        pb: "100px",
                         backgroundColor: theme.palette.grey[200],
 
 

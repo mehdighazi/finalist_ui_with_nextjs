@@ -69,7 +69,7 @@ const MatchList = ({ teamId, tab, role, result = "all", sub_status }: MatchListP
 
     try {
       handler(async function (data: any, status: any) {
-        console.log("API Response:", data.result); // برای دیباگ کردن پاسخ API
+      
         if (data && data.result) {
           // با ساختار جدید بک‌اندر، دیتای هاست و گست کاملاً یکسان و در data.result.data قرار دارد
           let normalizedData = role === "host" ? data.result.data || [] : data.result || [];

@@ -257,6 +257,7 @@ export default async function DetailMatchPage({ params, matchDetail }: PageProps
                                 border: "1px solid #eee",
                                 borderRadius: 3,
                                 p: 2,
+                                textAlign:"right"
                             }}
                         >
                             <Typography
@@ -268,6 +269,7 @@ export default async function DetailMatchPage({ params, matchDetail }: PageProps
 
                             <Typography
                                 variant="body2"
+                                
                                 sx={{
                                     lineHeight: 2,
                                     color: "text.secondary",

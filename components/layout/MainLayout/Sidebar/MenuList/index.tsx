@@ -11,6 +11,7 @@ import {
   ListItemText,
   Typography,
   Collapse,
+  Badge,
 } from '@mui/material';
 import { FiberManualRecord } from '@mui/icons-material';
 import { IconChevronLeft, IconPlus, IconMinus } from '@tabler/icons-react';
@@ -59,7 +60,7 @@ type MenuItemType = ItemMenuItem | CollapseMenuItem | GroupMenuItem;
 /* Components */
 /* ============================== */
 
-const NavItem: React.FC<{ item: ItemMenuItem; level: number }> = ({ item, level }) => {
+const NavItem: React.FC<{ item: ItemMenuItem; level: number; hasNotification?: boolean; notificationCount?: number }> = ({ item, level, hasNotification = false, notificationCount = 0 }) => {
   const theme = useTheme();
   const Icon = item.icon;
   const itemIcon = Icon ? <Icon stroke={1.5} size="1.3rem" /> : <FiberManualRecord fontSize={level > 0 ? 'inherit' : 'medium'} />;
@@ -90,12 +91,16 @@ const NavItem: React.FC<{ item: ItemMenuItem; level: number }> = ({ item, level 
           )
         }
       />
-      <IconChevronLeft stroke={1.5} size="1rem" style={{ margin: 'auto 0' }} />
+      {item.id === 'messages' && hasNotification ? (
+        <Badge color="error" variant="dot" overlap="circular" sx={{ ml: 1 }} />
+      ) : (
+        <IconChevronLeft stroke={1.5} size="1rem" style={{ margin: 'auto 0' }} />
+      )}
     </ListItemButton>
   );
 };
 
-const NavCollapse: React.FC<{ item: CollapseMenuItem; level: number }> = ({ item, level }) => {
+const NavCollapse: React.FC<{ item: CollapseMenuItem; level: number; hasNotification?: boolean; notificationCount?: number }> = ({ item, level, hasNotification = false, notificationCount = 0 }) => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const Icon = item.icon;
@@ -131,9 +136,9 @@ const NavCollapse: React.FC<{ item: CollapseMenuItem; level: number }> = ({ item
         <List component="div" disablePadding>
           {item.children?.map((child) =>
             child.type === 'collapse' ? (
-              <NavCollapse key={child.id} item={child as CollapseMenuItem} level={level + 1} />
+              <NavCollapse key={child.id} item={child as CollapseMenuItem} level={level + 1} hasNotification={hasNotification} notificationCount={notificationCount} />
             ) : (
-              <NavItem key={child.id} item={child as ItemMenuItem} level={level + 1} />
+              <NavItem key={child.id} item={child as ItemMenuItem} level={level + 1} hasNotification={hasNotification} notificationCount={notificationCount} />
             )
           )}
         </List>
@@ -142,7 +147,7 @@ const NavCollapse: React.FC<{ item: CollapseMenuItem; level: number }> = ({ item
   );
 };
 
-const NavGroup: React.FC<{ item: GroupMenuItem }> = ({ item }) => {
+const NavGroup: React.FC<{ item: GroupMenuItem; hasNotification?: boolean; notificationCount?: number }> = ({ item, hasNotification = false, notificationCount = 0 }) => {
   const theme = useTheme();
   return (
     <>
@@ -162,9 +167,9 @@ const NavGroup: React.FC<{ item: GroupMenuItem }> = ({ item }) => {
       >
         {item.children?.map((menu) =>
           menu.type === 'collapse' ? (
-            <NavCollapse key={menu.id} item={menu as CollapseMenuItem} level={1} />
+            <NavCollapse key={menu.id} item={menu as CollapseMenuItem} level={1} hasNotification={hasNotification} notificationCount={notificationCount} />
           ) : (
-            <NavItem key={menu.id} item={menu as ItemMenuItem} level={1} />
+            <NavItem key={menu.id} item={menu as ItemMenuItem} level={1} hasNotification={hasNotification} notificationCount={notificationCount} />
           )
         )}
       </List>
@@ -176,14 +181,14 @@ const NavGroup: React.FC<{ item: GroupMenuItem }> = ({ item }) => {
 /* MenuList Component */
 /* ============================== */
 
-const MenuList: React.FC = () => {
+const MenuList: React.FC<{ hasNotification?: boolean; notificationCount?: number }> = ({ hasNotification = false, notificationCount = 0 }) => {
   // اضافه کردن type assertion برای رفع خطا
   const items = (menuItems as { items: MenuItemType[] }).items || [];
   
   return (
     <>
       {items.map((item) => item.type === 'group' && (
-        <NavGroup key={item.id} item={item as GroupMenuItem} />
+        <NavGroup key={item.id} item={item as GroupMenuItem} hasNotification={hasNotification} notificationCount={notificationCount} />
       ))}
     </>
   );

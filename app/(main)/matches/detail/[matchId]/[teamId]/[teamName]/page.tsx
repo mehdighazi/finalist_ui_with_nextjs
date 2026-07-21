@@ -138,7 +138,7 @@ export default async function DetailMatchClient({ params, searchParams }: HomePr
 
   return (
     <>
-      <Box sx={{ p: 1.5 }}>
+     
         <MatchDetaiLayout
           hostTeamName={matchDisplayData.hostTeamName}
           hostTeamLogo={matchDisplayData.hostTeamLogo}
@@ -152,7 +152,7 @@ export default async function DetailMatchClient({ params, searchParams }: HomePr
             />
           }
         </MatchDetaiLayout>
-      </Box>
+    
 
       {/*!callRequestPage && (
         <Box sx={{ mb: '4rem', p: 2 }}>

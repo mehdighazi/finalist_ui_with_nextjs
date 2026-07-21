@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, Avatar, Typography, Stack, Box, Tooltip } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { IconAccessPoint, IconTrophy, IconMedal } from '@tabler/icons-react';
+import { hostAddress } from '@/components/api/api';
 
 // استایل سفارشی برای کارت‌ها همراه با تغییر شکل کرسر به دست (pointer)
 const StyledTeamCard = styled(Card)(({ theme }) => ({
@@ -66,8 +67,9 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
           
           <Stack direction="row" spacing={2} alignItems="center">
             {/* بخش آواتار / لوگوی تیم */}
+     
             <Avatar
-              src={team.logo?.logo_path}
+              src={`${hostAddress}${team.logo?.logo_path}`}
               alt={team.team_name}
               sx={{
                 width: 56,

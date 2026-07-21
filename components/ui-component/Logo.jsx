@@ -17,13 +17,13 @@ const Logo=({width,height})=>{
     </>)
 
 }
-const LogoSVG = () => {
+const LogoSVG = ({width,height}) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 420"
-            width="65"
-            height="30"
+            width={width??"80"}
+            height={height??"80"}
         >
             <g transform="translate(0, 10)">
                 <path

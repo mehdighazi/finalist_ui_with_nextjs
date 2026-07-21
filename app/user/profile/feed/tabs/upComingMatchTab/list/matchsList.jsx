@@ -12,7 +12,7 @@ const MatchList = ({ teamId, hostCheck }) => {
         apiParams={{
           page_size: 10,
           page_index: 1,
-          status: "host_accepted",
+          status: "confirmed",
           team_id: "",
         }}
        linkBuilder={(item)=>`/matches/detail/${item.match_id}/${item.host_team_id}/${encodeURIComponent(item.host_team.team_name)}`}

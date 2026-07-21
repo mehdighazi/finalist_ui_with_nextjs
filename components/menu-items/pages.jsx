@@ -141,7 +141,7 @@ const pages = {
       id: 'messages',
       title: 'پیام ها',
       type: 'item',
-      url: '/app/user/profile/notification',
+      url: '/user/profile/notification',
       icon: icons.IconMail
     },
     {

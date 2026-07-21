@@ -132,6 +132,12 @@ const Profile: React.FC = () => {
                         totalFollowers: data.result.totalFollowers
                     });
                 }
+                else {
+                    localStorage.removeItem("userInfo");
+                    localStorage.removeItem("token");
+                    setUserInfo(undefined);
+                    router.push("/404");
+                }
             });
         } catch (error) {
             console.error("خطا در دریافت اطلاعات کاربر:", error);

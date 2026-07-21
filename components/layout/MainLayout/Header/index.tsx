@@ -12,6 +12,7 @@ import { showMenu } from '@/components/store/slices/sidebarMenuSlice';
 import { useTheme } from '@mui/material/styles';
 import {
   Avatar,
+  Badge,
   Box,
   ButtonBase,
   Typography,
@@ -38,6 +39,8 @@ import type { UserInfo } from '@/types/user';
 interface HeaderProps {
   handleLeftDrawerToggle?: () => void;
   userInfo?: UserInfo | null;
+  hasNotification?: boolean;
+  notificationCount?: number;
 }
 
 /* ============================== */
@@ -46,13 +49,27 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({
   handleLeftDrawerToggle,
-  userInfo
+  userInfo,
+  hasNotification = false,
+  notificationCount = 0
 }) => {
   const theme = useTheme();
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
 
   const logoimg = '/images/logo.png';
+  const isMeaningfulUserInfo = (value?: UserInfo | null) => {
+    if (!value) return false;
+
+    const fullname = typeof value.fullname === 'string' ? value.fullname.trim() : '';
+    const id = typeof value.id === 'string' ? value.id.trim() : '';
+    const mobile = typeof value.mobile === 'string' ? value.mobile.trim() : '';
+
+    return Boolean(id || mobile || (fullname && fullname !== 'کاربر'));
+  };
+
+  const hasUserInfo = isMeaningfulUserInfo(userInfo);
+  const showNotificationBadge = hasUserInfo && hasNotification;
 
   return (
     <Box
@@ -66,12 +83,13 @@ const Header: React.FC<HeaderProps> = ({
       {/* Logo */}
       <Box component="span" sx={{ display: 'block' }}>
        {/* <SiteLogo /> */}
-       {<LogoComponent width="50" height="50" />}
-        <Typography fontSize={14}>فینالیست</Typography>
+       <Box sx={{pr:0.2}}>{<LogoComponent width="50" height="30" />}</Box>
+       
+        <Typography  fontSize={14}>فینالیست</Typography>
       </Box>
 
       {/* Right side */}
-      {!userInfo ? (
+      {hasUserInfo ? (
         <Box
           sx={{
             display: 'flex',
@@ -83,23 +101,31 @@ const Header: React.FC<HeaderProps> = ({
           {/*<NotificationSection />*/}
 
           <ButtonBase sx={{ borderRadius: 0, overflow: 'hidden', m: 0.5 }}>
-            <Avatar
-              variant="rounded"
-              sx={{
-                ...theme.typography.body1,
-                ...theme.typography.body2,
-                transition: 'all .2s ease-in-out',
-                background: theme.palette.grey[600],
-                color: theme.palette.grey[400],
-                '&:hover': {
-                  background: theme.palette.grey[500],
-                  color: theme.palette.grey[200]
-                }
-              }}
-              onClick={() => dispatch(showMenu())}
+            <Badge
+              color="error"
+              variant="dot"
+              overlap="circular"
+              invisible={!showNotificationBadge}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             >
-              <IconMenu2 stroke={1.5} size="1.3rem" />
-            </Avatar>
+              <Avatar
+                variant="rounded"
+                sx={{
+                  ...theme.typography.body1,
+                  ...theme.typography.body2,
+                  transition: 'all .2s ease-in-out',
+                  background: theme.palette.grey[600],
+                  color: theme.palette.grey[400],
+                  '&:hover': {
+                    background: theme.palette.grey[500],
+                    color: theme.palette.grey[200]
+                  }
+                }}
+                onClick={() => dispatch(showMenu())}
+              >
+                <IconMenu2 stroke={1.5} size="1.3rem" />
+              </Avatar>
+            </Badge>
           </ButtonBase>
         </Box>
       ) : (

@@ -152,6 +152,14 @@ const ApiAdmin = {
 
     return `${DOMAIN}match/request/accept?${getAccessKey()}`
   },
+   notificationList: (status: string, page: number) => {
+        
+        return `${DOMAIN}notification/list?page=${page}&status=${status}&${getAccessKey()}&page_index=1&page_size=20`
+    },
+    notificationDelete: (notification_id:any) => {
+        
+        return `${DOMAIN}notification/delete?notification_id=${notification_id}&${getAccessKey()}`
+    },
   /*listMatch(body: ListMatchBody): string {
     const {
       match_city_id = '',
