@@ -74,33 +74,45 @@ const icons = {
 /* ============================== */
 
 const ListTeams: React.FC<ListTeamsProps> = ({ data }) => {
-  const searchParams = useSearchParams();
+  const sports = data?.result.sports || [];
 
-
-
-const userTeams = data?.result?.teams || [];
- console.log(userTeams)
+  const userTeams = sports.flatMap((sport: any) =>
+  (sport.teams || []).map((team: any) => ({
+    ...team,
+    sport_field_id: sport.sports_field_id,
+    field_title: sport.field_title,
+    field_icon: sport.field_icon,
+  }))
+);
 
   return (
     <Box sx={{ mt: 2, px: 0.5 }}>
-    <Grid container sx={{direction:"rtl"
-    }} spacing={2} >
-      {userTeams.length > 0 ? (
-        userTeams.map((team: any) => (
-          <Grid item xs={12} sm={6} md={4} key={team.team_id}>
-           { <TeamCard team={team} />}
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          direction: "rtl",
+        }}
+      >
+        {userTeams.length > 0 ? (
+          userTeams.map((team: any) => (
+            <Grid item xs={12} sm={6} md={4} key={team.team_id}>
+          
+            { <TeamCard team={team} />}
+            </Grid>
+          ))
+        ) : (
+          <Grid item xs={12}>
+            <Box sx={{ py: 4, textAlign: "center", color: "text.secondary" }}>
+              <Typography variant="body1">
+                شما هنوز در هیچ تیمی عضو نیستید.
+              </Typography>
+            </Box>
           </Grid>
-        ))
-      ) : (
-        <Grid item xs={12}>
-          <Box sx={{ py: 4, textAlign: 'center', color: 'text.secondary' }}>
-            <Typography variant="body1">شما هنوز در هیچ تیمی عضو نیستید.</Typography>
-          </Box>
-        </Grid>
-      )}
-    </Grid>
-  </Box>
-  )
+        )}
+      </Grid>
+    </Box>
+  );
 };
 
 export default ListTeams;

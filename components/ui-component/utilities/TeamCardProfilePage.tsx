@@ -22,15 +22,12 @@ interface TeamCardProps {
   team: {
     team_id: number;
     team_name: string;
-    sport: {
+   
       field_title: string;
-    };
-    logo: {
-      logo_path: string;
-    } | null;
-    team_members: {
-      role: string;
-    };
+  
+    logo: string|null;
+     
+    member_role:string;
   };
 }
 
@@ -38,7 +35,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
   const theme = useTheme();
 
   // بررسی اینکه آیا کاربر سرپرست تیم است یا خیر
-  const isSupervisor = team.team_members.role === 'supervisor';
+  const isSupervisor = team.member_role === 'supervisor';
 
   return (
     <StyledTeamCard elevation={0}>
@@ -69,7 +66,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
             {/* بخش آواتار / لوگوی تیم */}
      
             <Avatar
-              src={`${hostAddress}${team.logo?.logo_path}`}
+              src={`${hostAddress}${team?.logo}`}
               alt={team.team_name}
               sx={{
                 width: 56,
@@ -92,7 +89,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
               <Stack direction="row" spacing={0.5} alignItems="center" sx={{ color: 'text.secondary' }}>
                 <IconAccessPoint size={14} />
                 <Typography variant="body2" sx={{ fontSize: '0.65rem' }}>
-                  {team.sport.field_title}
+                  {team.field_title}
                 </Typography>
               </Stack>
             </Stack>

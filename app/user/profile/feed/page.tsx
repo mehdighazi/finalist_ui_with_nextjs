@@ -43,6 +43,7 @@ interface InfoProps {
     avatar?: any; // برای سازگاری کامل با خروجی ریسپانس API و کامپوننت فرزند
     totalFollowers?: number;
     isFollowing?: boolean;
+    reward_point?: number;
 }
 
 // کست کردن تایپ کامپوننت به صورت any در خارج از رندر برای حل خطای ساختار پروپ‌ها و جلوگیری از غیب شدن محتوا
@@ -108,60 +109,63 @@ function a11yProps(index: number) {
 const Profile: React.FC = () => {
     const theme = useTheme();
     const router = useRouter();
-    const searchParams = useSearchParams(); 
+    const searchParams = useSearchParams();
 
     const [value, setValue] = React.useState<number>(0);
     const [, setStartGet] = React.useState<boolean>(false);
     const [userInfo, setUserInfo] = React.useState<InfoProps | undefined>(undefined);
-    
+
     const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
 
     const getData = () => {
-           const uidParam = searchParams.get('uid');
-        const result = dataHandler(api.getUserInfo({ uid: uidParam||"", first_name: "", last_name: "" }), "get", "");
+        const uidParam = searchParams.get('uid');
+        const result = dataHandler(api.getUserInfo({ uid: uidParam || "", first_name: "", last_name: "" }), "get", "");
+
 
         try {
             result(async function (data: any, status: boolean) {
-             
+
                 if (status && data?.result) {
+
                     setUserInfo({
                         fullname: data.result["fullname"],
                         avatar: data.result["avatar"],
                         bio: data.result["bio"],
                         isFollowing: data.result.isFollowing,
-                        totalFollowers: data.result.totalFollowers
+                        totalFollowers: data.result.totalFollowers,
+                        reward_point: data.result.reward_points,
                     });
                 }
                 else {
                     localStorage.removeItem("userInfo");
                     localStorage.removeItem("token");
-                    setUserInfo(undefined);
-                    router.push("/404");
+                    router.replace("/404");
                 }
+
             });
         } catch (error) {
             console.error("خطا در دریافت اطلاعات کاربر:", error);
         }
     };
     React.useEffect(() => {
-        if(!userInfo)
+        if (!userInfo)
             getData();
     })
 
     React.useEffect(() => {
-        
+
         const stParam = searchParams.get('st');
         const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
 
         // اگر وضعیت پروفایل تغییر کرد (مثلاً از شخصی به عمومی)، ایندکس تب‌ها را به صفر ریست کن
-       
-       // setUserId(uidParam);
+
+        // setUserId(uidParam);
 
         if (stParam === 'login') {
-           // setStartGet(true);
+            // setStartGet(true);
         }
 
-       
+
 
     }, [searchParams]);
 
@@ -180,19 +184,20 @@ const Profile: React.FC = () => {
                         <TopSectionUnifiedAny
                             type="user"
                             info={userInfo}
-                        //    id={userID || ""}
+
+                            //    id={userID || ""}
                             hostAddress={hostAddress}
                         />
                     </Grid>
-                    
+
                     <Grid xs={12} lg={12} item>
                         <Box sx={{ width: "100%", direction: "rtl", mt: 1 }}>
-                            <AppBar 
+                            <AppBar
                                 position="static"
                                 sx={{
-                                    boxShadow: 0, 
+                                    boxShadow: 0,
                                     direction: "rtl",
-                                    width: "100%", 
+                                    width: "100%",
                                     fontSize: 12,
                                     borderRadius: 2,
                                     background: "none"
@@ -237,27 +242,27 @@ const Profile: React.FC = () => {
                             </AppBar>
                         </Box>
                         <Divider />
-                        
+
                         <BoxWrapped>
                             {/* سناریو اول: کاربر وارد حساب خود شده و تمام تب‌ها در دسترس هستند */}
                             {userInfo && (
                                 <>
                                     <TabPanel value={value} index={0} dir={theme.direction}>
                                         <Box sx={{ mt: 0 }}>
-                                            { <UpcomingMatchContet/> }
-                                        
+                                            {<UpcomingMatchContet />}
+
                                         </Box>
                                     </TabPanel>
-                                    
+
                                     <TabPanel value={value} index={1} dir={theme.direction}>
                                         <Box sx={{ mt: 1 }}>
-                                            { <SportTabContet/> }
-                                          
+                                            {<SportTabContet />}
+
                                         </Box>
                                     </TabPanel>
                                 </>
                             )}
-                            
+
                             {/* سناریو دوم: مشاهده پروفایل عمومی (تب مسابقات مخفی است و ورزش‌ها ایندکس 0 می‌شود) 
                             {userInfo && (
                                 <TabPanel value={value} index={0} dir={theme.direction}>

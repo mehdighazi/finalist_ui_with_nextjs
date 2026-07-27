@@ -95,12 +95,13 @@ const SportsTab: React.FC = () => {
 
     const getData = React.useCallback(async (uid: string | null) => {
         const result = dataHandler(api.listUserSportTeam({ uid: uid || "" }), "get", "");
-        
+       
         try {
             result(async function (res: any, status: boolean) {
-              
+         
                 // بررسی وجود دیتا و پر بودن آرایه تیم‌ها
-                if (status && res?.result?.teams?.length > 0) {
+                if (status && res?.result?.sports?.length > 0) {
+                  
                     setData(res); // ذخیره کل آبجکت پاسخ دیتابیس برای در دسترس بودن فیلد .result
                 }
             });

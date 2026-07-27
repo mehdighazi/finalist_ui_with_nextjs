@@ -42,7 +42,7 @@ interface InfoProps {
     };
     totalFollowers?: number;
     isFollowing?: boolean;
-    rate?:number
+    reward_point?:number
 }
 
 interface TopSectionUnifiedProps {
@@ -150,7 +150,7 @@ const TopSectionUnified: React.FC<TopSectionUnifiedProps> = ({ type, info, id, a
     const followers = info?.totalFollowers || 0;
     const bio = about || (type === "team" ? info?.team_info?.about : info?.bio);
     const isFollowing = info?.isFollowing;
-    const rate=info.rate||0
+    const reward_point=info.reward_point||0
 
     return (
         <CardWrapper>
@@ -210,7 +210,7 @@ const TopSectionUnified: React.FC<TopSectionUnifiedProps> = ({ type, info, id, a
                         </Box>
                         <Box sx={{ textAlign: "center" }}>
                             <Typography variant="h6" className="numfarsi-s1" sx={{ fontWeight: 800, color: theme.palette.text.primary }}>
-                              {rate||"0"}
+                              {reward_point||"0"}
                             </Typography>
                             <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontWeight: 500 }}>
                                 امتیاز

@@ -1,5 +1,5 @@
 "use client"
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
@@ -33,6 +33,13 @@ export default function MatchListLayout({ children }: RootLayoutProps) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const [selectedCity, setSelectedCity] = useState<string>(
+        searchParams.get('city_title') || 'انتخاب شهر'
+    );
+
+    useEffect(() => {
+        setSelectedCity(searchParams.get('city_title') || 'انتخاب شهر');
+    }, [searchParams]);
 
     // هندل کردن تغییر شهر و آپدیت URL برای SSR
     const handleLocationOnchange = (city: City): void => {
@@ -41,23 +48,30 @@ export default function MatchListLayout({ children }: RootLayoutProps) {
         // ذخیره در LocalStorage برای مراجعات بعدی
         localStorage.setItem("city_id", String(city.city_id));
         localStorage.setItem("city_title", city.city_title);
+        setSelectedCity(city.city_title);
 
         // آپدیت کردن URL بدون ریلود صفحه (Next.js Navigation)
         const params = new URLSearchParams(searchParams.toString());
         params.set('city_id', String(city.city_id));
-        router.push(`${pathname}?${params.toString()}`);
+        params.set('city_title', city.city_title);
+        const query = params.toString();
+        router.push(query ? `${pathname}?${query}` : pathname);
     };
 
     // هندل کردن جستجو
     const handleSearch = (query: string) => {
+        console.log("Search query:", query); // این لاگ در کنسول مرورگر دیده می‌شود
         const params = new URLSearchParams(searchParams.toString());
         if (query) {
             params.set('q', query);
         } else {
             params.delete('q');
         }
-        router.push(`${pathname}?${params.toString()}`);
+        const queryString = params.toString();
+        console.log("new search params:", queryString);
+        router.push(queryString ? `${pathname}?${queryString}` : pathname);
     };
+
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -75,8 +89,8 @@ export default function MatchListLayout({ children }: RootLayoutProps) {
                             }}
                             endIcon={<IconMapPin size="20" color={theme.palette.grey[500]} />}
                             onClick={() =>
-                                console.log("Continue...")
-                               /* dispatch(
+                               
+                                dispatch(
                                     showBottomSheet({
                                         title: 'انتخاب شهر',
                                         renderContent: () => (
@@ -85,13 +99,13 @@ export default function MatchListLayout({ children }: RootLayoutProps) {
                                             />
                                         )
                                     })
-                                )*/
+                                )
                                 
                             }
                         >
                             {/* نمایش نام شهر از URL یا پیش‌فرض */}
 
-                           <span>{searchParams.get('city_title') || 'انتخاب شهر'}</span> 
+                           <span>{selectedCity}</span> 
                         </Button>
                     </Box>
                 </Stack>

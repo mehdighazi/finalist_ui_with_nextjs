@@ -203,19 +203,28 @@ const SearchSection = ({ onChange }) => {
   const theme = useTheme();
   const [value, setValue] = useState("");
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onChange(value);
+  };
+  
+
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
       <OutlineInputStyle
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="...جستجوی تیم، مسابقه، محل برگزاری"
         startAdornment={
           <InputAdornment position="start">
-            <ButtonBase onClick={() => onChange(value)}>
+            <ButtonBase component="button" type="submit">
               <IconSearch size="1rem" color={theme.palette.grey[500]} />
             </ButtonBase>
           </InputAdornment>
         }
+        inputProps={{
+          'aria-label': 'search',
+        }}
       />
     </Box>
   );

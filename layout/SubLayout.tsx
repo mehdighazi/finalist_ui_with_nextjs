@@ -75,9 +75,10 @@ export default function SubLayout({ children }: RootLayoutProps) {
      
     useEffect(() => {
         const tokenLocal = localStorage.getItem("token");
+        console.log(tokenLocal, ignoreAuth, "tokenLocal, ignoreAuth");
         if (!tokenLocal && !ignoreAuth) {
           
-            router.replace('/');
+          //  router.replace('/');
         }
     }, [ ignoreAuth, router]);
 
