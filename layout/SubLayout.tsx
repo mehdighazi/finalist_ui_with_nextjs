@@ -182,14 +182,14 @@ export default function SubLayout({ children }: RootLayoutProps) {
 
 
                     {/* Breadcrumb */}
-                    {token && !ignoreAuth && (
+                    {/*token && !ignoreAuth && (
                         <Breadcrumbs
                             separator={IconChevronRight}
                             navigation={BreadcrumbsItems}
                             icon
                             title
                             rightAlign
-                        />)}
+                        />)*/}
 
 
                     {/* Page content */}

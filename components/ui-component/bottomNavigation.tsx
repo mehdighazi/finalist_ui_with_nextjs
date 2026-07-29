@@ -576,11 +576,7 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
 
 const CustomBottomNavigation: React.FC = () => {
     //if user not logged in, don't show bottom navigation
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-        return null;
-    }
+    
 
     const boxRef = useRef<HTMLDivElement>(null);
     const [boxWidth, setBoxWidth] = useState<number>(0);
@@ -602,7 +598,7 @@ const CustomBottomNavigation: React.FC = () => {
 
     return (
         <Box ref={boxRef} sx={{ p: 0, pr: 0, position: "relative", width: "100%" }}>
-            <PagesBottomNavigation customWidth={boxWidth} />
+           {<PagesBottomNavigation customWidth={boxWidth} />} 
         </Box>
     );
 };

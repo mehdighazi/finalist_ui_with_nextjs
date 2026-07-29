@@ -10,7 +10,7 @@ export default function Layout({ children }: RootLayoutProps) {
         <>
             {children}
           
-           {  <CustomBottomNavigation /> }
+           {   <CustomBottomNavigation />} 
         </>
     )
 }

@@ -122,6 +122,7 @@ const ApiAdmin = {
   },
 
   listUserSportTeam(body: { uid: string }): string {
+    
     return `${DOMAIN}team/sport/user/list?uid=${body.uid}&${getAccessKey()}`;
   },
 

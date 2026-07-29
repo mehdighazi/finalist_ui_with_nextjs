@@ -4,7 +4,7 @@ import { Paper, Button, Box, Typography, CircularProgress, ListItem, ListItemTex
 import { TeamBox } from '@/components/ui-component/utilities/MatchCardContent';
 import { createDateStr, persiandate } from "@/components/utils/Lib";
 import MainCard from '@/components/ui-component/cards/MainCard';
-
+import CountdownTimer from '@/components/ui-component/utilities/Countdown';
 import { SxProps } from "@mui/material/styles"; // ✅ اضافه شد
 import MatchDetailHeader from '@/components/ui-component/utilities/matchDetailHeader';
 
@@ -175,6 +175,7 @@ export default async function DetailMatchPage({ params, matchDetail }: PageProps
         matchSportField: matchDetail.match_sport?.field_title || matchDetail.sport_field || 'فوتبال',
         matchDate: matchDetail.match_date ? (persiandate(matchDetail.match_date)?.[1] || matchDetail.match_date) : '',
         matchTime: matchDetail.match_time || '',
+        matchDataEng: matchDetail.match_date || '',
         matchLocation: matchDetail.match_location_address || matchDetail.location || '',
         city: matchDetail.city_match?.city_title || matchDetail.city || '',
         province: matchDetail.province_match?.province_title || matchDetail.province || '',
@@ -281,6 +282,13 @@ export default async function DetailMatchPage({ params, matchDetail }: PageProps
                                 </span>
                             </Typography>
                         </Paper>
+                    </Grid>
+                     <Grid   item xs={12} sx={{ textAlign: "center" }}>
+                      
+                        <CountdownTimer
+                             targetDate={matchDisplayData.matchDataEng.split("T")[0]}
+                            targetTime={matchDisplayData.city ? matchDisplayData.matchTime : "00:00"}
+                        />
                     </Grid>
                 </Grid>
 
