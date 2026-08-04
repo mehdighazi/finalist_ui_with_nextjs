@@ -145,7 +145,7 @@ const Header: React.FC<HeaderProps> = ({
               background: 'rgba(199, 199, 199, 0.08)'
             }
           }}
-          onClick={() => router.push('/user/login')}
+          onClick={() => router.push('/')}
         >
          <span>ورود/ثبت نام</span> 
         </Button>

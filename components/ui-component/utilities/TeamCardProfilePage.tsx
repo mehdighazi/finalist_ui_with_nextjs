@@ -3,6 +3,7 @@ import { Card, CardContent, Avatar, Typography, Stack, Box, Tooltip } from '@mui
 import { styled, useTheme } from '@mui/material/styles';
 import { IconAccessPoint, IconTrophy, IconMedal } from '@tabler/icons-react';
 import { hostAddress } from '@/components/api/api';
+import { useRouter } from "next/navigation";
 
 // استایل سفارشی برای کارت‌ها همراه با تغییر شکل کرسر به دست (pointer)
 const StyledTeamCard = styled(Card)(({ theme }) => ({
@@ -33,15 +34,18 @@ interface TeamCardProps {
 
 export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
   const theme = useTheme();
+  const router = useRouter();
 
   // بررسی اینکه آیا کاربر سرپرست تیم است یا خیر
   const isSupervisor = team.member_role === 'supervisor';
 
   return (
-    <StyledTeamCard elevation={0}>
+    <StyledTeamCard
+    onClick={() => router.push(`/team/profile/feed?tid=${team.team_id}`)} 
+    elevation={0}>
       {/* نمایش آیکون مدال طلایی در گوشه بالا سمت چپ کارت (فقط در صورت سرپرست بودن) */}
       {isSupervisor && (
-        <Tooltip title="سرپرست تیم" placement="top" arrow>
+        <Tooltip title={<span>سرپرست تیم</span>} placement="top" arrow>
           <Box
             sx={{
               position: 'absolute',

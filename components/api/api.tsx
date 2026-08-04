@@ -113,8 +113,8 @@ const ApiAdmin = {
     return `${DOMAIN}match/team/list?status=${tab}&sub_status=${sub_status}&team_id=${teamid}&userid=${usertoken}&role=${role}&${getAccessKey()}`
   },
   //profile page matchs
-  matchAllOfTeamList: ({ team_id, usertoken, status, sub_status, role }: any) => {
-    return `${DOMAIN}match/team/list/all?status=${status}&sub_status=${sub_status}&team_id=${team_id}&userid=${usertoken}&role=${role}&${getAccessKey()}`;
+  matchAllOfTeamList: ({uid, team_id, usertoken, status, sub_status, role }: any) => {
+    return `${DOMAIN}match/team/list/all?uid=${uid}&status=${status}&sub_status=${sub_status}&team_id=${team_id}&userid=${usertoken}&role=${role}&${getAccessKey()}`;
   },
   guestMatchRequest: (usertoken: string, teamid: string, accept: string) => {
     const accesskey = `token=${localStorage.getItem("token")}`

@@ -6,6 +6,7 @@ import { useMediaQuery, Box, Divider, Grid, Paper, Switch, Typography, useTheme 
 //project import
 import { SelectTeamChip } from '@/components/ui-component/utilities/SelectTeamChip'
 import MatchsList from "./matchsList";
+import { useSearchParams } from "next/navigation";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -41,11 +42,12 @@ function a11yProps(index) {
 }
 
 const UserMatchList = () => {
+        const searchParams = useSearchParams();
     const [teamID, setTeamID] = React.useState(null)
     const [checked, setChecked] = React.useState(false)
     const [teamName, setTeamName] = React.useState()
     const [logo, setLogo] = React.useState()
-
+   const uid = searchParams.get("uid"); // مقدار uid
     function handleSwitchChange() {
         setChecked(!checked)
     }
@@ -58,11 +60,11 @@ const UserMatchList = () => {
 
     }
 
-    const theme = useTheme()
+
     return (<>
 
         <Box sx={{p:0.5,mb:10}}>
-            <MatchsList hostCheck={checked} teamId={teamID ?? -1} />
+            <MatchsList hostCheck={checked} teamId={teamID ?? -1} uid={uid} />
         </Box>
     </>)
 

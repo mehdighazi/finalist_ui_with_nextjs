@@ -4,7 +4,7 @@
 import MatchListWrapper from '@/components/ui-component/utilities/MatchListProfileTab'
 import api from '@/components/api/api';
 
-const MatchList = ({ teamId, hostCheck }) => {
+const MatchList = ({ teamId, hostCheck, uid }) => {
   return (
     <>
       <MatchListWrapper
@@ -14,6 +14,7 @@ const MatchList = ({ teamId, hostCheck }) => {
           page_index: 1,
           status: "confirmed",
           team_id: "",
+          uid: uid,
         }}
        linkBuilder={(item)=>`/matches/detail/${item.match_id}/${item.host_team_id}/${encodeURIComponent(item.host_team.team_name)}`}
       />

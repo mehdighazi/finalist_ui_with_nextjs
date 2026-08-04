@@ -17,7 +17,8 @@ import {
     Chip,
     Popper,
     ButtonBase,
-    ClickAwayListener
+    ClickAwayListener,
+    Button
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import BottomNavigation from '@mui/material/BottomNavigation';
@@ -357,7 +358,7 @@ const TeamProfile: React.FC<TeamProfileProps> = ({ onChange, userTeamList, teamI
         <>
 
             <Box sx={{ mb: 1 }}>
-                <ButtonBase onClick={handleToggle} sx={{ borderRadius: 0 }} ref={anchorRef}>
+                <Button onClick={handleToggle} sx={{ borderRadius: 0 }} ref={anchorRef}>
                     <Chip
                         sx={{
                             border: 0,
@@ -415,7 +416,8 @@ const TeamProfile: React.FC<TeamProfileProps> = ({ onChange, userTeamList, teamI
                             </Typography>
                         }
                     />
-                </ButtonBase>
+                    
+                </Button>
             </Box>
             <Popper
                 sx={{ zIndex: 50 }}

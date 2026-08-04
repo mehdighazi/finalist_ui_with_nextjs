@@ -14,7 +14,7 @@ import Step1 from "./steps/step1";
 import api from '@/components/api/api';
 import dataHandler from '@/components/api/dataHandler';
 import { showAlert } from "@/components/store/slices/alertSlice";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/navigation';
 
 
 

@@ -23,6 +23,7 @@ interface TeamInfo {
     logo?: {
         logo_path?: string;
     };
+    reward_points:number;
 }
 
 interface UserInfo {
@@ -51,6 +52,7 @@ interface TopSectionUnifiedProps {
     id: string | number;
     about?: string;
     hostAddress?: string; // <-- اینجا اضافه شود
+  
 }
 
 // استایل مدرن‌تر برای کارت اصلی (تخت، تمیز و مینیمال با لبه‌های نرم)
@@ -67,6 +69,7 @@ const CardWrapper = styled(MainCard)<{ children?: React.ReactNode }>(({ theme })
 }));
 
 const TopSectionUnified: React.FC<TopSectionUnifiedProps> = ({ type, info, id, about }) => {
+    
     const theme = useTheme();
     const dispatch = useDispatch();
     const [file, setFile] = React.useState<File | null>(null);
@@ -150,8 +153,8 @@ const TopSectionUnified: React.FC<TopSectionUnifiedProps> = ({ type, info, id, a
     const followers = info?.totalFollowers || 0;
     const bio = about || (type === "team" ? info?.team_info?.about : info?.bio);
     const isFollowing = info?.isFollowing;
-    const reward_point=info.reward_point||0
-
+    const reward_point=info?.team_info?.reward_points||info?.reward_point
+console.log(info)
     return (
         <CardWrapper>
            

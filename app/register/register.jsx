@@ -76,7 +76,18 @@ const Register = () => {
 
                 //setDialogOpen(false)
                 if (status) {
+                    const userInfo = {
+                        fullname: resultData.fullname || [resultData.first_name, resultData.last_name].filter(Boolean).join(' ') || 'کاربر',
+                        first_name: resultData.first_name || '',
+                        last_name: resultData.last_name || '',
+                        avatar: resultData.avatar || null,
+                        token: resultData.token || '',
+                        type: resultData.type || 'active',
+                        ...resultData,
+                    };
 
+                    localStorage.setItem("token", resultData.token || "")
+                    localStorage.setItem("userInfo", JSON.stringify(userInfo))
                     localStorage.setItem("token", data.result.token)
                     dispatch(showAlert({
                         message: 'ورود موفقیت آمیز',
@@ -202,7 +213,7 @@ const Register = () => {
                                         <Typography textAlign={"right"} variant="body2" sx={{ mb: 0.5, fontWeight: 500, fontSize: '0.875rem' }}>
                                             تاریخ تولد
                                         </Typography>
-                                       
+
                                         <PopperCalender
                                             anchorEl={anchorEl}
                                             handleClose={handleClose}

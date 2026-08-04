@@ -51,7 +51,7 @@ export default function ListItems({ data }: ListItemsProps) {
                                 }
                             }}
                             component={Link} // ⚡ اصلاح شد: متصل به کامپوننت نکست
-                            href={`/app/user/profile?uid=${item.user_id}`} // ⚡ اصلاح شد: استفاده از href به جای to
+                            href={`/user/profile/feed?uid=${item.user_id}`} // ⚡ اصلاح شد: استفاده از href به جای to
                         >
                             <ListItemAvatar sx={{ ml: 2, mr: 0 }}>
                                 <CustomAvatar
