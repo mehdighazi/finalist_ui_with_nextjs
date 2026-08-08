@@ -496,7 +496,7 @@ const PagesBottomNavigation: React.FC<PagesBottomNavigationProps> = () => {
                 router.push('/user/match/create');
                 break;
             case 2:
-                router.push('/app/match/list');
+                router.push('/matches/list');
                 break;
             case 3:
                 // if we recently set team via the selector, suppress opening profile

@@ -247,7 +247,9 @@ export default function Requestes() {
             });
         } catch { }
     };
-
+ React.useEffect(() => {
+        document.title = "درخواست های مسابقه | فینالیست";
+    }, []);
     React.useEffect(() => {
         if (match_id && team_id) {
             getData({

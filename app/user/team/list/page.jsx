@@ -41,6 +41,9 @@ const Invite = () => {
             getData()
 
     }, [])
+     React.useEffect(() => {
+        document.title = "لیست تیم ها | فینالیست";
+    }, []);
      const selectedHandler=(e)=>
     {
      

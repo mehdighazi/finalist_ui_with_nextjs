@@ -111,18 +111,18 @@ const Step0: React.FC<Step0Props> = (props) => {
         };
     }, [teamIdentifier, api, dataHandler]);
     return (
-        <Box sx={{ textAlign: "right",p:0.5 }}>
+        <Box sx={{ textAlign: "right",p:1.5 }}>
             <SectionBox>
 
-                <Box sx={{ mb: 4, textAlign: 'right' }}>
+              
 
                     <IconText textPaddingTop={-1} fontSize={12} icon={<GroupAddIcon sx={{ color: 'primary.main', fontSize: 30 }} />} color={TextColor} text={"  ثبت اطلاعات تیم ورزشی"} />
 
 
-                    <Typography variant="body2" color="text.secondary" sx={{ pr: 1, borderRight: '3px solid', borderColor: 'primary.light', lineHeight: 1.8 }}>
+                    <Typography sx={{p:2}} variant="body2" fontSize={12} color="text.secondary" sx={{ pr: 1, borderRight: '3px solid', borderColor: 'primary.light', lineHeight: 1.8 }}>
                         لطفاً مشخصات تیم خود را با دقت وارد نمایید. انتخاب صحیح شهر و وضعیت جنسیتی تیم در دسته‌بندی مسابقات تأثیرگذار است.
                     </Typography>
-                </Box>
+               
             </SectionBox>
             <SectionBox>
                 <IconText textPaddingTop={-1} fontSize={12} icon={<IconCategory />} color={TextColor} text={" رشته ورزشی"} />

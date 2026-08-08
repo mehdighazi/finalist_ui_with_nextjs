@@ -17,8 +17,9 @@ import AuthFooter from '@/components/ui-component/cards/AuthFooter';
 import Transition from '@/components/ui-component/extended/Transitions'
 import AlertCompnent from '@/components/ui-component/alert'
 import dataHandler from '@/components/api/dataHandler';
-import  api from '@/components/api/api';
+import api from '@/components/api/api';
 import { showAlert } from "@/components/store/slices/alertSlice";
+
 // assets
 //=================================|| Code Inputs  ||================================
 const CodeInputMUI = ({ onChange }) => {
@@ -96,15 +97,15 @@ const CodeInputMUI = ({ onChange }) => {
                                 width: "100%",
                                 maxWidth: "50px",
                                 minWidth: "36px",
-                                height:"45px",
-                                background:'transparent',
+                                height: "45px",
+                                background: 'transparent',
                                 fontSize: "clamp(16px, 5vw, 24px)",
                             },
                         }}
                         sx={{
                             "& .MuiOutlinedInput-root": {
                                 borderRadius: "10px",
-                                background:'transparent'
+                                background: 'transparent'
                             },
                         }}
                     />
@@ -113,7 +114,7 @@ const CodeInputMUI = ({ onChange }) => {
 
             {!resendVisible ? (
                 <Typography
-                    sx={{ pr: 1,mt:1 }}
+                    sx={{ pr: 1, mt: 1 }}
                     fontSize={{ xs: 10, sm: 12 }}
                 >
                     زمان باقیمانده: {formatTime(timeLeft)}
@@ -136,8 +137,10 @@ const CodeInputMUI = ({ onChange }) => {
 
 const LoginPage = () => {
     const theme = useTheme();
-      const router = useRouter();
-
+    const router = useRouter();
+     React.useEffect(() => {
+        document.title = "ورود کاربر | فینالیست";
+    }, []);
     // اگر توکن وجود داشت کاربر را به پروفایل منتقل می‌کنیم
     React.useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -221,9 +224,9 @@ const LoginPage = () => {
                 }
                 else {
                     dispatch(showAlert({
-                message: 'خطایی رخ داده',
-                type: 'error'
-            }));
+                        message: 'خطایی رخ داده',
+                        type: 'error'
+                    }));
                 }
             });
         } catch (error) {
@@ -238,95 +241,95 @@ const LoginPage = () => {
         <AuthWrapper1>
             <AlertCompnent />
             <Grid container justifyContent="center" alignItems="center"
-             sx={{ minHeight: 'calc(100vh - 68px)', px: 2,maxWidth:{lg:550,sm:"100%",xs:"100%"} }}>
+                sx={{ minHeight: 'calc(100vh - 68px)', px: 2, maxWidth: { lg: 550, sm: "100%", xs: "100%" } }}>
                 <Grid item>
                     <AuthCardWrapper>
-                       
-                            <Grid container spacing={2} alignItems="center" justifyContent="center">
-                                <Grid xs={12} item sx={{ mb: 3, pt: 1 }}>
-                                    <Typography align='center' sx={{ mt: 4, pt: 2 }}>
-                                        <Logo height={"150"} width={"150"} />
-                                    </Typography>
 
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Grid
-                                        container
-                                        alignItems="center"
-                                        justifyContent="center"
-                                    >
-                                        <Grid item>
-                                            <Stack alignItems="center" justifyContent="center" spacing={1}>
-                                                <Typography
-                                                    color={theme.palette.primary.main}
-                                                    gutterBottom
-                                                    variant={matchDownSM ? 'h3' : 'h2'}
-                                                >
-                                                    به دنیای فینالیست خوش آمدید
-                                                </Typography>
-                                                <Typography
-                                                    variant="caption"
-                                                    fontSize="16px"
-                                                    textAlign={matchDownSM ? 'center' : 'inherit'}
-                                                >
-                                                    {smsCodeShow ? (
-                                                        <>
-                                                            کد ارسالی به شماره <b>{mobile}</b> را وارد نمایید
-                                                        </>
-                                                    ) : (
-                                                        'برای شروع شماره همراه خود را وارد کنید'
-                                                    )}
-                                                </Typography>
+                        <Grid container spacing={2} alignItems="center" justifyContent="center">
+                            <Grid xs={12} item sx={{ mb: 3, pt: 1 }}>
+                                <Typography align='center' sx={{ mt: 4, pt: 2 }}>
+                                    <Logo height={"150"} width={"250"} />
+                                </Typography>
+
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Grid
+                                    container
+                                    alignItems="center"
+                                    justifyContent="center"
+                                >
+                                    <Grid item>
+                                        <Stack alignItems="center" justifyContent="center" spacing={1}>
+                                            <Typography
+                                                color={theme.palette.primary.main}
+                                                gutterBottom
+                                                variant={matchDownSM ? 'h3' : 'h2'}
+                                            >
+                                                به دنیای فینالیست خوش آمدید
+                                            </Typography>
+                                            <Typography
+                                                variant="caption"
+                                                fontSize="16px"
+                                                textAlign={matchDownSM ? 'center' : 'inherit'}
+                                            >
+                                                {smsCodeShow ? (
+                                                    <>
+                                                        کد ارسالی به شماره <b>{mobile}</b> را وارد نمایید
+                                                    </>
+                                                ) : (
+                                                    'برای شروع شماره همراه خود را وارد کنید'
+                                                )}
+                                            </Typography>
 
 
-                                            </Stack>
-                                        </Grid>
+                                        </Stack>
                                     </Grid>
                                 </Grid>
-                                <Grid item xs={11} sm={12}>
-                                    <Box sx={{ display: smsCodeShow ? 'none' : 'block' }}>
-                                        <Transition type={"fade"} in={!smsCodeShow} key={0}>
-                                            {<AuthLogin resend={resend} onChange={(e) => {
-                                                if (e.state) {
-                                                    setsmsCodeShow(e)
-                                                    setMobile(e.mobile)
-                                                }
-                                            }} />}
-                                        </Transition>
-                                    </Box>
-                                    <Transition type={"fade"} in={smsCodeShow} key={0}>
-                                        <div>
-                                            {<CodeInputMUI onChange={(e) => {
-                                                if (e === 'resend') setResend(true)
-                                                else {
-                                                    setCode(e)
-                                                    setLoginStart(true)
-                                                }
-                                            }} />}
-                                        </div>
-
-                                        <Box sx={{ mt: 2 }}>
-                                            <AnimateButton>
-                                                <Button
-                                                    disableElevation
-                                                    fullWidth
-                                                    size="large"
-                                                    variant="contained"
-                                                    color="primary"
-                                                    onClick={() => setLoginStart(true)}
-                                                >
-                                                    <span>ورود</span>
-                                                </Button>
-                                            </AnimateButton>
-                                        </Box>
-                                    </Transition>
-                                </Grid>
-
-                                <Grid item xs={12}>
-                                    <Links />
-                                </Grid>
                             </Grid>
-                       
+                            <Grid item xs={11} sm={12}>
+                                <Box sx={{ display: smsCodeShow ? 'none' : 'block' }}>
+                                    <Transition type={"fade"} in={!smsCodeShow} key={0}>
+                                        {<AuthLogin resend={resend} onChange={(e) => {
+                                            if (e.state) {
+                                                setsmsCodeShow(e)
+                                                setMobile(e.mobile)
+                                            }
+                                        }} />}
+                                    </Transition>
+                                </Box>
+                                <Transition type={"fade"} in={smsCodeShow} key={0}>
+                                    <div>
+                                        {<CodeInputMUI onChange={(e) => {
+                                            if (e === 'resend') setResend(true)
+                                            else {
+                                                setCode(e)
+                                                setLoginStart(true)
+                                            }
+                                        }} />}
+                                    </div>
+
+                                    <Box sx={{ mt: 2 }}>
+                                        <AnimateButton>
+                                            <Button
+                                                disableElevation
+                                                fullWidth
+                                                size="large"
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={() => setLoginStart(true)}
+                                            >
+                                                <span>ورود</span>
+                                            </Button>
+                                        </AnimateButton>
+                                    </Box>
+                                </Transition>
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <Links />
+                            </Grid>
+                        </Grid>
+
                     </AuthCardWrapper>
                 </Grid>
             </Grid>

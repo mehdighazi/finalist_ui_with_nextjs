@@ -491,6 +491,9 @@ const MembersSetting = () => {
             }));
         }
     };
+     React.useEffect(() => {
+            document.title = "تنظیمات اعضا | فینالیست";
+        }, []);
 
     return (
         <Box sx={{mb:10}}>
@@ -609,13 +612,14 @@ const MembersSetting = () => {
                                     <Alert
                                         severity="warning"
                                         sx={{
+                                            fontSize:12,
                                             mb: 1,
                                             textAlign: "right",
                                             borderRadius: 2,
-                                            backgroundColor: theme.palette.primary.light,
-                                            color: theme.palette.warning.dark,
+                                            backgroundColor: theme.palette.error,
+                                          color: theme.palette.error.dark,
                                             '& .MuiAlert-icon': {
-                                                color: theme.palette.warning.dark,
+                                                color: theme.palette.error.dark,
                                             },
                                         }}
                                     >

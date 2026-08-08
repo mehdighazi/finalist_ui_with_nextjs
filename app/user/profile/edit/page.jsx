@@ -165,6 +165,9 @@ const Edit = () => {
     React.useEffect(() => {
         getData()
     }, [])
+     React.useEffect(() => {
+        document.title = "ویرایش پروفایل | فینالیست";
+    }, []);
     return (
         <Box
             sx={{ mb: 5 }}

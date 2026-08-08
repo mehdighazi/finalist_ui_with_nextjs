@@ -16,6 +16,7 @@ import Step2 from "./steps/step2";
 import dataHandler from '@/components/api/dataHandler';
 import api from '@/components/api/api';
 import { showAlert } from "@/components/store/slices/alertSlice";
+import { useRouter } from "next/navigation";
 
 // Interfaces
 interface Team {
@@ -47,7 +48,7 @@ const CreateMatch: React.FC = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
-
+    const router = useRouter();
     const [step, setStep] = useState<number>(0);
     const [userTeam, setUserTeam] = useState<Team[]>([]);
     const [teamLocation, setTeamLocation] = useState<string>("");
@@ -61,12 +62,12 @@ const CreateMatch: React.FC = () => {
         match_city_id: null,
         description: null,
         match_location_address: null,
-        match_type: 1 
+        match_type: 1
     });
 
     const handleInputChange = ({ name, value }: { name: keyof MatchFormData; value: any }) => {
         setFormData(prev => ({ ...prev, [name]: value }));
-       
+
     };
 
     const fetchUserTeams = async () => {
@@ -81,6 +82,9 @@ const CreateMatch: React.FC = () => {
             console.error("Error loading teams", error);
         }
     };
+     React.useEffect(() => {
+            document.title = "ایجاد مسابقه | فینالیست";
+        }, []);
 
     useEffect(() => {
         fetchUserTeams();
@@ -107,6 +111,11 @@ const CreateMatch: React.FC = () => {
                     message: status ? data.message : (data.response?.data?.message || "خطا در ارسال اطلاعات"),
                     type: status ? "success" : "error"
                 }));
+                if (status) {
+                    setTimeout(() => {
+                        router.push("/matches/list");
+                    }, 3000);
+                }
             });
         } catch (error) {
             dispatch(showAlert({
@@ -194,7 +203,7 @@ const CreateMatch: React.FC = () => {
     };
 
     return (
-        <Box sx={{ p: 1,height:"100vh" }}>
+        <Box sx={{ p: 1, height: "100vh" }}>
             <Stack spacing={2} sx={{ justifyContent: "center", alignItems: "flex-end" }}>
                 <Box sx={{ minWidth: "100%" }}>{renderStep()}</Box>
                 <Box

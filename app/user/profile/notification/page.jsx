@@ -75,6 +75,9 @@ const NotifList = () => {
 
         }
     }
+     React.useEffect(() => {
+        document.title = "اعلان ها | فینالیست";
+    }, []);
     return (<>
 
         <Box sx={{ p: 1, height: "100vh", mb: 5, pb: 10 }}>

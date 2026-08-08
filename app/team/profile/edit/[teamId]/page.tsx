@@ -85,7 +85,9 @@ export default function TeamEdit({ params, searchParams }: TeamEditProps) {
 
     const IconColor = theme.palette.grey[400];
     const TextColor = theme.palette.grey[600];
-
+    React.useEffect(() => {
+        document.title = "ویرایش تیم | فینالیست";
+    }, []);
     // --- Functions ---
     const handleUploadComplete = (res: { filepath: string }) => {
         setLogo(`${hostAddress}/${res.filepath}`);
@@ -94,12 +96,12 @@ export default function TeamEdit({ params, searchParams }: TeamEditProps) {
 
     const uploadFile = (file: string) => {
         const blobFile = base64ToBlob(file);
-          uploadHandler({
-              onChange: handleUploadComplete,
-              fileObj: blobFile,
-              sectionId: "4",
-              setPercentOfFileUploaded: setPercentUpload
-          });
+        uploadHandler({
+            onChange: handleUploadComplete,
+            fileObj: blobFile,
+            sectionId: "4",
+            setPercentOfFileUploaded: setPercentUpload
+        });
     };
 
     const sendData = async (formData: FormValues) => {
@@ -142,16 +144,16 @@ export default function TeamEdit({ params, searchParams }: TeamEditProps) {
     };
 
     const getTeamData = async () => {
-            
+
         setTeamId(tid);
-       // if (!tid) return;
+        // if (!tid) return;
         const result = dataHandler(api.teamInfo(tid), "get", "");
 
         try {
             result(async function (res: any, status: boolean) {
                 if (status) {
                     const teamRes = res.result as TeamData;
-               
+
                     setLogo(teamRes?.logo?.logo_path ? `${hostAddress}/${teamRes.logo.logo_path}` : "");
                     setLogoPath(teamRes?.logo?.logo_path || null);
 
@@ -171,7 +173,7 @@ export default function TeamEdit({ params, searchParams }: TeamEditProps) {
 
     // --- Render ---
     return (
-        <Box sx={{ mb: 5,height:"100vh" }}>
+        <Box sx={{ mb: 5, height: "100vh" }}>
             {data ? (
                 <Formik
                     enableReinitialize
@@ -224,7 +226,7 @@ export default function TeamEdit({ params, searchParams }: TeamEditProps) {
                                                 <AvatarCropper
                                                     uploadIconButton={true}
                                                     onChange={(e: any) => {
-                                                       
+
                                                         uploadFile(e)
                                                     }
                                                     }
@@ -270,9 +272,9 @@ export default function TeamEdit({ params, searchParams }: TeamEditProps) {
 
                                     <Divider />
 
-                                  
-                                        <IconText fontSize={12} icon={<IconUserCheck />} color={TextColor} text={"شناسه تیم"} />
-                                   
+
+                                    <IconText fontSize={12} icon={<IconUserCheck />} color={TextColor} text={"شناسه تیم"} />
+
 
                                     <CustomTextField
                                         endIcon={

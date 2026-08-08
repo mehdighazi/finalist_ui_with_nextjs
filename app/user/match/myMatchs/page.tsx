@@ -169,7 +169,9 @@ function MyMatchesContent() {
     }
     router.push(`?${params.toString()}`);
   };
-
+ React.useEffect(() => {
+        document.title = "مسابقات من | فینالیست";
+    }, []);
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
       {/* هدر صفحه */}

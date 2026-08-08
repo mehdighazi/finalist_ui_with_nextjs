@@ -22,15 +22,19 @@ import AlertCompnent from '@/components/ui-component/alert'
 // ===============================|| AUTH3 - REGISTER ||=============================== //
 
 const RegisterForm = () => {
+
     const theme = useTheme();
-     let router = useRouter();
+    let router = useRouter();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-     const getCode = localStorage.getItem("mobile")
+    const getCode = localStorage.getItem("mobile")
+    useEffect(() => {
+        document.title = "ورود کاربر | فینالیست";
+    }, []);
     React.useEffect(() => {
         if (!getCode)//if redirect from login page else navigate to login page
             router.push('/user/login')
-          
-       
+
+
     }, [])
     return (
         <AuthWrapper1>
@@ -82,9 +86,9 @@ const RegisterForm = () => {
                                     <Grid item xs={12}>
                                         <Grid item container direction="column" alignItems="center" xs={12}>
                                             <Link
-                                                
+
                                                 href="/login/login3"
-                                               
+
                                             >
                                                 ورود به حساب کاربری
                                             </Link>

@@ -175,7 +175,9 @@ const Profile: React.FC = () => {
 
     // فیلتر کردن داینامیک لیست تب‌ها بر اساس وجود یا عدم وجود userID (حذف مسابقات در حالت پروفایل مهمان)
     const activeTabs = TabsList.filter((_, index) => !(index === 0));
-
+ React.useEffect(() => {
+        document.title = "پروفایل کاربر| فینالیست";
+    }, []);
     return (
         <>
             <Box sx={{ p: 1, minHeight: "100vh" }}>

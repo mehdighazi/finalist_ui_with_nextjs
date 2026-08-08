@@ -148,14 +148,14 @@ const pages = {
       id: 'terms',
       title: 'قوانین و مقررات',
       type: 'item',
-      url: '/other/terms',
+      url: '/docs/terms',
       icon: icons.IconExclamationCircleFilled
     },
     {
       id: 'guide',
       title: 'راهنما',
       type: 'item',
-      url: '/other/guide',
+      url: '/docs/guide',
       icon: icons.IconHelp
     },
     {

@@ -106,7 +106,7 @@ const CreateTeam: React.FC = () => {
         try {
             // ۱. فراخوانی API (در اینجا فعلاً آی‌دی ۱۴ ثابت مانده طبق کد خودت)
             const result = dataHandler(api.createTeam(""), "post", formData);
-
+ 
             // ۲. هندل کردن نتیجه (دقت کن که دیتا و استاتوس تایپ‌گذاری شدند)
             result((data: any, status: boolean) => {
                 if (status) {
@@ -116,7 +116,12 @@ const CreateTeam: React.FC = () => {
                         message: "عملیات با موفقیت انجام شد",
                         type: status ? 'success' : 'error'
                     }));
-                    router.push("/user/profile/feed")
+                     if (status) {
+                    setTimeout(() => {
+                        router.push("/user/profile/feed")
+                    }, 3000);
+                }
+                   
 
                 } else {
                     dispatch(showAlert({
@@ -135,8 +140,6 @@ const CreateTeam: React.FC = () => {
 
         }
     };
-
-
     // هندلر تغییر مرحله
     const stepHandler = (action: string | number) => {
         if (action === 'Next') {
@@ -180,7 +183,9 @@ const CreateTeam: React.FC = () => {
             }
         }
     };
-
+ React.useEffect(() => {
+        document.title = "ایجاد تیم | فینالیست";
+    }, []);
 
     return (
         <Box sx={{ height: "100vh" }}>

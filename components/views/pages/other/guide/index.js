@@ -9,7 +9,7 @@ export default function Terms() {
   const [content, setContent] = React.useState("");
 
   React.useEffect(() => {
-    fetch("/guide/guide.md")
+    fetch("./guide.md")
       .then((res) => res.text())
       .then((text) => setContent(text));
   }, []);

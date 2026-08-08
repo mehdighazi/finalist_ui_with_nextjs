@@ -24,6 +24,9 @@ const InviteList = () => {
     const [notFound, setNotFound] = React.useState(false)
     const theme = useTheme();
     const dispatch = useDispatch();
+     React.useEffect(() => {
+        document.title = "درخواست های عضویت | فینالیست";
+    }, []);
     React.useEffect(() => {
 
         getData() 

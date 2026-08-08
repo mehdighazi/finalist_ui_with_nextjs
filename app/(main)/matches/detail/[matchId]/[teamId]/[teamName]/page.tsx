@@ -15,6 +15,11 @@ import MatchDetaiLayout from "@/layout/match/detail/layout";
 //import { persiandate } from '@/utils/Lib';
 //import { useDispatch } from 'react-redux';
 import MatchDetail from './home/MatchesDeteilContent'
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "جزئیات مسابقه| فاینالیست ",
+};
 
 
 // کامپوننت BottomSheet

@@ -98,6 +98,9 @@ const Profile: React.FC = () => {
     const [teamID, setTeamId] = React.useState<string>("");
     const searchParams = useSearchParams();
     const tid = searchParams.get('tid') || "";
+     React.useEffect(() => {
+            document.title = "پروفایل تیم | فینالیست";
+        }, []);
     const getData = () => {
 
         if (!tid) return;
