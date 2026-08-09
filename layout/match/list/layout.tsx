@@ -15,6 +15,7 @@ import { IconMapPin } from "@tabler/icons-react";
 
 // project imports
 import SearchBar from "@/components/ui-component/SearchBar";
+import FiltersComponent from "@/components/ui-component/filters/filters";
 import ProvinceCitySelector from "@/components/ui-component/utilities/ProvinceCitySelector";
 import { showBottomSheet, hideBottomSheet } from '@/components/store/slices/bottomSheetSlice';
 
@@ -57,10 +58,15 @@ export default function MatchListLayout({ children }: RootLayoutProps) {
         const query = params.toString();
         router.push(query ? `${pathname}?${query}` : pathname);
     };
+    const handleSportFieldChange = (id: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('sport_field_id', String(id));
+        const query = params.toString();
+        router.push(query ? `${pathname}?${query}` : pathname);
+    }
 
     // هندل کردن جستجو
     const handleSearch = (query: string) => {
-        console.log("Search query:", query); // این لاگ در کنسول مرورگر دیده می‌شود
         const params = new URLSearchParams(searchParams.toString());
         if (query) {
             params.set('q', query);
@@ -68,7 +74,6 @@ export default function MatchListLayout({ children }: RootLayoutProps) {
             params.delete('q');
         }
         const queryString = params.toString();
-        console.log("new search params:", queryString);
         router.push(queryString ? `${pathname}?${queryString}` : pathname);
     };
 
@@ -89,7 +94,7 @@ export default function MatchListLayout({ children }: RootLayoutProps) {
                             }}
                             endIcon={<IconMapPin size="20" color={theme.palette.grey[500]} />}
                             onClick={() =>
-                               
+
                                 dispatch(
                                     showBottomSheet({
                                         title: 'انتخاب شهر',
@@ -100,17 +105,20 @@ export default function MatchListLayout({ children }: RootLayoutProps) {
                                         )
                                     })
                                 )
-                                
+
                             }
                         >
                             {/* نمایش نام شهر از URL یا پیش‌فرض */}
 
-                           <span>{selectedCity}</span> 
+                            <span>{selectedCity}</span>
                         </Button>
                     </Box>
                 </Stack>
             </Box>
-
+            <Box sx={{ width: "100%", p: 1, mt: 1 }} >
+                 <FiltersComponent onChange={(e) => handleSportFieldChange(e)} />
+            </Box>
+           
             {/* نمایش محتوای اصلی (MatchesContent) که از سرور می‌آید */}
             <Box sx={{ mt: 2 }}>
                 {children}

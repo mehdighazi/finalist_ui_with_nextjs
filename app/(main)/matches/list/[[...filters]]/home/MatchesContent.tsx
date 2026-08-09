@@ -51,11 +51,11 @@ export default async function MatchesContent({
     const PORT = process.env.NEXT_PUBLIC_HOST_PORT
         ? `:${process.env.NEXT_PUBLIC_HOST_PORT}`
         : '';
-
+   const filtersParams = Allparam.param[0]!=='all'?Allparam.param:['','','','']; 
     const DOMAIN = `${HOST}${PORT}/api/app/`;
     // دریافت آدرس API از environment variable
     // const domain = `${process.env.NEXT_PUBLIC_API_URL}:3957/api/matches/list`;
-    const apiUrl = `${DOMAIN}match/list?match_city_id=${Allparam.match_city_id}&query=${Allparam.query}&page_index=${Allparam.page_index}&page_size=${Allparam.page_size}&param=&sport_field_id=${Allparam.sport_field_id}`
+    const apiUrl = `${DOMAIN}match/list?sport_field_title=${filtersParams[2]}&match_province_title=${filtersParams[1]}&match_city_title=${filtersParams[0]}&match_city_id=${Allparam.match_city_id}&query=${Allparam.query}&page_index=${Allparam.page_index}&page_size=${Allparam.page_size}&param=&sport_field_id=${Allparam.sport_field_id}`
     // فراخوانی مستقیم fetch در کامپوننت
     let matches = [];
 
@@ -79,7 +79,7 @@ export default async function MatchesContent({
 
         const result = await response.json();
         matches = result?.result?.data || [];
-console.log("MatchesContent.tsx - matches:", matches);
+
                 
 
    
